@@ -1,0 +1,161 @@
+.container {
+	margin:0 auto;
+}
+.button {
+	position:relative;
+	overflow:hidden;
+}
+.button input {
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-25em;
+	margin-left:-50em;
+	width:100em;
+	height:50em;
+	display:block;
+	-webkit-appearance:button;
+	cursor:pointer;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  /* IE 5-7 */
+  filter: alpha(opacity=0);
+  /* Netscape */
+  -moz-opacity: 0;
+  /* Safari 1.x */
+  -khtml-opacity: 0;
+  /* Good browsers */
+  opacity: 0;
+}
+#site-header {
+	background-color:#000;
+	padding-top:100px;
+	padding-bottom:40px;
+	color: white;
+}
+#site-header p {
+	text-transform:uppercase;
+	text-align:center;
+	font-size:22px;
+	line-height:34px;
+}
+#site-logo {
+	display:block;
+	margin:0 auto 50px;
+	width:296px;
+}
+
+#site-content {
+	background-color:#FFF;
+}
+
+#splash-page #site-content > .container {
+	width:960px;
+	margin-top:30px;
+	border:1px solid #e8e7e7;
+	border-bottom:none;
+	border-top:none;
+	padding-bottom:100px;
+	padding-top:15px;
+}
+
+#splash-page #site-content > .container h4 {
+	text-align:center;
+	font-size:15px;
+	line-height:60px;
+	color:#363636;
+}
+
+#splash-page .follow-us {
+	width:380px;
+}
+
+#splash-page .notify-me {
+	width:580px;
+}
+
+#splash-page .follow-us .container {
+	width:200px;
+	
+}
+
+#splash-page .social-media a {
+	display: block;
+	width:42px;
+	height:42px;
+	text-decoration:none;
+	background:url(../images/social-icons.png) 0 0 no-repeat;
+}
+
+#splash-page .social-media a.twitter {
+	background-position:-53px 0;
+}
+
+#splash-page .social-media a.pinterest {
+	background-position:-106px 0;
+}
+
+#splash-page .social-media a.instagram {
+	background-position:-159px 0;
+}
+
+#splash-page .notify-me .form .email-field {
+	border:1px solid #ccc;
+	border-right-width:0;
+	border-left-width:0;
+	width:360px;
+}
+
+#splash-page .notify-me .form {
+	height: 40px;
+	width:468px;
+}
+
+#splash-page .notify-me .form label {
+	line-height: 40px;
+	text-transform:uppercase;
+	font-size:17px;
+	color:#363636;
+	text-align: center;
+	width:120px;
+}
+
+#splash-page .notify-me .form input[type=email] {
+	border-width:0;
+	box-shadow:none;
+	background-color:#eeeeeb;
+	height:40px;
+	width:240px;
+	padding:0;
+}
+
+#splash-page .notify-me .form .button {
+	background-color:#ff4002;
+	height: 42px;
+	width:88px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+}
+
+#splash-page .notify-me .form .button .text {
+	color:#FFF;
+	text-align:center;
+	text-transform:uppercase;
+	line-height:42px;
+	
+}
+
+#site-footer {
+	background-color:#f6f5f4;
+	border-top:1px solid #e8e7e7;
+}
+
+#site-footer .container {
+	width:960px;
+	padding:16px 0;
+	text-align:right;
+	font-size:14px;
+	color:#a3a197;
+	font-family:Arial;
+	font-weight:bold;
+}

@@ -37,6 +37,8 @@
 	text-align:center;
 	font-size:22px;
 	line-height:34px;
+	font-family:dinnLC;
+	letter-spacing: 6px;
 }
 #site-logo {
 	display:block;
@@ -63,6 +65,7 @@
 	font-size:15px;
 	line-height:60px;
 	color:#363636;
+	font-family:akkuratB;
 }
 
 #splash-page .follow-us {
@@ -117,6 +120,7 @@
 	color:#363636;
 	text-align: center;
 	width:120px;
+	font-family:dinnC;
 }
 
 #splash-page .notify-me .form input[type=email] {

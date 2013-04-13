@@ -380,10 +380,9 @@ h1, h2, h3, h4, h5, h6 {
 	line-height:72px;
 }
 
-.ej-tabs.ui-tabs .ui-tabs-panel .container .centerme.form .primary.button {
-	background-color:#000;
-}
 
+
+/*Forms*/
 .form .row {
 	height:40px;
 	border:1px solid #c5c5c3;
@@ -413,6 +412,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight:normal;
 	color:#363636;
 	font-size:16px;
+	float:right;
 }
 
 .button-row {
@@ -430,10 +430,75 @@ h1, h2, h3, h4, h5, h6 {
 	padding-right:10px;
 }
 
+.primary.button {
+	background-color:#363636;
+}
+
 .button .text {
 	color:#FFF;
 	text-align:center;
 	text-transform:uppercase;
 	line-height:42px;
 	font-family:akkuratB;
+	font-size:13px;
+}
+
+
+/*Modal overrides*/
+.ui-widget-overlay {
+	background:transparent url(images/ui-bg_flat_90_000000_40x100.png) repeat;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  /* IE 5-7 */
+  filter: alpha(opacity=100);
+  /* Netscape */
+  -moz-opacity: 1;
+  /* Safari 1.x */
+  -khtml-opacity: 1;
+  /* Good browsers */
+  opacity: 1;
+}
+
+.ej-modal {
+	display:none;
+}
+
+.ej-modal.ui-dialog.ui-corner-all {
+	border-radius:0;
+	-moz-border-radius:0;
+	-webkit-border-radius:0;
+}
+
+.ej-modal .ui-widget-header {
+	border-width:0;
+	background:none;
+}
+
+.ej-modal .ui-widget-header .ui-dialog-title {
+	color:#ff4002;
+	font-family:dinnLC;
+	font-size:28px;
+	text-align:center;
+	font-weight:normal;
+	line-height:36px;
+	padding:20px 0;
+}
+
+.ej-modal .ui-widget-header .ui-button.ui-dialog-titlebar-close {
+	border-width:0;
+	background:none;
+	top:22px;
+	right:24px;
+	margin:0;
+	padding:0;
+}
+
+.ej-modal .ui-widget-header .ui-button.ui-dialog-titlebar-close .ui-icon {
+	width:22px;
+	height:22px;
+	background-image:url(../images/modal-close-button.png);
+	background-position:0 0;
+}
+
+.ej-modal .form .row label {
+	width:210px;
 }

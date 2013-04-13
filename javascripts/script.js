@@ -1,9 +1,25 @@
 $(function() { 
 	$( ".ej-tabs" ).tabs();
-	
-	var width = 0;
-	$(".button-row .button").each(function() { 
-		width += $(this).outerWidth(true, true);
+	$(".ej-modal").dialog({
+	modal:true,
+	width:537,
+	draggable: false,
+	resizable: false,
+	dialogClass: "ej-modal"
 	})
-	$(".button-row").width(width);
+	
+	center_button_row();
 })
+
+function center_button_row() {
+	
+	$(".button-row").each(function() {
+		var width = 0;
+		$(".button",this).each(function() {
+			$this = $(this);
+			width += $this.outerWidth(true, true);
+		})
+		$(this).width(width);
+	})
+	
+}

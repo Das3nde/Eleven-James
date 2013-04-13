@@ -1,3 +1,4 @@
+/*Generic*/
 .container, .centerme {
 	margin:0 auto;
 }
@@ -32,6 +33,8 @@ h1, h2, h3, h4, h5, h6 {
 	font-family:dinnLC;
 }
 
+
+/*Layout*/
 #site-header {
 	background-color:#000;
 	padding-top:100px;
@@ -54,93 +57,6 @@ h1, h2, h3, h4, h5, h6 {
 
 #site-content {
 	background-color:#FFF;
-}
-
-#splash-page #site-content > .container {
-	width:960px;
-	margin-top:30px;
-	border:1px solid #e8e7e7;
-	border-bottom:none;
-	border-top:none;
-	padding-bottom:100px;
-	padding-top:15px;
-}
-
-#splash-page #site-content > .container h4 {
-	text-align:center;
-	font-size:15px;
-	line-height:60px;
-	color:#363636;
-	font-family:akkuratB;
-}
-
-#splash-page .follow-us {
-	width:380px;
-}
-
-#splash-page .notify-me {
-	width:580px;
-}
-
-#splash-page .follow-us .container {
-	width:200px;
-	
-}
-
-#splash-page .social-media a {
-	display: block;
-	width:42px;
-	height:42px;
-	text-decoration:none;
-	background:url(../images/social-icons.png) 0 0 no-repeat;
-}
-
-#splash-page .social-media a.twitter {
-	background-position:-53px 0;
-}
-
-#splash-page .social-media a.pinterest {
-	background-position:-106px 0;
-}
-
-#splash-page .social-media a.instagram {
-	background-position:-159px 0;
-}
-
-#splash-page .notify-me .form .email-field {
-	border:1px solid #ccc;
-	border-right-width:0;
-	border-left-width:0;
-	width:360px;
-}
-
-#splash-page .notify-me .form {
-	height: 40px;
-	width:468px;
-}
-
-#splash-page .notify-me .form label {
-	line-height: 40px;
-	text-transform:uppercase;
-	font-size:17px;
-	color:#363636;
-	text-align: center;
-	width:120px;
-	font-family:dinnC;
-}
-
-#splash-page .notify-me .form input[type=email] {
-	border-width:0;
-	box-shadow:none;
-	background-color:#eeeeeb;
-	height:40px;
-	width:240px;
-	padding:0;
-}
-
-#splash-page .notify-me .form .button {
-	background-color:#ff4002;
-	width:68px;
 }
 
 #site-footer {
@@ -305,6 +221,96 @@ h1, h2, h3, h4, h5, h6 {
 	font-family:akkuratB;
 	font-weight:normal;
 }
+
+
+/*Splash Page*/
+#splash-page #site-content > .container {
+	width:960px;
+	margin-top:30px;
+	border:1px solid #e8e7e7;
+	border-bottom:none;
+	border-top:none;
+	padding-bottom:100px;
+	padding-top:15px;
+}
+
+#splash-page #site-content > .container h4 {
+	text-align:center;
+	font-size:15px;
+	line-height:60px;
+	color:#363636;
+	font-family:akkuratB;
+}
+
+#splash-page .follow-us {
+	width:380px;
+}
+
+#splash-page .notify-me {
+	width:580px;
+}
+
+#splash-page .follow-us .container {
+	width:200px;
+	
+}
+
+#splash-page .social-media a {
+	display: block;
+	width:42px;
+	height:42px;
+	text-decoration:none;
+	background:url(../images/social-icons.png) 0 0 no-repeat;
+}
+
+#splash-page .social-media a.twitter {
+	background-position:-53px 0;
+}
+
+#splash-page .social-media a.pinterest {
+	background-position:-106px 0;
+}
+
+#splash-page .social-media a.instagram {
+	background-position:-159px 0;
+}
+
+#splash-page .notify-me .form .email-field {
+	border:1px solid #ccc;
+	border-right-width:0;
+	border-left-width:0;
+	width:360px;
+}
+
+#splash-page .notify-me .form {
+	height: 40px;
+	width:468px;
+}
+
+#splash-page .notify-me .form label {
+	line-height: 40px;
+	text-transform:uppercase;
+	font-size:17px;
+	color:#363636;
+	text-align: center;
+	width:120px;
+	font-family:dinnC;
+}
+
+#splash-page .notify-me .form input[type=email] {
+	border-width:0;
+	box-shadow:none;
+	background-color:#eeeeeb;
+	height:40px;
+	width:240px;
+	padding:0;
+}
+
+#splash-page .notify-me .form .button {
+	background-color:#ff4002;
+	width:68px;
+}
+
 
 /*Jquery tabs override*/
 .ej-tabs.ui-widget-content {

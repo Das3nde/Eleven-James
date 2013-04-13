@@ -5,8 +5,19 @@ $(function() {
 	width:537,
 	draggable: false,
 	resizable: false,
-	dialogClass: "ej-modal"
-	})
+	dialogClass: "ej-modal",
+	autoOpen: true,
+	open: function(e,ui) {
+		$(this, ".button-close").click(function() {
+			$(e.target).dialog("close");
+		});
+		$(".ui-widget-overlay").click(function() {
+			$(e.target).dialog("close");
+		});
+	}
+	});
+	
+	
 	
 	center_button_row();
 })

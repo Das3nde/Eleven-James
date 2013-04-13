@@ -33,6 +33,33 @@ h1, h2, h3, h4, h5, h6 {
 	font-family:dinnLC;
 }
 
+.dynamic-centered {
+	margin:0 auto;
+}
+
+.decorated-block {
+	text-align:center;
+}
+.decorated-block:before, .decorated-block:after {
+	content: " ";
+	display:block;
+	width:12px;
+	height:6px;
+	background-color:#a3a197;
+	margin:0 auto;
+}
+.decorated-block:before {
+	margin-bottom:20px;
+}
+.decorated-block:after {
+	margin-top:20px;
+}
+
+.rhino-btn {
+	background:url(../images/slider-arrows.png) 0 0 no-repeat;
+	width:22px;
+	height:40px;
+}
 
 /*Layout*/
 #site-header {
@@ -97,7 +124,7 @@ h1, h2, h3, h4, h5, h6 {
 .internal-page #site-header #site-nav a {
 	color:#FFF;
 	text-decoration:none;
-	font-family:akkuratB;
+	font-family:akkurat;
 	line-height:40px;
 	font-size:15px;
 }
@@ -105,7 +132,7 @@ h1, h2, h3, h4, h5, h6 {
 	padding-left:15px;
 	background:url(../images/active-menu-marker.png) 0 15px no-repeat;
 }
-.internal-page #site-header #site-nav .active a {
+.internal-page #site-header #site-nav .active a, .internal-page #site-header #site-nav a:hover {
 	color:#ff4002;
 }
 .internal-page #site-header #site-nav .home a {
@@ -167,7 +194,7 @@ h1, h2, h3, h4, h5, h6 {
 	margin-right:30px;
 }
 
-.internal-page #site-footer .contact li a {
+.internal-page #site-footer .contact li a, .internal-page #site-footer li a:hover {
 	color:#ff4002;
 }
 
@@ -179,27 +206,33 @@ h1, h2, h3, h4, h5, h6 {
 	color:#FFF;
 }
 
-.internal-page #site-footer .social-media li {
+.internal-page #site-footer .social-media li,
+.internal-page #site-header.main-layout .social-media li {
 	width:42px;
 	border-width:0;
 }
 
-.internal-page #site-footer .social-media li a {
+.internal-page #site-footer .social-media li a,
+.internal-page #site-header.main-layout .social-media li a {
 	width:100%;
 	height:42px;
 	display:block;
 	background:url(../images/social-icons-white.png) 0 0 no-repeat;
+	text-decoration:none;
 }
 
-.internal-page #site-footer .social-media li a.twitter {
+.internal-page #site-footer .social-media li a.twitter,
+.internal-page #site-header.main-layout .social-media li a.twitter {
 	background-position:-53px 0;
 }
 
-.internal-page #site-footer .social-media li a.pinterest {
+.internal-page #site-footer .social-media li a.pinterest,
+.internal-page #site-header.main-layout .social-media li a.pinterest {
 	background-position:-106px 0;
 }
 
-.internal-page #site-footer .social-media li a.instagram {
+.internal-page #site-footer .social-media li a.instagram,
+.internal-page #site-header.main-layout .social-media li a.instagram {
 	background-position:-159px 0;
 }
 
@@ -220,6 +253,66 @@ h1, h2, h3, h4, h5, h6 {
 	font-size:12px;
 	font-family:akkuratB;
 	font-weight:normal;
+}
+
+.internal-page #site-header.main-layout #site-logo {
+	width:112px;
+	margin:0 auto;
+}
+
+.internal-page #site-header.main-layout {
+	padding-top:26px;
+	position:relative;
+}
+
+.internal-page #site-header.main-layout .sub {
+	font-size:15px;
+	padding:20px 0;
+}
+
+.internal-page #site-header.main-layout .sub:after {
+	content: ' ';
+	display:block;
+	width:107px;
+	border-bottom:1px solid #666666;
+	margin:0 auto;
+}
+
+.internal-page #site-header.main-layout #site-nav {
+	padding:20px 0;
+	float:none;
+}
+
+.internal-page #site-header.main-layout a.account {
+	position:absolute;
+	top:20px;
+	right:20px;
+	color:#FFF;
+	font-size:12px;
+	font-family:akkurat;
+	padding-right:60px;
+	line-height:50px;
+	text-decoration:none;
+	text-transform:uppercase;
+	background:url(../images/account-gear-icon-white.png) 100% 0 no-repeat;
+}
+
+.internal-page #site-header.main-layout .social-media {
+	position:absolute;
+	left:20px;
+	top:20px;
+}
+
+.internal-page #site-header.main-layout .social-media .label {
+	font-family:akkurat;
+	font-size:12px;
+	text-transform:uppercase;
+	line-height:45px;
+}
+
+.internal-page #site-header.main-layout .social-media li a {
+	background:none;
+	background:url(../images/social-icons-grey.png) 0 0 no-repeat;
 }
 
 
@@ -311,6 +404,98 @@ h1, h2, h3, h4, h5, h6 {
 	width:68px;
 }
 
+/*Homepage*/
+#home-page #site-content {
+	background-color:#FFF;
+}
+#homepage-slider {
+	background-color:#FFF;
+	margin: 0 auto;
+	overflow:hidden;
+}
+#homepage-slider p {
+	font-family:dinnLC;
+	text-transform:uppercase;
+}
+#homepage-slider .label {
+	line-height:40px;
+	font-size:21px;
+	color:#333;
+}
+#homepage-slider .name, #homepage-slider .highlight {
+	font-size:80px;
+	line-height:70px;
+	color:#222;
+}
+#homepage-slider .highlight {
+	color:#ff3a02;
+}
+#homepage-slider .decorated-block {
+	margin-top:70px;
+}
+#homepage-slider .decorated-block:after {
+	margin-top:40px;
+}
+#homepage-slider .decorated-block:before {
+	margin-bottom:40px;
+}
+#homepage-slider .info .button-row a {
+	width:50px;
+}
+
+#home-page .more-links {
+	background-color:#f6f5f4;
+	padding-bottom:80px;
+	padding-top:6px;
+}
+#home-page .more-links h4 {
+	font-size:27px;
+	font-family:dinCR;
+	text-transform:uppercase;
+	margin:35px 0;
+}
+
+#home-page .more-links .new h4 {
+	color:#ff4002;
+}
+
+#home-page .more-links li {
+	margin:0 1px;
+}
+
+#home-page .more-links .info {
+	background-color:#2c2b28;
+	color:#FFF;
+	font-family:akkurat;
+	text-align:center;
+	padding:15px 10px 18px;
+	font-size:16px;
+	line-height:20px;
+}
+
+#home-page .more-links p.name {
+	text-transform:uppercase;
+}
+
+#home-page .more-links img {
+	display:block;
+}
+
+#home-page .more-links .button {
+	width:50px;
+	margin:15px auto 0;
+	background-color:#f6f5f4;
+	color:#363636;
+	font-family:akkurat;
+	font-size:16px;
+}
+
+#home-page .more-links .news .button {
+	background-color:#ff4002;
+	color:#FFF;
+}
+
+#home-page .more-links {}
 
 /*Jquery tabs override*/
 .ej-tabs.ui-widget-content {
@@ -386,9 +571,28 @@ h1, h2, h3, h4, h5, h6 {
 	line-height:72px;
 }
 
+/*BJQS Overrides*/
+.bjqs-controls li a {
+	background:url(../images/slider-arrows.png) 0 0 no-repeat;
+	width:22px;
+	height:40px;
+	display:block;
+	text-decoration:none;
+}
 
+.bjqs-controls li.bjqs-next a {
+	background-position:-200px 0;
+}
 
-/*Forms*/
+.bjqs-controls li.bjqs-prev a:hover {
+	background-position:-100px 0;
+}
+
+.bjqs-controls li.bjqs-next a:hover {
+	background-position:-300px 0;
+}
+
+/*Forms and buttons*/
 .form .row {
 	height:40px;
 	border:1px solid #c5c5c3;
@@ -426,7 +630,7 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0 auto;
 }
 
-.form .button {
+.button, a.button {
 	border-radius:2px;
 	-moz-border-radius:2px;
 	-webkit-border-radius:2px;
@@ -440,13 +644,18 @@ h1, h2, h3, h4, h5, h6 {
 	background-color:#363636;
 }
 
-.button .text {
+.button .text, a.button {
 	color:#FFF;
 	text-align:center;
 	text-transform:uppercase;
 	line-height:42px;
 	font-family:akkuratB;
 	font-size:13px;
+}
+
+a.button {
+	text-decoration:none;
+	display:block;
 }
 
 

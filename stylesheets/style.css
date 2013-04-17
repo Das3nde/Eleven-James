@@ -115,7 +115,6 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 /*Layout*/
 #site-header {
 	background-color:#000;
-	padding-top:100px;
 	padding-bottom:40px;
 	color: white;
 }
@@ -129,7 +128,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 }
 #site-logo {
 	display:block;
-	margin:0 auto 50px;
+	margin:0 auto;
 	width:296px;
 }
 
@@ -388,7 +387,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	border:1px solid #e8e7e7;
 	border-bottom:none;
 	border-top:none;
-	padding-bottom:100px;
+	padding-bottom:50px;
 	padding-top:15px;
 }
 

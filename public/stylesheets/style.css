@@ -327,9 +327,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 
 .internal-page #site-header.main-layout {
 	padding-top:26px;
-	
 }
-
 .internal-page #site-header.main-layout .container {
 	position:relative;
 }
@@ -355,8 +353,10 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 
 .internal-page #site-header.main-layout a.account {
 	position:absolute;
+
 	top:0;
 	right:0;
+
 	color:#FFF;
 	font-size:12px;
 	font-family:akkurat;
@@ -736,6 +736,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	font-size:17px;
 }
 
+
 .form .row.textarea-row {
 	height:auto;
 }
@@ -744,7 +745,6 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	border-width:0px;
 	box-shadow:none;
 	background-color:#eeeeeb;
-	
 	width:255px;
 	padding:0 10px;
 	font-family:Arial;
@@ -753,6 +753,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	font-size:16px;
 	float:right;
 }
+
 
 .form .row input, .form .row .field {
 	height:40px;
@@ -1864,6 +1865,7 @@ ul.ej-queue li.unknown {
 .black-version.social-media a.instagram {
 	background-position:-159px 0;
 }
+
 
 
 /*Contact us*/

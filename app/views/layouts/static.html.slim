@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        title ElevenJames
+        = stylesheet_link_tag    "application", :media => "all"
+        = javascript_include_tag "application"
+        = csrf_meta_tags
+    body
+        div id="#{ @wrapper ? @wrapper : action_name}-page"
+            - case @header_layout
+            - when "splash"
+                = render "layouts/static/splash_header"
+
+                #site-content
+                    = yield
+                #site-footer
+                    - case @header_layout
+                    - when "splash"
+                        = render "layouts/static/splash_footer"

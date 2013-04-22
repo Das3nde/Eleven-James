@@ -1,4 +1,25 @@
 ElevenJames::Application.routes.draw do
+  
+  root to: "static_pages#splash"
+  
+  get "static_pages/splash"
+
+  get "static_pages/account"
+
+  get "static_pages/concierge"
+
+  get "static_pages/contact_us"
+
+  get "static_pages/detail"
+
+  get "static_pages/home"
+
+  get "static_pages/listing"
+
+  get "static_pages/queue"
+
+  get "static_pages/signup"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

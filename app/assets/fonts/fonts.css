@@ -1,0 +1,103 @@
+@font-face {
+	font-family: "akkurat";
+	src: url("AKKURAT.eot");
+	src: local('?'), url('AKKURAT.woff') format('woff'), url('AKKURAT.ttf') format('truetype'), url('AKKURAT.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "akkuratB";
+	src: url("AKKURATB.eot");
+	src: local('?'), url('AKKURATB.woff') format('woff'), url('AKKURATB.ttf') format('truetype'), url('AKKURATB.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "akkuratL";
+	src: url("AKKURATL.eot");
+	src: local('?'), url('AKKURATL.woff') format('woff'), url('AKKURATL.ttf') format('truetype'), url('AKKURATL.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "dinCB";
+	src: url("DINCond-Bold.eot");
+	src: local('?'), url('DINCond-Bold.woff') format('woff'), url('DINCond-Bold.ttf') format('truetype'), url('DINCond-Bold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "dinCL";
+	src: url("DINCond-Light.eot");
+	src: local('?'), url('DINCond-Light.woff') format('woff'), url('DINCond-Light.ttf') format('truetype'), url('DINCond-Light.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "dinCLA";
+	src: url("DINCond-LightAlternate.eot");
+	src: local('?'), url('DINCond-LightAlternate.woff') format('woff'), url('DINCond-LightAlternate.ttf') format('truetype'), url('DINCond-LightAlternate.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "dinCM";
+	src: url("DINCond-Medium.eot");
+	src: local('?'), url('DINCond-Medium.woff') format('woff'), url('DINCond-Medium.ttf') format('truetype'), url('DINCond-Medium.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "dinCR";
+	src: url("DINCond-Regular.eot");
+	src: local('?'), url('DINCond-Regular.woff') format('woff'), url('DINCond-Regular.ttf') format('truetype'), url('DINCond-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "dinnBC";
+	src: url("DINNextLTPro-BoldCondensed.eot");
+	src: local('?'), url('DINNextLTPro-BoldCondensed.woff') format('woff'), url('DINNextLTPro-BoldCondensed.ttf') format('truetype'), url('DINNextLTPro-BoldCondensed.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "dinnC";
+	src: url("DINNextLTPro-Condensed.eot");
+	src: local('?'), url('DINNextLTPro-Condensed.woff') format('woff'), url('DINNextLTPro-Condensed.ttf') format('truetype'), url('DINNextLTPro-Condensed.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "dinnHC";
+	src: url("DINNextLTPro-HeavyCondensed.eot");
+	src: local('?'), url('DINNextLTPro-HeavyCondensed.woff') format('woff'), url('DINNextLTPro-HeavyCondensed.ttf') format('truetype'), url('DINNextLTPro-HeavyCondensed.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "dinnLC";
+	src: url("DINNextLTPro-LightCondensed.eot");
+	src: local('?'), url('DINNextLTPro-LightCondensed.woff') format('woff'), url('DINNextLTPro-LightCondensed.ttf') format('truetype'), url('DINNextLTPro-LightCondensed.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "dinnMC";
+	src: url("DINNextLTPro-MediumCond.eot");
+	src: local('?'), url('DINNextLTPro-MediumCond.woff') format('woff'), url('DINNextLTPro-MediumCond.ttf') format('truetype'), url('DINNextLTPro-MediumCond.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}

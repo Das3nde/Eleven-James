@@ -12,4 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require jquery_ujs
+//= require bjqs-1.3.min
+//= require elevenjames

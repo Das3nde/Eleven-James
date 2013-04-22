@@ -1,19 +1,28 @@
 doctype html
 html
-    head
-        title ElevenJames
-        = stylesheet_link_tag    "application", :media => "all"
-        = javascript_include_tag "application"
-        = csrf_meta_tags
-    body
-        div id="#{ @wrapper ? @wrapper : action_name}-page"
-            - case @header_layout
-            - when "splash"
-                = render "layouts/static/splash_header"
-
-                #site-content
-                    = yield
-                #site-footer
-                    - case @header_layout
-                    - when "splash"
-                        = render "layouts/static/splash_footer"
+  head
+    title ElevenJames
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  body
+    - if @wrapper == "splash"
+      - @header_partial = "splash_header"
+      - @footer_partial = "splash_footer"
+      - @internal_class = ""
+    - elsif @wrapper == "account"
+      - @header_partial = "mini_header"
+      - @footer_partial = "footer"
+      - @internal_class = "internal-page"
+    - else
+      - @header_partial = "header"
+      - @footer_partial = "footer"
+      - @header_class = "main-layout"
+      - @internal_class = "internal-page"
+    div id="#{ @wrapper ? @wrapper : action_name}-page" class="#{@internal_class if @internal_class.present?}"
+      #site-header class="#{@header_class if @header_class.present?}"
+        = render "layouts/static/#{@header_partial}"
+      #site-content
+        = yield
+      #site-footer
+        = render "layouts/static/#{@footer_partial}"

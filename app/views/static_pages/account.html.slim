@@ -1,2 +1,34 @@
-h1 StaticPages#account
-p Find me in app/views/static_pages/account.html.slim
+h2 Manage Account
+.ej-tabs
+  .container
+    ul
+      li
+        a href="#account-info" Account Info
+      li
+        a href="#delivery" Delivery
+      li
+        a href="#frequency" Frequency
+  #account-info
+    .container
+      .form.centerme
+        h3 Username / Password
+        .row.cgrid.compact
+          label for="username" Username
+          input#username name="username" type="text"
+        .row.cgrid.compact
+          label for="userpassword" Password
+          input#userpassword name="userpassword" type="password"
+        .row.cgrid.compact
+          label for="userpassword-repeat" Confirm Password
+          input#userpassword-repeat name="userpassword-repeat" type="password"
+        .button-row.cgrid
+          .button.primary
+            .text Save
+            input type="submit" value="Save"
+          .button
+            .text I forgot my password
+            input type="submit" value="I forgot my password"
+  #delivery
+    .container
+  #frequency
+    .container

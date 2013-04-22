@@ -3,11 +3,10 @@ class StaticPagesController < ApplicationController
   
   def splash
     @wrapper = "splash"
-    @header_layout = "splash"
-    @footer_layout = "splash"
   end
 
   def account
+    @wrapper = "account"
   end
 
   def concierge

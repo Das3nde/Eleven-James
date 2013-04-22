@@ -72,7 +72,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 }
 
 .rhino-btn {
-	background:url(../images/slider-arrows.png) 0 0 no-repeat;
+	background:url(slider-arrows.png) 0 0 no-repeat;
 	width:22px;
 	height:40px;
 }
@@ -105,13 +105,13 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	position:absolute;
 	width:12px;
 	height:8px;
-	background:url(../images/select-arrow.png) 0 0 no-repeat;
+	background:url(select-arrow.png) 0 0 no-repeat;
 	top:16px;
 	right:10px;
 }
 
 .select-wrapper .arrow.red {
-	background-image:url(../images/select-arrow-red.png);
+	background-image:url(select-arrow-red.png);
 }
 
 /*Layout*/
@@ -195,24 +195,24 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 }
 .internal-page #site-header #site-nav .active {
 	padding-left:15px;
-	background:url(../images/active-menu-marker.png) 0 15px no-repeat;
+	background:url(active-menu-marker.png) 0 15px no-repeat;
 }
 .internal-page #site-header #site-nav .active a, .internal-page #site-header #site-nav a:hover {
 	color:#ff4002;
 }
 .internal-page #site-header #site-nav .home a {
-	background:url(../images/home-icon.png) 0 12px no-repeat;
+	background:url(home-icon.png) 0 12px no-repeat;
 	width:14px;
 	height:40px;
 	display:block;
 }
 .internal-page #site-header #site-nav .home.active a {
-	background-image:url(../images/home-icon-active.png);
+	background-image:url(home-icon-active.png);
 }
 .internal-page #site-header #site-nav .account {
 	padding-right:50px;
 	padding-left:40px;
-	background:url(../images/account-gear-icon.png) 100% 2px no-repeat;
+	background:url(account-gear-icon.png) 100% 2px no-repeat;
 }
 .internal-page #site-header #site-nav .account a {
 	text-transform:uppercase;
@@ -282,7 +282,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	width:100%;
 	height:42px;
 	display:block;
-	background:url(../images/social-icons-white.png) 0 0 no-repeat;
+	background:url(social-icons-white.png) 0 0 no-repeat;
 	text-decoration:none;
 }
 
@@ -308,7 +308,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 
 .internal-page #site-footer .omega .account {
 	padding-right:60px;
-	background:url(../images/account-gear-icon-white.png) 100% 0 no-repeat;
+	background:url(account-gear-icon-white.png) 100% 0 no-repeat;
 	height:50px;
 	line-height:45px;
 	display:block;
@@ -364,7 +364,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	line-height:50px;
 	text-decoration:none;
 	text-transform:uppercase;
-	background:url(../images/account-gear-icon-white.png) 100% 0 no-repeat;
+	background:url(account-gear-icon-white.png) 100% 0 no-repeat;
 }
 
 .internal-page #site-header.main-layout .social-media {
@@ -382,7 +382,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 
 .internal-page #site-header.main-layout .social-media li a {
 	background:none;
-	background:url(../images/social-icons-grey.png) 0 0 no-repeat;
+	background:url(social-icons-grey.png) 0 0 no-repeat;
 }
 
 
@@ -623,7 +623,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 
 /*BJQS Overrides*/
 .bjqs-controls li a {
-	background:url(../images/slider-arrows.png) 0 0 no-repeat;
+	background:url(slider-arrows.png) 0 0 no-repeat;
 	width:22px;
 	height:40px;
 	display:block;
@@ -631,7 +631,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 }
 
 .static-slider .bjqs-controls li a {
-	background-image:url(../images/slider-arrows-small.png);
+	background-image:url(slider-arrows-small.png);
 	padding:0;
 }
 
@@ -852,7 +852,7 @@ a.button {
 .ej-modal .ui-widget-header .ui-button.ui-dialog-titlebar-close .ui-icon {
 	width:22px;
 	height:22px;
-	background-image:url(../images/modal-close-button.png);
+	background-image:url(modal-close-button.png);
 	background-position:0 0;
 }
 
@@ -865,7 +865,7 @@ a.button {
 	background:none;
 	border-width:0;
 	padding-left:50px;
-	background:url(../images/checkbox.png) 0 -100px no-repeat;
+	background:url(checkbox.png) 0 -100px no-repeat;
 	border-radius:0;
 	-moz-border-radius:0;
 	-webkit-border-radius:0;
@@ -887,7 +887,7 @@ a.button {
 
 .ui-button.small-checkbox {
 	height:24px;
-	background-image:url(../images/checkbox-small.png);
+	background-image:url(checkbox-small.png);
 	background-position:0 -50px;
 	padding-left:40px;
 }
@@ -1280,7 +1280,7 @@ a.button {
 .ej-notification .close {
 	width:22px;
 	height:22px;
-	background:url(../images/modal-close-button.png) 0 0 no-repeat;
+	background:url(modal-close-button.png) 0 0 no-repeat;
 	position:absolute;
 	top:20px;
 	left:20px;
@@ -1444,7 +1444,7 @@ ul.ej-queue li .close {
 	right:0;
 	width:26px;
 	height:27px;
-	background:url(../images/queue-item-close.png) 0 0 no-repeat;
+	background:url(queue-item-close.png) 0 0 no-repeat;
 	cursor:pointer;
 }
 
@@ -1581,7 +1581,7 @@ ul.ej-queue li.unknown {
 
 #detail-page .back-link {
 	position:absolute;
-	background:url(../images/back-link-icon.png) 0 0 no-repeat;
+	background:url(back-link-icon.png) 0 0 no-repeat;
 	left:-30px;
 	top:43px;
 	font-size:12px;
@@ -1605,7 +1605,7 @@ ul.ej-queue li.unknown {
 	bottom:26px;
 	width:35px;
 	height:35px;
-	background:url(../images/zoom-icon.png) 0 0 no-repeat;
+	background:url(zoom-icon.png) 0 0 no-repeat;
 }
 
 #detail-page .ej-tabs {
@@ -1678,7 +1678,7 @@ ul.ej-queue li.unknown {
 #detail-page #comments .rating li a {
 	width:11px;
 	height:11px;
-	background:url(../images/rating.png) -14px 0 no-repeat;
+	background:url(rating.png) -14px 0 no-repeat;
 	display:block;
 }
 
@@ -1818,7 +1818,7 @@ ul.ej-queue li.unknown {
 
 /*Circles*/
 .circle{
-	background:url(../images/tag-circles.png) 0 0 no-repeat;
+	background:url(tag-circles.png) 0 0 no-repeat;
 	width:84px;
 	height:52px;
 	line-height:20px;
@@ -1847,7 +1847,7 @@ ul.ej-queue li.unknown {
 	width:42px;
 	height:42px;
 	text-decoration:none;
-	background:url(../images/social-icons.png) 0 0 no-repeat;
+	background:url(social-icons.png) 0 0 no-repeat;
 }
 
 .black-version.social-media a.twitter {
@@ -1928,11 +1928,11 @@ ul.ej-queue li.unknown {
 }
 
 #contact-page .email h4 {
-	background:url(../images/contact.png) 0 6px no-repeat;
+	background:url(contact.png) 0 6px no-repeat;
 }
 
 #contact-page .call h4 {
-	background:url(../images/phone.png) 0 -1px no-repeat;
+	background:url(phone.png) 0 -1px no-repeat;
 }
 
 #contact-page  .button-row{

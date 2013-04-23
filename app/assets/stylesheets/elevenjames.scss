@@ -146,11 +146,6 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
   border-top: 1px solid #e8e7e7;
   .copy {
     color: #FFF;
-    position: absolute;
-    bottom: 10px;
-    right: 0;
-    border-top: 1px solid #565553;
-    width: 100%;
     padding-top: 5px;
   }
   .container {
@@ -1363,6 +1358,9 @@ ul.ej-queue li {
       width: auto;
       .value {
         padding-right: 27px;
+        font-family:dinnLC;
+        text-transform:uppercase;
+        font-size:17px;
       }
       &.brand .value, &.band .value, &.type .value {
         width: 90px;
@@ -1376,11 +1374,13 @@ ul.ej-queue li {
     }
     .action {
       font-family: Arial;
-      font-size: 15px;
       line-height: 40px;
       text-decoration: none;
       color: #ff4002;
       padding-left: 15px;
+      font-family:dinnLC;
+      text-transform:uppercase;
+      font-size:17px;
     }
   }
   .listing {
@@ -1820,5 +1820,30 @@ ul.ej-queue li {
   }
   .request-button {
     width: 250px;
+  }
+}
+
+#account-page #delivery.ui-tabs {
+  .header {
+    margin-top:20px;
+    margin-bottom:20px;
+    text-align:center;;
+    a.button {
+      display:inline-block;
+      width:100px;
+      vertical-align:top;;
+    }
+  }
+  h3 {
+    font-size:28px;
+    line-height:40px;
+    display:inline-block;
+    color:#ff4002;
+    margin-right:30px;
+    vertical-align:top;;
+  }
+  p.address {
+    font-size:16px;
+    line-height:22px;
   }
 }

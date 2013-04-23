@@ -30,6 +30,27 @@ h2 Manage Account
             input type="submit" value="I forgot my password"
   #delivery
     .container
+      / .header
+      /         h3 Specify Delivery Address
+      /         a.button.primary href="#" Add new
+      /       .form
+      /         ul.cgrid.button-set
+      /           - 3.times do |i|
+      /             li class="#{"active" if i==0}"
+      /               - checked =  (i==0 ? {checked: 'checked'} : {})
+      /               input type="radio" id="address#{i}" name="address" *checked
+      /               label for="address#{i}" Ship to this address
+      /               p.address
+      /                 | Giles Dickerson
+      /                 br
+      /                 | 346 HAROLD ST
+      /                 br
+      /                 | Staten Island, NY 10314-4147
+      /                 br
+      /                 | United States
+      /                 br
+      /                 | Phone: 9173021682
+        
   #frequency
     .container
 

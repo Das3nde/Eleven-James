@@ -10,12 +10,15 @@ class StaticPagesController < ApplicationController
   end
 
   def concierge
+    @wrapper = "concierge"
   end
 
   def contact_us
+    @wrapper = "contact"
   end
 
   def detail
+    @wrapper = "detail"
   end
 
   def home

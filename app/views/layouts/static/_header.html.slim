@@ -4,17 +4,17 @@
   p.sub Timeless Timepieces with Brevity
   #site-nav
     ul.cgrid.dynamic-centered
-      li.active.home
+      li.home class="#{detemine_active_menu("home")}"
         a href="#home"
-      li
+      li class="#{detemine_active_menu("collection")}"
         a href="#" The Collection
-      li
+      li class="#{detemine_active_menu("selection")}"
         a href="#" Your Selections
-      li
+      li class="#{detemine_active_menu("service")}"
         a href="#" Services &amp; Benefits
-      li
-        a href="#" New &amp; Events
-      li
+      li class="#{detemine_active_menu("news")}"
+        a href="#" News &amp; Events
+      li class="#{detemine_active_menu("contact")}"
         a href="#" Contact Us
   a.account href="#" Account
   .social-media.cgrid

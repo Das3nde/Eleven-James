@@ -3592,3 +3592,14 @@ Served asset /application.js - 304 Not Modified (0ms)
 
 Started GET "/assets/DINNextLTPro-Condensed.woff" for 127.0.0.1 at 2013-04-22 23:58:30 +0530
 Served asset /DINNextLTPro-Condensed.woff - 200 OK (10ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml

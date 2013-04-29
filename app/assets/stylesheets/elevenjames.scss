@@ -243,15 +243,19 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
         font-weight: normal;
       }
     }
-    .contact li {
-      width: 230px;
-      margin-right: 50px;
+    .contact {
       a {
         color: #ff4002;
       }
     }
     li a:hover {
       color: #ff4002;
+    }
+    .follow-us, .omega {
+      float:right;
+    }
+    .omega {
+      width:300px;
     }
     .follow-us .label {
       line-height: 42px;

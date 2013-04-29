@@ -22,14 +22,18 @@ class StaticPagesController < ApplicationController
   end
 
   def home
+    @wrapper = "home"
   end
 
   def listing
+    @wrapper = "listing"
   end
 
   def queue
+    @wrapper = "queue"
   end
 
   def signup
+    @wrapper = "signup"
   end
 end

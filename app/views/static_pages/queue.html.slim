@@ -30,136 +30,51 @@ h2
         a href="#queue" Queue
       li
         a href="#history" History
+      li
+        a href="#guidelines" Guidelines
+      li
+        a href="#featured" Featured Queues
   #queue
     .container
       ul.ej-queue.cgrid
-        li.cgrid.compact
-          .image
-            img alt="" src="/assets/temp/C2.jpg"
-          .info
-            p.name Brietling
-            p.make Chronomat
-            p Case Diameter: 39.7 mm
-          .close
-        li.cgrid.compact.wrap
-          .image
-            img alt="" src="/assets/temp/C2.jpg"
-          .info
-            p.name Brietling
-            p.make Chronomat
-            p Case Diameter: 39.7 mm
-          .close
-        li.cgrid.compact
-          .image
-            img alt="" src="/assets/temp/C2.jpg"
-          .info
-            p.name Brietling
-            p.make Chronomat
-            p Case Diameter: 39.7 mm
-          .close
-        li.cgrid.compact.wrap
-          .image
-            img alt="" src="/assets/temp/C2.jpg"
-          .info
-            p.name Brietling
-            p.make Chronomat
-            p Case Diameter: 39.7 mm
-          .close
-        li.cgrid.compact
-          .image
-            img alt="" src="/assets/temp/C2.jpg"
-          .info
-            p.name Brietling
-            p.make Chronomat
-            p Case Diameter: 39.7 mm
-          .close
-        li.cgrid.compact.unknown.wrap
-          .image
-            img alt="" src="/assets/unknown-watch.png"
-          .info
-            p.text To schedule your first delivery, you’ll need to have a minimum of 8 watches in your queue. Please view our collection and select more.
-            a.button.the-collection href="#" The Collection
-            .clear
-        li.cgrid.compact
-          .image
-            img alt="" src="/assets/temp/C2.jpg"
-          .info
-            p.name Brietling
-            p.make Chronomat
-            p Case Diameter: 39.7 mm
-          .close
-        li.cgrid.compact.unknown.wrap
-          .image
-            img alt="" src="/assets/unknown-watch.png"
-          .info
-            p.text To schedule your first delivery, you’ll need to have a minimum of 8 watches in your queue. Please view our collection and select more.
-            a.button.the-collection href="#"The Collection
-            .clear
+        - 8.times do |i|
+          - unless [5,7].include? i
+            li.cgrid.compact class="#{"wrap" if i%2}"
+              .image
+                img alt="" src="/assets/temp/C2.jpg"
+              .info
+                p.name Brietling
+                p.make Chronomat
+                p Case Diameter: 39.7 mm
+              .close
+          - else
+            li.cgrid.compact.unknown  class="#{"wrap" if i%2}"
+              .image
+                img alt="" src="/assets/unknown-watch.png"
+              .info
+                p.text To schedule your first delivery, you’ll need to have a minimum of 8 watches in your queue. Please view our collection and select more.
+                a.button.the-collection href="#" The Collection
+                .clear
   #history
     .container
       ul.list
-        li
-          .container.cgrid.compact
-            .image
-              img alt="" src="/assets/temp/G1.jpg"
-            .info
-              p.name BREITLING
-              p.make Chronomat
-              p Case Diameter: 39.7 mm
-              p Worn: 03/18/13 - 05/18/13
-              .button-row.cgrid.not-centered
-                a.button.alpha href="#" +Add
-                a.button href="#" Add comments
-                a.button href="#" Buy
-        li
-          .container.cgrid.compact
-            .image
-              img alt="" src="/assets/temp/G1.jpg"
-            .info
-              p.name BREITLING
-              p.make Chronomat
-              p Case Diameter: 39.7 mm
-              p Worn: 03/18/13 - 05/18/13
-              .button-row.cgrid.not-centered
-                a.button.alpha href="#" +Add
-                a.button href="#" Add comments
-                a.button href="#" Buy
-        li
-          .container.cgrid.compact
-            .image
-              img alt="" src="/assets/temp/G1.jpg"
-            .info
-              p.name BREITLING
-              p.make Chronomat
-              p Case Diameter: 39.7 mm
-              p Worn: 03/18/13 - 05/18/13
-              .button-row.cgrid.not-centered
-                a.button.alpha href="#" +Add
-                a.button href="#" Add comments
-                a.button href="#" Buy
-        li
-          .container.cgrid.compact
-            .image
-              img alt="" src="/assets/temp/G1.jpg"
-            .info
-              p.name BREITLING
-              p.make Chronomat
-              p Case Diameter: 39.7 mm
-              p Worn: 03/18/13 - 05/18/13
-              .button-row.cgrid.not-centered
-                a.button.alpha href="#" +Add
-                a.button href="#" Add comments
-                a.button href="#" Buy
-        li
-          .container.cgrid.compact
-            .image
-              img alt="" src="/assets/temp/G1.jpg"
-            .info
-              p.name BREITLING
-              p.make Chronomat
-              p Case Diameter: 39.7 mm
-              p Worn: 03/18/13 - 05/18/13
-              .button-row.cgrid.not-centered
-                a.button.alpha href="#" +Add
-                a.button href="#" Add comments
-                a.button href="#" Buy
+        - 5.times do
+          li
+            .container.cgrid.compact
+              .image
+                img alt="" src="/assets/temp/G1.jpg"
+              .info
+                p.name BREITLING
+                p.make Chronomat
+                p Case Diameter: 39.7 mm
+                p Worn: 03/18/13 - 05/18/13
+                .button-row.cgrid.not-centered
+                  a.button.alpha href="#" +Add
+                  a.button href="#" Add comments
+                  a.button href="#" Buy
+  #guidelines
+    .container
+      p reminder/details of how the queue system works
+  #featured
+    .container
+      p show examples of Founder's Queue, Blogger Queues, Celebrity Queues, etc

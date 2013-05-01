@@ -42,7 +42,7 @@ $ ->
       draggable: false
       resizable: false
       dialogClass: "ej-modal"
-      autoOpen: false
+      autoOpen: true
       open: ->
         $this = $(this)
         $this.find(".button-close").click (e) ->

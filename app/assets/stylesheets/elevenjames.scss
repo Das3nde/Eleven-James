@@ -1482,11 +1482,6 @@ ul.ej-queue li {
   .comment-button {
     float: right;
   }
-  #comments .container {
-    width: 100%;
-    padding: 0;
-    padding-left: 44px;
-  }
   h3 {
     text-align: center;
     padding: 22px 0;
@@ -1499,24 +1494,41 @@ ul.ej-queue li {
     text-transform: uppercase;
     letter-spacing: 2px;
   }
-  #comments .review {
-    p {
-      line-height: 20px;
-      color: #333;
-    }
-    .user {
-      width: 152px;
-      margin-right: 10px;
-      font-size: 15px;
-      .name {
-        font-weight: bold;
-      }
-    }
-  }
   .comment-info {
     margin-top: 26px;
   }
   #comments {
+    .review {
+      p {
+        line-height: 20px;
+        color: #333;
+      }
+      .user {
+        width: 152px;
+        margin-right: 10px;
+        font-size: 15px;
+        .name {
+          font-weight: bold;
+        }
+      }
+    }
+    .pagination-wrap {
+      border-top:1px solid #c5c5c3;
+      margin-left:44px;
+      width:508px;
+    }
+    .pagination {
+      
+      padding-bottom:0;
+    }
+    .container {
+      width: 100%;
+      padding: 0;
+      padding-left: 44px;
+      overflow-y:auto;
+      overflow-x:hidden;
+      height:531px;
+    }
     .rating li {
       margin: 0 1px 0 2px;
       a {
@@ -1617,7 +1629,6 @@ ul.ej-queue li {
 
 .pagination {
   padding: 25px 0;
-  border-top: 1px solid #c5c5c3;
   .previous_page, .next_page {
     border-radius: 2px;
     -moz-border-radius: 2px;

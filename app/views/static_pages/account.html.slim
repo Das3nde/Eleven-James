@@ -1,5 +1,5 @@
 h2 Manage Account
-.ej-tabs
+.ej-tabs data-active="2"
   .container
     ul
       li
@@ -31,33 +31,44 @@ h2 Manage Account
           .button
             .text I forgot my password
             input type="submit" value="I forgot my password"
-  #delivery
+  #delivery.ui-tabs
     .container
-      / .header
-      /         h3 Specify Delivery Address
-      /         a.button.primary href="#" Add new
-      /       .form
-      /         ul.cgrid.button-set
-      /           - 3.times do |i|
-      /             li class="#{"active" if i==0}"
-      /               - checked =  (i==0 ? {checked: 'checked'} : {})
-      /               input type="radio" id="address#{i}" name="address" *checked
-      /               label for="address#{i}" Ship to this address
-      /               p.address
-      /                 | Giles Dickerson
-      /                 br
-      /                 | 346 HAROLD ST
-      /                 br
-      /                 | Staten Island, NY 10314-4147
-      /                 br
-      /                 | United States
-      /                 br
-      /                 | Phone: 9173021682
+      .header
+        h3 Specify Delivery Address
+        a.button.primary href="#" Add new
+      .form
+        ul.cgrid.buttonset
+          - 3.times do |i|
+            li class="#{"active" if i==0}"
+              - checked =  (i==0 ? {checked: 'checked'} : {})
+              input type="radio" id="address#{i}" name="address" *checked
+              label for="address#{i}" Ship to this address
+              p.address
+                | Giles Dickerson
+                br
+                | 346 HAROLD ST
+                br
+                | Staten Island, NY 10314-4147
+                br
+                | United States
+                br
+                | Phone: 9173021682
         
-  #frequency
+  #frequency.ui-tabs
     .container
+      .header
+        h3 Specify Rental Frequency
+        a.button.primary href="#" Save
+      .hr
+      p.label Please select 6 months of the year you would like to receive your watches.
+      ul.buttonset.cgrid
+        - ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ].each do |i|
+          li
+            label for="#{i.downcase}"=i
+            input type="checkbox" name="#{i.downcase}" id="#{i.downcase}"
+            p.number &nbsp;
 
-#add-address-modal.ej-modal title="Add An Address To Your Account"
+#add-address-modal.ej-modal title="Add An Address To Your Account" data-open="false"
   .form
     .row.cgrid.compact
       label for="address-name" Address Name

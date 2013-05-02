@@ -17,7 +17,7 @@ center_button_row = ->
 
     
     # 			console.log($this.outerWidth(true)); 
-    console.log width
+    # console.log width
     $(this).width width
 
 $ ->
@@ -35,14 +35,15 @@ $ ->
     $(this).tabs active: active
 
   $(".ej-modal").each ->
-    width = $(this).data("width") or 537
+    $this = $(this)
+    width = $this.data("width") or 537
     $(this).dialog
       modal: true
       width: width
       draggable: false
       resizable: false
       dialogClass: "ej-modal"
-      autoOpen: true
+      autoOpen: $this.data("open")
       open: ->
         $this = $(this)
         $this.find(".button-close").click (e) ->
@@ -107,7 +108,25 @@ $ ->
       responsive: false
       centercontrols: false
 
-
+  $("#account-page #frequency.ui-tabs .buttonset").buttonset create: ->
+    $this = $(this)
+    
+    $this.find("li").click ->
+      $this.find("li .number").html('&nbsp;')
+      count = 0
+      $this.find("label.ui-state-active").each ->
+        count+=1
+        $(this).parents("li").first().find(".number").text count
+        console.log( $(this).parents("li").first().find(".number"))
+  
+  $(".buttonset").buttonset create: ->
+    $this = $(this)
+    $this.find("li").click ->
+      $this.find("li").removeClass("active")
+      $(this).addClass("active")
+      
+  
+  
   $("#signup-page .dual-radio").buttonset create: ->
     $this = $(this)
     $this.find("label").click ->

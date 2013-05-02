@@ -1837,7 +1837,8 @@ ul.ej-queue li {
   }
 }
 
-#account-page #delivery.ui-tabs {
+#account-page .ui-tabs {
+  min-height:400px;
   .header {
     margin-top:20px;
     margin-bottom:20px;
@@ -1847,17 +1848,89 @@ ul.ej-queue li {
       width:100px;
       vertical-align:top;;
     }
+    h3 {
+      font-size:28px;
+      line-height:40px;
+      display:inline-block;
+      color:#ff4002;
+      margin-right:30px;
+      vertical-align:top;;
+    }
   }
-  h3 {
-    font-size:28px;
-    line-height:40px;
-    display:inline-block;
-    color:#ff4002;
-    margin-right:30px;
-    vertical-align:top;;
+}
+
+#account-page #frequency.ui-tabs {
+  .hr {
+    margin:0 auto;
+    height:1px;
+    width:80px;
+    background-color:#d0d0ce;
   }
+  .label {
+    text-align:center;
+    padding:20px 0 30px;
+    font-size:16px;
+  }
+  .buttonset {
+    padding:20px;
+    border:1px solid #c3c3c5;
+    label.ui-button {
+      width:80px;
+      text-align:center;
+      padding-left:0;
+      padding-bottom:30px;
+      line-height:35px;
+      background-position:27px -25px;
+      &.ui-state-active {
+        background-position:27px 25px;
+      }
+    }
+    .number {
+      text-align:center;;
+      font-size:16px;
+    }
+  }
+}
+
+#account-page #delivery.ui-tabs {
+  
   p.address {
     font-size:16px;
     line-height:22px;
+  }
+  .buttonset li {
+    width:300px;
+    padding:22px;
+    border:1px solid transparent;
+    &.active {
+      border-color:#cfcecc;
+    }
+    label.ui-button {
+      margin-bottom:15px;
+      padding-left:35px;
+    }
+    p {
+      font-size:16px;
+      line-height:23px;
+      color:#333;
+    }
+  }
+}
+
+/*Radio buttons*/
+.buttonset {
+  label.ui-button {
+    background-image:none;
+    border-width:0;
+    background-color:transparent;
+    background:url(checkbox-small.png) 0 -50px no-repeat;
+    line-height:25px;
+    height:25px;
+    &.ui-state-active {
+      background-position:0 0;
+    }
+    .ui-button-text {
+      line-height:25px;
+    }
   }
 }

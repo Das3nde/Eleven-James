@@ -8,6 +8,10 @@ h2 Manage Account
         a href="#delivery" Delivery
       li
         a href="#frequency" Frequency
+      li
+        a href="#referral" Referral
+      li
+        a href="#vault" Vault
   #account-info
     .container
       .form.centerme
@@ -64,6 +68,10 @@ h2 Manage Account
             label for="#{i.downcase}"=i
             input type="checkbox" name="#{i.downcase}" id="#{i.downcase}"
             p.number &nbsp;
+  #referral.ui-tabs
+    .container
+  #vault.ui-tabs
+    .container
 
 #add-address-modal.ej-modal title="Add An Address To Your Account"
   .form

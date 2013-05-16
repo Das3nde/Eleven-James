@@ -1,0 +1,10 @@
+%div
+  =simple_form_for :vendor, :html => {:id => 'add_vendor'}, :url => '/users'  do |f|
+    =f.text_field :name, placeholder: 'name', class: "required"
+    =f.text_field :address, placeholder: 'address', class: "required"
+    =f.text_field :phone, placeholder: 'phone', class: "required phoneUS"
+    =f.text_field :email, placeholder: 'email', class: "required email"
+    =f.text_field :website, placeholder: 'website', class: "required url"
+    %button{class: "cancel"}
+      Cancel
+    = f.submit 'Add Vendor'

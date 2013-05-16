@@ -1,0 +1,5 @@
+= simple_form_for [:admin, @d] do |f|
+  =f.input :bin_number
+  =f.input :courier
+  = f.input :product_id, :as => :hidden
+  = f.button :submit

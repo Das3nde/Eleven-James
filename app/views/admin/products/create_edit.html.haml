@@ -1,0 +1,36 @@
+= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/chosen/0.9.12/chosen.jquery.min.js"
+= stylesheet_link_tag "//cdn.jsdelivr.net/chosen/0.9.11/chosen.css"
+= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.0/jquery.validate.min.js"
+
+#sub_navigation= render_navigation
+HOLA!!!
+
+= simple_form_for [:admin, @product] do |f|
+  = f.input :quantity
+  = f.input :model
+  = f.input :brand
+  = f.input :material
+  = f.input :style
+  = f.input :color
+  = f.input :case
+  = f.input :msrp
+  %label
+    Vendor
+  = f.collection_select "vendor_id", Vendor.all, :id, :name, :label => "Name"
+  = f.input :description
+  = f.button :submit
+
+%table{:id=>'product_instances'}
+  - @product_instances.each do |product_instance|
+    %tr
+      %td
+        = product_instance.id
+
+%button{:id=>"add-watch"} Add Watch
+
+%div{:class=>"modal hide fade"}
+  = render("vendor").squish.html_safe
+
+%h3 Add Product Photos
+
+%button{:id=>"add-photo"} Add Photo

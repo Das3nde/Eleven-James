@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @tier.name
+%p
+  %b Cost:
+  = @tier.cost
+
+= link_to 'Edit', edit_tier_path(@tier)
+\|
+= link_to 'Back', tiers_path

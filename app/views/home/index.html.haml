@@ -1,0 +1,29 @@
+#sub_navigation= render_navigation
+%h3 Home
+- @users.each do |user|
+  %p
+    User: #{link_to user.name, user}
+
+%h2 Products
+%select{:id=>"page_size"}
+  %option 15
+  %option 50
+  %option 100
+%label{:for => "page_size"} Items Per Page
+%div
+  %span Page
+  %span 1
+  %span of
+  %span 3
+
+%table
+  %thead
+    %th Model
+    %th Brand
+    %th Tier
+    %th
+  %tbody
+    %td
+    %td
+    %td
+    %td

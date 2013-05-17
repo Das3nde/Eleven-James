@@ -26,6 +26,23 @@ $(()->
 
 #add/edit products page
 $(()->
+  $('#upload_iframe').load(()->
+    try
+      data = JSON.parse($(this).contents().text())
+      if(data.thumb_src)
+        $('#photos').append('<li data-id='+data.id+'><img src='+data.thumb_src+'/></li>')
+    catch e
+  )
+
+  $('#photos').delegate('li','click',()->
+    id = this.dataset.id
+    $.ajax({
+      url: '/admin/product_images/'+id
+      type: "GET",
+      dataType: 'script',
+    })
+  )
+
 
   if($('#add_vendor').validate)
     $('#add_vendor').validate({
@@ -49,6 +66,10 @@ $(()->
     #$('#add_vendor').submit(()->return false)
 
   if $().chosen
+    if($("#product_vendor_id option").length == 0)
+      $("#product_vendor_id").attr('data-placeholder', 'Enter a vendor name')
+      $("#product_vendor_id").append('<option value=""></option>')
+
     $("#product_vendor_id").chosen({
       no_results_text: "Add Vendor"
       no_results_callback: ($results, terms)->

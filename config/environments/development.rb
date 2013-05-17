@@ -35,5 +35,9 @@ Ej::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
+  config.serve_static_assets = true
+
+  Paperclip.options[:command_path] = "/tmp"
+
   ENV["REDISTOGO_URL"] = 'redis://redistogo:e281dcb1f412eddff96fa11e88c62e5a@barreleye.redistogo.com:10608/'
 end

@@ -23,11 +23,13 @@ class Admin::ProductsController < ApplicationController
     @product = Product.find(params[:id])
     model_id = sprintf '%05d', params[:id]
     @product_instances = ProductInstance.where('id ~ ?','^'+model_id)
+    @product_image = ProductImage.new()
     render "admin/products/create_edit"
   end
   def new
     @product = Product.new()
     @product_instances = []
+    @product_image = ProductImage.new()
     render "admin/products/create_edit"
   end
   def create
@@ -50,6 +52,9 @@ class Admin::ProductsController < ApplicationController
     instance.id = "#{model_id}-#{product_id}"
     instance.save
     render :json => {:id=> instance.id}
+  end
+  def upload_image
+    render :json => {:something => "changed now"}
   end
 end
 

@@ -1,6 +1,8 @@
 = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/chosen/0.9.12/chosen.jquery.min.js"
 = stylesheet_link_tag "//cdn.jsdelivr.net/chosen/0.9.11/chosen.css"
 = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.0/jquery.validate.min.js"
+= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jquery-jcrop/0.9.12/js/jquery.Jcrop.min.js"
+= stylesheet_link_tag "http://jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.min.css"
 
 #sub_navigation= render_navigation
 HOLA!!!
@@ -16,7 +18,7 @@ HOLA!!!
   = f.input :msrp
   %label
     Vendor
-  = f.collection_select "vendor_id", Vendor.all, :id, :name, :label => "Name"
+  = f.collection_select "vendor_id", Vendor.all, :id, :name, :label => "Name", :input_html => {'data-placeholder' => 'eretrefw'}
   = f.input :description
   = f.button :submit
 
@@ -33,4 +35,19 @@ HOLA!!!
 
 %h3 Add Product Photos
 
-%button{:id=>"add-photo"} Add Photo
+%button{:id=>"add-image"} Add Photo
+
+
+= simple_form_for [:admin, @product_image], :html => {:target => "upload_iframe"}  do |f|
+  = f.file_field :image
+  = f.input :product_id, :as => :hidden, :input_html => { :value => @product.id }
+  = f.button :submit, :input_html => { :value => "Upload Image" }
+
+%iframe{:id=>"upload_iframe", :src=>"/admin/product_images", :width=>"200", :height=>"200", :style => 'display:none'}
+
+%h3
+  Photos
+  %ul{:id=>'photos'}
+    - @product.product_images.each do |image|
+      %li{'data-id' => image.id}
+        %img{:src=>image.url("square")}

@@ -5,6 +5,7 @@ class Admin::ProductsController < ApplicationController
     stored = REDIS.get(key)
     @admin_prefs = stored ? JSON.parse(stored) :  {}
     if params[:sort]
+      params[:sort] = params[:sort] == 'tier' ? 'tier_id' : params[:sort]
       @admin_prefs['product_sort'] = params[:sort] + " " + (params[:order] == '1' ? 'ASC': 'DESC')
     end
     if params['page_size']

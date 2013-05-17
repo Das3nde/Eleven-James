@@ -8,7 +8,7 @@
 HOLA!!!
 
 = simple_form_for [:admin, @product] do |f|
-  = f.input :quantity
+  = f.input :quantity, :input_html => {:min => 0}
   = f.input :model
   = f.input :brand
   = f.input :material

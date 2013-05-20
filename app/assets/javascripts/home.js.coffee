@@ -31,6 +31,9 @@ $(()->
       data = JSON.parse($(this).contents().text())
       if(data.thumb_src)
         $('#photos').append('<li data-id='+data.id+'><img src='+data.thumb_src+'/></li>')
+      else if(data.error)
+        alert(data.error)
+
     catch e
   )
 
@@ -43,6 +46,17 @@ $(()->
     })
   )
 
+  $('#product_image_image').change(()->
+    val = this.value
+    ext = val.substring(val.lastIndexOf('.') + 1);
+    console.log(ext)
+    if($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']) == -1)
+      consle.log($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']))
+      alert('Must be a valid image format')
+      this.value = null
+    else
+      $('.new_product_image').submit()
+  )
 
   if($('#add_vendor').validate)
     $('#add_vendor').validate({
@@ -134,7 +148,6 @@ if is_page('inventory')
         return false
     )
   )
-
 
 #inventory records page
 

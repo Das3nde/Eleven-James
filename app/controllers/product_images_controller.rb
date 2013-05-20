@@ -4,14 +4,20 @@ class Admin::ProductImagesController < ApplicationController
 
   def create
     img = ProductImage.create( params[:product_image] )
-    render :json => {:thumb_src => img.image.url('square'), :id => img.id}
+    if(img.valid?)
+      render :json => {:thumb_src => img.image.url('square'), :id => img.id}
+    else
+      render :status => 400, :json => {:error => "Must be an image file"}
+    end
   end
+
   def show
     @img = ProductImage.find(params[:id])
     img = ::Magick::Image::read(@img.path('medium')).first
     @width = img.columns
     @height = img.rows
   end
+
   def update
     @img = ProductImage.find(params[:id])
     img = ::Magick::Image::read(@img.path('medium')).first

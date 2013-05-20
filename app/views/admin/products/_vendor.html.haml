@@ -1,5 +1,5 @@
 %div
-  =simple_form_for :vendor, :html => {:id => 'add_vendor'}, :url => '/users'  do |f|
+  =simple_form_for :vendor  do |f|
     =f.text_field :name, placeholder: 'name', class: "required"
     =f.text_field :address, placeholder: 'address', class: "required"
     =f.text_field :phone, placeholder: 'phone', class: "required phoneUS"

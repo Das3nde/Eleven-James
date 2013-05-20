@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516192342) do
+ActiveRecord::Schema.define(:version => 20130520214053) do
 
   create_table "admins", :force => true do |t|
     t.string   "name"
@@ -43,14 +43,44 @@ ActiveRecord::Schema.define(:version => 20130516192342) do
   add_index "customers", ["name", "resource_type", "resource_id"], :name => "index_customers_on_name_and_resource_type_and_resource_id"
   add_index "customers", ["name"], :name => "index_customers_on_name"
 
+  create_table "event_transits", :force => true do |t|
+    t.integer  "event_id"
+    t.boolean  "is_pickup"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "event_transits", ["event_id"], :name => "index_event_transits_on_event_id"
+
+  create_table "events", :force => true do |t|
+    t.string   "title"
+    t.string   "subhead"
+    t.text     "description"
+    t.string   "venue"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.boolean  "pickup"
+    t.boolean  "drop_off"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.time     "start_time"
+    t.time     "end_time"
+    t.date     "date"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
   create_table "fedex_transits", :force => true do |t|
     t.string   "shipping_class"
     t.string   "tracking_number"
     t.boolean  "is_signature_required"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
-    t.string   "destination_record"
-    t.string   "origin_record"
   end
 
   create_table "product_images", :force => true do |t|
@@ -101,8 +131,12 @@ ActiveRecord::Schema.define(:version => 20130516192342) do
     t.time     "end_date"
     t.string   "bin_number"
     t.string   "int"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.time     "est_start_date"
+    t.time     "est_end_date"
+    t.string   "prev_record"
+    t.string   "next_record"
   end
 
   create_table "roles", :force => true do |t|

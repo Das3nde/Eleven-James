@@ -6,6 +6,7 @@ end
 
 
 module Temporal
+
   #implements two table polymorphism
   def self.included(base)
     base.has_one :record, :autosave => true, :foreign_key => :id, :dependent=>:destroy
@@ -13,6 +14,14 @@ module Temporal
 
     base.alias_method_chain :record, :autobuild
     base.define_record_accessors
+  end
+
+  def next_record
+    Record.find(record.next_record_id)
+  end
+
+  def prev_record
+    Record.find(record.prev_record_id)
   end
 
   def record_with_autobuild

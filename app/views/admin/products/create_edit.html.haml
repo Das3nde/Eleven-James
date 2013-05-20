@@ -35,13 +35,9 @@ HOLA!!!
 
 %h3 Add Product Photos
 
-%button{:id=>"add-image"} Add Photo
-
-
 = simple_form_for [:admin, @product_image], :html => {:target => "upload_iframe"}  do |f|
   = f.file_field :image
   = f.input :product_id, :as => :hidden, :input_html => { :value => @product.id }
-  = f.button :submit, :input_html => { :value => "Upload Image" }
 
 %iframe{:id=>"upload_iframe", :src=>"/admin/product_images", :width=>"200", :height=>"200", :style => 'display:none'}
 

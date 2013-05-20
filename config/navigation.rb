@@ -36,11 +36,16 @@ SimpleNavigation::Configuration.run do |navigation|
     # You can also specify a condition-proc that needs to be fullfilled to display an item.
     # Conditions are part of the options. They are evaluated in the context of the views,
     # thus you can use all the methods and vars you have available in the views.
-    primary.item :index, 'Products', admin_products_path, :class => 'special'
-    primary.item :new, 'Add Product', new_admin_product_path
-    primary.item :featured, 'Featured', "/admin/products/featured"
-    primary.item :new_arrivals, 'New Arrivals', "/admin/products/new_arrivals"
-    primary.item :popularity, 'Popularity', "/admin/products/popularity"
+    primary.item :models, 'Models', admin_products_path, :class => 'special' do |secondary|
+      secondary.item :index, 'Products', admin_products_path, :class => 'special'
+      secondary.item :new, 'Add Product', new_admin_product_path
+      secondary.item :featured, 'Featured', "/admin/products/featured"
+      secondary.item :new_arrivals, 'New Arrivals', "/admin/products/new_arrivals"
+      secondary.item :popularity, 'Popularity', "/admin/products/popularity"
+    end
+    primary.item :inventory, 'Inventory', admin_inventory_index_path
+    primary.item :members, 'Members', "/admin/members"
+    primary.item :events, 'Events', "/admin/events"
 
     # you can also specify a css id or class to attach to this particular level
     # works for all levels of the menu
@@ -51,5 +56,6 @@ SimpleNavigation::Configuration.run do |navigation|
     # primary.auto_highlight = false
 
   end
+
 
 end

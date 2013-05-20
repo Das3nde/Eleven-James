@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def detemine_active_menu(context)
+  def determine_active_menu(context)
     case context
     when "home"
       "active" if action_name == "home"
@@ -13,7 +13,8 @@ module ApplicationHelper
       "active" if false
     when "contact"
       "active" if action_name == "contact_us"
-
+    else
+      "active" if action_name == context
     end
   end
 end

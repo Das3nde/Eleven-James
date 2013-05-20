@@ -3,17 +3,10 @@
     img alt="James Eleven logo" src="/assets/logo-small.png"
   #site-nav
     ul.cgrid
-      li.active.home
+      li.home
         a href="#"
-      li
-        a href="#" The Collection
-      li
-        a href="#" Your Selections
-      li
-        a href="#" Services & Benefits
-      li
-        a href="#" News and Events
-      li
-        a href="#" Contact Us
+      - @menu.each do |item|
+        li class="#{determine_active_menu(item[:slug].downcase)}"
+          = link_to item[:title], "#"
       li.account
         a href="#" Account

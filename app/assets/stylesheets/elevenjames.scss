@@ -170,9 +170,13 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
     #site-logo {
       margin: 0;
       width: auto;
+      margin-right:100px;
+    }
+    &.main-layout #site-nav {
+      width:auto;
     }
     #site-nav {
-      float: right;
+      width:937px;
       li {
         margin: 0 15px;
       }
@@ -208,6 +212,8 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
         padding-right: 50px;
         padding-left: 40px;
         background: url(account-gear-icon.png) 100% 2px no-repeat;
+        margin-right:0;
+        float:right;
         a {
           text-transform: uppercase;
           color: #ff4002;
@@ -264,6 +270,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
       width: 42px;
       border-width: 0;
     }
+
   }
   #site-header.main-layout .social-media li {
     width: 42px;

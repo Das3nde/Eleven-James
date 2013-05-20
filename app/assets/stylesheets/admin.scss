@@ -1,0 +1,22 @@
+@import "include";
+
+#site-footer {
+  .admin-footer {
+    .submenu {
+      display:none;
+    }
+    li {
+      border-color:transparent;
+      border-bottom:solid 1px transparent;
+      &.hover, &:hover {
+        border-color:#565553;
+        a {
+          color:$orange;
+        }
+      }
+    }
+    .sitemap li.hover {
+      background:url(admin/footer-arrow.png) 97% 9px no-repeat; 
+    }
+  }
+}

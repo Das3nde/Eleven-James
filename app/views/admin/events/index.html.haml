@@ -1,0 +1,6 @@
+= link_to 'New', new_admin_event_path
+
+%ul
+-@events.each do |event|
+  %li
+    =link_to event.title, edit_admin_event_path(event.id)

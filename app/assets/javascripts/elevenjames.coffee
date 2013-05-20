@@ -151,4 +151,19 @@ $ ->
 
   $(".select-wrapper select").each ->
     update_select this
-
+    
+  $(".custom-select-wrapper").each ->
+    $this = $(@)
+    $ul = $("<ul />")
+    $this.find("select option").each ->
+      value = $(@).attr("value")
+      text = $(@).text()
+      text = value if $.trim(text) == ""
+      $li = $("<li data-value='"+value+"'>"+text+"</li>")
+      $ul.append($li)
+    $this.find(".options").append($ul)
+    
+  $(".custom-select-wrapper").click ->
+    $(@).find(".options").toggle()
+    
+    

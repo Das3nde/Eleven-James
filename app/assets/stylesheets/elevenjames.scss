@@ -84,6 +84,22 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 .select-wrapper {
   position: relative;
   overflow: hidden;
+  &.custom-select-wrapper {
+    select {
+      display:none;
+    }
+    .options {
+      display:block;
+      position:absolute;
+      top:100%;
+      ul {
+        
+      }
+      li {
+        
+      }
+    }
+  }
   select {
     position: absolute;
     top: 0;

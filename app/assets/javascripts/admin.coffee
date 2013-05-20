@@ -13,7 +13,7 @@ $ ->
         ->
           $("#site-footer .admin-footer .submenu").hide();
           $("#site-footer .admin-footer .sitemap li").removeClass("hover")
-        , 400
+        , 100
       )
   )
   

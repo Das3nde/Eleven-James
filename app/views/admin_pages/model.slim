@@ -1,0 +1,167 @@
+#admin-manage-models
+  h2 Manage Models
+  .ej-tabs data-active="1"
+    .container
+      ul
+        li
+          a href="#all-products" All Products
+        li
+          a href="#add-model" Add Model
+        li
+          a href="#featured" Featured
+        li
+          a href="#new-arrivals" New Arrivals
+        li
+          a href="#popularity" Popularity
+        
+    #all-products.ui-tabs
+    #add-model.ui-tabs
+      .container.cgrid
+        .left_col.alpha
+          .section
+            h3 Product Specifications
+            .cgrid.form
+              .left.alpha
+                .row.cgrid.compact
+                  label Model
+                  input type="text" value="Sea Dweller Deepsea"
+                .row.cgrid.compact
+                  label Brand
+                  .select-wrapper.brand.field
+                    .value
+                    .arrow.red
+                    select#brand
+                      - 5.times do |i|
+                        option value="#{i}" Rolex #{i}
+                .row.cgrid.compact
+                  label Style
+                  .select-wrapper.style.field
+                    .value
+                    .arrow.red
+                    select#style
+                      - 5.times do |i|
+                        option value="#{i}" Style Type #{i}
+                .row.cgrid.compact
+                  label Case
+                  input type="text" value="43mm"
+                .row.cgrid.compact
+                  label Face
+                  .select-wrapper.face.field
+                    .value
+                    .arrow.red
+                    select#face
+                      - 5.times do |i|
+                        option value="#{i}"  Face Type #{i}
+              .right.omega
+                .row.cgrid.compact
+                  label Tier
+                  .select-wrapper.tier.field
+                    .value
+                    .arrow.red
+                    select#tier
+                      - 5.times do |i|
+                        option value="#{i}" Artisan #{i}
+                .row.cgrid.compact
+                  label Material
+                  .select-wrapper.material.field
+                    .value
+                    .arrow.red
+                    select#material
+                      - 5.times do |i|
+                        option value="#{i}" Steel #{i}
+                .row.cgrid.compact
+                  label Vendor
+                  / .custom-select-wrapper.select-wrapper.vendor.field
+                  .select-wrapper.vendor.field
+                    .value
+                    .arrow.red
+                    select#vendor
+                      - 5.times do |i|
+                        option value="#{i}" vendor #{i}
+                    / .options
+                .row.cgrid.compact
+                  label MSRP
+                  input type="text" value="$12,050.00"
+                .row.cgrid.compact
+                  label Purchase Price
+                  input type="text" value="$11,050.00"
+            .section.description
+              h3 Product Description
+              .form
+                .row.cgrid.compact
+                  label Description
+                  .field
+                    .text The Rolex Deepsea was designed for extreme underwater exploration. An intricate three-piece case architecture, the Ringlock System, enables it to withstand the colossal pressure at depths of up to 3,900 metres (12,000 feet). The Rolex Deepsea has a bezel inlaid with a virtually scratch resistant black Cerachrom disc  and a titanium caseback. The Rolex Deepsea is also equipped with a unique bracelet, featuring a double extension system for a perfect fit over any diving suit.
+            .section
+              h3 Product Photos
+              .content.photo-list
+                ul.cgrid.compact
+                  li.add-photo
+                    label Add Photo
+                    input type="file"
+                  li
+                    img src="/assets/admin/modelpic1.jpg"
+                    .edit-bar
+                      a href="#" Edit
+                      .arrows
+                        a.left href="#" <
+                        a.right href="#" >
+                  li
+                    img src="/assets/admin/modelpic2.jpg"
+                    .edit-bar
+                      a href="#" Edit
+                      .arrows
+                        a.left href="#" <
+                        a.right href="#" >
+                  li
+                    img src="/assets/admin/modelpic3.jpg"
+                    .edit-bar
+                      a href="#" Edit
+                      .arrows
+                        a.left href="#" <
+                        a.right href="#" >
+                  li
+                    img src="/assets/admin/modelpic4.jpg"
+                    .edit-bar
+                      a href="#" Edit
+                      .arrows
+                        a.left href="#" <
+                        a.right href="#" >
+            .section.cgrid
+              .form.button_panel.cgrid
+                .buttonset.cgrid.alpha
+                  .checkbox.featured
+                    label for="is_featured" Featured
+                    input type="checkbox" id="is_featured"
+                  .checkbox
+                    label for="is_new" New Arrival
+                    input type="checkbox" id="is_new"
+                .row.cgrid.compact.omega
+                  label Status
+                  .select-wrapper.status.field
+                    .value
+                    .arrow.red
+                    select#status
+                      option value="0" Draft
+                      option value="1" Saved
+              .button-row.not-centered.cgrid
+                a.preview.button.alpha href="#" Preview
+                a.save.btn.button.primary.omega href="#" Save
+
+                
+        .right_col.omega
+          .section
+            .header.cgrid
+              h3 Quantity
+              .count.omega 15
+            .body
+              ul
+                - 15.times do |i|
+                  li.cgrid
+                    .number.alpha="######-"+"%03d" %[i]
+                    a.edit.omega href="#"
+              .button-row
+                a.button.primary href="#" Remove Model
+    #featured.ui-tabs
+    #new-arrivals.ui-tabs
+    #popularity.ui-tabs

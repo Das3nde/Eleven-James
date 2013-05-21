@@ -1,5 +1,5 @@
 /*Generic*/
-
+@import "include";
 p {
   font-family: Arial;
   color: #333;
@@ -1366,6 +1366,71 @@ ul.ej-queue li {
 
 /*Lisitng Page*/
 
+#listing-layout .listing {
+  background-color: #f6f6f4;
+  padding: 50px 0 80px;
+  .nav-on-bottom {
+    
+    .bjqs-prev, .bjqs-next {
+      
+      text-decoration:none;
+      position:absolute;
+      bottom:-86px;
+      font-family:akkurat;
+      font-size:28px;
+      
+      a {
+        background:none;
+        color:$orange;
+      }
+    }
+    .bjqs-controls {
+      
+    }
+    .bjqs-prev {
+      left:20px;
+    }
+    .bjqs-next {
+      right:20px;
+    }
+  }
+  li {
+    width: 360px;
+    margin-left: 1px;
+    background-color: #FFF;
+    img {
+      display: block;
+    }
+  }
+  .info {
+    line-height: 20px;
+    font-size: 16px;
+    text-align: center;
+    font-family: akkurat;
+    padding: 14px 0;
+    background-color: #2c2b28;
+    color: #FFF;
+    p.name {
+      text-transform: uppercase;
+      color:#FFF;
+    }
+  }
+  .button-row {
+    padding-bottom: 0;
+    padding-top: 25px;
+  }
+  .button {
+    padding: 0 15px;
+    font-size: 16px;
+  }
+  .upgrade {
+    background-color: #ff4002;
+  }
+  .button-row .add {
+    background-color: #f6f5f4;
+    color: #363636;
+  }
+}
 #listing-page {
   h2 {
     color: #ff4002;
@@ -1407,49 +1472,6 @@ ul.ej-queue li {
       font-family:dinnLC;
       text-transform:uppercase;
       font-size:17px;
-    }
-  }
-  .listing {
-    background-color: #f6f6f4;
-    padding: 50px 0 80px;
-  }
-  .info {
-    background-color: #2c2b28;
-    color: #FFF;
-  }
-  .listing {
-    li {
-      width: 360px;
-      margin-left: 1px;
-      background-color: #FFF;
-      img {
-        display: block;
-      }
-    }
-    .info {
-      line-height: 20px;
-      font-size: 16px;
-      text-align: center;
-      font-family: akkurat;
-      padding: 14px 0;
-      p.name {
-        text-transform: uppercase;
-      }
-    }
-    .button-row {
-      padding-bottom: 0;
-      padding-top: 25px;
-    }
-    .button {
-      padding: 0 15px;
-      font-size: 16px;
-    }
-    .upgrade {
-      background-color: #ff4002;
-    }
-    .button-row .add {
-      background-color: #f6f5f4;
-      color: #363636;
     }
   }
 }

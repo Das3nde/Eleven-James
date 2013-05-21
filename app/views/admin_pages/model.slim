@@ -1,6 +1,6 @@
 #admin-manage-models
   h2 Manage Models
-  .ej-tabs data-active="1"
+  .ej-tabs data-active="2"
     .container
       ul
         li
@@ -99,34 +99,14 @@
                   li.add-photo
                     label Add Photo
                     input type="file"
-                  li
-                    img src="/assets/admin/modelpic1.jpg"
-                    .edit-bar
-                      a href="#" Edit
-                      .arrows
-                        a.left href="#" <
-                        a.right href="#" >
-                  li
-                    img src="/assets/admin/modelpic2.jpg"
-                    .edit-bar
-                      a href="#" Edit
-                      .arrows
-                        a.left href="#" <
-                        a.right href="#" >
-                  li
-                    img src="/assets/admin/modelpic3.jpg"
-                    .edit-bar
-                      a href="#" Edit
-                      .arrows
-                        a.left href="#" <
-                        a.right href="#" >
-                  li
-                    img src="/assets/admin/modelpic4.jpg"
-                    .edit-bar
-                      a href="#" Edit
-                      .arrows
-                        a.left href="#" <
-                        a.right href="#" >
+                  - 4.times do |i|
+                    li
+                      img src="/assets/admin/modelpic#{i}.jpg"
+                      .edit-bar
+                        a href="#" Edit
+                        .arrows
+                          a.left href="#" <
+                          a.right href="#" >
             .section.cgrid
               .form.button_panel.cgrid
                 .buttonset.cgrid.alpha
@@ -163,5 +143,23 @@
               .button-row
                 a.button.primary href="#" Remove Model
     #featured.ui-tabs
+      .container#listing-layout
+        .listing
+          .container
+            ul.cgrid.compact
+              - 5.times do
+                li
+                  .bjqs-wrap.nav-on-bottom data-width="359" data-height="293"
+                    ul.bjqs
+                      li: img alt="" src="/assets/temp/D1.jpg"
+                      li: img alt="" src="/assets/temp/D2.jpg"
+                      li: img alt="" src="/assets/temp/D3.jpg"
+                  .info
+                    p.name Rolex
+                    .make
+                      | Daytona Stainless
+                    .item-footer
+                      .button-row.cgrid
+                        a.button href="#" Remove
     #new-arrivals.ui-tabs
     #popularity.ui-tabs

@@ -66,7 +66,22 @@ $ ->
       $(this).remove()
       arrange_queue()
 
-
+  $(".bjqs-wrap").each ->
+    width = $(@).data("width")
+    height = $(@).data("height")
+    $(@).bjqs
+      width: width
+      height: height
+      animduration: 1450
+      animspeed: 6000
+      automatic: false
+      showmarkers: false
+      keyboardnav: false
+      nexttext: ">"
+      prevtext: "<"
+      randomstart: false
+      responsive: false
+    
   $("#homepage-slider").bjqs
     width: 1084
     height: 531

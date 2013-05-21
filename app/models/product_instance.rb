@@ -30,12 +30,10 @@ class ProductInstance < ActiveRecord::Base
     end
     return Record.find(@status_id)
   end
-  def next_record
-    Record.where('start_date = ?',nil).order('est_start_date ASC').first();
-  end
+
   def advance_record(date = Time.now)
     current_record = status()
-    next_record = next_record()
+    next_record = current_record.next_record()
     current.end_date = date;
     next_record.start_date = date
     self.status = next_record;

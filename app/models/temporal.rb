@@ -53,6 +53,8 @@ module Temporal
         create_attr(name)
       end
     end
+
+    #this part doesn't actually work, but i want it to work so im leaving it in
     def create_attr( name )
       create_method( "#{name}=".to_sym ) { |val|
         instance_variable_set( "@" + name, val)

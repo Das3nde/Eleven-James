@@ -99,6 +99,8 @@ body.elevenjames {
   .select-wrapper {
     position: relative;
     overflow: hidden;
+    background-color:#eeeeeb;
+    height:40px;
     &.custom-select-wrapper {
       select {
         display:none;
@@ -123,6 +125,7 @@ body.elevenjames {
       display: block;
       width: 100%;
       height: 40px;
+      font-size:10px;
       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
       /* IE 5-7 */
       filter: alpha(opacity = 0);
@@ -132,6 +135,9 @@ body.elevenjames {
       -khtml-opacity: 0;
       /* Good browsers */
       opacity: 0;
+    }
+    .value {
+      line-height:40px;
     }
     .arrow {
       position: absolute;
@@ -1999,5 +2005,109 @@ body.elevenjames {
         line-height:25px;
       }
     }
+  }
+}
+.token-input-wrap {
+  position:relative;
+  .token-input-token {
+    display:inline-block;
+    vertical-align:top;
+    padding-right:15px;
+    position:relative;
+    margin-right:5px;
+    
+    p {
+      font-size:10px;
+      font-family:akkuratB;
+      line-height:13px;
+      
+      margin-top:7px;
+    }
+    .token-input-delete-token {
+      text-indent:-2000em;
+      width:13px;
+      position:absolute;
+      height:13px;
+      right:0;
+      top:7px;
+      background:url(admin/token-close.png) 0 0 no-repeat;
+    }
+  }
+  input[type=text] {
+    background-color:transparent;
+    border-width:0;
+  }
+  .arrow {
+    position:absolute;
+    right:10px;
+    width:12px;
+    height:8px;
+    top:16px;
+    background:url(select-arrow-red.png) 0 0 no-repeat;
+  }
+}
+
+.ej-text-field {
+  border-width:0;
+  background-color:#eeeeeb;
+  font-family:akkurat;
+}
+
+.arrow {
+  a {
+    text-decoration:none;
+    color:#bebebc;
+    font-family:akkuratB;
+    padding:0 5px;
+    &.active {
+      color:$orange;
+    }
+  }
+}
+
+table.ej-table {
+  table-layout: fixed;
+  th {
+    background-color:#eeeeeb;
+    font-size:17px;
+    font-family:dinnMC;
+    font-weight:normal;
+    height:42px;
+    line-height:42px;
+    border-bottom:1px solid $bdcolor;
+    &.id > span {
+      padding:0 10px 0 20px;
+    }
+    > span {
+      padding:0 10px;
+      display:block;
+    }
+    .sort {
+      width:12px;
+      height:8px;
+      display:block;
+      background:url(select-arrow.png) 0 0 no-repeat;
+      margin-top:16px;
+      margin-left:8px;
+      &.active {
+        background-image:url(select-arrow-red.png);
+      }
+    }
+  }
+  td {
+    border-bottom:1px solid $bdcolor;
+    line-height:40px;
+    font-size:13px;
+    font-family:akkuratB;
+    span {
+      padding:0 10px;
+    }
+  }
+  .id > span {
+    padding:0 10px 0 20px;
+  }
+  .even td {
+    background-color:#f2f2f2;
+    
   }
 }

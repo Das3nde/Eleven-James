@@ -14,6 +14,13 @@
  *= require fonts
  *= require jquery-ui
  *= require bjqs
+ *= require bootstrap_and_overrides
+ *= require scaffolds
+ *= require tiers
+ *= require vendor
+ *= require home
  *= require elevenjames
  *= require admin
+ *= require admin_pages
+ *= require static_pages
  */

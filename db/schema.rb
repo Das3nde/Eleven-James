@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520224240) do
+ActiveRecord::Schema.define(:version => 20130520214323) do
 
   create_table "admins", :force => true do |t|
     t.string   "name"
@@ -163,9 +163,8 @@ ActiveRecord::Schema.define(:version => 20130520224240) do
 
   create_table "storage_records", :force => true do |t|
     t.integer  "bin_number"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.boolean  "is_available"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "tiers", :force => true do |t|

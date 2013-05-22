@@ -1,6 +1,6 @@
 #admin-manage-models
   h2 Manage Models
-  .ej-tabs data-active="2"
+  .ej-tabs data-active="0"
     .container
       ul
         li
@@ -15,6 +15,40 @@
           a href="#popularity" Popularity
         
     #all-products.ui-tabs
+      .container
+        .search-header
+          .cgrid.compact
+            .token-input-wrap.filter
+              label Filter
+              ul.token-input-list
+                - ["iwc", "Cartier", "Burberry", "Jeager"].each do |i|
+                  li.token-input-token
+                    p= i
+                    .token-input-delete-token x
+                li.token-input-token
+                  input type="text"
+              .arrow
+            .token-input-wrap.search
+              label Search
+              ul.token-input-list
+                - ["Search Term A", "Search Term B"].each do |i|
+                  li.token-input-token
+                    p= i
+                    .token-input-delete-token x
+                li.token-input-token
+                  input type="text"
+              .arrow
+            .count
+              p 5 items
+            a.button.export.primary href="#" Export
+        .page-controls.cgrid
+          .alpha
+            .select-wrapper
+              
+              
+          .omega
+
+          
     #add-model.ui-tabs
       .container.cgrid
         .left_col.alpha

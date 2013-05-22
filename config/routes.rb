@@ -1,4 +1,5 @@
 Ej::Application.routes.draw do
+
   # root to: "static_pages#splash"
   
   get "static_pages/splash"
@@ -20,6 +21,8 @@ Ej::Application.routes.draw do
   get "static_pages/signup"
   
   get "admin_pages/model"
+
+
   authenticated :user do
     root :to => redirect("/admin/products")
     namespace :admin do

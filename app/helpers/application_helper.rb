@@ -13,6 +13,7 @@ module ApplicationHelper
   end
 
 
+
   def determine_active_menu(context)
     case context
     when "home"
@@ -31,5 +32,7 @@ module ApplicationHelper
       "active" if action_name == context
     end
   end
+
+
 
 end

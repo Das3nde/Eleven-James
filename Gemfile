@@ -4,11 +4,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-<<<<<<< HEAD
   gem 'slim-rails', "~> 1.1.0"
-=======
-
->>>>>>> 9ba50191b55d543e6fe12cbbc71110149c3e0fff
 end
 
 #gem 'fedex', :path => '~/dev/fedex'

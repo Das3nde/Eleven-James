@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-ElevenJames::Application.load_tasks
+Ej::Application.load_tasks

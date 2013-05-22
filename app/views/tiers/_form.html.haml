@@ -1,0 +1,9 @@
+= simple_form_for(@tier) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :cost
+
+  .form-actions
+    = f.button :submit

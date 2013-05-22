@@ -1,41 +1,44 @@
-source 'https://rubygems.org'
-
+source 'http://rubygems.org'
 gem 'rails', '3.2.13'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'unicorn'
-gem 'pg'
-
-
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
   gem 'uglifier', '>= 1.0.3'
+<<<<<<< HEAD
+  gem 'slim-rails', "~> 1.1.0"
+=======
+
+>>>>>>> 9ba50191b55d543e6fe12cbbc71110149c3e0fff
 end
 
+#gem 'fedex', :path => '~/dev/fedex'
+gem 'rmagick', :require => 'RMagick'
+gem "jcrop-rails"
+gem "paperclip", "~> 3.0"
+gem "redis"
+gem "simple-navigation", "~> 3.10.0"
+gem "rails-backbone"
+gem "chosen-rails"
+gem "underscore-rails"
 gem 'jquery-rails'
-gem 'awesome_print', :require => 'ap'
-gem 'slim-rails', "~> 1.1.0"
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
+gem 'pg'
+gem 'uuid'
+gem "unicorn", ">= 4.3.1"
+gem "haml-rails", ">= 0.4"
+gem "html2haml", ">= 1.0.1", :group => :development
+gem "rspec-rails", ">= 2.12.2", :group => [:development, :test]
+gem "capybara", ">= 2.0.2", :group => :test
+gem "database_cleaner", ">= 1.0.0.RC1", :group => :test
+gem "email_spec", ">= 1.4.0", :group => :test
+gem "factory_girl_rails", ">= 4.2.0", :group => [:development, :test]
+gem "bootstrap-sass", ">= 2.3.0.0"
+gem "devise", ">= 2.2.3"
+gem "cancan", ">= 1.6.9"
+gem "rolify", ">= 3.2.0" ,        :git => "git://github.com/EppO/rolify.git"
+gem "simple_form", ">= 2.1.0"
+gem "quiet_assets", ">= 1.0.2", :group => :development
+gem "figaro", ">= 0.6.3"
+gem "better_errors", ">= 0.7.2", :group => :development
+gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri_19, :rbx]
+gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
+gem 'kaminari'

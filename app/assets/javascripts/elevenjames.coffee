@@ -21,6 +21,9 @@ center_button_row = ->
     $(this).width width
 
 $ ->
+  # button conflict between bootstrap and jqueryui
+  btn = $.fn.button.noConflict() # reverts $.fn.button to jqueryui btn
+  $.fn.btn = btn # assigns bootstrap button functionality to $.fn.btn
   arrange_queue = ->
     $("ul.ej-queue li.wrap").removeClass "wrap"
     $("ul.ej-queue li:nth-child(2n)").addClass "wrap"

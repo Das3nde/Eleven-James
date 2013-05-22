@@ -1,0 +1,21 @@
+$('<div class="modal hide fade"><%=render("vendor").squish.html_safe -%></div>').modal({backdrop:false});
+
+
+$('#add_vendor').submit(function(){
+    var data = $(this).serialize();
+    $.ajax({
+        type: "POST",
+        url: "/admin/vendors",
+        data: $(this).serialize(),
+        success: function(response){
+            $("#product_vendor").append('<option value="'+response.id+'">'+response.name+'</option>')
+                .trigger("liszt:updated")
+            $('.modal').hide();
+        },
+        error: function(){
+            alert("An unexpected error has occurred")
+        },
+        dataType:'json'
+    });
+    return false;
+}).validate()

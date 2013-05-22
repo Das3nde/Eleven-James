@@ -1,4 +1,4 @@
-ElevenJames::Application.configure do
+Ej::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -34,4 +34,10 @@ ElevenJames::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.serve_static_assets = true
+
+  Paperclip.options[:command_path] = "/tmp"
+
+  ENV["REDISTOGO_URL"] = 'redis://redistogo:e281dcb1f412eddff96fa11e88c62e5a@barreleye.redistogo.com:10608/'
 end

@@ -1,0 +1,32 @@
+(function(){
+    var dimensions = {};
+    $('.modal').remove()
+    $("<div class='modal hide'><%=render("image_crop").squish.html_safe -%></div>").modal({backdrop:false});
+    $('#image_crop').Jcrop({
+        aspectRatio: 1,
+        minSize: [300,300],
+        onChange: function(c){
+            dimensions = c;
+            $('#save_image').removeAttr('disabled')
+        }
+    })
+    $('#save_image').click(function(){
+        if(dimensions){
+            $.ajax({
+                type: 'PUT',
+                url : '<%=request.path%>',
+                data: dimensions,
+                success: function (res){
+                    var src = res.src+Math.random(); //cache bust
+                    $('#photos li[data-id=<%=@img.id%>] img').attr('src',src)
+                    $('.modal').remove()
+                },
+                dataType: 'json'
+            })
+        }
+        return false
+    })
+    $('#delete_image').click(function(){
+
+    })
+}())

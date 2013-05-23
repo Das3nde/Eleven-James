@@ -211,9 +211,11 @@ body.elevenjames {
       }
       &.main-layout #site-nav {
         width:auto;
+        margin-top:0;
       }
       #site-nav {
         width:937px;
+        margin-top:17px;
         li {
           margin: 0 15px;
         }
@@ -371,7 +373,7 @@ body.elevenjames {
         }
       }
       #site-nav {
-        padding: 20px 0;
+        padding: 0;
         float: none;
       }
       a.account {

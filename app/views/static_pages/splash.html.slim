@@ -1,8 +1,20 @@
 .container.cgrid.compact
-  .notify-me.container
+  .follow-us
+    .container
+      h4 Follow Us:
+      ul.cgrid.social-media.black-version
+        li.alpha
+          a.facebook href="#{t("social_urls.facebook")}" target="_blank"
+        li
+          a.twitter href="#{t("social_urls.twitter")}" target="_blank"
+        li
+          a.pinterest href="#{t("social_urls.pinterest")}" target="_blank"
+        li.omega
+          a.instagram href="#{t("social_urls.instagram")}" target="_blank"
+  .notify-me
     h4 We'll contact you when it's time
     form action="#"
-      .form.cgrid.container
+      .form.cgrid
         .email-field.cgrid.compact
           label for="visitor-email" Your email
           input#visitor-email type="email"

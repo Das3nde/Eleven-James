@@ -4,3 +4,8 @@
 en:
   hello: "Hello world"
   tagline: "An annual<br/>private membership program that reimagines how luxury timepieces are<br/>consumed and enjoyed."
+  social_urls:
+    facebook: "https://www.facebook.com/pages/Eleven-James/361055100672374?fref=ts"
+    instagram: "http://instagram.com/elevenjames"
+    pinterest: "http://pinterest.com/elevenjames/"
+    twitter: "https://twitter.com/11JamesWatches"

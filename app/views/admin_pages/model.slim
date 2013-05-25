@@ -18,27 +18,57 @@
       .container
         .search-header
           .cgrid.compact
-            .token-input-wrap.filter.cgrid
-              label.aplha Filter
-              ul.token-input-list.omega
-                - ["iwc", "Cartier", "Burberry", "Jeager"].each do |i|
+            form
+              .token-input-wrap.filter.cgrid
+                label.alpha Filter
+                ul.token-input-list.omega
+                  - ["iwc", "Cartier", "Burberry", "Jeager"].each do |i|
+                    li.token-input-token
+                      p= i
+                      .token-input-delete-token x
                   li.token-input-token
-                    p= i
-                    .token-input-delete-token x
-                li.token-input-token
-                  input type="text"
-              .arrow
+                    input type="text"
+                .arrow
+                .dropdown
+                  .cgrid.select_row
+                    .brands_select_field.multiple_select_field
+                      select.custom_select_wrapper multiple="multiple" data-width="114" data-class="brands" data-prompt="Brand"
+                        - @brands.each_with_index do |b,i|
+                          option value="#{i}" #{b}
+                    .tier_select_field.multiple_select_field
+                      select.custom_select_wrapper multiple="multiple" data-width="114" data-class="tier" data-prompt="Tier"
+                        - @tiers.each_with_index do |b,i|
+                          option value="#{i}" #{b}
+                    .diameter_select_field.multiple_select_field
+                      select.custom_select_wrapper multiple="multiple" data-width="145" data-class="diameter" data-prompt="Case Diameter"
+                        - @diameter.each_with_index do |b,i|
+                          option value="#{i}" #{b}
+                  .button-row.cgrid.not-centered(style="width: 196px")
+                    a.button.primary href="#" Primary
+                    a.button href="#" Reset All
             img.seperator src="/assets/seperator-pointed.png"  
-            .token-input-wrap.search
-              label Search
-              ul.token-input-list
-                - ["Search Term A", "Search Term B"].each do |i|
+            form
+              .token-input-wrap.search
+                label Search
+                ul.token-input-list
+                  - ["Search Term A", "Search Term B"].each do |i|
+                    li.token-input-token
+                      p= i
+                      .token-input-delete-token x
                   li.token-input-token
-                    p= i
-                    .token-input-delete-token x
-                li.token-input-token
-                  input type="text"
-              .arrow
+                    input type="text"
+                .arrow
+                .dropdown
+                  .form
+                    .row.cgrid.compact.search_for
+                      label Search for
+                      input type="text"
+                    .buttonset.search-within-results
+                      label for="search_within_results" Search within results
+                      input id="search_within_results" type="checkbox"
+                    .button-row
+                      a.button.primary Search
+                        
             img src="/assets/seperator-pointed.png"
             .count
               p 5 items

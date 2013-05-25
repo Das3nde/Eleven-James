@@ -8,17 +8,20 @@
 # 		console.log($(".shipping-info")); 
 
 #         console.log(text_value) 
-center_button_row = ->
+window.center_button_row = ->
   $(".button-row:not('.not-centered'), .dynamic-centered").each ->
     width = 0
     $("> *", this).each ->
       $this = $(this)
+      # console.log $this.outerWidth(true)
       width += $this.outerWidth(true)
-
-    
     # 			console.log($this.outerWidth(true)); 
     # console.log width
     $(this).width width
+
+window.onload = ->
+  center_button_row()
+  # console.log("zsd")
 
 $ ->
   # button conflict between bootstrap and jqueryui
@@ -31,7 +34,7 @@ $ ->
     val = $(sel_instance).val()
     text_value = $(sel_instance).find("option[value=" + val + "]").text()
     $(sel_instance).parents(".select-wrapper").find(".value").text text_value
-  center_button_row()
+  
   $(".ej-tabs").each ->
     active = 0
     active = $(this).data("active")  if $(this).data("active") isnt `undefined`

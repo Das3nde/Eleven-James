@@ -15,6 +15,7 @@
  *= require jquery-ui
  *= require bjqs
  *= require bootstrap_and_overrides
+ *= require jquery.multiselect
  *= require scaffolds
  *= require tiers
  *= require vendor

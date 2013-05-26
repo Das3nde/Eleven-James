@@ -1,6 +1,6 @@
 #admin-manage-models
   h2 Manage Models
-  .ej-tabs data-active="4"
+  .ej-tabs data-active="0"
     .container
       ul
         li
@@ -44,7 +44,7 @@
                         - @diameter.each_with_index do |b,i|
                           option value="#{i}" #{b}
                   .button-row.cgrid.not-centered(style="width: 196px")
-                    a.button.primary href="#" Primary
+                    a.button.primary href="#" Filter
                     a.button href="#" Reset All
             img.seperator src="/assets/seperator-pointed.png"  
             form
@@ -95,7 +95,7 @@
             tr
               ruby:
                 cols = [
-                  {text: "Product Id", classname: "id", width: 115},
+                  {text: "Product Id", classname: "id", width: 118},
                   {text: "Quantity", classname: "quantity", width: 140},
                   {text: "Model", classname: "model", width: 295},
                   {text: "Brand", classname: "brand", width: 190},

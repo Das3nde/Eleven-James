@@ -21,6 +21,7 @@ Ej::Application.routes.draw do
   get "static_pages/signup"
   
   get "admin_pages/model"
+  get "admin_pages/inventory"
 
 
   authenticated :user do

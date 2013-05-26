@@ -1,8 +1,13 @@
 class AdminPagesController < ApplicationController
   layout "static"
+  before_filter :set_variables
   
   def model
-    @brands = ["A. Lange",
+    
+  end
+  
+  def set_variables
+    @brands  = ["A. Lange",
     "Audemars Piguet",
     "Bell & Ross",
     "Blancpain",
@@ -34,6 +39,13 @@ class AdminPagesController < ApplicationController
       "43.5 mm",
       "44 mm",
       "47 mm",
+      ]
+    @status = [
+      "Full Inventory",
+      "Available",
+      "Transit to Member",
+      "Transit to 11James",
+      "Service"
       ]
   end
 end

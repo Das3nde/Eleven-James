@@ -1,6 +1,6 @@
 #admin-manage-models
   h2 Manage Models
-  .ej-tabs data-active="0"
+  .ej-tabs data-active="4"
     .container
       ul
         li
@@ -122,8 +122,6 @@
                   - cols.each do |cell|
                       td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
                         span= cell[:text]
-            - [115, 140, 295, 190, 165, 185].each do |i|
-              col width="#{i}"
         .page-controls.cgrid
           .alpha
             .select-wrapper
@@ -290,4 +288,79 @@
                       .button-row.cgrid
                         a.button href="#" Remove
     #new-arrivals.ui-tabs
+      .container
     #popularity.ui-tabs
+      .container
+        .filters-header
+          a.in-most-queues.active href="#" In most Queues
+          a.longest-wait href="#" Longest Wait
+          a.least-queued href="#" Least Queued
+        .search-header.cgrid.compact
+          .show-top
+            label Show Top
+            input.ej-text-field type="text" value="5"
+          img.seperator src="/assets/seperator-pointed.png"
+          .search-panel
+            .text Search
+        .page-controls.cgrid
+          .alpha
+            .select-wrapper
+              .value
+              .arrow.red
+              select
+                - 3.times do |i|
+                  option value="#{(i+1)*10}" #{(i+1)*10}
+            .label items per page
+          .omega
+            .label page
+            input.ej-text-field type="text" value="1"
+            .label of 5
+            span.arrow
+              a.prev href="#" <
+              a.next.active href="#" >
+        .table-view
+          table.ej-table
+            tr
+              ruby:
+                cols = [
+                  {text: "Rank", classname: "rank", width: 123},
+                  {text: "Model", classname: "model", width: 355},
+                  {text: "Brand", classname: "brand", width: 300},
+                  {text: "Tier", classname: "tier", width: 180},
+                  {text: "Queue Count", classname: "queue_count", width: 125}
+                ]
+              - cols.each do |i|
+                th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
+                  span.cgrid.compact
+                    span= i[:text]
+                    a.sort class="#{'active' if i[:classname] == 'queue_count'}" href="#"
+            tbody
+              - 10.times do |i|
+                tr class="#{'even' if i%2 == 1}"
+                  ruby:
+                    cols = [
+                      {text: "1", classname: "rank", width: 123},
+                      {text: "Chronomat", classname: "model", width: 355},
+                      {text: "Breitling", classname: "brand", width: 300},
+                      {text: "Artisan", classname: "tier", width: 180},
+                      {text: "35", classname: "queue_count", width: 125}
+                    ]
+                  - cols.each do |cell|
+                      td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
+                        span= cell[:text]
+        .page-controls.cgrid
+          .alpha
+            .select-wrapper
+              .value
+              .arrow.red
+              select
+                - 3.times do |i|
+                  option value="#{(i+1)*10}" #{(i+1)*10}
+            .label items per page
+          .omega
+            .label page
+            input.ej-text-field type="text" value="1"
+            .label of 5
+            span.arrow
+              a.prev href="#" <
+              a.next.active href="#" >

@@ -355,37 +355,6 @@
       text-transform:uppercase;
       line-height:40px;
     }
-    .page-controls {
-      margin-top:20px;
-      
-      .ej-text-field {
-        width:30px;
-        margin:0 3px;
-        text-align:center;
-        font-family:dinnC;
-        font-size:17px;
-      }
-      .select-wrapper, .label {
-        display:inline-block;
-      }
-      .omega {
-        float:right;
-      }
-      .select-wrapper {
-        margin-right:15px;
-        height:27px;
-        padding-right:30px;
-        padding-left:10px;
-        .value {
-          line-height:27px;
-          font-family:dinnMC;
-          font-size:17px;
-        }
-        .arrow {
-          top:9px;
-        }
-      }
-    }
   }
 }
 
@@ -434,5 +403,91 @@
       }
     }
     
+  }
+}
+
+.ui-tabs {
+  .page-controls {
+    margin-top:20px;
+    
+    .ej-text-field {
+      width:30px;
+      margin:0 3px;
+      text-align:center;
+      font-family:dinnC;
+      font-size:17px;
+    }
+    .select-wrapper, .label {
+      display:inline-block;
+    }
+    .label {
+      font-family: dinnC;
+      font-size: 17px;
+      text-transform: uppercase;
+      line-height: 40px;
+    }
+    .omega {
+      float:right;
+    }
+    .select-wrapper {
+      margin-right:15px;
+      height:27px;
+      padding-right:30px;
+      padding-left:10px;
+      .value {
+        line-height:27px;
+        font-family:dinnMC;
+        font-size:17px;
+      }
+      .arrow {
+        top:9px;
+      }
+    }
+  }
+}
+
+#popularity.ui-tabs {
+  .filters-header {
+    font-size:15px;
+    font-family:akkuratB;
+    padding:22px 0;
+    line-height:20px;
+    a.active {
+      color:$orange;
+    }
+    a {
+      text-decoration:none;
+      padding-right:30px;
+    }
+  }
+  .search-header {
+    font-family:dinCM;
+    font-size:17px;
+    border-top:1px solid $bdcolor;
+    border-bottom:1px solid $bdcolor;
+    label, .text {
+      line-height:40px;
+      text-transform:uppercase;
+      margin-left:15px;
+      margin-right:5px;
+    }
+    .search-panel {
+      background:url(select-arrow-red.png) 100% 16px no-repeat;
+      float:right;
+      margin-right:15px;
+    }
+    .text {
+      padding-right:20px;
+    }
+    img.seperator {
+      padding:0 10px;
+    }
+    .show-top {
+      input[type=text] {
+        width:30px;
+        text-align:center;
+        margin:8px 0;
+      }
+    }
   }
 }

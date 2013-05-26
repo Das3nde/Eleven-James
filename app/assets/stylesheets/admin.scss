@@ -508,4 +508,25 @@
   .search-header {
       margin-top:0;
   }
+  .extra {
+    padding:0 10px 10px;
+    line-height:20px;
+    div {
+      line-height:20px;
+    }
+  }
+  .brand .extra {
+    font-family:dinnC;
+    font-size:16px;
+    text-transform:uppercase;
+  }
+  .model .extra {
+    .label {
+      width:130px;
+    }
+    .value {
+      width:170px;
+      
+    }
+  }
 }

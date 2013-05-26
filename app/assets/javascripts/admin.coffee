@@ -20,6 +20,10 @@ window.prepare_multiselect = ->
     unless width == null
       $(@).next().css('width', width+'px')
 $ ->
+  $("table.ej-table td.arrow img").click ->
+      $(@).parents("tr").toggleClass("highlight");
+
+  
   prepare_multiselect()
   
   $(".token-input-wrap .arrow").click ->

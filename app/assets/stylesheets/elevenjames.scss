@@ -2104,6 +2104,9 @@ table.ej-table {
         background-image:url(select-arrow-red.png);
       }
     }
+    &.noarrow .sort {
+      display:none;
+    }
   }
   td {
     border-bottom:1px solid $bdcolor;
@@ -2112,6 +2115,31 @@ table.ej-table {
     font-family:akkuratB;
     span {
       padding:0 10px;
+    }
+    &.red {
+      color:$orange;
+    }
+    &.arrow {
+      img {
+        cursor:pointer;
+      }
+      .down {display:none;}
+      .up {display:inline;}
+    }
+    .extra {
+      display:none;
+    }
+  }
+  .highlight {
+    td {
+      background-color:#fcfac9;
+    }
+    .arrow {
+      .down {display:inline;}
+      .up {display:none;}
+    }
+    .extra {
+      display:block;
     }
   }
   .id > span {

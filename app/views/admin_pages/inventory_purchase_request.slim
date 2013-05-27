@@ -1,0 +1,140 @@
+#admin-manage-inventory
+  h2 Manage Models
+  .ej-tabs data-active="3"
+    .container
+      ul
+        li
+          a href="#inventory" Inventory
+        li
+          a href="#arrange-transit" Arrange Transit [10]
+        li
+          a href="#past-due" Past Due [3]
+        li
+          a href="#purchase-request" Purchase Request [1]
+    #purchase-request.ui-tabs
+      .container
+        .filters-header
+        .search-header
+          .cgrid.compact
+            form
+              .token-input-wrap.filter.cgrid
+                label.alpha Filter
+                ul.token-input-list.omega
+                  - ["iwc", "Cartier", "Burberry", "Jeager"].each do |i|
+                    li.token-input-token
+                      p= i
+                      .token-input-delete-token x
+                  li.token-input-token
+                    input type="text"
+                .arrow
+                .dropdown
+                  .cgrid.select_row
+                    .brands_select_field.multiple_select_field
+                      select.custom_select_wrapper multiple="multiple" data-width="114" data-class="brands" data-prompt="Brand"
+                        - @brands.each_with_index do |b,i|
+                          option value="#{i}" #{b}
+                    .status_select_field.multiple_select_field
+                      select.custom_select_wrapper multiple="multiple" data-width="114" data-class="tier" data-prompt="Status"
+                        - @status.each_with_index do |b,i|
+                          option value="#{i}" #{b}
+                  .button-row.cgrid.not-centered(style="width: 196px")
+                    a.button.primary href="#" Filter
+                    a.button href="#" Reset All
+            img.seperator src="/assets/seperator-pointed.png"  
+            form
+              .token-input-wrap.search
+                label Search
+                ul.token-input-list
+                  - ["Search Term A", "Search Term B"].each do |i|
+                    li.token-input-token
+                      p= i
+                      .token-input-delete-token x
+                  li.token-input-token
+                    input type="text"
+                .arrow
+                .dropdown
+                  .form
+                    .row.cgrid.compact.search_for
+                      label Search for
+                      input type="text"
+                    .buttonset.search-within-results
+                      label for="search_within_results" Search within results
+                      input id="search_within_results" type="checkbox"
+                    .button-row
+                      a.button.primary Search
+                        
+            img src="/assets/seperator-pointed.png"
+            .count
+              p 5 items
+            img.seperator src="/assets/seperator-pointed.png"  
+            a.button.export.primary href="#" Export
+        .page-controls.cgrid
+          .alpha
+            .select-wrapper
+              .value
+              .arrow.red
+              select
+                - 3.times do |i|
+                  option value="#{(i+1)*10}" #{(i+1)*10}
+            .label items per page
+          .omega
+            .label page
+            input.ej-text-field type="text" value="1"
+            .label of 5
+            span.arrow
+              a.prev href="#" <
+              a.next.active href="#" >
+        .table-view
+          table.ej-table
+            tr
+              ruby:
+                cols = [
+                  {text: "Product Id", classname: "id", width: 140},
+                  {text: "Model", classname: "model", width: 321},
+                  {text: "Brand", classname: "brand", width: 150},
+                  {text: "Tier", classname: "tier", width: 320},
+                  {text: "Price", classname: "price", width: 150}
+                ]
+              - cols.each do |i|
+                th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
+                  span.cgrid.compact
+                    span= i[:text]
+                    a.sort class="#{'active' if i[:text] == 'Price'}" href="#"
+            tbody
+              - 10.times do |i|
+                tr class="#{'even' if i%2 == 1}"
+                  ruby:
+                    cols = [
+                      {text: "######", classname: "id", width: 140},
+                      {text: "Chronomat", classname: "model", width: 321, extra: "<div class='cgrid compact'><div class='label'>Member Name<br/>Member ID<br/>Email</div><div class='value'>Harlan Stanton<br/>#####<br/>harlon.stanton@domain.com</div></div>"},
+                      {text: "Breitling", classname: "brand", width: 150, extra: "Phone Home<br/>Phone Mobile<br/>Phone Office"},
+                      {text: "Artisan", classname: "tier", width: 320, extra: "212.555.1234<br/>212.555.1234<br/>212.555.1234"},
+                      {text: "$9,500", classname: "price", width: 150}
+                    ]
+                  - cols.each do |cell|
+                      td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
+                        span= raw cell[:text]
+                        - if cell.has_key?(:extra)
+                          .extra= raw cell[:extra]
+        .page-controls.cgrid
+          .alpha
+            .select-wrapper
+              .value
+              .arrow.red
+              select
+                - 3.times do |i|
+                  option value="#{(i+1)*10}" #{(i+1)*10}
+            .label items per page
+          .omega
+            .label page
+            input.ej-text-field type="text" value="1"
+            .label of 5
+            span.arrow
+              a.prev href="#" <
+              a.next.active href="#" >
+    #inventory.ui-tabs
+      .container
+    #arrange-transit.ui-tabs
+      .container
+    #past-due.ui-tabs
+      .container

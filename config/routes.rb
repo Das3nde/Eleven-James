@@ -27,6 +27,7 @@ Ej::Application.routes.draw do
   get "admin_pages/inventory_full"
   get "admin_pages/inventory_arrange_transit"
   get "admin_pages/inventory_past_due"
+  get "admin_pages/inventory_purchase_request"
 
 
   authenticated :user do

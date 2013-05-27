@@ -165,6 +165,7 @@ body.elevenjames {
       line-height: 34px;
       font-family: dinnLC;
       letter-spacing: 6px;
+      color:#FFF;
     }
   }
 
@@ -202,6 +203,7 @@ body.elevenjames {
     .container {
       width: 1084px;
     }
+
     #site-header {
       padding: 20px 0;
       #site-logo {
@@ -211,9 +213,13 @@ body.elevenjames {
       }
       &.main-layout #site-nav {
         width:auto;
+
+        margin-top:0;
       }
       #site-nav {
         width:937px;
+        margin-top:17px;
+
         li {
           margin: 0 15px;
         }
@@ -371,7 +377,8 @@ body.elevenjames {
         }
       }
       #site-nav {
-        padding: 20px 0;
+        padding: 0;
+
         float: none;
       }
       a.account {
@@ -428,7 +435,9 @@ body.elevenjames {
       width: 380px;
     }
     .notify-me {
-      width: 100%;
+
+      width: 580px;
+
     }
     .follow-us .container {
       width: 200px;

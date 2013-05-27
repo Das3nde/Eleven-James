@@ -16,14 +16,6 @@ module Temporal
     base.define_record_accessors
   end
 
-  def next_record
-    Record.find(record.next_record_id)
-  end
-
-  def prev_record
-    Record.find(record.prev_record_id)
-  end
-
   def record_with_autobuild
     record_without_autobuild || build_record
   end

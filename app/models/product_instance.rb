@@ -2,6 +2,7 @@ class ProductInstance < ActiveRecord::Base
   require 'json'
   attr_accessible :current_size, :status, :status_id
   attr_accessor :model, :brand, :tier, :type
+
   def type
     @type =Product.find(self.id[0,5].to_i)
   end

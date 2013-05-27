@@ -1,8 +1,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :transit_fedex do
-    id "MyString"
+  factory :fedex_transit do
+    id "a6c743f5-982d-4e3f-9ba2-57e769159abd"
     'class' "MyString"
     tracking_number "MyString"
     is_signature_required false

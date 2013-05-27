@@ -22,6 +22,11 @@ Ej::Application.routes.draw do
   
   get "admin_pages/model"
   get "admin_pages/inventory"
+  get "admin_pages/inventory_transit_to_member"
+  get "admin_pages/inventory_available"
+  get "admin_pages/inventory_full"
+  get "admin_pages/inventory_arrange_transit"
+  get "admin_pages/inventory_past_due"
 
 
   authenticated :user do

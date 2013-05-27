@@ -2131,7 +2131,7 @@ table.ej-table {
     }
   }
   .highlight {
-    td {
+    td, &.even td {
       background-color:#fcfac9;
     }
     .arrow {

@@ -1,0 +1,218 @@
+#admin-manage-inventory
+  h2
+    | Manage Inventory
+    small
+      | /
+    span.sub Rolex Sea-Dweller Deesea
+  .ej-tabs data-active="0"
+    .container
+      ul
+        li
+          a href="#inventory" Inventory
+        li
+          a href="#arrange-transit" Arrange Transit [10]
+        li
+          a href="#past-due" Past Due [3]
+        li
+          a href="#purchase-request" Purchase Request [1]
+  #inventory.ui-tabs
+    .container.watch-record
+      .cgrid.compact
+        .detail-info.alpha
+          .action-bar.cgrid.compact
+            .product-id #####-034
+            img.seperator src="/assets/seperator-pointed.png"
+            a.button Add a record
+            label Current Status
+            .value Transit to Member (Shipping)
+            img.seperator src="/assets/seperator-pointed.png"
+            a.button.primary href="#" Export
+          .content
+            .cgrid
+              .transit-info
+                h3 Transit Info
+                .inforow-wrapper
+                  .inforow.cgrid
+                    label.alpha Shipping Address
+                    .text
+                      | Harlon Stanton
+                      br
+                      | 860 East 74th Street
+                      br
+                      | New York, NY 10010
+                .form
+                  .row.cgrid.compact
+                    label Shipping Company
+                    input.text-field type="text" value="Fedex"
+                  .row.cgrid.compact
+                    label Shipping Speed
+                    input.text-field type="text" value="Priority"
+                  .row.cgrid.compact
+                    label Ship Date
+                    input.text-field type="text" value="3/23/13"
+                  .row.cgrid.compact
+                    label Deliver Date
+                    input.text-field type="text" value="3/25/13"
+                  .row.cgrid.compact
+                    label Tracking number
+                    input.text-field type="text" value="013840222514114"
+                  .row.cgrid.compact
+                    label Signature Req
+                    .select-wrapper.field
+                      .arrow.red
+                      .value
+                      select
+                        option value="1" Yes
+                        option value="0" No
+              .product-member-info
+                .product-info
+                  h3 Product Info
+                  .inforow-wrapper
+                    .inforow.cgrid
+                      label.alpha Brand
+                      .text Rolex
+                    .inforow.cgrid
+                      label.alpha Model
+                      .text Sew-Dweller Deepsea
+                    .inforow.cgrid
+                      label.alpha Product ID
+                      .text ######-034
+                  .form
+                    .row.cgrid.compact
+                      label BIN number
+                      input type="text"
+                    .row.cgrid.compact
+                      label Watch Size
+                      input type="text"
+                .member-info
+                  h3 Member Info
+                  .inforow-wrapper
+                    .inforow.cgrid
+                      label.alpha Name
+                      .text Harlon Stanton
+                    .inforow.cgrid
+                      label.alpha Member ID
+                      .text #######
+                    .inforow.cgrid
+                      label.alpha Email
+                      .text HarlonStanton@domain.com
+                    .inforow.cgrid
+                      label.alpha Phone Home
+                      .text 212.555.1234
+                    .inforow.cgrid
+                      label.alpha Phone Mobile
+                      .text 212.555.5678
+                    .inforow.cgrid
+                      label.alpha Phone Office
+                      .text Harlon 212.555.1234
+          .status-bar.form.cgrid.compact
+            .row.cgrid.compact
+              label Status
+              input type="text" value="open"
+            img.seperator src="/assets/seperator-pointed.png"
+            a.button.primary href="#" Save
+          .product-history
+            h3 Product History
+            .page-controls.cgrid
+              .alpha
+                .select-wrapper
+                  .value
+                  .arrow.red
+                  select
+                    - 3.times do |i|
+                      option value="#{(i+1)*10}" #{(i+1)*10}
+                .label items per page
+              .omega
+                .label page
+                input.ej-text-field type="text" value="1"
+                .label of 5
+                span.arrow
+                  a.prev href="#" <
+                  a.next.active href="#" >
+            .table-view
+              table.ej-table
+                tr
+                  ruby:
+                    cols = [
+                      {text: "Date", classname: "date", width: 218},
+                      {text: "Record Type", classname: "record-type", width: 370},
+                      {text: "Created By", classname: "created-by", width: 260},
+                      {text: "", classname: "edit noarrow", width: 46}
+                      
+                    ]
+                  - cols.each do |i|
+                    th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
+                      span.cgrid.compact
+                        span= i[:text]
+                        a.sort class="#{'active' if i[:text] == 'Date'}" href="#"
+                tbody
+                  - 10.times do |i|
+                    tr class="#{'even' if i%2 == 1}"
+                      ruby:
+                        cols = [
+                          {text: "3/23/13", classname: "date", width: 218},
+                          {text: "Transit to Member", classname: "record-type", width: 370},
+                          {text: "Jamie V.", classname: "created-by", width: 260},
+                          {text: "<a href='#'><img src='/assets/edit-icon.png'/></a>", classname: "edit", width: 46}
+                        ]
+                      - cols.each do |cell|
+                          td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
+                            span= raw cell[:text]
+                            - if cell.has_key?(:extra)
+                              .extra= raw cell[:extra]
+            .page-controls.cgrid
+              .alpha
+                .select-wrapper
+                  .value
+                  .arrow.red
+                  select
+                    - 3.times do |i|
+                      option value="#{(i+1)*10}" #{(i+1)*10}
+                .label items per page
+              .omega
+                .label page
+                input.ej-text-field type="text" value="1"
+                .label of 5
+                span.arrow
+                  a.prev href="#" <
+                  a.next.active href="#" >
+        .properties.omega
+          .form
+            .photo
+              img src="/assets/watch-photo.png"
+            .row
+              .select-wrapper.field
+                .text Active
+                .arrow.red
+                select
+                  option value="1" Active
+                  option value="0" Inactive
+            label Rotations
+            .value 35
+            label Date Purchased
+            .value 3/12/13
+            label Age
+            .value 2 years
+            label Tier
+            .value Artisan
+            label Material
+            .value Steel
+            label Face
+            .value Black
+            label Style
+            .value Style Type
+            label Case
+            .value 13 mm
+            label MSRP
+            .value $##,###
+            label.buy-now Buy Now Price
+            input.ej-text-field type="text" value="$##,###"
+            a.primary.button Update
+            
+          
+  #arrange-transit.ui-tabs
+    .container
+  #past-due.ui-tabs
+    .container
+  #purchase-request.ui-tabs
+    .container

@@ -546,4 +546,175 @@
       
     }
   }
+  h2 {
+    small {
+      padding:0 10px;
+    }
+    .sub {
+      color:#a3a197;
+    }
+  }
+  #inventory.ui-tabs {
+    .action-bar {
+        border-top:1px solid $bdcolor;
+        border-bottom:1px solid $bdcolor;
+        line-height:40px;
+        .button.primary {
+          float:right;
+        }
+        label {
+          width:105px;
+          padding:0 20px;
+        }
+        .value {
+          width:415px;
+          font-family:akkurat;
+          padding:0 10px;
+        }
+        .product-id {
+          width:110px;
+          font-family:akkuratB;
+          color:$orange;
+          font-size:13px;
+          padding:0 10px;
+        }
+        .button {
+          @include border_radius(0);
+          margin-left:-6px;
+        }
+    }
+    .detail-info {
+      width:892px;
+    }
+    .properties {
+      float:right;;
+      width:183px;
+    }
+  }
+  .watch-record {
+    margin-top:50px;
+    h3 {
+      color:$orange;
+      text-transform:uppercase;
+      font-size:27px;
+      text-align:left;
+      margin-top:30px;
+    }
+    .properties {
+      background-color:#eeeeeb;
+      border-bottom:1px solid $bdcolor;
+      .photo {
+        border-top:1px solid $bdcolor;
+        border-bottom:1px solid $bdcolor;
+        img {
+          display:block;
+        }
+      }
+      label {
+        font-size:13px;
+        line-height:18px;
+        margin-left:15px;
+      }
+      label.buy-now {
+        font-size:17px;
+        margin-top:20px;
+        display:block;
+        margin-bottom:5px;
+      }
+      .ej-text-field {
+        background-color:#e2e2de;
+        font-family:akkurat;
+        line-height:40px;
+        font-size:17px;
+        line-height:40px;
+        width:163px;
+        padding:0 10px;
+      }
+      .button.primary {
+        width:80px;
+        margin:20px auto;
+      }
+      .value {
+        font-size:13px;
+        font-family:akkuratB;
+        margin-bottom:5px;
+        margin-left:15px;
+      }
+      .row {
+        margin-bottom:10px;
+        .field {
+          width:164px;
+        }
+      }
+    }
+    .content {
+      background-color:#FFF;
+    }
+    .inforow-wrapper {
+      padding:20px 0;
+    }
+    .inforow {
+      padding:3px 0;
+      label {
+        width:150px;
+        margin-right:10px;
+        line-height:17px;
+      }
+      .text {
+        width:255px;
+        float:right;
+        font-family:akkuratB;
+        font-size:13px;
+        line-height:16px;
+      }
+    }
+    .transit-info .inforow-wrapper, .product-info .inforow-wrapper {
+      height:80px;
+    }
+    .status-bar {
+      border-top:1px solid $bdcolor;
+      border-bottom:1px solid $bdcolor;
+      .row {
+        border-width:0;
+      }
+      .button.primary {
+        float:right;
+        margin-left:-6px;
+        @include border_radius(0);
+        height:40px;
+      }
+      label {
+        width:650px;
+        text-align:right;
+        line-height:40px;
+        padding-right:14px;
+        margin-top:1px;
+        font-size:21px;
+      }
+      input[type=text] {
+        width:140px;
+        margin-top:1px;
+      }
+      
+    }
+    td.edit span a img {
+      vertical-align:middle;
+    }
+    .transit-info, .product-member-info {
+      width:425px;
+      padding:0 0 18px 10px;
+      input[type=text], .field {
+        width:240px;
+      }
+      label {
+        width:140px;
+      }
+    }
+    .product-member-info {
+      margin-left:0;
+      margin-right:10px;
+      float:right;
+    }
+  }
 }
+

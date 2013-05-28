@@ -823,9 +823,24 @@ body.elevenjames {
       -moz-border-radius: 0;
       -webkit-border-radius: 0;
     }
+    .ui-dialog-titlebar-close {
+      border-width: 0;
+      background: none;
+      top: 22px;
+      right: 24px;
+      margin: 0;
+      padding: 0;
+      .ui-icon {
+        width: 22px;
+        height: 22px;
+        background-image: url(modal-close-button.png);
+        background-position: 0 0;
+      }
+    }
     .ui-widget-header {
       border-width: 0;
       background: none;
+      
       .ui-dialog-title {
         color: #ff4002;
         font-family: dinnLC;
@@ -835,20 +850,7 @@ body.elevenjames {
         line-height: 36px;
         padding: 20px 0;
       }
-      .ui-dialog-titlebar-close {
-        border-width: 0;
-        background: none;
-        top: 22px;
-        right: 24px;
-        margin: 0;
-        padding: 0;
-        .ui-icon {
-          width: 22px;
-          height: 22px;
-          background-image: url(modal-close-button.png);
-          background-position: 0 0;
-        }
-      }
+      
     }
     .form .row label {
       width: 210px;

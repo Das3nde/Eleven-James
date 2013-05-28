@@ -23,6 +23,7 @@ Ej::Application.routes.draw do
   get "admin_pages/model"
   get "admin_pages/model_removal_error"
   get "admin_pages/model_add_vendor"
+  get "admin_pages/model_add_photo"
   get "admin_pages/inventory"
   get "admin_pages/inventory_transit_to_member"
   get "admin_pages/inventory_available"

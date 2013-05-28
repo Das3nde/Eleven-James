@@ -1,7 +1,7 @@
 Ej::Application.routes.draw do
 
   # root to: "static_pages#splash"
-  
+
   get "static_pages/splash"
 
   get "static_pages/account"
@@ -19,7 +19,7 @@ Ej::Application.routes.draw do
   get "static_pages/queue"
 
   get "static_pages/signup"
-  
+
   get "admin_pages/model"
 
 
@@ -36,5 +36,5 @@ Ej::Application.routes.draw do
     end
   end
   root :to => "users#index"
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
 end

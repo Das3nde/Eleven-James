@@ -1,0 +1,170 @@
+li.section.step4
+  .header
+    .cgrid.compact
+      .bullet Step 5
+      h3
+        | Make payment arrangements for your
+        em 6 Months of Master Craftsman
+        |  timepiece service...
+  .cgrid.compact
+    .billing-info
+      h5 Billing Information
+      .form
+        .row.cgrid.compact
+          label for="billing-first-name"
+            | First Name
+            sup *
+          input#billing-first-name name="" type="text"
+        .row.cgrid.compact
+          label for="billing-last-name"
+            | Last Name
+            sup *
+          input#billing-last-name name="" type="text"
+        .row.cgrid.compact
+          label for="billing-address"
+            | Address
+            sup *
+          input#billing-address name="" type="text"
+        .row.cgrid.compact
+          label for="billing-apt-unit"
+            | Apt / unit
+            sup *
+          input#billing-apt-unit name="" type="text"
+        .row.cgrid.compact
+          label for="billing-city"
+            | City
+            sup *
+          input#billing-city name="" type="text"
+        .row.cgrid.compact
+          label for="billing-state"
+            | state
+            sup *
+          .select-wrapper.field
+            .value New York
+            .arrow
+            select#billing-state name=""
+              option value="1"
+              option value="2"
+              option value="3"
+        .row.cgrid.compact
+          label for="billing-zip"
+            | zip
+            sup *
+          input#billing-zip name="" type="text"
+        .row.cgrid.compact
+          label for="billing-phone"
+            | phone
+            sup *
+          input#billing-phone name="" type="text"
+    /! End billing
+    .shipping-info
+      .overlay
+      h5 Shipping Information
+      .form
+        .row.cgrid.compact
+          label for="shipping-first-name"
+            | First Name
+            sup *
+          input#shipping-first-name name="" type="text"
+        .row.cgrid.compact
+          label for="shipping-last-name"
+            | Last Name
+            sup *
+          input#shipping-last-name name="" type="text"
+        .row.cgrid.compact
+          label for="shipping-address"
+            | Address
+            sup *
+          input#shipping-address name="" type="text"
+        .row.cgrid.compact
+          label for="shipping-apt-unit"
+            | Apt / unit
+            sup *
+          input#shipping-apt-unit name="" type="text"
+        .row.cgrid.compact
+          label for="shipping-city"
+            | City
+            sup *
+          input#shipping-city name="" type="text"
+        .row.cgrid.compact
+          label for="shipping-state"
+            | state
+            sup *
+          .select-wrapper.field
+            .value New York
+            .arrow
+            select#shipping-state name=""
+              option value="1"
+              option value="2"
+              option value="3"
+        .row.cgrid.compact
+          label for="shipping-zip"
+            | zip
+            sup *
+          input#shipping-zip name="" type="text"
+        .row.cgrid.compact
+          label for="shipping-phone"
+            | phone
+            sup *
+          input#shipping-phone name="" type="text"
+    /! End shipping info
+    .card-info
+      h5 Visa, Mastercard, Amex or Discover
+      .form
+        .row.cgrid.compact
+          label for="card-num"
+            | Card #
+            sup *
+          input#card-num name="" type="text"
+        .row.cgrid.compact
+          label for="card-expiry-month"
+            | Expiration
+            sup *
+          .field.cgrid.compact.card-expiry
+            .select-wrapper.card-expiry-month
+              .value 1
+              .arrow
+              select id="" name="card-expiry-month"
+                option value="1"
+                option value="2"
+                option value="3"
+            .select-wrapper
+              .value 2013
+              .arrow
+              select id="" name="card-expiry-year"
+                option value="2013"
+                option value="2014"
+                option value="2015"
+        .row.cgrid.compact.card-ccv
+          label for="card-ccv-1"
+            | CCV
+            sup *
+          .field.cgrid.compact
+            input#card-ccv-1.card-ccv-1 name="" type="text"
+            .sep
+            input#card-ccv-2.card-ccv-2 name="" type="text"
+        .row.cgrid.compact.card-ssn
+          label for="card-ssn"
+            | Social Security #
+            sup *
+          .field.compact.cgrid
+            input#card-ssn-1.card-ssn-1 name="" type="text"
+            .sep
+            input#card-ssn-2.card-ssn-2 name="" type="text"
+            .sep
+            input#card-ssn-3.card-ssn-3 name="" type="text"
+        .checkbox-row.shipping-billing-same
+          input#shipping-billing-same name="shipping-billing-same" type="checkbox"
+          label.small-checkbox for="shipping-billing-same" my shipping and billing information are the same
+    .final
+      h5  
+      .summary.cgrid.compact
+        .label monthly charges beginning today
+        .value $925.00
+      .checkbox-row.cgrid.compact
+        input#send-promotional-email name="" type="checkbox"
+        label.small-checkbox for="send-promotional-email"  send me promotional email &amp; news
+        .button.submit
+          .text Join
+          input type="submit" value="Join"
+/! End step4 content

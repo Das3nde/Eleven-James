@@ -1,0 +1,21 @@
+li.section.step1
+  .header
+    .cgrid.compact
+      .bullet Step 1
+      h3 Your Details
+  .cgrid.compact.dual-radio style="width:990px"
+    div
+      | Name
+      = text_field_tag :name
+
+    br
+
+    div
+      | Email
+      = text_field_tag :email
+
+    br
+
+    div
+      | Password
+      = password_field_tag :password

@@ -21,8 +21,7 @@ window.prepare_multiselect = ->
       $(@).next().css('width', width+'px')
 $ ->
   # remove model modal
-  $(".admin-wrapper #admin-manage-models #add-model .right_col .remove-model").click ->
-    $("#remove-model-modal").dialog "open"
+  
   $("table.ej-table td.arrow img").click ->
       $(@).parents("tr").toggleClass("highlight");
 

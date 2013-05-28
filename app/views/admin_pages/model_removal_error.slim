@@ -366,13 +366,32 @@
               a.next.active href="#" >
 
 
-#remove-model-modal.ej-modal title="Remove Model <small>/</small> <span class='sub'>Rolex Sea-Dweller Deepsea</span>" data-class="remove-model-modal" data-width="699"
-  p Are you sure that you want to delete this model and its 15 products.
+#remove-model-error-modal.ej-modal title="Remove Model <small>/</small> <span class='sub'>Rolex Sea-Dweller Deepsea</span>" data-class="remove-model-modal" data-width="699"
+  p This model can not be removed at this time, there are 3 products wiith open records.Please complete the open records and try again.
+  table.ej-table
+    tr
+      th
+        span.cgrid.compact
+          span Product ID
+          a.sort.active href="#"
+      th
+        span.cgrid.compact
+          span Status
+          a.sort href="#"
+    tr
+      td
+        span ######-006
+      td
+        span In Rotation
+    tr
+      td
+        span ######-010
+      td
+        span Transit to 11James
+    tr
+      td
+        span ######-015
+      td
+        span Service
   .button-row.cgrid
-    a.button.primary href="#" Remove
     a.button href="#" Cancel
-    
-    
-coffee:
-  $(".admin-wrapper #admin-manage-models #add-model .right_col .remove-model").click ->
-    $("#remove-model-modal").dialog "open"

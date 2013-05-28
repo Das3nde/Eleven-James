@@ -43,6 +43,7 @@ $ ->
   $(".ej-modal").each ->
     $this = $(this)
     width = $this.data("width") or 537
+    # console.log(autoopen)
     $(this).dialog
       modal: true
       width: width

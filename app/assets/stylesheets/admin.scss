@@ -44,6 +44,9 @@
       .right_col {
         width:180px;
         float:right;
+        .button.primary {
+          width:100px;
+        }
       }
       .section {
         margin-top:35px;
@@ -593,6 +596,7 @@
   }
   .watch-record {
     margin-top:50px;
+    border-top-width:0;
     h3 {
       color:$orange;
       text-transform:uppercase;
@@ -715,6 +719,22 @@
       margin-right:10px;
       float:right;
     }
+  }
+}
+
+.remove-model-modal {
+  text-align:center;
+  .ui-dialog-title {
+    text-transform:uppercase;
+    small {
+      padding:0 10px;
+    }
+    .sub {
+      color:#a3a197;
+    }
+  }
+  .ui-dialog-content p {
+    font-size:15px;
   }
 }
 

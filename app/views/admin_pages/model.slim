@@ -1,6 +1,6 @@
 #admin-manage-models
   h2 Manage Models
-  .ej-tabs data-active="0"
+  .ej-tabs data-active="1"
     .container
       ul
         li
@@ -267,7 +267,7 @@
                     .number.alpha="######-"+"%03d" %[i]
                     a.edit.omega href="#"
               .button-row
-                a.button.primary href="#" Remove Model
+                a.button.primary.remove-model href="#" Remove Model
     #featured.ui-tabs
       .container#listing-layout
         .listing
@@ -364,3 +364,10 @@
             span.arrow
               a.prev href="#" <
               a.next.active href="#" >
+
+
+#remove-model-modal.ej-modal title="Remove Model <small>/</small> <span class='sub'>Rolex Sea-Dweller Deepsea</span>" data-class="remove-model-modal" data-width="699" data-open="false"
+  p Are you sure that you want to delete this model and its 15 products.
+  .button-row.cgrid
+    a.button.primary href="#" Remove
+    a.button href="#" Cancel

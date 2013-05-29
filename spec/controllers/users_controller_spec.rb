@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+=begin
 describe UsersController do
 
   before (:each) do
@@ -22,3 +22,5 @@ describe UsersController do
   end
 
 end
+
+=end

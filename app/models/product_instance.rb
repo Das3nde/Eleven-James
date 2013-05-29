@@ -2,6 +2,7 @@ class ProductInstance < ActiveRecord::Base
   require 'json'
   attr_accessible :current_size, :status, :status_id
   attr_accessor :model, :brand, :tier, :type
+
   def type
     @type =Product.find(self.id[0,5].to_i)
   end
@@ -16,19 +17,19 @@ class ProductInstance < ActiveRecord::Base
   end
 
   def history
-    @history = [] #Record.where('product_id = '+@id)
+    history = [] #Record.where('product_id = '+@id)
     records = Record.where('product_id = ?', self.id)
     count = 0
     records.each do |generic|
-      @history << generic.table.classify.constantize.find(generic.id);
+      history << generic.table.classify.constantize.find(generic.id);
     end
-    return @history
+    return history
   end
   def status
-    if !@status_id
+    if !record_id
       return nil
     end
-    return Record.find(@status_id)
+    return Record.find(record_id)
   end
 
   def advance_record(date = Time.now)

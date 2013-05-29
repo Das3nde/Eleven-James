@@ -1,5 +1,5 @@
 require "spec_helper"
-
+=begin
 describe TiersController do
   describe "routing" do
 
@@ -33,3 +33,5 @@ describe TiersController do
 
   end
 end
+
+=end

@@ -10,17 +10,11 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-
-//= require underscore
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
 //= require jquery.multiselect
 //= require bootstrap
-//= require backbone
-//= require backbone_rails_sync
-//= require backbone_datalink
-//= require backbone/ej
 //= require bjqs-1.3.min
 //= require elevenjames
 //= require admin
@@ -29,5 +23,4 @@
 //= require static_pages
 //= require tiers
 //= require vendor
-
 

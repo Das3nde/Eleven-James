@@ -37,6 +37,7 @@ $ ->
     $(@).parents('.token-input-wrap').find(".dropdown").slideToggle()
       
     
+$ ->
   $("#site-footer .admin-footer .sitemap li").hover(
     ->
       clearTimeout window.timer_ref

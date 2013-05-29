@@ -17,7 +17,7 @@
         }
       }
       .sitemap li.hover {
-        background:url(admin/footer-arrow.png) 97% 9px no-repeat; 
+        background:url(admin/footer-arrow.png) 97% 9px no-repeat;
       }
     }
   }
@@ -30,7 +30,7 @@
       text-transform:uppercase;
       line-height:60px;
     }
-    #add-model {  
+    #add-model {
       .left_col {
         width:890px;
         .left, .right {
@@ -99,7 +99,7 @@
             &.ui-state-active {
               background-position:120% 0;
             }
-        
+
           }
         }
       }
@@ -122,7 +122,7 @@
             display:block;
           }
         }
-    
+
         .edit-bar {
           position:absolute;
           bottom:0;
@@ -153,7 +153,7 @@
             }
           }
         }
-     
+
         .add-photo {
           background:#232221 url(admin/add-button.png) 50px 30px no-repeat;
           input[type="file"] {
@@ -171,8 +171,8 @@
             text-align:center;
             margin-top:78px;
             display:block;
-           }
-         }
+          }
+        }
       }
       .right_col {
         float:right;
@@ -217,9 +217,9 @@
         }
       }
     }
-  
+
     #all-products {
-      
+
     }
   }
 
@@ -267,14 +267,14 @@
           text-align:left;
         }
       }
-    
+
     }
   }
 
   .ui-tabs {
     .page-controls {
       margin-top:20px;
-    
+
       .ej-text-field {
         width:30px;
         margin:0 3px;
@@ -365,7 +365,7 @@
       min-height:300px;
     }
   }
-  
+
   .search-header {
     margin-top:45px;
     border-top:1px solid $bdcolor;
@@ -383,7 +383,7 @@
       padding-top:20px;
       padding-bottom:20px;
     }
-  
+
   }
   .multiple_select_field {
     select, button {
@@ -408,7 +408,7 @@
     background:url(select-arrow-red.png) 0 0 no-repeat;
     margin-top:15px;
     margin-right:5px;
-  }    
+  }
 
   .seperator {
     position:relative;
@@ -509,7 +509,7 @@
 }
 #admin-manage-inventory {
   .search-header {
-      margin-top:0;
+    margin-top:0;
   }
 }
 #arrange-transit.ui-tabs, #past-due.ui-tabs, #purchase-request.ui-tabs {
@@ -518,7 +518,7 @@
   }
 }
 #arrange-transit.ui-tabs {
-  
+
   .membership .extra {
     font-family:dinnC;
     font-size:16px;
@@ -528,7 +528,7 @@
     width:150px;
   }
 }
-#admin-manage-inventory {  
+#admin-manage-inventory {
   .extra {
     padding:0 10px 10px;
     line-height:20px;
@@ -547,7 +547,7 @@
     }
     .value {
       width:170px;
-      
+
     }
   }
   h2 {
@@ -560,32 +560,32 @@
   }
   #inventory.ui-tabs {
     .action-bar {
-        border-top:1px solid $bdcolor;
-        border-bottom:1px solid $bdcolor;
-        line-height:40px;
-        .button.primary {
-          float:right;
-        }
-        label {
-          width:105px;
-          padding:0 20px;
-        }
-        .value {
-          width:415px;
-          font-family:akkurat;
-          padding:0 10px;
-        }
-        .product-id {
-          width:110px;
-          font-family:akkuratB;
-          color:$orange;
-          font-size:13px;
-          padding:0 10px;
-        }
-        .button {
-          @include border_radius(0);
-          margin-left:-6px;
-        }
+      border-top:1px solid $bdcolor;
+      border-bottom:1px solid $bdcolor;
+      line-height:40px;
+      .button.primary {
+        float:right;
+      }
+      label {
+        width:105px;
+        padding:0 20px;
+      }
+      .value {
+        width:415px;
+        font-family:akkurat;
+        padding:0 10px;
+      }
+      .product-id {
+        width:110px;
+        font-family:akkuratB;
+        color:$orange;
+        font-size:13px;
+        padding:0 10px;
+      }
+      .button {
+        @include border_radius(0);
+        margin-left:-6px;
+      }
     }
     .detail-info {
       width:892px;
@@ -700,7 +700,7 @@
         width:140px;
         margin-top:1px;
       }
-      
+
     }
     td.edit span a img {
       vertical-align:middle;
@@ -750,11 +750,11 @@
 .add-photo-modal {
   padding:0;
   .image-container {
-    
+
     background-color:#eeeeeb;
     text-align:center;
   }
-  
+
   .ui-widget-header {
     display:none;
   }

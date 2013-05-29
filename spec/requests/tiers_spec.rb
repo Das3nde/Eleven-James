@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+=begin
 describe "Tiers" do
   describe "GET /tiers" do
     it "works! (now write some real specs)" do
@@ -9,3 +9,4 @@ describe "Tiers" do
     end
   end
 end
+=end

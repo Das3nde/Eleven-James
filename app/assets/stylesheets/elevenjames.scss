@@ -13,8 +13,8 @@ body.bootstrap .content {
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
-body.elevenjames {  
-  
+body.elevenjames {
+
   p {
     font-family: Arial;
     color: #333;
@@ -110,10 +110,10 @@ body.elevenjames {
         position:absolute;
         top:100%;
         ul {
-        
+
         }
         li {
-        
+
         }
       }
     }
@@ -840,7 +840,7 @@ body.elevenjames {
     .ui-widget-header {
       border-width: 0;
       background: none;
-      
+
       .ui-dialog-title {
         color: #ff4002;
         font-family: dinnLC;
@@ -850,7 +850,7 @@ body.elevenjames {
         line-height: 36px;
         padding: 20px 0;
       }
-      
+
     }
     .form .row label {
       width: 210px;
@@ -1406,22 +1406,22 @@ body.elevenjames {
     background-color: #f6f6f4;
     padding: 50px 0 80px;
     .nav-on-bottom {
-    
+
       .bjqs-prev, .bjqs-next {
-      
+
         text-decoration:none;
         position:absolute;
         bottom:-86px;
         font-family:akkurat;
         font-size:28px;
-      
+
         a {
           background:none;
           color:$orange;
         }
       }
       .bjqs-controls {
-      
+
       }
       .bjqs-prev {
         left:20px;
@@ -1602,7 +1602,7 @@ body.elevenjames {
         width:508px;
       }
       .pagination {
-      
+
         padding-bottom:0;
       }
       .container {
@@ -1976,7 +1976,7 @@ body.elevenjames {
   }
 
   #account-page #delivery.ui-tabs {
-  
+
     p.address {
       font-size:16px;
       line-height:22px;
@@ -2026,12 +2026,12 @@ body.elevenjames {
     padding-right:15px;
     position:relative;
     margin-right:5px;
-    
+
     p {
       font-size:10px;
       font-family:akkuratB;
       line-height:13px;
-      
+
       margin-top:7px;
     }
     .token-input-delete-token {
@@ -2149,6 +2149,6 @@ table.ej-table {
   }
   .even td {
     background-color:#f2f2f2;
-    
+
   }
 }

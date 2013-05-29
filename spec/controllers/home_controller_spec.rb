@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+=begin
 describe HomeController do
 
   describe "GET 'index'" do
@@ -10,3 +10,5 @@ describe HomeController do
   end
 
 end
+
+=end

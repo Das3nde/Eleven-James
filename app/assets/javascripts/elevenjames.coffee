@@ -21,11 +21,13 @@ window.center_button_row = ->
 
 window.onload = ->
   center_button_row()
-  # console.log("zsd")
+# console.log("zsd")
 
 $ ->
   # button conflict between bootstrap and jqueryui
-  btn = $.fn.button.noConflict() # reverts $.fn.button to jqueryui btn
+  # noConflict() was causing an error, so killing this line for now
+  #btn = $.fn.button.noConflict() # reverts $.fn.button to jqueryui btn
+  btn = $.fn.button
   $.fn.btn = btn # assigns bootstrap button functionality to $.fn.btn
   arrange_queue = ->
     $("ul.ej-queue li.wrap").removeClass "wrap"
@@ -34,7 +36,7 @@ $ ->
     val = $(sel_instance).val()
     text_value = $(sel_instance).find("option[value=" + val + "]").text()
     $(sel_instance).parents(".select-wrapper").find(".value").text text_value
-  
+
   $(".ej-tabs").each ->
     active = 0
     active = $(this).data("active")  if $(this).data("active") isnt `undefined`
@@ -88,7 +90,7 @@ $ ->
       prevtext: "<"
       randomstart: false
       responsive: false
-    
+
   $("#homepage-slider").bjqs
     width: 1084
     height: 531
@@ -132,7 +134,7 @@ $ ->
 
   $("#account-page #frequency.ui-tabs .buttonset").buttonset create: ->
     $this = $(this)
-    
+
     $this.find("li").click ->
       $this.find("li .number").html('&nbsp;')
       count = 0
@@ -140,15 +142,15 @@ $ ->
         count+=1
         $(this).parents("li").first().find(".number").text count
         console.log( $(this).parents("li").first().find(".number"))
-  
+
   $(".buttonset").buttonset create: ->
     $this = $(this)
     $this.find("li").click ->
       $this.find("li").removeClass("active")
       $(this).addClass("active")
-      
-  
-  
+
+
+
   $("#signup-page .dual-radio").buttonset create: ->
     $this = $(this)
     $this.find("label").click ->
@@ -173,7 +175,7 @@ $ ->
 
   $(".select-wrapper select").each ->
     update_select this
-    
+
   $(".custom-select-wrapper").each ->
     $this = $(@)
     $ul = $("<ul />")
@@ -184,7 +186,7 @@ $ ->
       $li = $("<li data-value='"+value+"'>"+text+"</li>")
       $ul.append($li)
     $this.find(".options").append($ul)
-    
+
   $(".custom-select-wrapper").click ->
     $(@).find(".options").toggle()
     

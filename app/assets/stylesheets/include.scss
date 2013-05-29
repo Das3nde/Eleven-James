@@ -1,0 +1,63 @@
+/*Colors*/
+$orange: #ff4002;
+$bdcolor: #c5c5c3;
+
+
+/* Font Family */
+@mixin include_font($family, $path) {	
+	@font-face {
+		font-family: "#{$family}";
+		src: url("#{$path}.eot");
+		src: local('?'), url('#{$path}.woff') format('woff'), url('#{$path}.ttf') format('truetype'), url('#{$path}.svg') format('svg');
+		font-weight: normal;
+		font-style: normal;
+	}
+}
+
+/* Cross Browser Mixins */
+@mixin border_radius($radius, $corner: '') {
+	border#{$corner}-radius:$radius;
+	-webkit-border#{$corner}-radius:$radius;
+	-moz-border#{$corner}-radius:$radius;
+}
+
+/* Cross Browser Gradient */
+@mixin linear_gradient($start_color, $end_color) {
+	background: $start_color; /* Old browsers */
+	background: -moz-linear-gradient(top,  $start_color 0%, $end_color 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$start_color), color-stop(100%,$end_color)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  $start_color 0%,$end_color 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  $start_color 0%,$end_color 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  $start_color 0%,$end_color 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  $start_color 0%,$end_color 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$start_color}', endColorstr='#{$end_color}',GradientType=0 ); /* IE6-9 */
+}
+
+/* Cross Browser Opacity */
+@mixin opacity($trans) {
+  filter: alpha(opactiy=($trans * 100));
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$trans * 100})";
+  -moz-opacity: $trans;
+  -khtml-opacity: $trans;
+  opacity: $trans;
+}
+
+@mixin font_trebuchet {
+  font-family:"Trebuchet MS", Helvetica, sans-serif;
+}
+
+@mixin placeholder_color($color) {
+  &::-webkit-input-placeholder { /* WebKit browsers */
+      color:    $color;
+  }
+  &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+      color:    $color;
+  }
+  &::-moz-placeholder { /* Mozilla Firefox 19+ */
+      color:    $color;
+  }
+  &:-ms-input-placeholder { /* Internet Explorer 10+ */
+      color:    $color;
+  }
+  
+}

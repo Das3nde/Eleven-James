@@ -7,7 +7,7 @@ DatabaseCleaner.clean
 begin
 describe Admin::FedexTransitsController do
   before(:all) do
-    @c = Admin::FedexTransitsController.new()
+    @c = FedexTransitsController.new()
     @msg_html = IO.read(Rails.root.to_s + '/spec/helpers/fedex_email.html')
     @subject = 'FedEx Shipment 61292700352544887192 Delivered'
     @time = Chronic.parse('May 10, 2013 3:08 PM')

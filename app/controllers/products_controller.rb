@@ -1,5 +1,8 @@
-class Admin::ProductsController < ApplicationController
+class Admin::ProductsController < AdminController
   before_filter :user_preferences
+  def models
+
+  end
   def user_preferences
     key = 'admin::'+ (current_user.id.to_s)
     stored = REDIS.get(key)

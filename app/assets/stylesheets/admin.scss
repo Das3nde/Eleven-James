@@ -1,0 +1,216 @@
+@import "include";
+
+#site-footer {
+  .admin-footer {
+    .submenu {
+      display:none;
+    }
+    li {
+      border-color:transparent;
+      border-bottom:solid 1px transparent;
+      &.hover, &:hover {
+        border-color:#565553;
+        a {
+          color:$orange;
+        }
+      }
+    }
+    .sitemap li.hover {
+      background:url(admin/footer-arrow.png) 97% 9px no-repeat; 
+    }
+  }
+}
+
+#admin-manage-models {
+  h3 {
+    color:$orange;
+    text-align:left;
+    font-size:27px;
+    text-transform:uppercase;
+    line-height:60px;
+  }
+  #add-model {  
+    .left_col {
+      width:890px;
+      .left, .right {
+        width:442px;
+      }
+      .right {
+        float:right;
+        margin-left:0;
+      }
+    }
+    .right_col {
+      width:180px;
+      float:right;
+    }
+    .section {
+      margin-top:35px;
+      &.description {
+        .row, .field {
+          height:auto;
+        }
+        .field {
+          width:700px;
+        }
+        .text {
+          line-height:24px;
+          margin:5px 0;
+        }
+      }
+    }
+    .button_panel {
+      border-top:1px solid $bdcolor;
+      border-bottom:1px solid $bdcolor;
+      width:700px;
+      .row {
+        border-width:0;
+        float:right;;
+        margin-top:0;
+      }
+      .select-wrapper {
+        width:150px;
+        float:right;
+      }
+      label {
+        text-align:right;
+        margin-right:15px;
+      }
+      .buttonset {
+        .checkbox {
+          margin-top:8px;
+          &.featured {
+            margin-right:40px;
+          }
+        }
+        label {
+          text-align:left;
+          padding-right:50px;
+          padding-left:0;
+          background-position:120% -50px;
+          font-size:21px;
+          text-transform:uppercase;
+          margin-right:0;
+          color:#363636;
+          &.ui-state-active {
+            background-position:120% 0;
+          }
+        
+        }
+      }
+    }
+    .button-row {
+      padding:0;
+      float:right;
+      .button {
+        padding:0 18px;
+      }
+    }
+    .photo-list {
+      border-top:1px solid $bdcolor;
+      border-bottom:1px solid $bdcolor;
+      li {
+        width:135px;
+        height:135px;
+        overflow:hidden;
+        position:relative;
+        &:hover .edit-bar  {
+          display:block;
+        }
+      }
+    
+      .edit-bar {
+        position:absolute;
+        bottom:0;
+        left:0;
+        background-color:#363636;
+        padding:0 5px;
+        width:125px;
+        @include opacity(0.7);
+        display:none;
+        > a {
+          color:#FFF;
+          text-transform:uppercase;
+          font-size:17px;
+          font-family:dinnMC;
+          float:left;
+        }
+        a {
+          line-height:24px;
+          text-decoration:none;
+        }
+        .arrows {
+          float:right;
+          text-align:center;;
+          a {
+            width:20px;
+            font-family:akkuratB;
+            color:$orange;
+          }
+        }
+      }
+     
+      .add-photo {
+        background:#232221 url(admin/add-button.png) 50px 30px no-repeat;
+        input[type="file"] {
+          position:absolute;
+          top:0;
+          right:0;
+          @include opacity(0);
+          font-size:100em;
+        }
+        label {
+          color:#FFF;
+          font-size:27px;
+          font-family:dinCR;
+          text-transform:uppercase;
+          text-align:center;
+          margin-top:78px;
+          display:block;
+         }
+       }
+    }
+    .right_col {
+      float:right;
+      .header .count {
+        float:right;
+        background-color:#eeeeeb;
+        border-top:1px solid $bdcolor;
+        border-left:1px solid $bdcolor;
+        line-height:59px;
+        padding:0 25px;
+        position:relative;
+        z-index:1;
+        font-size:17px;
+        color:#363636;
+      }
+      h3 {
+        line-height:58px;
+      }
+      .body {
+        background-color:#eeeeeb;
+        border-top:1px solid $bdcolor;
+        border-bottom:1px solid $bdcolor;
+        padding:9px 9px 9px 18px;
+        margin-top:-1px;
+      }
+      .number {
+        font-size:17px;
+        font-family:dinnMC;
+        color:#363636;
+        line-height:30px;
+      }
+      .edit {
+        width:22px;
+        height:21px;
+        display:block;
+        float:right;
+        background:url(admin/edit-button.png) 0 0 no-repeat;
+      }
+      .button-row {
+        float:none;
+        margin:15px 0;
+      }
+    }
+  }
+}

@@ -14,9 +14,6 @@ class Record < ActiveRecord::Base
   end
 
   def self.find(id)
-    #if !(id)
-    #  puts self.to_yaml
-    #end
     generic = super(id)
     if !generic
       return null

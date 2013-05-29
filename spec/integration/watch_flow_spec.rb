@@ -1,16 +1,39 @@
 require 'spec_helper'
 
-describe "watch gets dropped off from the end of a member rotation" do
+DatabaseCleaner.strategy = :truncation
+DatabaseCleaner.clean
+
+
+describe "rotation end, watch dropped off;" do
   before(:all) do
-    @dropoff_time = Time.new(2002, 10, 31, 2, 2, 2, "+02:00")
+    @dropoff_time = Chronic.parse('May 10, 2013 3:08 PM')
+
     @product_instance = FactoryGirl.create(:product_instance)
-    @fedex_transit = Factory.create(:fedex_transit)
-    @member = Factory.create(:member)
-    post '/admin/fedex_transits', :subject => 'FedEx Shipment 61292700352544887192 Delivered', 'body-plain' => IO.read('fedex_email.html')
+    @prev_record = FactoryGirl.create(:prev_record)
+    @next_record = FactoryGirl.create(:next_record)
+    @storage_record = FactoryGirl.create(:storage_record)
+    @prev_rotation = FactoryGirl.create(:rotation)
+
+    record = FactoryGirl.create(:record)
+    @fedex_transit = FactoryGirl.create(:fedex_transit)
+
+    #set the status of the product instance to the fedex transit
+    @product_instance.record_id = 'a6c743f5-982d-4e3f-9ba2-57e769159abd';
+    @product_instance.save()
+
+
+    puts @product_instance.status().table
+    #@member = FactoryGirl.create(:member)
+    post 'fedex-email-notifications', :subject => 'FedEx Shipment 61292700352544887192 Delivered', 'body-plain' => IO.read(Rails.root.to_s + '/spec/helpers/fedex_email.html')
   end
   it "creates an in_storage record and sets it as the watch's current status" do
-    @storage_record = @product_instance.status()
-    @storage_record.table.should equal('storage_record')
+    product_instance = ProductInstance.find(@product_instance.id)
+    current_record = product_instance.status()
+    current_record.table.should eq('storage_records')
+  end
+  it "sets the end_time of the transit record and the start_time of the storage record" do
+    @fedex_transit.end_time.should eq(@dropoff_time)
+    @storage_record.start_time.should eq(@dropoff_time)
   end
 =begin
   it "sends member an email letting them know the watch was received" do
@@ -19,10 +42,7 @@ describe "watch gets dropped off from the end of a member rotation" do
     email.subject.should equal('Your last watch has been received')
 
   end
-  it "sets the end_time of the transit record and the start_time of the storage record" do
-    @fedex_transit.to_i.end_time.should equal(@dropoff_time.to_i)
-    @storage_record.to_i.start_time.should equal(@dropoff_time.to_i)
-  end
+
   it "lets the admin know they need to assign a bin number" do
     pending("not yet implemented")
   end

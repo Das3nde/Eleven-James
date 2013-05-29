@@ -9,6 +9,7 @@ Ej::Application.routes.draw do
       match "products/add_vendor" => "products#add_vendor"
       match "products/:id/add_watch" => "products#add_watch"
       match "inventory/:id/add_record" => "inventory#add_record"
+      match "models" => "products#models"
 
     end
   end

@@ -1,7 +1,7 @@
 require 'chronic'
 
 #Receives emails from fedex regarding shipping notifications
-class Admin::FedexTransitsController < Admin::RecordsController
+class FedexTransitsController < Admin::RecordsController
 =begin
   def create
 
@@ -14,13 +14,13 @@ class Admin::FedexTransitsController < Admin::RecordsController
   end
 =end
 
-  def update params
+  def update
     action = get_action(params['subject'])
     time = get_time(params['body-plain'])
     trk = get_tracking_number(params['subject'])
 
-    transit = FedexTransits.where("tracking_number = ?", trk)
-    item = ProductInstance.find(transit.product_id)
+    transit = FedexTransit.where("tracking_number = ?", trk).first
+    item = ProductInstance.find(transit.product_instance_id)
     status = item.status();
 
     if transit.end_time
@@ -28,11 +28,13 @@ class Admin::FedexTransitsController < Admin::RecordsController
     end
     if transit.start_time && status.id != transit.id
       raise(RuntimeError, 'Record has a start time but no end time and is not the current record. tracking number:#{trk}')
-    elsif status.id != transit.prev().id
+    elsif action == 'pickup' && status.id != transit.prev_record().id
       raise(RuntimeError, 'Fedex picked up package but the Fedex Transit record isn\'t the item\'s next record. tracking number:#{trk}')
     end
-
-    item.advance_record(time)
+    self.send(action, transit, time)
+    puts "action:"
+    puts action
+    render :nothing => true
   end
 
   def get_action subject
@@ -73,7 +75,6 @@ class Admin::FedexTransitsController < Admin::RecordsController
 
   def pickup(transit, time)
     product_instance = transit.product_instance
-   # puts transit.record.to_yaml
     prev_record = transit.prev_record()
     advance_record(prev_record, transit, product_instance, time)
   end
@@ -88,6 +89,9 @@ class Admin::FedexTransitsController < Admin::RecordsController
       success = current.save && success
       success = product_instance.save && success
     end
+    puts "product_instance:"
+    puts product_instance.to_yaml
+    puts product_instance.status()
   end
 
   def pickup_request(transit)

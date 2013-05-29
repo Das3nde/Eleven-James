@@ -1,0 +1,13 @@
+.container
+  a#site-logo href="#"
+    img alt="James Eleven logo" src="/assets/logo-mini.png"
+  p.sub
+      == t("tagline").html_safe
+  #site-nav
+    ul.cgrid.dynamic-centered
+      li class="home"
+        a href="#"
+      - @menu.each do |item|
+        li class="#{determine_active_menu(item[:slug].downcase)}"
+          = link_to item[:title], "#"
+  a.account href="#" Account

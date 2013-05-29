@@ -771,3 +771,50 @@
     }
   }
 }
+.add-record-modal .ui-dialog-title {
+  text-transform:uppercase;
+}
+#add-record-modal {
+  padding-left:45px;
+  padding-right:45px;
+  margin-bottom:40px;
+  input[type=text] {
+    float:left;
+  }
+  p {
+    text-align:center;
+    margin:0 0 30px;
+    font-size:15px;
+  }
+  input[type=text] {
+    width:300px;
+    font-family:akkuratB;
+    font-size:13px;
+  }
+  .select-wrapper {
+    background-color:#FFF;
+    .value {
+      font-size:13px;
+      text-indent:10px;
+      font-family:akkuratB;
+    }
+  }
+  .highlight {
+    position:relative;
+    input[type=text] {
+      background-color:#fcfac9;
+      width:231px;
+      position:relative;
+      z-index:1;
+    }
+    .button.primary {
+      margin-left:-6px;
+      height:40px;
+      float:right;
+      position:absolute;
+      right:0;
+      z-index:-1;
+      @include border_radius(0);
+    }
+  }
+}

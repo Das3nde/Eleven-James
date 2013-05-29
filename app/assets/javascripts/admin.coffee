@@ -20,7 +20,12 @@ window.prepare_multiselect = ->
     unless width == null
       $(@).next().css('width', width+'px')
 $ ->
-  # remove model modal
+  
+  $(".admin-wrapper .export.button").click ->
+    $("#export-inventory-modal").dialog "open"
+
+  $(".admin-wrapper .add_a_record.button").click ->
+    $("#add-record-modal").dialog "open"
   
   $("table.ej-table td.arrow img").click ->
       $(@).parents("tr").toggleClass("highlight");

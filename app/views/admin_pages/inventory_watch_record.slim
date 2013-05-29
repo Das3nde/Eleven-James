@@ -22,7 +22,7 @@
             .action-bar.cgrid.compact
               .product-id #####-034
               img.seperator src="/assets/seperator-pointed.png"
-              a.button Add a record
+              a.button.add_a_record href="#" Add a record
               label Current Status
               .value Transit to Member (Shipping)
               img.seperator src="/assets/seperator-pointed.png"
@@ -182,7 +182,7 @@
                 img src="/assets/watch-photo.png"
               .row
                 .select-wrapper.field
-                  .text Active
+                  .value
                   .arrow.red
                   select
                     option value="1" Active
@@ -216,3 +216,20 @@
       .container
     #purchase-request.ui-tabs
       .container
+      
+#add-record-modal.ej-modal title="Add Record" data-class="add-record-modal" data-width="410"
+  p Please select the next record type.
+  .form
+    .cgrid.row.compact.highlight
+      input type="text" value="transit to 11 James"
+      =image_tag("seperator-pointed-yellow.png")
+      a.button.primary Create
+    .row
+      input type="text" value="missing Watch"
+    .row
+      .select-wrapper
+        .value
+        .arrow.red
+        select
+          option value="" Other
+          option value="2" Other2

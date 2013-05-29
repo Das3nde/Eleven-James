@@ -145,3 +145,18 @@
       .container
     #purchase-request.ui-tabs
       .container
+
+
+#export-inventory-modal.ej-modal title="Export"
+  .form
+    .cgrid.row.compact
+      label File Format
+      .field.select-wrapper
+        .value
+        .arrow.red
+        select
+          option value="2" CSV
+          option value="1" PDF
+          option value="3" DOC
+    .button-row.cgrid
+      a.button.primary href="#" Export

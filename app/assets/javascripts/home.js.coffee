@@ -69,7 +69,7 @@ $(()->
              console.log(response)
              $("#product_vendor_id").append('<option value="'+response.id+'">'+response.name+'</option>')
                .trigger("liszt:updated")
-             $('.modal').modal('hide');
+             $('.modal').dialog('hide')
            error: ()->
              alert("An unexpected error has occurred")
            },
@@ -87,7 +87,6 @@ $(()->
     $("#product_vendor_id").chosen({
       no_results_text: "Add Vendor"
       no_results_callback: ($results, terms)->
-        console.log("balls")
         $results.click(()->
           console.log("balls")
         )

@@ -40,3 +40,5 @@ gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem 'kaminari'
 gem 'slim-rails', "~> 1.1.0"
 gem 'chronic'
+gem 'jquery-validation-rails'
+

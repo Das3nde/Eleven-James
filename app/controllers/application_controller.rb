@@ -62,6 +62,16 @@ class ApplicationController < ActionController::Base
     ]
   end
 
-  helper_method :us_states
+  def jst_checkbox name, attrs = nil
+    html = '<input type="checkbox" name="'+name+'" <%=obj.'+name+' ? \'checked="checked"\' : \'\' %>'
+    attrs.each do |key,val|
+      html+= ' '+key.to_s+ '='+ '"'+val+'"'
+    end
+    return html + '/>'
+  end
+
+
+
+  helper_method :us_states, :jst_checkbox
 
 end

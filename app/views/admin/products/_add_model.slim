@@ -1,4 +1,5 @@
 .container.cgrid
+  = simple_form_for [:admin, @product] do |f|
         .left_col.alpha
           .section
             h3 Product Specifications
@@ -6,7 +7,7 @@
               .left.alpha
                 .row.cgrid.compact
                   label Model
-                  input type="text" value="Sea Dweller Deepsea"
+                  = f.input_field :model
                 .row.cgrid.compact
                   label Brand
                   .select-wrapper.brand.field
@@ -25,7 +26,7 @@
                         option value="#{i}" Style Type #{i}
                 .row.cgrid.compact
                   label Case
-                  input type="text" value="43mm"
+                  = f.input_field :case
                 .row.cgrid.compact
                   label Face
                   .select-wrapper.face.field
@@ -57,23 +58,20 @@
                   .select-wrapper.vendor.field
                     .value
                     .arrow.red
-                    select#vendor
-                      - 5.times do |i|
-                        option value="#{i}" vendor #{i}
+                    = f.collection_select "vendor_id", Vendor.all, :id, :name, :label => "Name", :input_html => {'data-placeholder' => 'eretrefw'}
                     / .options
                 .row.cgrid.compact
                   label MSRP
-                  input type="text" value="$12,050.00"
+                  = f.input_field :msrp
                 .row.cgrid.compact
                   label Purchase Price
-                  input type="text" value="$11,050.00"
+                  =f.input_field :price
             .section.description
               h3 Product Description
               .form
                 .row.cgrid.compact
                   label Description
-                  .field
-                    textarea.text The Rolex Deepsea was designed for extreme underwater exploration. An intricate three-piece case architecture, the Ringlock System, enables it to withstand the colossal pressure at depths of up to 3,900 metres (12,000 feet). The Rolex Deepsea has a bezel inlaid with a virtually scratch resistant black Cerachrom disc  and a titanium caseback. The Rolex Deepsea is also equipped with a unique bracelet, featuring a double extension system for a perfect fit over any diving suit.
+                  =f.input_field :description, :as => :text
             .section
               h3 Product Photos
               .content.photo-list
@@ -94,10 +92,10 @@
                 .buttonset.cgrid.alpha
                   .checkbox.featured
                     label for="is_featured" Featured
-                    input type="checkbox" id="is_featured"
+                    = f.input_field :is_featured
                   .checkbox
                     label for="is_new" New Arrival
-                    input type="checkbox" id="is_new"
+                    = f.input_field :is_new
                 .row.cgrid.compact.omega
                   label Status
                   .select-wrapper.status.field
@@ -124,3 +122,5 @@
                     a.edit.omega href="#"
               .button-row
                 a.button.primary href="#" Remove Model
+div.modal.hide.fade
+  =render("vendor").squish.html_safe

@@ -4,5 +4,5 @@ class Product < ActiveRecord::Base
   has_many :product_images
   accepts_nested_attributes_for :product_images, :reject_if => lambda { |t| t['product_images'].nil? }
 
-  attr_accessible :brand, :case, :color, :description, :material, :model, :msrp, :style, :vendor_id, :quantity
+  attr_accessible :brand, :case, :color, :description, :material, :model, :msrp, :price, :is_featured, :is_new, :style, :vendor_id, :quantity
 end

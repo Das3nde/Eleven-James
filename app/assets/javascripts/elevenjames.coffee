@@ -40,7 +40,95 @@ $ ->
   $(".ej-tabs").each ->
     active = 0
     active = $(this).data("active")  if $(this).data("active") isnt `undefined`
-    $(this).tabs active: active
+    $(this).tabs({
+                 active: active
+                 activate: (e, i)->
+                   $el = $(i.newPanel)
+                   action = $el.attr('data-action')
+                   console.log(action)
+                   $.get('/admin/products/'+action, {}, (html)->
+                     console.log("CHOOOOSE")
+                     $el.html(html)
+                     if($("#product_vendor_id option").length == 0)
+                       $("#product_vendor_id").attr('data-placeholder', 'Enter a vendor name')
+                       $("#product_vendor_id").append('<option value=""></option>')
+
+                     $("#product_vendor_id").chosen({
+                                                    no_results_text: "Add Vendor"
+                                                    no_results_callback: ($results, terms)->
+                                                      console.log("balls")
+                                                      $results.click(()->
+                                                        console.log("balls")
+                                                      )
+                                                    })
+                     $('.chzn-search input').keydown((e)->
+                       chosen = $("#product_vendor_id").data('chosen')
+                       has_results = $('.chzn-results .active-result').length != 0
+                       if(e.which == 13 && !has_results)
+                         console.log("ENTER!!!")
+                         $('.modal').dialog()
+                         $('#vendor_name').val($('.chzn-search input').val())
+                         return false
+                       return true;
+                     )
+
+                     $('.chzn-results').delegate('.no-results','click',()->
+                       $('.modal').dialog();
+                     )
+
+                     if($('.simple_form.vendor').validate)
+                         $('.simple_form.vendor').validate({
+                           submitHandler: (form)->
+                             $.ajax({
+                                    type: "POST",
+                                    data: $(form).serialize()
+                                    url: "/admin/vendors",
+                                    success: (response)->
+                                      console.log(response)
+                                      $("#product_vendor_id").append('<option value="'+response.id+'">'+response.name+'</option>')
+                                        .trigger("liszt:updated")
+                                      $('.modal').dialog('close')
+                                    error: ()->
+                                      alert("An unexpected error has occurred")
+                                    },
+                                    type:'json'
+                             )
+                             return false
+                           })
+                   )
+
+    })
+
+  ###
+  get_product = (id, compiled)->
+    $.get('/admin/products/new', {}, (res)->
+      $('#add-model').html(compiled(res))
+      console.log(compiled(res))
+      $('#product_image_image').change(()->
+        val = this.value
+        ext = val.substring(val.lastIndexOf('.') + 1);
+        console.log(ext)
+        if($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']) == -1)
+          consle.log($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']))
+          alert('Must be a valid image format')
+          this.value = null
+        else
+          $('.new_product_image').submit()
+      )
+      $('#upload_iframe').load(()->
+        try
+          data = JSON.parse($(this).contents().text())
+          if(data.thumb_src)
+            $('#photos').append('<li data-id='+data.id+'><img src='+data.thumb_src+'/></li>')
+          else if(data.error)
+            alert(data.error)
+
+        catch e
+      )
+    , 'json')
+  ###
+
+
 
   $(".ej-modal").each ->
     $this = $(this)

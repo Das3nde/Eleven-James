@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20130524045007) do
+ActiveRecord::Schema.define(:version => 20130530041142) do
 
   create_table "admins", :force => true do |t|
     t.string   "name"
@@ -153,6 +152,9 @@ ActiveRecord::Schema.define(:version => 20130524045007) do
     t.string   "color"
     t.string   "case"
     t.integer  "msrp"
+    t.integer  "price"
+    t.boolean  "is_featured"
+    t.boolean  "is_new"
     t.integer  "vendor_id"
     t.text     "description"
     t.datetime "created_at",  :null => false

@@ -1,27 +1,23 @@
-#admin-manage-models
-  h2 Manage Models
-  .ej-tabs data-active="0"
-    .container
-      ul
-        li
-          a href="#all-products" All Products
-        li
-          a href="#add-model" Add Model
-        li
-          a href="#featured" Featured
-        li
-          a href="#new-arrivals" New Arrivals
-        li
-          a href="#popularity" Popularity
+.admin-wrapper
+  #admin-manage-models
+    h2 Manage Models
+    .ej-tabs data-active="0"
+      .container
+        ul
+          li
+            a href="#all-products" All Products
+          li
+            a href="#add-model" Add Model
+          li
+            a href="#featured" Featured
+          li
+            a href="#new-arrivals" New Arrivals
+          li
+            a href="#popularity" Popularity
 
-    #all-products.ui-tabs
-      =render 'all_products'
-    #add-model.ui-tabs
-      =render 'add_model'
-    #featured.ui-tabs
-      =render 'featured'
-    #new-arrivals.ui-tabs
-    #popularity.ui-tabs
+      #all-products.ui-tabs{data-template="all_products"}
+      #add-model.ui-tabs{data-template="add_model"  data-action="new"}
+      #featured.ui-tabs{data-template="featured"}
+      #new-arrivals.ui-tabs{data-template="new_arrivals"}
+      #popularity.ui-tabs{data-template="popularity"}
 
-  -['all_products', 'add_model', 'featured'].each do |tpl|
-    script type="text/template" =render tpl

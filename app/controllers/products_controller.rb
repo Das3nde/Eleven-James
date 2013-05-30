@@ -1,7 +1,8 @@
 class Admin::ProductsController < AdminController
   before_filter :user_preferences
-  def models
 
+  def models
+    @product_image = ProductImage.new()
   end
   def user_preferences
     key = 'admin::'+ (current_user.id.to_s)
@@ -31,15 +32,10 @@ class Admin::ProductsController < AdminController
     render "admin/products/create_edit"
   end
   def new
-    @product = Product.new()
+    @product = Product.where('model = ?', 'Untitled Model').last || Product.create({:model => 'Untitled Model'})
     @product_instances = []
     @product_image = ProductImage.new()
-    render "admin/products/create_edit"
-  end
-  def create
-    product = Product.new(params[:product])
-    product.save()
-    redirect_to admin_products_path
+    render :layout => false, :file => "admin/products/_add_model"
   end
   def update
     product = Product.find(params[:id])

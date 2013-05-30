@@ -1,5 +1,4 @@
-
-# 		console.log(active); 
+# 		console.log(active);
 
 # 		console.log([$this.parents(".ui-dialog").get(0), width]); 
 
@@ -28,76 +27,75 @@ $ ->
   # noConflict() was causing an error, so killing this line for now
   #btn = $.fn.button.noConflict() # reverts $.fn.button to jqueryui btn
   btn = $.fn.button
-  $.fn.btn = btn # assigns bootstrap button functionality to $.fn.btn
+  $.fn.btn = btn
+  # assigns bootstrap button functionality to $.fn.btn
   arrange_queue = ->
     $("ul.ej-queue li.wrap").removeClass "wrap"
     $("ul.ej-queue li:nth-child(2n)").addClass "wrap"
   update_select = (sel_instance) ->
     val = $(sel_instance).val()
-    text_value = $(sel_instance).find("option[value=" + val + "]").text()
+    console.log("option[value='" + val + "']")
+    text_value = $(sel_instance).find("option[value='" + val + "']").text()
     $(sel_instance).parents(".select-wrapper").find(".value").text text_value
 
   $(".ej-tabs").each ->
     active = 0
     active = $(this).data("active")  if $(this).data("active") isnt `undefined`
     $(this).tabs({
-                 active: active
-                 activate: (e, i)->
-                   $el = $(i.newPanel)
-                   action = $el.attr('data-action')
-                   console.log(action)
-                   $.get('/admin/products/'+action, {}, (html)->
-                     console.log("CHOOOOSE")
-                     $el.html(html)
-                     if($("#product_vendor_id option").length == 0)
-                       $("#product_vendor_id").attr('data-placeholder', 'Enter a vendor name')
-                       $("#product_vendor_id").append('<option value=""></option>')
+       active: active
+       activate: (e, i)->
+         $el = $(i.newPanel)
+         action = $el.attr('data-action')
+         if(action)
+           $.get('/admin/products/' + action, {}, (html)->
+             refresh_interface($el, html)
+           )
 
-                     $("#product_vendor_id").chosen({
-                                                    no_results_text: "Add Vendor"
-                                                    no_results_callback: ($results, terms)->
-                                                      console.log("balls")
-                                                      $results.click(()->
-                                                        console.log("balls")
-                                                      )
-                                                    })
-                     $('.chzn-search input').keydown((e)->
-                       chosen = $("#product_vendor_id").data('chosen')
-                       has_results = $('.chzn-results .active-result').length != 0
-                       if(e.which == 13 && !has_results)
-                         console.log("ENTER!!!")
-                         $('.modal').dialog()
-                         $('#vendor_name').val($('.chzn-search input').val())
-                         return false
-                       return true;
-                     )
+       })
+  refresh_interface = ($el, html)->
+    $el.html(html)
+    $(".select-wrapper select").on "change", ->
+      update_select(this)
 
-                     $('.chzn-results').delegate('.no-results','click',()->
-                       $('.modal').dialog();
-                     )
+    $(".select-wrapper select").each ->
+      update_select(this)
 
-                     if($('.simple_form.vendor').validate)
-                         $('.simple_form.vendor').validate({
-                           submitHandler: (form)->
-                             $.ajax({
-                                    type: "POST",
-                                    data: $(form).serialize()
-                                    url: "/admin/vendors",
-                                    success: (response)->
-                                      console.log(response)
-                                      $("#product_vendor_id").append('<option value="'+response.id+'">'+response.name+'</option>')
-                                        .trigger("liszt:updated")
-                                      $('.modal').dialog('close')
-                                    error: ()->
-                                      alert("An unexpected error has occurred")
-                                    },
-                                    type:'json'
-                             )
-                             return false
-                           })
-                   )
+    $vendor_select = $('#product_vendor_id')
+    $empty_option = '<option value="">Add Vendor</option>'
+    $vendor_select.append($empty_option)
+    $vendor_select.change(()->
+      if(!$vendor_select.val())
+        handle_vendor_form()
+    )
+    if($vendor_select.find('option').length == 1 )
+      console.log("balls")
+      $('.select-wrapper.vendor').click(handle_vendor_form)
+    $('.button.save').click(()->
+      console.log($('.simple_form.edit_product').serialize())
+      return false
+    )
 
-    })
+  handle_vendor_form = ()->
+    $('.modal').dialog()
+    $('.simple_form.vendor').validate({
+      submitHandler: (form)->
+        $.ajax({
+               type: "POST",
+               data: $(form).serialize()
+               url: "/admin/vendors",
+               success: (response)->
+                 console.log(response)
+                 $("#product_vendor_id").append('<option value="' + response.id + '">' + response.name + '</option>')
+                   .trigger("liszt:updated")
+                 $('.modal').dialog('close')
+               error: ()->
+                 alert("An unexpected error has occurred")
+               },
+               type: 'json'
+        )
+        return false
+      })
+
 
   ###
   get_product = (id, compiled)->
@@ -127,7 +125,6 @@ $ ->
       )
     , 'json')
   ###
-
 
 
   $(".ej-modal").each ->
@@ -227,16 +224,15 @@ $ ->
       $this.find("li .number").html('&nbsp;')
       count = 0
       $this.find("label.ui-state-active").each ->
-        count+=1
+        count += 1
         $(this).parents("li").first().find(".number").text count
-        console.log( $(this).parents("li").first().find(".number"))
+        console.log($(this).parents("li").first().find(".number"))
 
   $(".buttonset").buttonset create: ->
     $this = $(this)
     $this.find("li").click ->
       $this.find("li").removeClass("active")
       $(this).addClass("active")
-
 
 
   $("#signup-page .dual-radio").buttonset create: ->
@@ -271,7 +267,7 @@ $ ->
       value = $(@).attr("value")
       text = $(@).text()
       text = value if $.trim(text) == ""
-      $li = $("<li data-value='"+value+"'>"+text+"</li>")
+      $li = $("<li data-value='" + value + "'>" + text + "</li>")
       $ul.append($li)
     $this.find(".options").append($ul)
 

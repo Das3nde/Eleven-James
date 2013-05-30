@@ -23,6 +23,16 @@ class Admin::ProductsController < AdminController
   end
   def index
     @products = Product.order(@order).page(params[:page]).per(@page_size)
+    render :nothing => true
+  end
+  def featured
+    render :json => {:a=>'b'}
+  end
+  def new_arrivals
+    render :nothing => true
+  end
+  def popular
+    render :nothing => true
   end
   def edit
     @product = Product.find(params[:id])
@@ -35,6 +45,11 @@ class Admin::ProductsController < AdminController
     @product = Product.where('model = ?', 'Untitled Model').last || Product.create({:model => 'Untitled Model'})
     @product_instances = []
     @product_image = ProductImage.new()
+    @brands = ['Cartier', 'Rolex', 'Omega']
+    @styles = ['Awesome', 'Even More Awesome']
+    @tiers = ['tier 1', 'tier 2', 'tier 3']
+    @faces = ['Red', 'Blue', 'Purple']
+    @materials = ['Gold', 'Silver', 'Steel']
     render :layout => false, :file => "admin/products/_add_model"
   end
   def update

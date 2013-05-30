@@ -69,7 +69,7 @@ $(()->
              console.log(response)
              $("#product_vendor_id").append('<option value="'+response.id+'">'+response.name+'</option>')
                .trigger("liszt:updated")
-             $('.modal').dialog('hide')
+             $('.modal').dialog('close')
            error: ()->
              alert("An unexpected error has occurred")
            },

@@ -13,17 +13,13 @@
                   .select-wrapper.brand.field
                     .value
                     .arrow.red
-                    select#brand
-                      - 5.times do |i|
-                        option value="#{i}" Rolex #{i}
+                    =f.input_field :brand, collection: @brands, as: :select
                 .row.cgrid.compact
                   label Style
                   .select-wrapper.style.field
                     .value
                     .arrow.red
-                    select#style
-                      - 5.times do |i|
-                        option value="#{i}" Style Type #{i}
+                    =f.input_field :style, collection: @styles, as: :select
                 .row.cgrid.compact
                   label Case
                   = f.input_field :case
@@ -32,33 +28,27 @@
                   .select-wrapper.face.field
                     .value
                     .arrow.red
-                    select#face
-                      - 5.times do |i|
-                        option value="#{i}"  Face Type #{i}
+                    =f.input_field :face, collection: @faces, as: :select
               .right.omega
                 .row.cgrid.compact
                   label Tier
                   .select-wrapper.tier.field
                     .value
                     .arrow.red
-                    select#tier
-                      - 5.times do |i|
-                        option value="#{i}" Artisan #{i}
+                    =f.input_field :tier, collection: @tiers, as: :select
                 .row.cgrid.compact
                   label Material
                   .select-wrapper.material.field
                     .value
                     .arrow.red
-                    select#material
-                      - 5.times do |i|
-                        option value="#{i}" Steel #{i}
+                    =f.input_field :material, collection: @materials, as: :select
                 .row.cgrid.compact
                   label Vendor
                   / .custom-select-wrapper.select-wrapper.vendor.field
                   .select-wrapper.vendor.field
                     .value
                     .arrow.red
-                    = f.collection_select "vendor_id", Vendor.all, :id, :name, :label => "Name", :input_html => {'data-placeholder' => 'eretrefw'}
+                    = f.collection_select "vendor_id", Vendor.all, :id, :name, :label => "Name"
                     / .options
                 .row.cgrid.compact
                   label MSRP
@@ -122,5 +112,5 @@
                     a.edit.omega href="#"
               .button-row
                 a.button.primary href="#" Remove Model
-div.modal.hide.fade
+div.modal.hide.fade style="display:none"
   =render("vendor").squish.html_safe

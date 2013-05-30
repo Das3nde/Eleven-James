@@ -21,10 +21,12 @@ class Admin::ProductsController < AdminController
     @order = @admin_prefs['product_sort'] || "model"
     @page_size = @admin_prefs['page_size'].to_i || 10;
   end
+
   def index
     @products = Product.order(@order).page(params[:page]).per(@page_size)
     render :nothing => true
   end
+
   def featured
     render :json => {:a=>'b'}
   end
@@ -55,9 +57,9 @@ class Admin::ProductsController < AdminController
   def update
     product = Product.find(params[:id])
     if product.update_attributes params[:product]
-      redirect_to admin_products_path
+      render :json => {:ok => true}
     else
-      render :action => :edit
+      render :json => {:ok => false}
     end
   end
   def add_watch

@@ -45,7 +45,9 @@ Ej::Application.routes.draw do
       match "products/:id/add_watch" => "products#add_watch"
       match "inventory/:id/add_record" => "inventory#add_record"
       match "models" => "products#models"
-
+      match "product/featured" => "product#featured"
+      match "product/new_arrivals" => "product#new_arrivals"
+      match "product/popular" => "product#popular"
     end
   end
   match "/fedex-email-notifications" => 'fedex_transits#update'

@@ -1,6 +1,6 @@
 Ej::Application.routes.draw do
   # root to: "static_pages#splash"
-  
+
   get "static_pages/splash"
 
   get "static_pages/account"
@@ -18,7 +18,7 @@ Ej::Application.routes.draw do
   get "static_pages/queue"
 
   get "static_pages/signup"
-  
+
   get "admin_pages/model"
   get "admin_pages/model_removal_error"
   get "admin_pages/model_add_vendor"
@@ -50,5 +50,9 @@ Ej::Application.routes.draw do
   end
   match "/fedex-email-notifications" => 'fedex_transits#update'
   root :to => "users#index"
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"} do
+    match '/auth/sign_out' => 'registrations#destroy_session', :as => :destroy_user_session
+  end
+
+  get 'collection' => 'home#collection'
 end

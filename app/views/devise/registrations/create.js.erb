@@ -1,0 +1,9 @@
+$('.signup-error').remove();
+
+<%if @status%>
+  window.location.href = '/collection';
+<%else%>
+  <%@errors.each do |k,v|%>
+  $("#<%=k%>").siblings('label').append("<span class='signup-error'><%=v%></span>")
+  <%end%>
+<%end%>

@@ -10,5 +10,10 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
-  
+
+  validates :name, presence: true
+
+  has_one :billing_address, :as => :addressable
+  has_one :shipping_address, :as => :addressable
+
 end

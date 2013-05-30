@@ -41,4 +41,4 @@ gem 'kaminari'
 gem 'slim-rails', "~> 1.1.0"
 gem 'chronic'
 gem 'jquery-validation-rails'
-
+gem 'thin'

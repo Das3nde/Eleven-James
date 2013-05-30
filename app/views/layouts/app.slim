@@ -1,0 +1,42 @@
+doctype html
+html
+  head
+    title ElevenJames
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  body.elevenjames
+    - @header_partial = "mini_header"
+    - @footer_partial = "footer"
+    - @internal_class = "internal-page"
+    ruby:
+     @menu = [
+        {title: "The Collection", slug: "collection"},
+        {title: "Your Selections", slug: "selection"},
+        {title: "Services & Benefits", slug: "service"},
+        {title: "News and Events", slug: "news"},
+        {title: "Contact Us", slug: "contact"}
+             ]
+    - if @wrapper == "splash"
+      - @header_partial = "splash_header"
+      - @footer_partial = "splash_footer"
+      - @internal_class = ""
+    - elsif @wrapper == "home" || @wrapper == "signup"
+      - @header_partial = "header"
+      - @header_class = "main-layout"
+    - elsif controller_name == "admin_pages" or @wrapper == "admin"
+      - @footer_partial = "admin/footer"
+      ruby:
+       @menu = [
+          {title: "Models", slug: "model"},
+          {title: "Inventory", slug: "inventory"},
+          {title: "Members", slug: "members"},
+          {title: "Events", slug: "events"}
+               ]
+    div id="#{ @wrapper ? @wrapper : action_name}-page" class="#{@internal_class if @internal_class.present?}"
+      #site-header class="#{@header_class if @header_class.present?}"
+        = render "layouts/static/#{@header_partial}"
+      #site-content
+        = yield
+      #site-footer
+        = render "layouts/static/#{@footer_partial}"

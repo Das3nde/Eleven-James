@@ -1,0 +1,167 @@
+li.section.step4
+  .header
+    .cgrid.compact
+      .bullet Step 5
+      h3
+        | Make payment arrangements for your
+        em 6 Months of Master Craftsman
+        |  timepiece service...
+  .cgrid.compact
+    .billing-info
+      h5 Billing Information
+      .form
+        = fields_for :billing_address, BillingAddress.new do |ba|
+          .row.cgrid.compact
+            label for="billing-first-name"
+              | First Name
+              sup *
+            = ba.text_field :first_name
+
+          .row.cgrid.compact
+            label for="billing-last-name"
+              | Last Name
+              sup *
+            = ba.text_field :last_name
+          .row.cgrid.compact
+            label for="billing-address"
+              | Address
+              sup *
+            = ba.text_field :address_line
+          .row.cgrid.compact
+            label for="billing-apt-unit"
+              | Apt / unit
+              sup *
+            = ba.text_field :apt_unit
+          .row.cgrid.compact
+            label for="billing-city"
+              | City
+              sup *
+            = ba.text_field :city
+          .row.cgrid.compact
+            label for="billing-state"
+              | state
+              sup *
+            .select-wrapper.field
+              .value New York
+              .arrow
+              = ba.select :state, options_for_select(us_states.unshift(['', '']))
+          .row.cgrid.compact
+            label for="billing-zip"
+              | zip
+              sup *
+            = ba.text_field :zip
+          .row.cgrid.compact
+            label for="billing-phone"
+              | phone
+              sup *
+            = ba.text_field :phone
+    /! End billing
+    .shipping-info
+      .overlay
+      h5 Shipping Information
+      .form
+        = fields_for :shipping_address, ShippingAddress.new do |sa|
+          .row.cgrid.compact
+            label for="shipping-first-name"
+              | First Name
+              sup *
+            = sa.text_field :first_name
+          .row.cgrid.compact
+            label for="shipping-last-name"
+              | Last Name
+              sup *
+            = sa.text_field :last_name
+          .row.cgrid.compact
+            label for="shipping-address"
+              | Address
+              sup *
+            = sa.text_field :address_line
+          .row.cgrid.compact
+            label for="shipping-apt-unit"
+              | Apt / unit
+              sup *
+            = sa.text_field :apt_unit
+          .row.cgrid.compact
+            label for="shipping-city"
+              | City
+              sup *
+            = sa.text_field :city
+          .row.cgrid.compact
+            label for="shipping-state"
+              | state
+              sup *
+            .select-wrapper.field
+              .value New York
+              .arrow
+              = sa.select :state, options_for_select(us_states.unshift(['', '']))
+          .row.cgrid.compact
+            label for="shipping-zip"
+              | zip
+              sup *
+            = sa.text_field :zip
+          .row.cgrid.compact
+            label for="shipping-phone"
+              | phone
+              sup *
+            = sa.text_field :phone
+    /! End shipping info
+    .card-info
+      h5 Visa, Mastercard, Amex or Discover
+      .form
+        .row.cgrid.compact
+          label for="card-num"
+            | Card #
+            sup *
+          input#card-num name="" type="text"
+        .row.cgrid.compact
+          label for="card-expiry-month"
+            | Expiration
+            sup *
+          .field.cgrid.compact.card-expiry
+            .select-wrapper.card-expiry-month
+              .value 1
+              .arrow
+              select id="" name="card-expiry-month"
+                option value="1"
+                option value="2"
+                option value="3"
+            .select-wrapper
+              .value 2013
+              .arrow
+              select id="" name="card-expiry-year"
+                option value="2013"
+                option value="2014"
+                option value="2015"
+        .row.cgrid.compact.card-ccv
+          label for="card-ccv-1"
+            | CCV
+            sup *
+          .field.cgrid.compact
+            input#card-ccv-1.card-ccv-1 name="" type="text"
+            .sep
+            input#card-ccv-2.card-ccv-2 name="" type="text"
+        .row.cgrid.compact.card-ssn
+          label for="card-ssn"
+            | Social Security #
+            sup *
+          .field.compact.cgrid
+            input#card-ssn-1.card-ssn-1 name="" type="text"
+            .sep
+            input#card-ssn-2.card-ssn-2 name="" type="text"
+            .sep
+            input#card-ssn-3.card-ssn-3 name="" type="text"
+        .checkbox-row.shipping-billing-same
+          input#shipping-billing-same name="shipping-billing-same" type="checkbox"
+          label.small-checkbox for="shipping-billing-same" my shipping and billing information are the same
+    .final
+      h5  
+      .summary.cgrid.compact
+        .label monthly charges beginning today
+        .value $925.00
+      .checkbox-row.cgrid.compact
+        input#send-promotional-email name="" type="checkbox"
+        label.small-checkbox for="send-promotional-email"  send me promotional email &amp; news
+        .button.submit
+          .text Join
+          input type="submit" value="Join"
+/! End step4 content

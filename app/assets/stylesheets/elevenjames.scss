@@ -897,6 +897,13 @@ body.elevenjames {
   /*Signup Page*/
 
   #signup-page {
+    .signup-error
+    {
+      font-size: 12px;
+      text-transform: lowercase;
+      color: red;
+      margin-left: 2px;
+    }
     #site-content {
       font-family: dinnC;
       padding-bottom: 50px;
@@ -961,6 +968,14 @@ body.elevenjames {
         opacity: 0.5;
         padding-bottom: 1000px;
         margin-bottom: -1000px;
+      }
+    }
+    .user-info
+    {
+      label
+      {
+        display: inline-block;
+        width: 170px;
       }
     }
     .step3 .dual-radio > .selected, .step1 .dual-radio > .selected {

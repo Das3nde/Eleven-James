@@ -1,0 +1,34 @@
+li.section.step1
+  .header
+    .cgrid.compact
+      .bullet Step 1
+      h3 Basic Info
+  .cgrid.compact.dual-radio.user-info style="width:990px"
+    div
+      label
+        | Name
+      = f.text_field :name
+
+    br
+
+    div
+      label
+        | Email
+      = f.text_field :email
+
+    br
+
+    div
+      label
+        | Password
+      = f.password_field :password
+
+    br
+
+    div
+      label
+        | Confirm Password
+      = f.password_field :password_confirmation
+
+    br
+  br

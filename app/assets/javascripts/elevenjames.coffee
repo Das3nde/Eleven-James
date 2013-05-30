@@ -46,7 +46,7 @@ $ ->
        activate: (e, i)->
          $el = $(i.newPanel)
          action = $el.attr('data-action')
-         if(action)
+         if(action != undefined)
            $.get('/admin/products/' + action, {}, (html)->
              refresh_interface($el, html)
            )
@@ -71,8 +71,42 @@ $ ->
       console.log("balls")
       $('.select-wrapper.vendor').click(handle_vendor_form)
     $('.button.save').click(()->
-      console.log($('.simple_form.edit_product').serialize())
+      $product_form = $('.simple_form.edit_product')
+      $.post($product_form.attr('action'), $product_form.serialize(), (result)->
+        console.log(result)
+      , 'json')
       return false
+    )
+    $('#upload_iframe').load(()->
+      try
+        data = JSON.parse($(this).contents().text())
+        if(data.thumb_src)
+          $('#photos').append('<li data-id='+data.id+'><img src='+data.thumb_src+'/></li>')
+        else if(data.error)
+          alert(data.error)
+
+      catch e
+    )
+
+    $('#photos').delegate('li','click',()->
+      id = this.dataset.id
+      $.ajax({
+             url: '/admin/product_images/'+id
+             type: "GET",
+             dataType: 'script',
+             })
+    )
+    $('#product_image_image').change(()->
+      console.log("changed")
+      val = this.value
+      ext = val.substring(val.lastIndexOf('.') + 1);
+      console.log(ext)
+      if($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']) == -1)
+        consle.log($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']))
+        alert('Must be a valid image format')
+        this.value = null
+      else
+        $('.new_product_image').submit()
     )
 
   handle_vendor_form = ()->

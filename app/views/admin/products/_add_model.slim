@@ -65,13 +65,14 @@
             .section
               h3 Product Photos
               .content.photo-list
-                ul.cgrid.compact
+                ul.cgrid.compact#photos
                   li.add-photo
-                    label Add Photo
-                    input type="file"
-                  - 4.times do |i|
+                    label for="product_image_image" Add Photo
+
+
+                  - @product.product_images.each do |image|
                     li
-                      img src="/assets/admin/modelpic#{i}.jpg"
+                      img{src=(image.url('square'))}
                       .edit-bar
                         a href="#" Edit
                         .arrows
@@ -114,3 +115,9 @@
                 a.button.primary href="#" Remove Model
 div.modal.hide.fade style="display:none"
   =render("vendor").squish.html_safe
+
+= simple_form_for [:admin, @product_image], :html => {:target => "upload_iframe", :style=>"display:none"}  do |f|
+                      = f.file_field :image
+                      = f.input :product_id, :as => :hidden, :input_html => { :value => @product.id }
+
+iframe{id="upload_iframe" src="/admin/product_images" width="200" height="200" style="display:none"}

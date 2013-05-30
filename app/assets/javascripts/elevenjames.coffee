@@ -24,8 +24,8 @@ window.onload = ->
 
 $ ->
   # button conflict between bootstrap and jqueryui
-  # noConflict() was causing an error, so killing this line for now
-  #btn = $.fn.button.noConflict() # reverts $.fn.button to jqueryui btn
+  # noConflict() #was causing an error, so killing this line for now
+  btn = $.fn.button.noConflict() # reverts $.fn.button to jqueryui btn
   btn = $.fn.button
   $.fn.btn = btn
   # assigns bootstrap button functionality to $.fn.btn

@@ -3,32 +3,32 @@ li.section.step1
     .cgrid.compact
       .bullet Step 1
       h3 Basic Info
-  .cgrid.compact.dual-radio.user-info style="width:990px"
-    div
+  .cgrid.compact.user-info.form style="width:990px"
+    .row.cgrid.compact
       label
         | Name
       = f.text_field :name
 
-    br
 
-    div
+
+    .row.cgrid.compact
       label
         | Email
       = f.text_field :email
 
-    br
 
-    div
+
+    .row.cgrid.compact
       label
         | Password
       = f.password_field :password
 
-    br
 
-    div
+
+    .row.cgrid.compact
       label
         | Confirm Password
       = f.password_field :password_confirmation
 
-    br
+
   br

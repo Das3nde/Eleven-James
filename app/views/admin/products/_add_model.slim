@@ -120,7 +120,7 @@ ruby:
                     a.edit.omega href="#"
               .button-row
                 a.button.primary#add-inventory href="#" Add Inventory
-div.modal.hide.fade style="display:none"
+div.vendor-dialog style="display:none"
   =render("vendor").squish.html_safe
 
 = simple_form_for [:admin, @product_image], :html => {:target => "upload_iframe", :style=>"display:none"}  do |f|

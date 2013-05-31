@@ -167,7 +167,7 @@ $ ->
 
 
   handle_vendor_form = ()->
-    $('.modal').dialog()
+    $('.vendor-dialog').dialog()
     $('.simple_form.vendor').validate({
       submitHandler: (form)->
         $.ajax({
@@ -177,7 +177,7 @@ $ ->
                success: (response)->
                  $("#product_vendor_id").append('<option value="' + response.id + '">' + response.name + '</option>')
                    .trigger("liszt:updated")
-                 $('.modal').dialog('close')
+                 $('.vendor-dialog').dialog('close')
                error: ()->
                  alert("An unexpected error has occurred")
                },

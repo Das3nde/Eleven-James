@@ -1,4 +1,4 @@
-class VendorsController < ApplicationController
+class Admin::VendorsController < ApplicationController
   def create
     vendor = Vendor.new(params[:vendor])
     if vendor.save()

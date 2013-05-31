@@ -5,8 +5,8 @@
     });
     $('#image_crop').Jcrop({
         keySupport: false,
-        aspectRatio: 1,
-        minSize: [300,300],
+        aspectRatio:1.22,
+        minSize: [359,293],
         onChange: function(c){
             dimensions = c;
             $('#save_image').removeAttr('disabled')
@@ -31,6 +31,12 @@
         return false
     })
     $('#delete_image').click(function(){
+        $.ajax({
+            data: {authenticity_token: '<%=form_authenticity_token%>'},
+            url: '/admin/product_images/'+<%=@img.id%>,
+            type: "DELETE"
+        })
+
         $('#photos li[data-id=<%=@img.id%>]').remove()
         $modal.dialog('close')
         return false

@@ -6,8 +6,9 @@ class ProductImage < ActiveRecord::Base
 
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :image, :styles => {
-      :thumb => '100x100>',
+      :thumb => '100x100#',
       :square => '200x200#',
+      :public => '359x293',
       :medium => '600x600>'
   }
 

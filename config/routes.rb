@@ -38,16 +38,18 @@ Ej::Application.routes.draw do
   authenticated :user do
     root :to => redirect("/admin/models")
     namespace :admin do
-      resources :products, :users, :settings, :vendors, :tiers, :inventory, :courier_transits,
-                :records, :product_images, :events
       match "products/:product_id/upload_image" => "products#upload_image"
       match "products/add_vendor" => "products#add_vendor"
       match "products/:id/add_inventory" => "products#add_inventory"
       match "inventory/:id/add_record" => "inventory#add_record"
       match "models" => "products#models"
-      match "product/featured" => "product#featured"
-      match "product/new_arrivals" => "product#new_arrivals"
-      match "product/popular" => "product#popular"
+      match "products/featured" => "products#featured"
+      match "products/new_arrivals" => "products#new_arrivals"
+      match "products/popular" => "products#popular"
+
+      resources :products, :users, :settings, :vendors, :tiers, :inventory, :courier_transits,
+                :records, :product_images, :events
+
     end
   end
   match "/fedex-email-notifications" => 'fedex_transits#update'

@@ -21,6 +21,7 @@ test:
 
 production:
   adapter: postgresql
-  database: ej_production
+  database: d40soj0cs4fam5
+  username: xbjuxuuuviwpzv
   pool: 5
   timeout: 5000

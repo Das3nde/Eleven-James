@@ -8,6 +8,7 @@ class HomeController < ApplicationController
 
   def collection
     @wrapper = "listing"
+    @products = Product.all
   end
 
   private

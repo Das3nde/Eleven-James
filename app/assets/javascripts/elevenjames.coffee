@@ -52,6 +52,9 @@ $ ->
                    $('#edit_tab').attr('data-action', 'new')
                    $el = $(i.newPanel)
                    action = $el.attr('data-action')
+                   if($el.attr('id')!= 'add-model')
+                     $('#add-model').attr('data-action', 'new')
+                     $('a[href="#add-model"]').html('Add Model')
                    if(action != undefined)
                      $.get('/admin/products/' + action, {}, (html)->
                        action = action == "" ? "index" : action
@@ -141,8 +144,24 @@ $ ->
     $('.ej-table tbody tr').click(()->
       id = $(this).attr('data-id')
       $('#add-model').attr('data-action', id)
+      $('a[href="#add-model"]').html('Edit Model')
       $('.ej-tabs').tabs('select', 1);
     )
+    $(".bjqs-wrap").each ->
+      width = $(@).data("width")
+      height = $(@).data("height")
+      $(@).bjqs
+        width: width
+        height: height
+        animduration: 1450
+        animspeed: 6000
+        automatic: false
+        showmarkers: false
+        keyboardnav: false
+        nexttext: ">"
+        prevtext: "<"
+        randomstart: false
+        responsive: false
 
 
   handle_vendor_form = ()->
@@ -199,21 +218,7 @@ $ ->
       $(this).remove()
       arrange_queue()
 
-  $(".bjqs-wrap").each ->
-    width = $(@).data("width")
-    height = $(@).data("height")
-    $(@).bjqs
-      width: width
-      height: height
-      animduration: 1450
-      animspeed: 6000
-      automatic: false
-      showmarkers: false
-      keyboardnav: false
-      nexttext: ">"
-      prevtext: "<"
-      randomstart: false
-      responsive: false
+
 
   $("#homepage-slider").bjqs
     width: 1084

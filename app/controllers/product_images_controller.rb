@@ -25,9 +25,20 @@ class Admin::ProductImagesController < ApplicationController
     square = img.crop(params[:x].to_i,params[:y].to_i,params[:w].to_i,params[:h].to_i)
     square = square.adaptive_resize(200,200);
     square.write(@img.path("square"))
+
+    public = img.crop(params[:x].to_i,params[:y].to_i,params[:w].to_i,params[:h].to_i)
+    public = public.adaptive_resize(359,293);
+    public.write(@img.path("public"))
+
+
+
     render :json => {:src => @img.url('square')}
   end
   def index
+    render :nothing => true
+  end
+  def destroy
+    ProductImage.find(params[:id]).destroy
     render :nothing => true
   end
 end

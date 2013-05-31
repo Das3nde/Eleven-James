@@ -2,17 +2,18 @@
         .listing
           .container
             ul.cgrid.compact
-              - 5.times do
+              - @products.each do |product|
                 li
                   .bjqs-wrap.nav-on-bottom data-width="359" data-height="293"
                     ul.bjqs
-                      li: img alt="" src="/assets/temp/D1.jpg"
-                      li: img alt="" src="/assets/temp/D2.jpg"
-                      li: img alt="" src="/assets/temp/D3.jpg"
+                      -product.product_images.each do |image|
+                        li
+                          img{alt="" src=(image.url('public'))}
+
                   .info
-                    p.name Rolex
+                    p.name =product.model
                     .make
-                      | Daytona Stainless
+                        =product.brand
                     .item-footer
                       .button-row.cgrid
                         a.button href="#" Remove

@@ -28,7 +28,8 @@ class Admin::ProductsController < AdminController
   end
 
   def featured
-    render :json => {:a=>'b'}
+    @products = Product.where('is_featured = true')
+    render :layout => false, :file => 'admin/products/_featured'
   end
   def new_arrivals
     render :nothing => true

@@ -41,12 +41,4 @@ gem 'kaminari'
 gem 'slim-rails', "~> 1.1.0"
 gem 'chronic'
 gem 'jquery-validation-rails'
-
-
-group :development do
-  gem 'thin'
-end
-
-group :test do
-  gem 'thin'
-end
+gem 'thin', "~> 1.5.1"

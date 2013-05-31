@@ -281,7 +281,7 @@ DEPENDENCIES
   simple-navigation (~> 3.10.0)
   simple_form (>= 2.1.0)
   slim-rails (~> 1.1.0)
-  thin
+  thin (~> 1.5.1)
   uglifier (>= 1.0.3)
   underscore-rails
   unicorn (>= 4.3.1)

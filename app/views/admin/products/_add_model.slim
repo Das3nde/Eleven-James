@@ -111,7 +111,7 @@ ruby:
           .section
             .header.cgrid
               h3 Quantity
-              .count.omega 15
+              .count.omega =@product.quantity || 0
             .body
               ul#model-inventory
                 - @product_instances.each do |p|

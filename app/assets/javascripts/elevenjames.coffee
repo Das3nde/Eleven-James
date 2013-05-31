@@ -134,6 +134,8 @@ $ ->
              data: {authenticity_token:auth}
              success: (response)->
                $('#model-inventory').append('<li class="cgrid"><div class="number alpha">'+response.id+'</div><a class="edit omega" href="#"></a></li>')
+               $('.count.omega').html(response.quantity)
+
              error: ()->
                alert("An unexpected error has occurred")
              })

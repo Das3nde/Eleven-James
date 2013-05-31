@@ -45,7 +45,7 @@ class Admin::ProductsController < AdminController
     render "admin/products/create_edit"
   end
   def new
-    @product = Product.where('model = ?', 'Untitled Model').last || Product.create({:model => 'Untitled Model'})
+    @product = Product.where('model = ?', 'Untitled Model').last || Product.create({:model => 'Untitled Model', :quantity => 0})
     @product_instances = ProductInstance.where('id ~ ?','^'+ sprintf('%05d',@product.id))
     @product_image = ProductImage.new()
     render :layout => false, :file => "admin/products/_add_model"
@@ -61,10 +61,16 @@ class Admin::ProductsController < AdminController
   def add_inventory
     instance = ProductInstance.new
     model_id = sprintf '%05d', params[:id]
+    product = Product.find(params[:id])
     product_id = ProductInstance.where('id ~ ?','^'+model_id).count + 1
     instance.id = "#{model_id}-#{product_id}"
-    instance.save
-    render :json => {:id=> instance.id}
+
+    ActiveRecord::Base.transaction do
+      product.quantity = product.quantity ? product.quantity+1 : 1;
+      product.save
+      instance.save
+    end
+    render :json => {:id=> instance.id, :quantity => product.quantity}
   end
   def upload_image
     render :json => {:something => "changed now"}

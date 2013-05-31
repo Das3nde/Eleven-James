@@ -61,5 +61,5 @@ Ej::Application.routes.draw do
   end
 
   get 'collection' => 'home#collection'
-  get 'queue' => 'home#queue'
+  get 'user_queue' => 'home#user_queue'
 end

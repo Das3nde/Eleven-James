@@ -12,7 +12,7 @@ class HomeController < ApplicationController
     @requested_product_ids = ProductRequest.where("user_id = ?", current_user.id).collect(&:product_id)
   end
 
-  def queue
+  def user_queue
     @wrapper = "queue"
     @requested_products = ProductRequest.where("user_id = ?", current_user.id)
   end
@@ -21,7 +21,7 @@ class HomeController < ApplicationController
 
   def determine_layout
     case action_name
-    when 'collection', 'queue'
+    when 'collection', 'user_queue'
       'app'
     else
       'application'

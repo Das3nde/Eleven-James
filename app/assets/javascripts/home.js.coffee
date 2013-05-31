@@ -150,3 +150,21 @@ if is_page('inventory')
 
 #inventory records page
 
+
+add_collection =
+  init: ->
+    $('#listing-layout').find('a.add').bind 'click', ->
+      $(this).removeClass('add').addClass('upgrade').html('Upgrade')
+      product_id = $(this).attr('data-product-id')
+      $.ajax '/request_product',
+        type: 'POST'
+        dataType: 'json'
+        data:
+          product_id: product_id
+        error: (jqXHR, textStatus, errorThrown) ->
+        success: (data, textStatus, jqXHR) ->
+
+      false
+
+$ ->
+  add_collection.init()

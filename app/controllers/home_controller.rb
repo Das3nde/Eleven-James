@@ -8,14 +8,20 @@ class HomeController < ApplicationController
 
   def collection
     @wrapper = "listing"
-    @products = Product.all
+    @products = Product.where("is_featured = ?", true)
+    @requested_product_ids = ProductRequest.where("user_id = ?", current_user.id).collect(&:product_id)
+  end
+
+  def queue
+    @wrapper = "queue"
+    @requested_products = ProductRequest.where("user_id = ?", current_user.id)
   end
 
   private
 
   def determine_layout
     case action_name
-    when 'collection'
+    when 'collection', 'queue'
       'app'
     else
       'application'

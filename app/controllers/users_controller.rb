@@ -30,4 +30,15 @@ class UsersController < ApplicationController
       redirect_to users_path, :notice => "Can't delete yourself."
     end
   end
+
+  def request_product
+    pr = ProductRequest.new
+    pr.user_id = current_user.id
+    pr.product_id = Product.find(params[:product_id]).id
+    pr.save
+    render json: { status: 'success' }
+  end
+
+
+
 end

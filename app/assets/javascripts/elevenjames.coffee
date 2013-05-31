@@ -1,12 +1,12 @@
 # 		console.log(active);
 
-# 		console.log([$this.parents(".ui-dialog").get(0), width]); 
+# 		console.log([$this.parents(".ui-dialog").get(0), width]);
 
-# 		console.log([index,$(this).parents(".bjqs-markers").next().find("li").eq(index).find("a")]) 
+# 		console.log([index,$(this).parents(".bjqs-markers").next().find("li").eq(index).find("a")])
 
-# 		console.log($(".shipping-info")); 
+# 		console.log($(".shipping-info"));
 
-#         console.log(text_value) 
+#         console.log(text_value)
 window.center_button_row = ->
   $(".button-row:not('.not-centered'), .dynamic-centered").each ->
     width = 0
@@ -14,7 +14,7 @@ window.center_button_row = ->
       $this = $(this)
       # console.log $this.outerWidth(true)
       width += $this.outerWidth(true)
-    # 			console.log($this.outerWidth(true)); 
+    # 			console.log($this.outerWidth(true));
     # console.log width
     $(this).width width
 
@@ -319,5 +319,4 @@ $ ->
 
   $(".custom-select-wrapper").click ->
     $(@).find(".options").toggle()
-    
-    
+

@@ -1,7 +1,7 @@
 (function(){
     $('.modal').remove()
     $modal = $("<div class='modal hide'><%=render("image_crop").squish.html_safe -%></div>").dialog({
-        width: '<%=@height-100%>px'
+        width: 'auto'
     });
     $('#image_crop').Jcrop({
         keySupport: false,

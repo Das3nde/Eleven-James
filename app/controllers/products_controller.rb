@@ -47,11 +47,6 @@ class Admin::ProductsController < AdminController
     @product = Product.where('model = ?', 'Untitled Model').last || Product.create({:model => 'Untitled Model'})
     @product_instances = ProductInstance.where('id ~ ?','^'+ sprintf('%05d',@product.id))
     @product_image = ProductImage.new()
-    @brands = ['Cartier', 'Rolex', 'Omega']
-    @styles = ['Awesome', 'Even More Awesome']
-    @tiers = ['tier 1', 'tier 2', 'tier 3']
-    @faces = ['Red', 'Blue', 'Purple']
-    @materials = ['Gold', 'Silver', 'Steel']
     render :layout => false, :file => "admin/products/_add_model"
   end
   def update
@@ -72,6 +67,12 @@ class Admin::ProductsController < AdminController
   end
   def upload_image
     render :json => {:something => "changed now"}
+  end
+  def show
+    @product = Product.find(params[:id])
+    @product_instances = ProductInstance.where('id ~ ?','^'+ sprintf('%05d',@product.id))
+    @product_image = ProductImage.new()
+    render :layout => false, :file => "admin/products/_add_model"
   end
 end
 

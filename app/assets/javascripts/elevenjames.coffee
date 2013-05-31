@@ -28,30 +28,40 @@ $ ->
   btn = $.fn.button.noConflict() # reverts $.fn.button to jqueryui btn
   btn = $.fn.button
   $.fn.btn = btn
+  model_id = null
   # assigns bootstrap button functionality to $.fn.btn
   arrange_queue = ->
     $("ul.ej-queue li.wrap").removeClass "wrap"
     $("ul.ej-queue li:nth-child(2n)").addClass "wrap"
   update_select = (sel_instance) ->
     val = $(sel_instance).val()
-    console.log("option[value='" + val + "']")
     text_value = $(sel_instance).find("option[value='" + val + "']").text()
     $(sel_instance).parents(".select-wrapper").find(".value").text text_value
 
+  $.get('/admin/products/', {}, (html)->
+    action = action == "" ? "index" : action
+    refresh_interface($('#all-products'), html)
+  )
+
   $(".ej-tabs").each ->
     active = 0
-    active = $(this).data("active")  if $(this).data("active") isnt `undefined`
+    active = $(this).data("active")  if $(this).data("active") isnt 'undefined'
     $(this).tabs({
-       active: active
-       activate: (e, i)->
-         $el = $(i.newPanel)
-         action = $el.attr('data-action')
-         if(action != undefined)
-           $.get('/admin/products/' + action, {}, (html)->
-             refresh_interface($el, html)
-           )
+                 active: active,
+                 activate: (e, i)->
+                   $('#edit_tab').attr('data-action', 'new')
+                   $el = $(i.newPanel)
+                   action = $el.attr('data-action')
+                   if(action != undefined)
+                     $.get('/admin/products/' + action, {}, (html)->
+                       action = action == "" ? "index" : action
+                       refresh_interface($el, html)
+                     )
+                 })
 
-       })
+
+
+
   refresh_interface = ($el, html)->
     $el.html(html)
     $(".select-wrapper select").on "change", ->
@@ -69,12 +79,12 @@ $ ->
         handle_vendor_form()
     )
     if($vendor_select.find('option').length == 1 )
-      console.log("balls")
       $('.select-wrapper.vendor').click(handle_vendor_form)
     $('.button.save').click(()->
       $product_form = $('.simple_form.edit_product')
       $.post($product_form.attr('action'), $product_form.serialize(), (result)->
-        console.log(result)
+        console.log("ooo")
+
       , 'json')
       return false
     )
@@ -89,10 +99,8 @@ $ ->
              })
     )
     $('#product_image_image').change(()->
-      console.log("changed")
       val = this.value
       ext = val.substring(val.lastIndexOf('.') + 1);
-      console.log(ext)
       if($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']) == -1)
         consle.log($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']))
         alert('Must be a valid image format')
@@ -114,11 +122,9 @@ $ ->
       catch e
     )
 
-
     $('#add-inventory').click(()->
       url = $('.simple_form.edit_product').attr('action') + '/add_inventory'
       auth = $('.simple_form.edit_product input[name=authenticity_token]').val()
-      console.log(url)
       $.ajax({
              type: "POST",
              url: url,
@@ -132,6 +138,13 @@ $ ->
       return false
     )
 
+    $('.ej-table tbody tr').click(()->
+      id = $(this).attr('data-id')
+      $('#add-model').attr('data-action', id)
+      $('.ej-tabs').tabs('select', 1);
+    )
+
+
   handle_vendor_form = ()->
     $('.modal').dialog()
     $('.simple_form.vendor').validate({
@@ -141,7 +154,6 @@ $ ->
                data: $(form).serialize()
                url: "/admin/vendors",
                success: (response)->
-                 console.log(response)
                  $("#product_vendor_id").append('<option value="' + response.id + '">' + response.name + '</option>')
                    .trigger("liszt:updated")
                  $('.modal').dialog('close')

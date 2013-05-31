@@ -102,14 +102,14 @@
               a.next.active href="#" >
         .table-view
           table.ej-table
-            tr
+            thead
               ruby:
                 cols = [
                   {text: "Product Id", classname: "id", width: 118},
                   {text: "Quantity", classname: "quantity", width: 140},
                   {text: "Model", classname: "model", width: 295},
                   {text: "Brand", classname: "brand", width: 190},
-                  {text: "Case Diameter", classname: "diameter", width: 165},
+                  {text: "Case Diameter", classname: "case", width: 165},
                   {text: "Tier", classname: "tier", width: 185},
                 ]
               - cols.each do |i|
@@ -119,18 +119,11 @@
                     a.sort class="#{'active' if i[:text] == 'Tier'}" href="#"
             tbody
               - @products.each_with_index do |product, i|
-                tr class="#{'even' if i%2 == 1}"
-                  ruby:
-                    cols = [
-                      {text: "######", classname: "id", width: 115},
-                      {text: 25, classname: "quantity", width: 140},
-                      {text: "Chronomat", classname: "model", width: 295},
-                      {text: "Breiting", classname: "brand", width: 190},
-                      {text: "39.7 mm", classname: "diameter", width: 165},
-                      {text: "Artisan", classname: "tier", width: 185},
-                    ]
+                tr{class="#{'even' if i%2 == 1}" data-id=(product.id)}
+
+
                   - cols.each do |cell|
-                      td{class="#{cell[:classname]}" style="width:#{cell[:width]}px;" data-id=(product.id)}
+                      td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
                         span= product.read_attribute(cell[:classname])
         /.page-controls.cgrid
           .alpha

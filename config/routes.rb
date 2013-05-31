@@ -36,7 +36,7 @@ Ej::Application.routes.draw do
 
   resources :fedex_transits
   authenticated :user do
-    root :to => redirect("/admin/products")
+    root :to => redirect("/admin/models")
     namespace :admin do
       resources :products, :users, :settings, :vendors, :tiers, :inventory, :courier_transits,
                 :records, :product_images, :events

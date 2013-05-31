@@ -62,13 +62,15 @@ h2 Timepieces
     .container
       ul.cgrid.compact
         - @products.each do |product|
-          -if product.product_images[0]
-            li
-              img{alt="" src=(product.product_images[0].url("public"))}
-              .info
-                p.name =product.brand
-                .make
-                   =product.model
-                .button-row.cgrid
-                  a.button.add href="#" + Add
-                  a.button href="#" Info
+          li
+            img alt="" src="/assets/temp/D1.jpg"
+            .info
+              p.name = product.brand
+              .make
+                = product.model
+              .button-row.cgrid
+                - if @requested_product_ids.include?(product.id)
+                  a.button.upgrade href="#" data-product-id="#{product.id}" Upgrade
+                - else
+                  a.button.add href="#" data-product-id="#{product.id}" + Add
+                a.button href="#" Info

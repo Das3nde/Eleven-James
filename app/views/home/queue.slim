@@ -1,0 +1,82 @@
+- if @requested_products.length < 8
+  .ej-notification.error.container
+    .close
+    .cgrid.content
+      p.text
+        | In order to activate your first delivery, you’ll need to have a minimum of 8 watches in your queue.
+        | Please view our collection and select #{8 - @requested_products.length} more.
+      a.button.primary href="/collection" Add more watches
+
+h2
+  em Your Selections
+  small
+    |  /
+  | current timepiece
+.container.cgrid.your-selections
+  .info
+    p.name Rolex
+    p.make Sea Dweller Stainless
+    p Movement: Rolex Automatic
+    p Case Width: 44mm
+    p Height: 14.3mm
+  .image
+    img alt="" src="/assets/temp/C1.jpg"
+  .button-row.cgrid
+    a.button.primary href="#" Repeat
+    a.button href="#" Comment
+    a.button href="#" Buy
+.ej-tabs data-active="1"
+  .container
+    ul
+      li
+        a href="#queue" Queue
+      li
+        a href="#history" History
+      li
+        a href="#guidelines" Guidelines
+      li
+        a href="#featured" Featured Queues
+  #queue
+    .container
+      ul.ej-queue.cgrid
+        - @requested_products.each_with_index do |pr, i|
+          li.cgrid.compact class="#{"wrap" if i%2}"
+            .image
+              img alt="" src="/assets/temp/C2.jpg"
+            .info
+              p.name = pr.product.brand
+              p.make = pr.product.model
+              p Case Diameter: 39.7 mm
+            .close
+
+        - (8 - @requested_products.length).times do |i|
+          li.cgrid.compact.unknown  class="#{"wrap" if i%2}"
+            .image
+              img alt="" src="/assets/unknown-watch.png"
+            .info
+              p.text To schedule your first delivery, you’ll need to have a minimum of 8 watches in your queue. Please view our collection and select more.
+              a.button.the-collection href="/collection" The Collection
+              .clear
+  #history
+    .container
+      ul.list
+        - 5.times do
+          li
+            .container.cgrid.compact
+              .image
+                img alt="" src="/assets/temp/G1.jpg"
+              .info
+                p.name BREITLING
+                p.make Chronomat
+                p Case Diameter: 39.7 mm
+                p Worn: 03/18/13 - 05/18/13
+                .button-row.cgrid.not-centered
+                  a.button.alpha href="#" +Add
+                  a.button href="#" Add comments
+                  a.button href="#" Buy
+  #guidelines
+    .container
+      p reminder/details of how the queue system works
+  #featured
+    .container
+      p show examples of Founder's Queue, Blogger Queues, Celebrity Queues, etc

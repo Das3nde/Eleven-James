@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130530192745) do
+ActiveRecord::Schema.define(:version => 20130530181344) do
 
   create_table "addresses", :force => true do |t|
     t.string   "first_name"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20130530192745) do
   create_table "products", :force => true do |t|
     t.string   "model"
     t.string   "brand"
+    t.integer  "tier_id"
     t.string   "material"
     t.string   "style"
     t.string   "color"
@@ -154,9 +155,9 @@ ActiveRecord::Schema.define(:version => 20130530192745) do
     t.boolean  "is_new"
     t.integer  "price"
     t.string   "face"
-    t.string   "tier"
   end
 
+  add_index "products", ["tier_id"], :name => "index_products_on_tier_id"
   add_index "products", ["vendor_id"], :name => "index_products_on_vendor_id"
 
   create_table "records", :force => true do |t|

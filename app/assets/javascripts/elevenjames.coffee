@@ -175,9 +175,11 @@ $ ->
                data: $(form).serialize()
                url: "/admin/vendors",
                success: (response)->
-                 $("#product_vendor_id").append('<option value="' + response.id + '">' + response.name + '</option>')
-                   .trigger("liszt:updated")
+                 $new_vendor = $('<option value="' + response.id + '">' + response.name + '</option>')
+                 $new_vendor.insertBefore('#product_vendor_id option[value=""]')
                  $('.vendor-dialog').dialog('close')
+                 $('#product_vendor_id').val(response.id)
+                 update_select($('#product_vendor_id'))
                error: ()->
                  alert("An unexpected error has occurred")
                },

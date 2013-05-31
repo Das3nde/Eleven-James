@@ -134,6 +134,8 @@ $ ->
              data: {authenticity_token:auth}
              success: (response)->
                $('#model-inventory').append('<li class="cgrid"><div class="number alpha">'+response.id+'</div><a class="edit omega" href="#"></a></li>')
+               $('.count.omega').html(response.quantity)
+
              error: ()->
                alert("An unexpected error has occurred")
              })
@@ -165,7 +167,7 @@ $ ->
 
 
   handle_vendor_form = ()->
-    $('.modal').dialog()
+    $('.vendor-dialog').dialog()
     $('.simple_form.vendor').validate({
       submitHandler: (form)->
         $.ajax({
@@ -173,9 +175,11 @@ $ ->
                data: $(form).serialize()
                url: "/admin/vendors",
                success: (response)->
-                 $("#product_vendor_id").append('<option value="' + response.id + '">' + response.name + '</option>')
-                   .trigger("liszt:updated")
-                 $('.modal').dialog('close')
+                 $new_vendor = $('<option value="' + response.id + '">' + response.name + '</option>')
+                 $new_vendor.insertBefore('#product_vendor_id option[value=""]')
+                 $('.vendor-dialog').dialog('close')
+                 $('#product_vendor_id').val(response.id)
+                 update_select($('#product_vendor_id'))
                error: ()->
                  alert("An unexpected error has occurred")
                },

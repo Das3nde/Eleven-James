@@ -71,7 +71,7 @@
 
 
                   - @product.product_images.each do |image|
-                    li
+                    li{data-id=(image.id)}
                       img{src=(image.url('square'))}
                       .edit-bar
                         a href="#" Edit
@@ -106,13 +106,13 @@
               h3 Quantity
               .count.omega 15
             .body
-              ul
-                - 15.times do |i|
+              ul#model-inventory
+                - @product_instances.each do |p|
                   li.cgrid
-                    .number.alpha="######-"+"%03d" %[i]
+                    .number.alpha=p.id.to_s
                     a.edit.omega href="#"
               .button-row
-                a.button.primary href="#" Remove Model
+                a.button.primary#add-inventory href="#" Add Inventory
 div.modal.hide.fade style="display:none"
   =render("vendor").squish.html_safe
 

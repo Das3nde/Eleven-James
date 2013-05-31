@@ -60,6 +60,7 @@ $ ->
     $(".select-wrapper select").each ->
       update_select(this)
 
+    #Vendor editing stuff --------------------------------------------------
     $vendor_select = $('#product_vendor_id')
     $empty_option = '<option value="">Add Vendor</option>'
     $vendor_select.append($empty_option)
@@ -77,17 +78,8 @@ $ ->
       , 'json')
       return false
     )
-    $('#upload_iframe').load(()->
-      try
-        data = JSON.parse($(this).contents().text())
-        if(data.thumb_src)
-          $('#photos').append('<li data-id='+data.id+'><img src='+data.thumb_src+'/></li>')
-        else if(data.error)
-          alert(data.error)
 
-      catch e
-    )
-
+    #Image upload stuff --------------------------------------------------
     $('#photos').delegate('li','click',()->
       id = this.dataset.id
       $.ajax({
@@ -107,6 +99,37 @@ $ ->
         this.value = null
       else
         $('.new_product_image').submit()
+    )
+    $('#upload_iframe').load(()->
+      try
+        data = JSON.parse($(this).contents().text())
+        if(data.thumb_src)
+          $('#photos').append('<li data-id='+data.id+'><img src='+data.thumb_src+'/>/ +
+                     /<div class="edit-bar"><a href="#">Edit</a>  +
+                       <div class="arrows"><a class="left" href="#">&lt;</a><a class="right" href="#">&gt;</a>  +
+                         </div></div></li>')
+        else if(data.error)
+          alert(data.error)
+
+      catch e
+    )
+
+
+    $('#add-inventory').click(()->
+      url = $('.simple_form.edit_product').attr('action') + '/add_inventory'
+      auth = $('.simple_form.edit_product input[name=authenticity_token]').val()
+      console.log(url)
+      $.ajax({
+             type: "POST",
+             url: url,
+             data: {authenticity_token:auth}
+             success: (response)->
+               $('#model-inventory').append('<li class="cgrid"><div class="number alpha">'+response.id+'</div><a class="edit omega" href="#"></a></li>')
+             error: ()->
+               alert("An unexpected error has occurred")
+             })
+
+      return false
     )
 
   handle_vendor_form = ()->
@@ -129,36 +152,6 @@ $ ->
         )
         return false
       })
-
-
-  ###
-  get_product = (id, compiled)->
-    $.get('/admin/products/new', {}, (res)->
-      $('#add-model').html(compiled(res))
-      console.log(compiled(res))
-      $('#product_image_image').change(()->
-        val = this.value
-        ext = val.substring(val.lastIndexOf('.') + 1);
-        console.log(ext)
-        if($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']) == -1)
-          consle.log($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']))
-          alert('Must be a valid image format')
-          this.value = null
-        else
-          $('.new_product_image').submit()
-      )
-      $('#upload_iframe').load(()->
-        try
-          data = JSON.parse($(this).contents().text())
-          if(data.thumb_src)
-            $('#photos').append('<li data-id='+data.id+'><img src='+data.thumb_src+'/></li>')
-          else if(data.error)
-            alert(data.error)
-
-        catch e
-      )
-    , 'json')
-  ###
 
 
   $(".ej-modal").each ->

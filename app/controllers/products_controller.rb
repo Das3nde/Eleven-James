@@ -24,7 +24,7 @@ class Admin::ProductsController < AdminController
 
   def index
     @products = Product.order(@order).page(params[:page]).per(@page_size)
-    render :nothing => true
+    render :layout => false
   end
 
   def featured
@@ -45,7 +45,7 @@ class Admin::ProductsController < AdminController
   end
   def new
     @product = Product.where('model = ?', 'Untitled Model').last || Product.create({:model => 'Untitled Model'})
-    @product_instances = []
+    @product_instances = ProductInstance.where('id ~ ?','^'+ sprintf('%05d',@product.id))
     @product_image = ProductImage.new()
     @brands = ['Cartier', 'Rolex', 'Omega']
     @styles = ['Awesome', 'Even More Awesome']
@@ -62,7 +62,7 @@ class Admin::ProductsController < AdminController
       render :json => {:ok => false}
     end
   end
-  def add_watch
+  def add_inventory
     instance = ProductInstance.new
     model_id = sprintf '%05d', params[:id]
     product_id = ProductInstance.where('id ~ ?','^'+model_id).count + 1

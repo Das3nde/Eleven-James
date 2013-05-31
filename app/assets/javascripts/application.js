@@ -16,3 +16,4 @@
 //= require chosen-jquery
 //= require underscore
 //= require jquery.validate
+//= require jcrop

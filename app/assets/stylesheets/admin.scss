@@ -36,6 +36,7 @@
         .left, .right {
           width:442px;
         }
+        float:left;
         .right {
           float:right;
           margin-left:0;
@@ -45,7 +46,7 @@
         width:180px;
         float:right;
         .button.primary {
-          width:100px;
+          width:110px;
         }
       }
       .section {
@@ -57,9 +58,11 @@
           .field {
             width:700px;
           }
-          .text {
+          textarea.text {
             line-height:24px;
             margin:5px 0;
+            width:700px;
+            height:200px
           }
         }
       }
@@ -745,6 +748,10 @@
     width:100%;
     text-align:left;
   }
+}
+
+.table-view .ej-table tbody tr{
+  cursor:pointer
 }
 
 .add-photo-modal {

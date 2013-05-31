@@ -42,7 +42,7 @@ Ej::Application.routes.draw do
                 :records, :product_images, :events
       match "products/:product_id/upload_image" => "products#upload_image"
       match "products/add_vendor" => "products#add_vendor"
-      match "products/:id/add_watch" => "products#add_watch"
+      match "products/:id/add_inventory" => "products#add_inventory"
       match "inventory/:id/add_record" => "inventory#add_record"
       match "models" => "products#models"
       match "product/featured" => "product#featured"

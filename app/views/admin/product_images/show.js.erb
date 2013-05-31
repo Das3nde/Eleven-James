@@ -1,8 +1,10 @@
 (function(){
-    var dimensions = {};
     $('.modal').remove()
-    $("<div class='modal hide'><%=render("image_crop").squish.html_safe -%></div>").modal({backdrop:false});
+    $modal = $("<div class='modal hide'><%=render("image_crop").squish.html_safe -%></div>").dialog({
+        width: '<%=@height-100%>px'
+    });
     $('#image_crop').Jcrop({
+        keySupport: false,
         aspectRatio: 1,
         minSize: [300,300],
         onChange: function(c){
@@ -10,8 +12,10 @@
             $('#save_image').removeAttr('disabled')
         }
     })
+
     $('#save_image').click(function(){
         if(dimensions){
+            dimensions.authenticity_token = "<%=form_authenticity_token%>"
             $.ajax({
                 type: 'PUT',
                 url : '<%=request.path%>',
@@ -27,6 +31,8 @@
         return false
     })
     $('#delete_image').click(function(){
-
+        $('#photos li[data-id=<%=@img.id%>]').remove()
+        $modal.dialog('close')
+        return false
     })
 }())

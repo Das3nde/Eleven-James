@@ -1,143 +1,22 @@
-/#sub_navigation= render_navigation
-  %h3 Home
-  %h2 Products
-  %script{:src=>"//cdnjs.cloudflare.com/ajax/libs/chosen/0.9.12/chosen.jquery.min.js"}
-  %link{:rel=>"stylesheet", :href => "//cdn.jsdelivr.net/chosen/0.9.11/chosen.css"}
+#admin-manage-models
+  h2 Manage Models
+  .ej-tabs data-active="0"
+    .container
+      ul
+        li
+          a href="#all-products" All Products
+        li
+          a href="#add-model" Add Model
+        li
+          a href="#featured" Featured
+        li
+          a href="#new-arrivals" New Arrivals
+        li
+          a href="#popularity" Popularity
 
-  = simple_form_for :preference do |f|
-    = f.select :page_size, [10,20,50], :selected => @admin_prefs['page_size']
+    #all-products.ui-tabs{data-action=""}
+    #add-model.ui-tabs{data-action="new"}
+    #featured.ui-tabs{data-action="featured"}
+    #new-arrivals.ui-tabs{data-action="new_arrivals"}
+    #popularity.ui-tabs{data-action="popular"}
 
-  %div{:id=>"paginator"}
-    = paginate @products, :remote => true
-
-
-
-  %table
-
-    %thead
-      %th
-        = link_to 'Model', admin_products_path+'?&prefs=1&sort=model&order=-1',  {:id => 'model_sort'}
-      %th
-        = link_to 'Brand', admin_products_path+'?&prefs=1&sort=brand&order=-1', {:id => 'brand_sort'}
-      %th
-        = link_to 'Tier', admin_products_path+'?&prefs=1&sort=tier&order=-1', {:id => 'tier_sort'}
-      %th
-    %tbody{:id=>"products"}
-      = render @products
-
-.container
-        /.search-header
-          /.cgrid.compact
-            form
-              .token-input-wrap.filter.cgrid
-                label.alpha Filter
-                ul.token-input-list.omega
-                  - ["iwc", "Cartier", "Burberry", "Jeager"].each do |i|
-                    li.token-input-token
-                      p= i
-                      .token-input-delete-token x
-                  li.token-input-token
-                    input type="text"
-                .arrow
-                .dropdown
-                  .cgrid.select_row
-                    .brands_select_field.multiple_select_field
-                      select.custom_select_wrapper multiple="multiple" data-width="114" data-class="brands" data-prompt="Brand"
-                        - @brands.each_with_index do |b,i|
-                          option value="#{i}" #{b}
-                    .tier_select_field.multiple_select_field
-                      select.custom_select_wrapper multiple="multiple" data-width="114" data-class="tier" data-prompt="Tier"
-                        - @tiers.each_with_index do |b,i|
-                          option value="#{i}" #{b}
-                    .diameter_select_field.multiple_select_field
-                      select.custom_select_wrapper multiple="multiple" data-width="145" data-class="diameter" data-prompt="Case Diameter"
-                        - @diameter.each_with_index do |b,i|
-                          option value="#{i}" #{b}
-                  .button-row.cgrid.not-centered(style="width: 196px")
-                    a.button.primary href="#" Filter
-                    a.button href="#" Reset All
-            img.seperator src="/assets/seperator-pointed.png"
-            form
-              .token-input-wrap.search
-                label Search
-                ul.token-input-list
-                  - ["Search Term A", "Search Term B"].each do |i|
-                    li.token-input-token
-                      p= i
-                      .token-input-delete-token x
-                  li.token-input-token
-                    input type="text"
-                .arrow
-                .dropdown
-                  .form
-                    .row.cgrid.compact.search_for
-                      label Search for
-                      input type="text"
-                    .buttonset.search-within-results
-                      label for="search_within_results" Search within results
-                      input id="search_within_results" type="checkbox"
-                    .button-row
-                      a.button.primary Search
-
-            img src="/assets/seperator-pointed.png"
-            .count
-              p 5 items
-            /img.seperator src="/assets/seperator-pointed.png"
-            /a.button.export.primary href="#" Export
-        /.page-controls.cgrid
-          .alpha
-            .select-wrapper
-              .value
-              .arrow.red
-              select
-                - 3.times do |i|
-                  option value="#{(i+1)*10}" #{(i+1)*10}
-            .label items per page
-          .omega
-            .label page
-            input.ej-text-field type="text" value="1"
-            .label of 5
-            span.arrow
-              a.prev href="#" <
-              a.next.active href="#" >
-        .table-view
-          table.ej-table
-            thead
-              ruby:
-                cols = [
-                  {text: "Product Id", classname: "id", width: 118},
-                  {text: "Quantity", classname: "quantity", width: 140},
-                  {text: "Model", classname: "model", width: 295},
-                  {text: "Brand", classname: "brand", width: 190},
-                  {text: "Case Diameter", classname: "case", width: 165},
-                  {text: "Tier", classname: "tier", width: 185},
-                ]
-              - cols.each do |i|
-                th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
-                  span.cgrid.compact
-                    span= i[:text]
-                    a.sort class="#{'active' if i[:text] == 'Tier'}" href="#"
-            tbody
-              - @products.each_with_index do |product, i|
-                tr{class="#{'even' if i%2 == 1}" data-id=(product.id)}
-
-
-                  - cols.each do |cell|
-                      td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
-                        span= product.read_attribute(cell[:classname])
-        /.page-controls.cgrid
-          .alpha
-            .select-wrapper
-              .value
-              .arrow.red
-              select
-                - 3.times do |i|
-                  option value="#{(i+1)*10}" #{(i+1)*10}
-            .label items per page
-          .omega
-            .label page
-            input.ej-text-field type="text" value="1"
-            .label of 5
-            span.arrow
-              a.prev href="#" <
-              a.next.active href="#" >

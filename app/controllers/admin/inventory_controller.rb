@@ -1,5 +1,14 @@
-class Admin::InventoryController < ApplicationController
+class Admin::InventoryController < AdminController
   before_filter :append_view_paths
+  helper_method :tabs
+
+  def tabs
+    {:inventory => 'Inventory',
+    :arrange_transit => 'Arrange Transit',
+    :past_due => 'Past Due',
+    :purchase_request => 'Purchase Request'
+    }
+  end
 
   def append_view_paths
     append_view_path 'app/views/admin/inventory/record_forms'
@@ -10,9 +19,7 @@ class Admin::InventoryController < ApplicationController
     @products = ProductInstance.all
   end
   def show
-
     id = params[:id]
-
     @product_instance = ProductInstance.find(id)
     @history = @product_instance.history()
     @d = CourierTransit.new()
@@ -27,6 +34,20 @@ class Admin::InventoryController < ApplicationController
     @f.table = @f.class.name.tableize;
   end
   def add_record
-    prdouct_id = params[:id]
+    product_id = params[:id]
+  end
+
+  #tab actions
+  def inventory
+    render :nothing => true
+  end
+  def arrange_transit
+    render :nothing => true
+  end
+  def past_due
+    render :nothing => true
+  end
+  def purchase_request
+    render :nothing => true
   end
 end

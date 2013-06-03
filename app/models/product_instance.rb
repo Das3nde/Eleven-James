@@ -1,20 +1,30 @@
 class ProductInstance < ActiveRecord::Base
-  require 'json'
   attr_accessible :current_size, :status, :status_id
-  attr_accessor :model, :brand, :tier, :type
+  belongs_to :product
+  has_many :records
+  has_many :rotations
+  has_many :services
+  has_many :storage_records
+  has_many :courier_transits
+  has_many :event_transits
+  has_many :fedex_transits
 
-  def type
-    @type =Product.find(self.id[0,5].to_i)
+  belongs_to :record, :foreign_key => :status_id
+  belongs_to :rotation, :foreign_key => :status_id
+  belongs_to :service, :foreign_key => :status_id
+  belongs_to :storage_record, :foreign_key => :status_id
+  belongs_to :courier_transit, :foreign_key => :status_id
+  belongs_to :event_transit, :foreign_key => :status_id
+  belongs_to :fedex_transit, :foreign_key => :status_id
+
+  def record
+    self.read_attribute(status_obj)
   end
-  def brand
-    self.type.brand
+
+  def method_missing(meth, *args, &blk)
+    product.send(meth, *args, &blk)
   end
-  def tier
-    self.type.tier
-  end
-  def model
-    self.type.model
-  end
+
 
   def history
     history = [] #Record.where('product_id = '+@id)
@@ -30,6 +40,17 @@ class ProductInstance < ActiveRecord::Base
       return nil
     end
     return Record.find(record_id)
+  end
+
+  def status_name
+    label = status_table.classify.constantize.label
+    if(status..index('Transit'))
+      label += ' to ' + next_status_table.classify
+    end
+  end
+
+  def member
+
   end
 
   def advance_record(date = Time.now)

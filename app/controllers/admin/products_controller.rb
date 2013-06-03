@@ -1,7 +1,13 @@
 class Admin::ProductsController < AdminController
   before_filter :user_preferences
-
-  def models
+  @tabs = {
+    :products => 'All Products',
+    :add_product => 'Add Model',
+    :featured => 'Featured',
+    :new_arrivals  => 'New Arrivals',
+    :popular => 'Popular'
+  }
+  def index
     @product_image = ProductImage.new()
   end
   def user_preferences
@@ -22,7 +28,7 @@ class Admin::ProductsController < AdminController
     @page_size = @admin_prefs['page_size'].to_i || 10;
   end
 
-  def index
+  def products
     @products = Product.order(@order).page(params[:page]).per(@page_size)
     render :layout => false
   end
@@ -44,9 +50,9 @@ class Admin::ProductsController < AdminController
     @product_image = ProductImage.new()
     render "admin/products/create_edit"
   end
-  def new
+  def add_product
     @product = Product.where('model = ?', 'Untitled Model').last || Product.create({:model => 'Untitled Model', :quantity => 0})
-    @product_instances = ProductInstance.where('id ~ ?','^'+ sprintf('%05d',@product.id))
+    @product.product_instances
     @product_image = ProductImage.new()
     render :layout => false, :file => "admin/products/_add_model"
   end
@@ -64,7 +70,8 @@ class Admin::ProductsController < AdminController
     product = Product.find(params[:id])
     product_id = ProductInstance.where('id ~ ?','^'+model_id).count + 1
     instance.id = "#{model_id}-#{product_id}"
-
+    instance.product_id = params[:id]
+    instance.storage_record=StorageRecord.create()
     ActiveRecord::Base.transaction do
       product.quantity = product.quantity ? product.quantity+1 : 1;
       product.save

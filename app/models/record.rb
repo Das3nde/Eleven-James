@@ -1,4 +1,5 @@
 class Record < ActiveRecord::Base
+  set_primary_key :uuid
   include Rails.application.routes.url_helpers
   attr_accessible :bin_number, :due_date, :end_date, :id, :int, :product_instance, :start_date, :table
   belongs_to :temporal, :polymorphic => true, :dependent => :destroy, :autosave => true
@@ -9,7 +10,6 @@ class Record < ActiveRecord::Base
   end
 
   def prev_record
-
     return Record.find(self.prev_record_id)
   end
 

@@ -114,7 +114,7 @@ ruby:
               .count.omega =@product.quantity || 0
             .body
               ul#model-inventory
-                - @product_instances.each do |p|
+                - @product.product_instances.each do |p|
                   li.cgrid
                     .number.alpha=p.id.to_s
                     a.edit.omega href="#"

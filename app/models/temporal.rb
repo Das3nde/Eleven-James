@@ -1,24 +1,22 @@
-class ActiveRecord::Base
-  def self.temporary
-    include Temporal
-  end
-end
-
-
 module Temporal
+
 
   #implements two table polymorphism
   def self.included(base)
     base.has_one :record, :autosave => true, :foreign_key => :id, :dependent=>:destroy
     base.extend ClassMethods
+    base.set_primary_key "uuid"
 
-    base.alias_method_chain :record, :autobuild
     base.define_record_accessors
+    base.before_save :generate_uuid
+
+    def generate_uuid
+      if(!self.id)
+        self.id = UUID.generate
+      end
+    end
   end
 
-  def record_with_autobuild
-    record_without_autobuild || build_record
-  end
 
   def method_missing(meth, *args, &blk)
     record.send(meth, *args, &blk)

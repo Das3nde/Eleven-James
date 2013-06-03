@@ -1,14 +1,10 @@
 class Admin::InventoryController < AdminController
   before_filter :append_view_paths
-  helper_method :tabs
-
-  def tabs
-    {:inventory => 'Inventory',
+  @tabs = {:inventory => 'Inventory',
     :arrange_transit => 'Arrange Transit',
     :past_due => 'Past Due',
     :purchase_request => 'Purchase Request'
     }
-  end
 
   def append_view_paths
     append_view_path 'app/views/admin/inventory/record_forms'
@@ -17,6 +13,9 @@ class Admin::InventoryController < AdminController
 
   def index
     @products = ProductInstance.all
+    if(request.xhr?)
+
+    end
   end
   def show
     id = params[:id]
@@ -39,7 +38,8 @@ class Admin::InventoryController < AdminController
 
   #tab actions
   def inventory
-    render :nothing => true
+    @product_instances = ProductInstance.all
+    render :layout=>false, :file => 'admin/inventory/_inventory'
   end
   def arrange_transit
     render :nothing => true

@@ -36,12 +36,13 @@ Ej::Application.routes.draw do
 
   resources :fedex_transits
   authenticated :user do
-    root :to => redirect("/admin/models")
+    root :to => redirect("/admin/products/")
     namespace :admin do
       match "products/:product_id/upload_image" => "products#upload_image"
       match "products/add_vendor" => "products#add_vendor"
       match "products/:id/add_inventory" => "products#add_inventory"
 
+      match "/admin/products" => redirect("/admin/products/")
       ['inventory','products'].each do |path|
         controller = ('Admin::'+path.capitalize+'Controller').constantize
         controller.tabs.each do |a, l|

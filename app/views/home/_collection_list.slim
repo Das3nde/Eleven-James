@@ -1,7 +1,7 @@
 ul.cgrid.compact
   - products.each do |product|
     li
-      - img_src = (product.product_images.first.url rescue '')
+      - img_src = (product.product_images.first.url rescue '/assets/temp/D1.jpg')
       img alt="" src="#{img_src}"
       .info
         p.name = product.brand

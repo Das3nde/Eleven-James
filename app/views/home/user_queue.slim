@@ -42,7 +42,7 @@ h2
         - @requested_products.each_with_index do |pr, i|
           li.cgrid.compact class="#{"wrap" if i%2}"
             .image
-              - img_src = (pr.product.product_images[0].url(:square) rescue '')
+              - img_src = (pr.product.product_images[0].url(:square) rescue '/assets/temp/D1.jpg')
               img alt="" src="#{img_src}" style="width:146px;height:146px;"
             .info
               p.name = pr.product.brand

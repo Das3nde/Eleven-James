@@ -42,12 +42,14 @@ h2
         - @requested_products.each_with_index do |pr, i|
           li.cgrid.compact class="#{"wrap" if i%2}"
             .image
-              img alt="" src="/assets/temp/C2.jpg"
+              - img_src = (pr.product.product_images[0].url(:square) rescue '')
+              img alt="" src="#{img_src}" style="width:146px;height:146px;"
             .info
               p.name = pr.product.brand
               p.make = pr.product.model
-              p Case Diameter: 39.7 mm
-            .close
+              p Case Diameter: #{pr.product.case}
+
+            .close data-request-id="#{pr.id}"
 
         - (8 - @requested_products.length).times do |i|
           li.cgrid.compact.unknown  class="#{"wrap" if i%2}"

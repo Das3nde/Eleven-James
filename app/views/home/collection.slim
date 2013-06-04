@@ -63,7 +63,8 @@ h2 Timepieces
       ul.cgrid.compact
         - @products.each do |product|
           li
-            img alt="" src="/assets/temp/D1.jpg"
+            - img_src = (product.product_images.first.url rescue '')
+            img alt="" src="#{img_src}"
             .info
               p.name = product.brand
               .make

@@ -8,13 +8,13 @@ class HomeController < ApplicationController
 
   def collection
     @wrapper = "listing"
-    @products = Product.where("is_featured = ?", true)
+    @products = Product.where("quantity > ?", 0)
     @requested_product_ids = ProductRequest.where("user_id = ?", current_user.id).collect(&:product_id)
   end
 
   def user_queue
     @wrapper = "queue"
-    @requested_products = ProductRequest.where("user_id = ?", current_user.id)
+    @requested_products = ProductRequest.where("fulfillment_time IS NULL AND user_id = ?", current_user.id)
   end
 
   private

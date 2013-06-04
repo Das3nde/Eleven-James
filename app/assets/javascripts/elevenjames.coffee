@@ -117,6 +117,15 @@ $ ->
 
 
   $("ul.ej-queue li .close").click ->
+    request_id = $(this).attr('data-request-id')
+    $.ajax '/delete_request',
+      type: 'DELETE'
+      dataType: 'json'
+      data:
+        request_id : request_id
+      error: (jqXHR, textStatus, errorThrown) ->
+      success: (data, textStatus, jqXHR) ->
+
     $(this).parent().fadeOut 700, ->
       $(this).remove()
       arrange_queue()

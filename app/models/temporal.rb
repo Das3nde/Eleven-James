@@ -9,7 +9,6 @@ module Temporal
     base.attr_accessible :start_date, :end_date
     base.define_record_accessors
     base.before_save :generate_uuid
-    base.initialize
 
     def generate_uuid
       if(!self.id)

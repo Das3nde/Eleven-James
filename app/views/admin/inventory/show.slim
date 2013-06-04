@@ -1,7 +1,15 @@
-h2 Product History
+.container
+  #admin-manage-inventory
+    .content
 
-.table-view
-  table.ej-table
-    -@history.each do |r|
-      tr
-        td =r.dates
+    h3 Product History
+    .table-view
+      table.ej-table
+        thead
+          th width='400px' Dates
+          th width='400px' Record Type
+        tbody
+          -@history.each do |r|
+            tr
+              td =r.dates
+              td =r.type

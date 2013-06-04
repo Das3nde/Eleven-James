@@ -16,7 +16,10 @@ class Record < ActiveRecord::Base
   def dates
     start = start_date.strftime("%m/%d/%Y")
     stop = end_date ? end_time.strftime("%m/%d/%Y") : 'current'
-    "#{start - stop}"
+    "#{start} - #{stop}"
+  end
+  def type
+    table.classify.constantize.label
   end
 =begin
   def self.find(id)

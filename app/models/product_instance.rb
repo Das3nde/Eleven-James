@@ -2,6 +2,7 @@ class ProductInstance < ActiveRecord::Base
   attr_accessible :current_size, :status, :status_id
   belongs_to :product
   has_many :records
+  accepts_nested_attributes_for :records
 
   has_many :rotations
   has_many :services
@@ -33,12 +34,7 @@ class ProductInstance < ActiveRecord::Base
 
   def history
     history = [] #Record.where('product_id = '+@id)
-    records = Record.where('start_date != null and product_instance_id = ?', self.id).order('start_date DESC')
-    count = 0
-    records.each do |generic|
-      history << generic.table.classify.constantize.find(generic.id);
-    end
-    return history
+    Record.where('start_date is not null and product_instance_id = ?', self.id).order('start_date DESC')
   end
   def status
     if(@status)

@@ -127,4 +127,4 @@ div.vendor-dialog style="display:none"
                       = f.file_field :image
                       = f.input :product_id, :as => :hidden, :input_html => { :value => @product.id }
 
-iframe{id="upload_iframe" src="/admin/product_images" width="200" height="200" style="display:none"}
+iframe{id="upload_iframe" src="/admin/product_images" width="200" height="200" style="position:absolute;top:-500px"}

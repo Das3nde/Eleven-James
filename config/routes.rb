@@ -58,6 +58,7 @@ Ej::Application.routes.draw do
   end
 
   match "/request_product" => 'users#request_product'
+  delete "/delete_request" => 'users#delete_request'
   match "/fedex-email-notifications" => 'fedex_transits#update'
   root :to => "users#index"
   devise_for :users, :controllers => {:registrations => "registrations"} do
@@ -65,5 +66,6 @@ Ej::Application.routes.draw do
   end
 
   get 'collection' => 'home#collection'
+  post 'filter_collection' => 'home#filter_collection'
   get 'user_queue' => 'home#user_queue'
 end

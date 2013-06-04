@@ -28,4 +28,24 @@ class Product < ActiveRecord::Base
     end
     instance
   end
+  def self.brand_list
+    ['Cartier', 'Rolex', 'Omega', 'Breitling']
+  end
+
+  def self.style_list
+    ['Sport', 'Luxury']
+  end
+
+  def self.tier_list
+    ['Artisan', 'tier 2', 'tier 3']
+  end
+
+  def self.faces_list
+    ['Red', 'Blue', 'Purple', 'Black']
+  end
+
+  def self.materials_list
+    ['Gold', 'Silver', 'Steel']
+  end
+
 end

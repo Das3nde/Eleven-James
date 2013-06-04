@@ -68,11 +68,16 @@ $ ->
        if(action != undefined)
          $.get(action, {}, (html)->
            action = action || "all_products"
-           if($.isNumeric(action) && page == 'products')
-             action = 'add_product'
-           else
-             action = 'view_item'
+           if($.isNumeric(action))
+              if(page == 'products')
+                action = 'add_product'
+              else
+               action = 'view_item'
+
+
            refresh_method = refresh_tab_methods[page][action]
+           console.log(refresh_tab_methods[page])
+           console.log(action)
            $el.html(html)
            $(".select-wrapper select").on "change", ->
                update_select(this)

@@ -6,29 +6,20 @@ h2 Timepieces
       .select-wrapper.brand.field
         .value
         .arrow.red
-        select#brand name=""
-          option value="0" Breitling
-          option value="1" Breitling 1
-          option value="2" Breitling 2
-          option value="3" Breitling 3
+        = select_tag 'brand', options_for_select(Product.brand_list.unshift(['Brand', '']))
+
       label for="tier" Tier
       .select-wrapper.tier.field
         .value
         .arrow.red
-        select#tier name=""
-          option value="0" Tier
-          option value="1" Tier 1
-          option value="2" Tier 2
-          option value="3" Tier 3
+        = select_tag 'tier', options_for_select(Product.tier_list.unshift(['Tier', '']))
+
       label for="type" Type
       .select-wrapper.type.field
         .value
         .arrow.red
-        select#type name=""
-          option value="0"  Any
-          option value="1"  Any 1
-          option value="2"  Any 2
-          option value="3"  Any 3
+        = select_tag 'type', options_for_select(Product.style_list.unshift(['Any', '']))
+
       label for="band" band
       .select-wrapper.band.field
         .value
@@ -42,11 +33,7 @@ h2 Timepieces
       .select-wrapper.face.field
         .value
         .arrow.red
-        select#Face name=""
-          option value="0" Face
-          option value="1" Face 1
-          option value="2" Face 2
-          option value="3" Face 3
+        = select_tag 'face', options_for_select(Product.faces_list.unshift(['Any', '']))
       label for="width" Width
       .select-wrapper.width.field
         .value
@@ -56,22 +43,8 @@ h2 Timepieces
           option value="1" Width 1
           option value="2" Width 2
           option value="3" Width 3
-      a.action href="#" Reset All
+      a.action href="#" id="reset_collection" Reset All
 #listing-layout
   .listing
     .container
-      ul.cgrid.compact
-        - @products.each do |product|
-          li
-            - img_src = (product.product_images.first.url rescue '')
-            img alt="" src="#{img_src}"
-            .info
-              p.name = product.brand
-              .make
-                = product.model
-              .button-row.cgrid
-                - if @requested_product_ids.include?(product.id)
-                  a.button.upgrade href="#" data-product-id="#{product.id}" Upgrade
-                - else
-                  a.button.add href="#" data-product-id="#{product.id}" + Add
-                a.button href="#" Info
+      = render '/home/collection_list', products: @products, requested_product_ids: @requested_product_ids

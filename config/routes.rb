@@ -66,5 +66,6 @@ Ej::Application.routes.draw do
   end
 
   get 'collection' => 'home#collection'
+  post 'filter_collection' => 'home#filter_collection'
   get 'user_queue' => 'home#user_queue'
 end

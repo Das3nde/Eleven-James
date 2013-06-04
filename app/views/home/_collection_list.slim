@@ -1,0 +1,15 @@
+ul.cgrid.compact
+  - products.each do |product|
+    li
+      - img_src = (product.product_images.first.url rescue '')
+      img alt="" src="#{img_src}"
+      .info
+        p.name = product.brand
+        .make
+          = product.model
+        .button-row.cgrid
+          - if requested_product_ids.include?(product.id)
+            a.button.upgrade href="#" data-product-id="#{product.id}" Upgrade
+          - else
+            a.button.add href="#" data-product-id="#{product.id}" + Add
+          a.button href="#" Info

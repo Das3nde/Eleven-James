@@ -151,8 +151,14 @@ if is_page('inventory')
 #inventory records page
 
 
-add_collection =
+collection_list=
   init: ->
+    if $('#listing-layout').length > 0
+      this.add_to_collection()
+      this.filter_collection()
+      this.reset_collection()
+
+  add_to_collection: ->
     $('#listing-layout').find('a.add').bind 'click', ->
       $(this).removeClass('add').addClass('upgrade').html('Upgrade')
       product_id = $(this).attr('data-product-id')
@@ -166,5 +172,24 @@ add_collection =
 
       false
 
+  filter_collection: ->
+    $('#brand, #tier, #type, #band, #face, #width').bind 'change', ->
+      $.ajax '/filter_collection',
+        type: 'POST'
+        data:
+          brand: $('#brand').val()
+          tier: $('#tier').val()
+          type: $('#type').val()
+          band: $('#band').val()
+          face: $('#face').val()
+          width: $('#width').val()
+        error: (jqXHR, textStatus, errorThrown) ->
+        success: (data, textStatus, jqXHR) ->
+          $('#listing-layout > .listing > .container').html(data)
+
+  reset_collection: ->
+    $('#reset_collection').bind 'click', ->
+      $('#brand, #tier, #type, #band, #face, #width').val('')
+
 $ ->
-  add_collection.init()
+  collection_list.init()

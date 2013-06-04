@@ -1,9 +1,9 @@
 ruby:
-  @brands = ['Cartier', 'Rolex', 'Omega', 'Breitling']
-  @styles = ['Sport', 'Luxury']
-  @tiers = ['Artisan', 'tier 2', 'tier 3']
-  @faces = ['Red', 'Blue', 'Purple', 'Black']
-  @materials = ['Gold', 'Silver', 'Steel']
+  @brands = Product.brand_list
+  @styles = Product.style_list
+  @tiers = Product.tier_list
+  @faces = Product.faces_list
+  @materials = Product.materials_list
 
 .container.cgrid
   = simple_form_for [:admin, @product] do |f|

@@ -6,21 +6,28 @@ module Temporal
     base.has_one :record, :autosave => true, :foreign_key => :id, :dependent=>:destroy
     base.extend ClassMethods
     base.set_primary_key "uuid"
-
+    base.attr_accessible :start_date, :end_date
     base.define_record_accessors
     base.before_save :generate_uuid
+    base.initialize
 
     def generate_uuid
       if(!self.id)
         self.id = UUID.generate
+      end
+      if(!self.record)
+        self.record = Record.new(:id => self.id)
       end
     end
   end
 
 
   def method_missing(meth, *args, &blk)
-    record.send(meth, *args, &blk)
-  rescue NoMethodError
+    if(!record)
+      self.record = Record.new(:id => id)
+    end
+    self.record.send(meth, *args, &blk)
+    rescue NoMethodError
     super
   end
 

@@ -41,12 +41,12 @@
              "Service"
              ]
 
-    @full_inventory_colls = [
+    full_inventory_cols = [
       {text: "Product Id", classname: "id", width: 135, attr: "id"},
-      {text: "Product Id", classname: "id", width: 135, attr: "model"},
-      {text: "Product Id", classname: "id", width: 135, attr: "brand"},
-      {text: "Product Id", classname: "id", width: 135, attr: "tier"},
-      {text: "Product Id", classname: "id", width: 135, attr: "status"},
+      {text: "Model", classname: "model", width: 135, attr: "model"},
+      {text: "Brand", classname: "brand", width: 135, attr: "brand"},
+      {text: "Tier", classname: "tier", width: 135, attr: "tier"},
+      {text: "Status Name", classname: "status", width: 135, attr: "status_name"},
     ]
   /.filters-header
     a href="#" Full Inventory
@@ -136,14 +136,14 @@
             {text: "Expected Completion", classname: "completion", width: 170},
             {text: "", classname: "noarrow", width: 40}
           ]
-        - cols.each do |i|
+        - full_inventory_cols.each do |i|
           th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
             span.cgrid.compact
               span= i[:text]
               a.sort class="#{'active' if i[:text] == 'Expected Completion'}" href="#"
       tbody
         - @product_instances.each_with_index do |instance, i|
-          tr class="#{'even' if i%2 == 1}"
+          tr class="#{'even' if i%2 == 1}" data-id=instance.id
             ruby:
               cols = [
                 {text: "######", classname: "id", width: 135},
@@ -153,9 +153,9 @@
                 {text: "-6 Days", classname: "completion red", width: 170},
                 {text: "<img src='/assets/select-arrow-red.png' class='down'/><img src='/assets/select-arrow-up.png' class='up'/>", classname: "arrow", width: 40}
               ]
-            - cols.each do |cell|
+            - full_inventory_cols.each do |cell|
                 td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
-                  span= instance.send(cell[:classname])
+                  span= instance.send(cell[:attr])
                   - if cell.has_key?(:extra)
                     .extra= raw cell[:extra]
   /.page-controls.cgrid

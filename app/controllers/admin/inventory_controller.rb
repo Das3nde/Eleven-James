@@ -21,16 +21,7 @@ class Admin::InventoryController < AdminController
     id = params[:id]
     @product_instance = ProductInstance.find(id)
     @history = @product_instance.history()
-    @d = CourierTransit.new()
-  #  @debug.bin_number = 5423
-    @d.product_id = params[:id]
-    @d.is_signature_required  = true
-    @d.table = @d.class.name.tableize;
-
-    @f = FedexTransit.new()
-  #  @debug.bin_number = 5423
-    @f.product_id = params[:id]
-    @f.table = @f.class.name.tableize;
+    render :layout=> false
   end
   def add_record
     product_id = params[:id]

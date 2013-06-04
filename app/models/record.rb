@@ -13,6 +13,12 @@ class Record < ActiveRecord::Base
     return Record.find(self.prev_record_id)
   end
 
+  def dates
+    start = start_date.strftime("%m/%d/%Y")
+    stop = end_date ? end_time.strftime("%m/%d/%Y") : 'current'
+    "#{start - stop}"
+  end
+=begin
   def self.find(id)
     generic = super(id)
     if !generic
@@ -20,4 +26,5 @@ class Record < ActiveRecord::Base
     end
     return generic.table.classify.constantize.find(id)
   end
+=end
 end

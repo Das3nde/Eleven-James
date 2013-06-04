@@ -41,12 +41,7 @@ Ej::Application.routes.draw do
       match "products/:product_id/upload_image" => "products#upload_image"
       match "products/add_vendor" => "products#add_vendor"
       match "products/:id/add_inventory" => "products#add_inventory"
-      #match "products/products" => "products#products"
-      #match "products/featured" => "products#featured"
-      #match "products/new_arrivals" => "products#new_arrivals"
-      #match "products/popular" => "products#popular"
 
-      match "inventory/" => "inventory#index"
       ['inventory','products'].each do |path|
         controller = ('Admin::'+path.capitalize+'Controller').constantize
         controller.tabs.each do |a, l|
@@ -56,8 +51,7 @@ Ej::Application.routes.draw do
       end
 
       resources :products, :users, :settings, :vendors, :tiers, :courier_transits,
-                :records, :product_images, :events
-
+                :records, :product_images, :events, :inventory
 
     end
   end

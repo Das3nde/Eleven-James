@@ -65,13 +65,17 @@ class Admin::ProductsController < AdminController
     end
   end
   def add_inventory
-    instance = ProductInstance.new
+
     model_id = sprintf '%05d', params[:id]
     product = Product.find(params[:id])
     product_id = ProductInstance.where('id ~ ?','^'+model_id).count + 1
+
+    instance = ProductInstance.new
     instance.id = "#{model_id}-#{product_id}"
     instance.product_id = params[:id]
-    instance.storage_record=StorageRecord.create()
+    instance.storage_record = StorageRecord.create(:start_date => Time.now)
+    instance.storage_record.start_date = Time.now
+    instance.status_table = 'storage_records'
     ActiveRecord::Base.transaction do
       product.quantity = product.quantity ? product.quantity+1 : 1;
       product.save

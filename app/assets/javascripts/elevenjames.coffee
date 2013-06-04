@@ -70,7 +70,8 @@ $ ->
            action = action || "all_products"
            if($.isNumeric(action) && page == 'products')
              action = 'add_product'
-             console.log(action)
+           else
+             action = 'view_item'
            refresh_method = refresh_tab_methods[page][action]
            $el.html(html)
            $(".select-wrapper select").on "change", ->
@@ -340,6 +341,12 @@ refresh_tab_methods = {
   },
   inventory : {
     inventory: ()->
-      console.log("inventory")
+      $('.ej-table tr').click(()->
+        id = this.dataset.id
+        $('.ej-tabs').tabs("add", id, 'View Item');
+        $('.ui-tabs-panel:last-child').attr('data-action', id)
+        $('.ej-tabs').tabs('select', 4);
+        console.log("should be working")
+      )
   }
 }

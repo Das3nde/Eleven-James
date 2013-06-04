@@ -2,6 +2,7 @@ class ProductInstance < ActiveRecord::Base
   attr_accessible :current_size, :status, :status_id
   belongs_to :product
   has_many :records
+
   has_many :rotations
   has_many :services
   has_many :storage_records
@@ -22,13 +23,17 @@ class ProductInstance < ActiveRecord::Base
   end
 
   def method_missing(meth, *args, &blk)
-    product.send(meth, *args, &blk)
+    if(product.respond_to?(meth))
+      product.send(meth, *args, &blk)
+    else
+      status.send(meth, *args, &blk)
+    end
   end
 
 
   def history
     history = [] #Record.where('product_id = '+@id)
-    records = Record.where('product_id = ?', self.id)
+    records = Record.where('start_date != null and product_instance_id = ?', self.id).order('start_date DESC')
     count = 0
     records.each do |generic|
       history << generic.table.classify.constantize.find(generic.id);
@@ -36,21 +41,20 @@ class ProductInstance < ActiveRecord::Base
     return history
   end
   def status
-    if !record_id
-      return nil
+    if(@status)
+      return @status
+    else
+      @status = Record.find(status_id)
     end
-    return Record.find(record_id)
+    @status
   end
 
   def status_name
     label = status_table.classify.constantize.label
-    if(status..index('Transit'))
+    if(label.index('Transit'))
       label += ' to ' + next_status_table.classify
     end
-  end
-
-  def member
-
+    label
   end
 
   def advance_record(date = Time.now)

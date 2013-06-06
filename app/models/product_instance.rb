@@ -1,56 +1,55 @@
 class ProductInstance < ActiveRecord::Base
-  attr_accessible :current_size, :status, :status_id
+  attr_accessible :current_size, :id, :product, :status
   belongs_to :product
-  has_many :records
-  accepts_nested_attributes_for :records
+  #accepts_nested_attributes_for :records
+  attr_accessor :status
 
-  has_many :rotations
-  has_many :services
-  has_many :storage_records
-  has_many :courier_transits
-  has_many :event_transits
-  has_many :fedex_transits
+  [:records, :rotations, :services, :storage_records, :courier_transits, :event_transits, :fedex_transits].each do |t|
+    has_many t, :autosave => true
+  end
 
-  belongs_to :record, :foreign_key => :status_id
-  belongs_to :rotation, :foreign_key => :status_id
-  belongs_to :service, :foreign_key => :status_id
-  belongs_to :storage_record, :foreign_key => :status_id
-  belongs_to :courier_transit, :foreign_key => :status_id
-  belongs_to :event_transit, :foreign_key => :status_id
-  belongs_to :fedex_transit, :foreign_key => :status_id
+  before_create :add_storage_record
+  before_save :save_status
 
-  def record
-    self.read_attribute(status_obj)
+  def save_status is_create = false
+    if(!new_record? || is_create)
+      self.status_id = @status.id
+      self.status_table = @status.class.to_s.tableize
+    end
+  end
+
+  def add_storage_record time = Time.now
+    @status = StorageRecord.new(
+        :start_date => Time.now,
+        :id => UUID.generate
+    )
+    self.storage_records << @status
+    save_status(true)
+  end
+
+  def status
+    puts 'status id id '+status_id
+    @status ||= status_table.classify.constantize.find(status_id)
+  end
+
+  def status=(obj)
+    @status = obj
   end
 
   def method_missing(meth, *args, &blk)
-    if(product.respond_to?(meth))
-      product.send(meth, *args, &blk)
-    else
-      status.send(meth, *args, &blk)
-    end
+    product.respond_to?(meth) ? product.send(meth, *args, &blk) : status.send(meth, *args, &blk)
   end
-
 
   def history
-    history = [] #Record.where('product_id = '+@id)
     Record.where('start_date is not null and product_instance_id = ?', self.id).order('start_date DESC')
   end
-  def status
-    if(@status)
-      return @status
-    else
-      @status = Record.find(status_id)
-    end
-    @status
+
+  def future
+    Record.where('start_date is null and product_instance_id = ?', self.id).order('est_start_date DESC')
   end
 
   def status_name
-    label = status_table.classify.constantize.label
-    if(label.index('Transit'))
-      label += ' to ' + next_status_table.classify
-    end
-    label
+    label.index('Transit') ? label + ' to ' + next_status_table.classify : label
   end
 
   def advance_record(date = Time.now)
@@ -66,4 +65,13 @@ class ProductInstance < ActiveRecord::Base
       self.save()
     end
   end
+=begin
+  def assign_rotation member, est_start_time
+    rotation = Rotation.new(
+        :est_start_time
+    )
+    member.rotations << rotation
+    product_instance.rotations << rotation
+  end
+=end
 end

@@ -1,5 +1,5 @@
 class FedexTransit < ActiveRecord::Base
-  include Temporal
+  include Status
   attr_accessible :class_name, :id, :is_signature_required, :tracking_number, :record
 
   def self.delivery_event tracking_number

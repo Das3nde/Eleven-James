@@ -1,5 +1,6 @@
 class StorageRecord < ActiveRecord::Base
-  include Temporal
+  include Status
+  attr_accessor :start_date, :end_date
   def self.label
     "In Storage"
   end

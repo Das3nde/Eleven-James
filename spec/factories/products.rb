@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :product do |p|
+    p.id    1
     p.model "MyString"
     p.brand "MyString"
     p.tier nil

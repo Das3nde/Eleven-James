@@ -9,24 +9,14 @@ class Product < ActiveRecord::Base
 
   def add_inventory
     product_id = sprintf '%05d', id
-    product_instance_id = ProductInstance.where('id ~ ?','^'+product_id).count + 1
-    instance = ProductInstance.new
-    instance.id = "#{product_id}-#{product_instance_id}"
-    instance.product_id = id
-    storage_record = StorageRecord.create()
-    storage_record.record.start_date = Time.now
-    storage_record.record.product_instance_id = instance.id
-    storage_record.record.table = 'storage_record'
-    instance.status_table = 'storage_records'
-    instance.storage_record = storage_record
-    self.product_instances << instance
-    ActiveRecord::Base.transaction do
-      self.quantity = self.product_instances.size;
-      self.save
-      storage_record.record.save
-      instance.save
-    end
-    instance
+    quantity = ProductInstance.where('id ~ ?','^'+product_id).count + 1
+
+    instance = ProductInstance.create(
+        :id => "#{product_id}-#{quantity}",
+    )
+    product_instances << instance
+    quantity = self.product_instances.size
+    save()
   end
   def self.brand_list
     ['Cartier', 'Rolex', 'Omega', 'Breitling']

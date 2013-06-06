@@ -112,7 +112,8 @@ CREATE TABLE courier_transits (
     is_signature_required boolean,
     customer character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    product_instance_id character varying(255)
 );
 
 
@@ -158,7 +159,8 @@ CREATE TABLE event_transits (
     event_id integer,
     is_pickup boolean,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    product_instance_id character varying(255)
 );
 
 
@@ -220,7 +222,8 @@ CREATE TABLE fedex_transits (
     tracking_number character varying(255),
     is_signature_required boolean,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    product_instance_id character varying(255)
 );
 
 
@@ -370,15 +373,15 @@ CREATE TABLE records (
     uuid character varying(255) NOT NULL,
     product_instance_id character varying(255),
     "table" character varying(255),
-    start_date time without time zone,
-    due_date time without time zone,
-    end_date time without time zone,
     bin_number character varying(255),
     "int" character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    est_start_date time without time zone,
-    est_end_date time without time zone
+    start_date timestamp without time zone,
+    end_date timestamp without time zone,
+    due_date timestamp without time zone,
+    est_start_date timestamp without time zone,
+    est_end_date timestamp without time zone
 );
 
 
@@ -423,7 +426,8 @@ CREATE TABLE rotations (
     uuid character varying(255) NOT NULL,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    product_instance_id character varying(255)
 );
 
 
@@ -447,7 +451,8 @@ CREATE TABLE services (
     repair_description text,
     vendor_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    product_instance_id character varying(255)
 );
 
 
@@ -460,7 +465,8 @@ CREATE TABLE storage_records (
     bin_number integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    is_available boolean
+    is_available boolean,
+    product_instance_id character varying(255)
 );
 
 
@@ -1090,3 +1096,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130602065013');
 INSERT INTO schema_migrations (version) VALUES ('20130603200704');
 
 INSERT INTO schema_migrations (version) VALUES ('20130603213001');
+
+INSERT INTO schema_migrations (version) VALUES ('20130605073056');
+
+INSERT INTO schema_migrations (version) VALUES ('20130605190928');

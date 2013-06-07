@@ -373,15 +373,15 @@ CREATE TABLE records (
     uuid character varying(255) NOT NULL,
     product_instance_id character varying(255),
     "table" character varying(255),
-    bin_number character varying(255),
-    "int" character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     start_date timestamp without time zone,
     end_date timestamp without time zone,
     due_date timestamp without time zone,
     est_start_date timestamp without time zone,
-    est_end_date timestamp without time zone
+    est_end_date timestamp without time zone,
+    next_id character varying(255),
+    next_table character varying(255)
 );
 
 
@@ -1100,3 +1100,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130603213001');
 INSERT INTO schema_migrations (version) VALUES ('20130605073056');
 
 INSERT INTO schema_migrations (version) VALUES ('20130605190928');
+
+INSERT INTO schema_migrations (version) VALUES ('20130606051439');

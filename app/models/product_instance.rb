@@ -2,7 +2,7 @@ class ProductInstance < ActiveRecord::Base
   attr_accessible :current_size, :id, :product, :status
   belongs_to :product
   #accepts_nested_attributes_for :records
-  attr_accessor :status
+  attr_accessor :status, :next_status
 
   [:records, :rotations, :services, :storage_records, :courier_transits, :event_transits, :fedex_transits].each do |t|
     has_many t, :autosave => true
@@ -36,6 +36,10 @@ class ProductInstance < ActiveRecord::Base
     @status = obj
   end
 
+  def next_status
+    @next_status ||= next_status_table.classify.constantize.find(next_status_id)
+  end
+
   def method_missing(meth, *args, &blk)
     product.respond_to?(meth) ? product.send(meth, *args, &blk) : status.send(meth, *args, &blk)
   end
@@ -50,6 +54,21 @@ class ProductInstance < ActiveRecord::Base
 
   def status_name
     label.index('Transit') ? label + ' to ' + next_status_table.classify : label
+  end
+
+  def add_rotation(user)
+    if(status.class != StorageRecord || status.is_available != true)
+      raise 'Rotations cannot be added to product_instances that are not currently available'
+    end
+    transit_class = user.transit_type.classify.constantize
+    ActiveRecord::Base.transaction do
+      transit = transit_class.create({:next => rotation})
+      rotation = Rotation.create(:prev => rotation)
+      user.rotations << rotation
+      self.rotations << rotation
+      self.read_attribute(user.transit_type.tableize) << transit
+
+    end
   end
 
   def advance_record(date = Time.now)

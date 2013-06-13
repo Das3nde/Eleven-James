@@ -1,5 +1,5 @@
 class ProductInstance < ActiveRecord::Base
-  attr_accessible :current_size, :id, :product, :status
+  attr_accessible :current_size, :id, :product, :status, :next_status
   belongs_to :product
   #accepts_nested_attributes_for :records
   attr_accessor :status, :next_status
@@ -16,6 +16,10 @@ class ProductInstance < ActiveRecord::Base
       self.status_id = @status.id
       self.status_table = @status.class.to_s.tableize
     end
+    if(@next_status)
+      self.next_status_table = status.class.to_s.tableize
+      self.next_status_id = status.id
+    end
   end
 
   def add_storage_record time = Time.now
@@ -28,16 +32,25 @@ class ProductInstance < ActiveRecord::Base
   end
 
   def status
-    puts 'status id id '+status_id
-    @status ||= status_table.classify.constantize.find(status_id)
+    @status ||= status_table.to_class.find(status_id)
   end
 
   def status=(obj)
     @status = obj
   end
 
+  #we store this information on both the status record and here, which is a bit redundant,
+  #We're doing so because it needs to be stored on the record and we want to save ourselves a db lookup when sorting
+  #product_instances (aka inventory) by transit destination
+
   def next_status
-    @next_status ||= next_status_table.classify.constantize.find(next_status_id)
+    @next_status ||= self.next_status_table.to_class.find(next_status_id)
+  end
+
+  def next_status=(status)
+    @next_status = status
+    self.next_status_table = status.class.table_name
+    self.next_status_id = status.id
   end
 
   def method_missing(meth, *args, &blk)
@@ -58,18 +71,35 @@ class ProductInstance < ActiveRecord::Base
 
   def add_rotation(user)
     if(status.class != StorageRecord || status.is_available != true)
-      raise 'Rotations cannot be added to product_instances that are not currently available'
+      raise 'Rotations cannot be added to product_instances that are unavailable'
     end
-    transit_class = user.transit_type.classify.constantize
-    ActiveRecord::Base.transaction do
-      transit = transit_class.create({:next => rotation})
-      rotation = Rotation.create(:prev => rotation)
-      user.rotations << rotation
-      self.rotations << rotation
-      self.read_attribute(user.transit_type.tableize) << transit
+    transit_class = user.transit_table.to_class
+    rotation = Rotation.new()
+    transit = transit_class.new()
+    transit.next = rotation
 
+    self.next_status = transit
+    status.next = transit
+    user.rotations << rotation
+    self.rotations << rotation
+    self.send(user.transit_table) << transit
+
+    ActiveRecord::Base.transaction do
+      self.save
     end
   end
+
+  def add_service(vendor, transit = FedexTransit.new())
+    service = Service.new()
+    transit.next = service
+
+    self.next_status = transit
+    status.next = transit
+    vendor.services << service
+    self.services << service
+    self.fedex_transits << transit
+  end
+
 
   def advance_record(date = Time.now)
     current_record = status()
@@ -84,13 +114,4 @@ class ProductInstance < ActiveRecord::Base
       self.save()
     end
   end
-=begin
-  def assign_rotation member, est_start_time
-    rotation = Rotation.new(
-        :est_start_time
-    )
-    member.rotations << rotation
-    product_instance.rotations << rotation
-  end
-=end
 end

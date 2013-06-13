@@ -8,7 +8,6 @@ FactoryGirl.define do
     fax 1
     email "MyString"
     website "MyString"
-    address "MyString"
     city "MyString"
     state "MyString"
     postal_code "MyString"

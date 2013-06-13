@@ -7,6 +7,7 @@ group :assets do
 end
 
 #gem 'fedex', :path => '~/dev/fedex'
+gem 'munkres'
 gem 'rmagick', :require => 'RMagick'
 gem "jcrop-rails"
 gem "paperclip", "~> 3.0"

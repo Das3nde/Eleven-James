@@ -18,6 +18,13 @@ class Product < ActiveRecord::Base
     quantity = self.product_instances.size
     save()
   end
+
+  def to_vector
+    ['brand', 'color', 'material', 'model', 'style', 'face'].each do |attr|
+      attr+'-'+self.send(attr).to_s = 1;
+    end
+
+  end
   def self.brand_list
     ['Cartier', 'Rolex', 'Omega', 'Breitling']
   end

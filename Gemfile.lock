@@ -134,6 +134,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     multi_json (1.7.3)
+    munkres (0.1.0)
     nokogiri (1.5.9)
     orm_adapter (0.4.0)
     paperclip (3.4.1)
@@ -267,6 +268,7 @@ DEPENDENCIES
   jquery-rails
   jquery-validation-rails
   kaminari
+  munkres
   paperclip (~> 3.0)
   pg
   quiet_assets (>= 1.0.2)

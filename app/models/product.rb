@@ -5,7 +5,7 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_images, :reject_if => lambda { |t| t['product_images'].nil? }
   accepts_nested_attributes_for :product_instances
 
-  attr_accessible :brand, :case, :color, :description, :material, :model, :msrp, :price, :is_featured, :is_new, :style, :vendor_id,:face, :tier, :quantity
+  attr_accessible :brand, :case_size, :color, :description, :material, :model, :msrp, :price, :is_featured, :is_new, :style, :vendor_id,:face, :tier, :quantity
 
   def add_inventory
     product_id = sprintf '%05d', id
@@ -17,14 +17,31 @@ class Product < ActiveRecord::Base
     product_instances << instance
     quantity = self.product_instances.size
     save()
+    instance
   end
 
   def to_vector
+    vector = {}
     ['brand', 'color', 'material', 'model', 'style', 'face'].each do |attr|
-      attr+'-'+self.send(attr).to_s = 1;
+      val = self.send(attr)
+      if(val && !val.empty?)
+        vector[attr+'-'+val.to_s] = 1;
+      end
     end
-
+    vector['case_size'] = relative_case_size()
+    return vector
   end
+
+  def relative_case_size
+    @@max_case_size ||= Product.maximum('case_size').to_i;
+    @@min_case_size ||= Product.minimum('case_size').to_i;
+    if @@max_case_size === @@min_case_size
+      return 1
+    end
+    (case_size.to_i - @@min_case_size * 1.0) / (@@max_case_size - @@min_case_size)
+  end
+
+
   def self.brand_list
     ['Cartier', 'Rolex', 'Omega', 'Breitling']
   end

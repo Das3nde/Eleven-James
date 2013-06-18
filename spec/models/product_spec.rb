@@ -22,4 +22,16 @@ describe Product do
       @instance.status.instance_of?(StorageRecord).should be_true
     end
   end
+  describe "#to_vector" do
+    it "properly converts properties to a vector" do
+      expected = {"brand-rolex"=>1,
+                  "color-blue"=>1,
+                  "material-Gold"=>1,
+                  "model-navitimer"=>1,
+                  "style-luxury"=>1,
+                  "case_size"=>1}
+      @product.to_vector.should eq(expected)
+    end
+
+  end
 end

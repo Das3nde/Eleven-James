@@ -13,9 +13,10 @@ class Product < ActiveRecord::Base
 
     instance = ProductInstance.create(
         :id => "#{product_id}-#{quantity}",
+        :is_available => true
     )
     product_instances << instance
-    quantity = self.product_instances.size
+    self.quantity = self.product_instances.size
     save()
     instance
   end
@@ -62,4 +63,7 @@ class Product < ActiveRecord::Base
     ['Gold', 'Silver', 'Steel']
   end
 
+  def image
+    product_images.first.url('thumb')
+  end
 end

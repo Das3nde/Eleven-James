@@ -41,18 +41,16 @@ $ ->
     $("ul.ej-queue li:nth-child(2n)").addClass "wrap"
 
   path_parts = document.location.pathname.split('/')
-  action = path_parts.pop() || $('.ui-tabs')[0].dataset.action
-  page = path_parts.pop()
+  if($('.ui-tabs')[0])
+    action = path_parts.pop() || $('.ui-tabs')[0].dataset.action
+    page = path_parts.pop()
 
-  console.log("action", action)
-  console.log("page", page)
-  $.get(action, {}, (html)->
-    refesh_method = refresh_tab_methods[page][action]
-    $el = $('.ej-tabs [data-action='+action+']')
-    $el.html(html)
-    console.log($el)
-    refesh_method($el, html)
-  )
+    $.get(action, {}, (html)->
+      refesh_method = refresh_tab_methods[page][action]
+      $el = $('.ej-tabs [data-action='+action+']')
+      $el.html(html)
+      refesh_method($el, html)
+    )
 
   $(".ej-tabs").each ->
     active = 0
@@ -66,18 +64,17 @@ $ ->
          $('#add-product').attr('data-action', 'add_product')
          $('a[href="#add-product"]').html('Add Model')
        if(action != undefined)
+         console.log('making a request')
          $.get(action, {}, (html)->
            action = action || "all_products"
-           if($.isNumeric(action))
+           if($.isNumeric(action) || action.substr(5,1) == '-')
               if(page == 'products')
                 action = 'add_product'
               else
                action = 'view_item'
-
-
-           refresh_method = refresh_tab_methods[page][action]
-           console.log(refresh_tab_methods[page])
+           console.log('how many times is this called?')
            console.log(action)
+           refresh_method = refresh_tab_methods[page][action]
            $el.html(html)
            $(".select-wrapper select").on "change", ->
                update_select(this)
@@ -85,7 +82,9 @@ $ ->
            $(".select-wrapper select").each ->
              update_select(this)
            if(refresh_method)
-            refresh_method($el, html)
+             $el.ready(()->
+               refresh_method($el, html)
+             )
          )
       })
 
@@ -230,6 +229,66 @@ $ ->
     $(@).find(".options").toggle()
 
 
+  $( ".connected-sortable" ).sortable({
+    connectWith: ".connected-sortable"
+    update: (ev,ui)->
+      $item = ui.item
+      if($(this).hasClass('user-selection'))
+        $item.addClass('locked')
+        if($(this).find('li').length > 1)
+          $old_item = $(this).find('li').eq(1)
+          $old_item.removeClass('locked')
+          $('#selection_products').append($old_item)
+
+      else
+        $item.removeClass('locked')
+      check_paired()
+  }).disableSelection()
+  locked_pairs = ()->
+    arr = _.map($('.locked'),(
+      (item)->
+          [item.dataset.id, $(item).parents('ul')[0].dataset.id] ))
+    arr || []
+
+  $('#selection_form').submit(()->
+    console.log(locked_pairs())
+    data =  $(this).serialize() + '&' + $.param({
+      locked_pairs : locked_pairs(),
+    })
+    $.post('get_pairs', data, (result)->
+      _.each(result, (pair)->
+        product_id = pair[0]
+        user_id = pair[1]
+        console.log($('#user-'+user_id))
+        $('#user-'+user_id).append($('#product-'+product_id))
+      )
+      check_paired()
+
+    , 'json')
+    return false
+  )
+
+  check_paired = ()->
+    action = if ($('.user-selection li').length != 0) then 'show' else 'hide'
+    $('#distribute_button')[action]()
+    action = if ($('.user-selection li').length == $('.user-selection').length) then 'hide' else 'show'
+    $('#run_selection')[action]()
+
+  $('#distribute_button').click(()->
+    pairs = _.map($('.user-selection li'), (item)->
+      [item.dataset.id,item.parentNode.dataset.id]
+    )
+    if confirm('Are you sure you want to distribute these '+ pairs.length + ' items?')
+      params = {
+        pairs:pairs,
+        authenticity_token: $('input[name=authenticity_token]').val()
+      }
+      $.post('distribute', params, ()->
+        $('.user-slot:has(li)').remove()
+      ,'json')
+    return false
+  )
+
 
 refresh_tab_methods = {
   products:{
@@ -294,7 +353,6 @@ refresh_tab_methods = {
                })
       )
       $('#product_image_image').change(()->
-        console.log("image changed")
         val = this.value
         ext = val.substring(val.lastIndexOf('.') + 1);
         if($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']) == -1)
@@ -357,10 +415,37 @@ refresh_tab_methods = {
     inventory: ()->
       $('.ej-table tr').click(()->
         id = this.dataset.id
-        $('.ej-tabs').tabs("add", id, 'View Item');
+        if($('.ui-tabs-anchor').length < 5)
+          console.log('adding')
+          $('.ej-tabs').tabs("add", id, id);
+        else
+          $('.ui-tabs-nav:last-child span').html(id)
         $('.ui-tabs-panel:last-child').attr('data-action', id)
         $('.ej-tabs').tabs('select', 4);
-        console.log("should be working")
       )
+    view_item : ($el)->
+      console.log($('a.remove-record').html())
+      setTimeout(()-> #this is retarded, but I have no idea why it doesn't work otherwise
+        $el.find('a.remove-record').click(()->
+          if(confirm('Are you sure you want to remove this event? Any associated transit records will also be deleted'))
+            id = this.dataset.id
+            $.post('remove_record', {
+                   authenticity_token:AUTH_TOKEN,
+                   id: id
+                   }, (res)->
+              _.each(res, (id)->
+                $('#future').find('[data-id='+id+']').remove()
+              )
+            , 'json')
+            return false
+        )
+        $el.find('form').change(()->
+          $.post(this.action, $(this).serialize(), ()->
+            console.log('all good')
+          )
+          return false
+        )
+
+      , 100)
   }
 }

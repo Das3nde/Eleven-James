@@ -1,5 +1,5 @@
 class ProductInstance < ActiveRecord::Base
-  attr_accessible :current_size, :id, :product, :status, :next_status
+  attr_accessible :current_size, :id, :product, :status, :next_status, :is_available
   belongs_to :product
   #accepts_nested_attributes_for :records
   attr_accessor :status, :next_status
@@ -9,26 +9,15 @@ class ProductInstance < ActiveRecord::Base
   end
 
   before_create :add_storage_record
-  before_save :save_status
-
-  def save_status is_create = false
-    if(!new_record? || is_create)
-      self.status_id = @status.id
-      self.status_table = @status.class.to_s.tableize
-    end
-    if(@next_status)
-      self.next_status_table = status.class.to_s.tableize
-      self.next_status_id = status.id
-    end
-  end
 
   def add_storage_record time = Time.now
-    @status = StorageRecord.new(
+    self.status = StorageRecord.new(
         :start_date => Time.now,
-        :id => UUID.generate
+        :id => UUID.generate,
+        :is_available => true
     )
     self.storage_records << @status
-    save_status(true)
+    is_available = true
   end
 
   def status
@@ -37,6 +26,8 @@ class ProductInstance < ActiveRecord::Base
 
   def status=(obj)
     @status = obj
+    self.status_id = @status.id
+    self.status_table = @status.class.to_s.tableize
   end
 
   #we store this information on both the status record and here, which is a bit redundant,
@@ -44,13 +35,13 @@ class ProductInstance < ActiveRecord::Base
   #product_instances (aka inventory) by transit destination
 
   def next_status
-    @next_status ||= self.next_status_table.to_class.find(next_status_id)
+    @next_status ||= self.next_status_table ? self.next_status_table.to_class.find(next_status_id) : nil
   end
 
-  def next_status=(status)
-    @next_status = status
-    self.next_status_table = status.class.table_name
-    self.next_status_id = status.id
+  def next_status=(new_status)
+    @next_status = new_status
+    self.next_status_table = new_status && new_status.class.table_name
+    self.next_status_id = new_status && new_status.id
   end
 
   def method_missing(meth, *args, &blk)
@@ -62,7 +53,13 @@ class ProductInstance < ActiveRecord::Base
   end
 
   def future
-    Record.where('start_date is null and product_instance_id = ?', self.id).order('est_start_date DESC')
+    @future = []
+    next_record = next_status && next_status.record
+    while(next_record)
+      @future << next_record
+      next_record = next_record.next_id && Record.find(next_record.next_id)
+    end
+    return @future.reverse
   end
 
   def status_name
@@ -70,7 +67,7 @@ class ProductInstance < ActiveRecord::Base
   end
 
   def add_rotation(user)
-    if(status.class != StorageRecord || status.is_available != true)
+    if(status.class != StorageRecord || is_available != true)
       raise 'Rotations cannot be added to product_instances that are unavailable'
     end
     transit_class = user.transit_table.to_class
@@ -83,10 +80,8 @@ class ProductInstance < ActiveRecord::Base
     user.rotations << rotation
     self.rotations << rotation
     self.send(user.transit_table) << transit
-
-    ActiveRecord::Base.transaction do
-      self.save
-    end
+    self.is_available = false
+    self.save
   end
 
   def add_service(vendor, transit = FedexTransit.new())
@@ -98,6 +93,8 @@ class ProductInstance < ActiveRecord::Base
     vendor.services << service
     self.services << service
     self.fedex_transits << transit
+    self.is_available = false
+    self.save
   end
 
 
@@ -113,5 +110,9 @@ class ProductInstance < ActiveRecord::Base
       current_record.save()
       self.save()
     end
+  end
+
+  def self.available()
+    ProductInstance.joins(:storage_records).where("storage_records.is_available is null")
   end
 end

@@ -1,0 +1,23 @@
+.container
+  div style='width:200px;display:inline-block;top:0;vertical-align:text-top'
+    form#selection_form
+      button#run_selection run selection
+      input type='hidden' value=form_authenticity_token name='authenticity_token'
+
+    button#distribute_button Distribute
+  div style='width:400px;display:inline-block;height:700px;top:0;vertical-align:text-top'
+    h2 Users
+    -@users.each do |u|
+      -if u.needs_rotation()
+        .user-slot
+          p =u.email
+          ul.connected-sortable.user-selection style='height:110px' id=('user-'+u.id.to_s) data-id=u.id
+  div style='width:400px;display:inline-block;height:700px;vertical-align:text-top'
+    h2 Products
+    ul#selection_products.connected-sortable
+      -@products.each do |p|
+        li data-id=p.id id=('product-'+p.id)
+          .lock Locked
+          div{style='clear:both;height:110px'}
+            img{src=p.image style='float:left'}
+            p =p.model

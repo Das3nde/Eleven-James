@@ -17,10 +17,17 @@ class User < ActiveRecord::Base
   has_one :shipping_address, :as => :addressable
   has_many :rotations
 
-  def requests
-    sql = 'fulfillment_time is not null and removal_time is not null and user_id = ?'
+  def request_vectors
+    sql = 'fulfillment_time is null and removal_time is null and user_id = ?'
+    reqs = []
     ProductRequest.where(sql, id).to_a.map{|req|
-      req.product.toVector()
+      reqs << req.product.to_vector()
     }
+    return reqs
+  end
+
+  def needs_rotation
+    rotations = Rotation.where('user_id = ?', id)
+    rotations.last == nil || Rotation.last.start_date != nil
   end
 end

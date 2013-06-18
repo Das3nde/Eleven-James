@@ -12,15 +12,14 @@ class Admin::InventoryController < AdminController
   end
 
   def index
-    @products = ProductInstance.all
-    if(request.xhr?)
-
-    end
+    @products = ProductInstance.order('id DESC')
   end
   def show
     id = params[:id]
     @product_instance = ProductInstance.find(id)
     @history = @product_instance.history()
+    @future = @product_instance.future()
+    @status = @product_instance.status
     render :layout=> false
   end
   def add_record
@@ -40,5 +39,12 @@ class Admin::InventoryController < AdminController
   end
   def purchase_request
     render :nothing => true
+  end
+  def remove_record
+    record = Record.find(params[:id])
+    transit_record = record.prev
+    transit_record.destroy()
+    record.destroy()
+    render :json => [transit_record.id, record.id]
   end
 end

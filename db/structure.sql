@@ -331,7 +331,7 @@ CREATE TABLE products (
     material character varying(255),
     style character varying(255),
     color character varying(255),
-    "case" character varying(255),
+    case_size character varying(255),
     msrp integer,
     vendor_id integer,
     description text,
@@ -1105,3 +1105,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130605190928');
 INSERT INTO schema_migrations (version) VALUES ('20130606051439');
 
 INSERT INTO schema_migrations (version) VALUES ('20130607164306');
+
+INSERT INTO schema_migrations (version) VALUES ('20130613174634');

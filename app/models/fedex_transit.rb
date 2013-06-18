@@ -1,7 +1,9 @@
 class FedexTransit < ActiveRecord::Base
   include Status
   attr_accessible :class_name, :id, :is_signature_required, :tracking_number, :record
-
+  def self.label
+    'Fedex Transit'
+  end
   def self.delivery_event tracking_number
     record = self.where("tracking_number = "+tracking_number)
 

@@ -39,11 +39,13 @@ describe ProductInstance do
       expect { @instance.add_rotation(@user) }.to raise_error
     end
     it "correctly adds records to product_instances that are available" do
-      @storage_status = @instance.status
-      @storage_status.is_available = true
-      @storage_status.save
+      @instance.is_available = true
+      @instance.save
 
       @instance.add_rotation(@user)
+
+      @instance = ProductInstance.find(@instance.id)
+
       @next_status = @instance.next_status;
       @next_status.class.to_s.should eq('FedexTransit')
       @next_status.id.should eq(@instance.status.next.id)

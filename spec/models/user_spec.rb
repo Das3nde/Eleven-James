@@ -7,7 +7,8 @@ describe User do
       :name => "Example User",
       :email => "user@example.com",
       :password => "changeme",
-      :password_confirmation => "changeme"
+      :password_confirmation => "changeme",
+      :id => 1
     }
   end
 
@@ -100,4 +101,17 @@ describe User do
 
   end
 
+  describe "#to_vector" do
+    before(:all) do
+      @user = FactoryGirl.create(:user)
+      FactoryGirl.create(:product_request)
+      FactoryGirl.create(:product_request2)
+      @product1 = FactoryGirl.create(:product)
+      @product2 = FactoryGirl.create(:product2)
+    end
+    it "correctly generates the request set of vectors" do
+      expected = [@product1.to_vector(), @product2.to_vector]
+      @user.request_vectors().should eq(expected)
+    end
+  end
 end

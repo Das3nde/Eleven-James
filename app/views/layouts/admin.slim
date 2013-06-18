@@ -4,6 +4,9 @@ html
     title ElevenJames
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
+    javascript:
+      var AUTH_TOKEN ='#{form_authenticity_token}'
+
   body.elevenjames
     - @is_admin = controller.class.to_s.split("::").first=="Admin"
     - @header_partial = "mini_header"
@@ -32,7 +35,8 @@ html
           {title: "Models", slug: "models", href: 'products/'},
           {title: "Inventory", slug: "inventory", href: 'inventory/'},
           {title: "Members", slug: "members", href: '#'},
-          {title: "Events", slug: "events", href: '#'}
+          {title: "Events", slug: "events", href: '#',
+           title: "Selection", slug: "selection", href: 'selection/'}
                ]
     div id="#{ @wrapper ? @wrapper : action_name}-page" class="#{@internal_class if @internal_class.present?}"
       #site-header class="#{@header_class if @header_class.present?}"

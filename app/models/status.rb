@@ -16,8 +16,8 @@ module Status
 
     def initialize (attributes = {}, options = {})
       super(attributes.slice(@@record_attrs), options)
-      self.id = UUID.generate
-      self.record = record = Record.new(attributes)
+      self.id = options[:id] || UUID.generate
+      self.record = record = options[:record] || Record.new(attributes)
       record.table = self.class.to_s.tableize
       record.id = self.id
       record.status = self
@@ -28,6 +28,22 @@ module Status
       record.product_instance_id = product_instance_id
     end
 
+    def switch (new_status_class, attributes)
+      new_status = new_status_class.new(attributes, {:record => record, :id => id})
+      if(product_instance.next_status_id == id)
+        product_instance.next_status = new_status
+      end
+
+      previous = Record.where('next_id = ?', id).last
+
+      ActiveRecord::Base.transaction do
+        product_instance.save
+        previous.update_attribute('next_table', nil)
+        self.destroy()
+        new_status.save()
+      end
+    end
+
     @@record_attrs.each do |attr|
       define_method attr.to_s do
         return self.record.send(attr.to_s)
@@ -36,5 +52,9 @@ module Status
         return self.record.send(attr.to_s+'=', arg)
       end
     end
+  end
+
+  def label
+    self.class.label
   end
 end

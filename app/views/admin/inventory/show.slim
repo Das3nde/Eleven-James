@@ -1,13 +1,27 @@
 .container
   #admin-manage-inventory
     .content
-
+      =render('admin/inventory/record_forms/' + @status.class.to_s.underscore)
+    -if !@future.empty?
+      h3 Scheduled
+      .table-view
+        table#future.ej-table
+          thead
+            th width='400px' Status
+            th
+          tbody
+            -@future.each do |r|
+              tr data-id=r.id
+                td =r.type
+                -if !r.type.index('Transit')
+                  td
+                    a.remove-record data-id=r.id href="#" X
     h3 Product History
     .table-view
       table.ej-table
         thead
           th width='400px' Dates
-          th width='400px' Record Type
+          th width='400px' Status
         tbody
           -@history.each do |r|
             tr

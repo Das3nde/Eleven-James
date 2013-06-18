@@ -510,6 +510,14 @@
     line-height:40px;
   }
 }
+
+.locked .lock{
+  display:inline-block;
+}
+.lock{
+  display:none;
+}
+
 #admin-manage-inventory {
   .search-header {
     margin-top:0;
@@ -750,8 +758,10 @@
   }
 }
 
-.table-view .ej-table tbody tr{
-  cursor:pointer
+#inventory, #products{
+  .table-view .ej-table tbody tr{
+    cursor:pointer
+  }
 }
 
 .add-photo-modal {
@@ -825,4 +835,5 @@
       @include border_radius(0);
     }
   }
+
 }

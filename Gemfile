@@ -7,6 +7,7 @@ group :assets do
 end
 
 #gem 'fedex', :path => '~/dev/fedex'
+gem 'money'
 gem 'aws-sdk'
 gem 'munkres'
 gem 'rmagick', :require => 'RMagick'

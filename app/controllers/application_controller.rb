@@ -70,8 +70,7 @@ class ApplicationController < ActionController::Base
     return html + '/>'
   end
 
-
-
   helper_method :us_states, :jst_checkbox
+
 
 end

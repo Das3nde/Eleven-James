@@ -4,17 +4,21 @@ html
     title ElevenJames
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
+    javascript:
+      var AUTH_TOKEN ='#{form_authenticity_token}'
+
   body.elevenjames
+    - @is_admin = controller.class.to_s.split("::").first=="Admin"
     - @header_partial = "mini_header"
     - @footer_partial = "footer"
     - @internal_class = "internal-page"
     ruby:
      @menu = [ 
-        {title: "The Collection", slug: "collection"},
-        {title: "Your Selections", slug: "selection"},
-        {title: "Services & Benefits", slug: "service"},
-        {title: "News and Events", slug: "news"},
-        {title: "Contact Us", slug: "contact"}
+        {title: "The Collection", slug: "collection", href: '#'},
+        {title: "Your Selections", slug: "selection", href: '#'},
+        {title: "Services & Benefits", slug: "service", href: '#'},
+        {title: "News and Events", slug: "news", href: '#'},
+        {title: "Contact Us", slug: "contact", href: '#'}
              ]
     - if @wrapper == "splash"
       - @header_partial = "splash_header"
@@ -24,19 +28,22 @@ html
       - @header_partial = "header"
       - @header_class = "main-layout"
 
-    - elsif controller.class.to_s.split("::").first=="Admin" #Are we in the admin section?
+    - elsif  @is_admin
       - @footer_partial = "admin/footer"
       ruby:
        @menu = [ 
-          {title: "Models", slug: "model"},
-          {title: "Inventory", slug: "inventory"},
-          {title: "Members", slug: "members"},
-          {title: "Events", slug: "events"}
+          {title: "Models", slug: "models", href: 'products/'},
+          {title: "Inventory", slug: "inventory", href: 'inventory/'},
+          {title: "Members", slug: "members", href: '#'},
+          {title: "Events", slug: "events", href: '#',
+           title: "Selection", slug: "selection", href: 'selection/'}
                ]
     div id="#{ @wrapper ? @wrapper : action_name}-page" class="#{@internal_class if @internal_class.present?}"
       #site-header class="#{@header_class if @header_class.present?}"
         = render "layouts/#{@header_partial}"
       #site-content
-        = yield
+        -if @is_admin
+          div{class=(@is_admin ? 'admin-wrapper': '')}
+            = yield
       #site-footer
         = render "layouts/#{@footer_partial}"

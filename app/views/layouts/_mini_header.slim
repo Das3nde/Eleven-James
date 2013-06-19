@@ -7,6 +7,6 @@
         a href="#"
       - @menu.each do |item|
         li class="#{determine_active_menu(item[:slug].downcase)}"
-          = link_to item[:title], "#"
+          = link_to item[:title], @is_admin ? '/admin/'+item[:href] : item[:href]
       li.account
         a href="#" Account

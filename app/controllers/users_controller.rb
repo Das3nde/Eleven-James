@@ -39,6 +39,10 @@ class UsersController < ApplicationController
     render json: { status: 'success' }
   end
 
-
+  def delete_request
+    pr = ProductRequest.where("id = ? AND user_id = ?", params[:request_id], current_user.id).first
+    pr.destroy if pr
+    render json: { status: 'success' }
+  end
 
 end

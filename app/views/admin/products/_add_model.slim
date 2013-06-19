@@ -1,9 +1,9 @@
 ruby:
-  @brands = ['Cartier', 'Rolex', 'Omega']
-  @styles = ['Awesome', 'Even More Awesome']
-  @tiers = ['tier 1', 'tier 2', 'tier 3']
-  @faces = ['Red', 'Blue', 'Purple']
-  @materials = ['Gold', 'Silver', 'Steel']
+  @brands = Product.brand_list
+  @styles = Product.style_list
+  @tiers = Product.tier_list
+  @faces = Product.faces_list
+  @materials = Product.materials_list
 
 .container.cgrid
   = simple_form_for [:admin, @product] do |f|
@@ -28,8 +28,8 @@ ruby:
                     .arrow.red
                     =f.input_field :style, collection: @styles, as: :select
                 .row.cgrid.compact
-                  label Case
-                  = f.input_field :case
+                  label Case Size (MM)
+                  = f.input_field :case_size
                 .row.cgrid.compact
                   label Face
                   .select-wrapper.face.field
@@ -114,7 +114,7 @@ ruby:
               .count.omega =@product.quantity || 0
             .body
               ul#model-inventory
-                - @product_instances.each do |p|
+                - @product.product_instances.each do |p|
                   li.cgrid
                     .number.alpha=p.id.to_s
                     a.edit.omega href="#"
@@ -127,4 +127,4 @@ div.vendor-dialog style="display:none"
                       = f.file_field :image
                       = f.input :product_id, :as => :hidden, :input_html => { :value => @product.id }
 
-iframe{id="upload_iframe" src="/admin/product_images" width="200" height="200" style="display:none"}
+iframe{id="upload_iframe" src="/admin/product_images" width="200" height="200" style="position:absolute;top:-500px"}

@@ -1,5 +1,5 @@
 class CourierTransit < ActiveRecord::Base
-  include Temporal
+  include Status
   attr_accessible :courier, :customer, :id, :is_signature_required, :record
 
 end

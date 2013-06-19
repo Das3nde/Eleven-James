@@ -36,24 +36,31 @@ Ej::Application.routes.draw do
 
   resources :fedex_transits
   authenticated :user do
-    root :to => redirect("/admin/models")
+    root :to => redirect("/admin/products/")
     namespace :admin do
       match "products/:product_id/upload_image" => "products#upload_image"
       match "products/add_vendor" => "products#add_vendor"
       match "products/:id/add_inventory" => "products#add_inventory"
-      match "inventory/:id/add_record" => "inventory#add_record"
-      match "models" => "products#models"
-      match "products/featured" => "products#featured"
-      match "products/new_arrivals" => "products#new_arrivals"
-      match "products/popular" => "products#popular"
+      match "selection/get_pairs" => "selection#get_pairs"
+      match "selection/distribute" => "selection#distribute"
+      #match "products" => redirect("/admin/products/")
+      match 'inventory/remove_record' => 'inventory#remove_record'
+      ['inventory','products'].each do |path|
+        controller = ('Admin::'+path.capitalize+'Controller').constantize
+        controller.tabs.each do |a, l|
+          action = a.to_s
+          match path+'/'+action => path+"#"+action
+        end
+      end
 
-      resources :products, :users, :settings, :vendors, :tiers, :inventory, :courier_transits,
-                :records, :product_images, :events
+      resources :products, :users, :settings, :vendors, :tiers, :courier_transits,
+                :records, :product_images, :events, :inventory, :selection, :storage_records
 
     end
   end
 
   match "/request_product" => 'users#request_product'
+  delete "/delete_request" => 'users#delete_request'
   match "/fedex-email-notifications" => 'fedex_transits#update'
   root :to => "users#index"
   devise_for :users, :controllers => {:registrations => "registrations"} do
@@ -61,5 +68,6 @@ Ej::Application.routes.draw do
   end
 
   get 'collection' => 'home#collection'
+  post 'filter_collection' => 'home#filter_collection'
   get 'user_queue' => 'home#user_queue'
 end

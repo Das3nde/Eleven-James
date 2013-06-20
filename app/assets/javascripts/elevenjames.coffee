@@ -108,8 +108,14 @@ $ ->
 
         $this.parents(".ui-dialog").addClass($this.data("class")).css "top", "60px"
         center_button_row()
-
-
+        if $(@).attr("id") == "image-zoom-popup"
+          $('#image-zoom-popup .image-content').one "load", ->  
+            width = $(@).parents(".ui-dialog").width()
+            $(@).parents(".ui-dialog").css {
+              marginLeft: "-#{width/2}px"
+            }
+        
+          
   $("body").delegate ".ej-notification .close", "click", ->
     $(this).parents(".ej-notification").fadeOut 700, ->
       $(this).remove()

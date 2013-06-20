@@ -2199,3 +2199,22 @@ table.ej-table {
 
   }
 }
+
+.image-zoom-popup {
+  padding:0;
+  border-width:0;
+  left:50% !important;
+  .ui-dialog-title {
+    display:none;
+  }
+  .ui-dialog-titlebar {
+    padding:0;
+  }
+  .ui-dialog-content {
+    padding:0;
+    margin-right:70px;
+    img.image-content {
+      display:block;
+    }
+  }
+}

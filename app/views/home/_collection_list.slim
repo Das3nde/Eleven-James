@@ -4,7 +4,7 @@ ul.cgrid.compact
       - img_src = (product.product_images.first.url(:public) rescue '/assets/temp/D1.jpg')
       img alt="" src="#{img_src}"
       .info
-        p.name = product.brand
+        p.name style="height:20px;" = product.brand
         .make
           = product.model
         .button-row.cgrid

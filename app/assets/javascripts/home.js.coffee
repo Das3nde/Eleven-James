@@ -153,10 +153,27 @@ if is_page('inventory')
 
 collection_list=
   init: ->
+    if $('#info').length > 0
+      this.show_page_add_to_collection()
+
     if $('#listing-layout').length > 0
       this.add_to_collection()
       this.filter_collection()
       this.reset_collection()
+
+  show_page_add_to_collection: ->
+    $('#info').find('a.add').bind 'click', ->
+      $(this).html('Upgrade')
+      product_id = $(this).attr('data-product-id')
+      $.ajax '/request_product',
+        type: 'POST'
+        dataType: 'json'
+        data:
+          product_id: product_id
+        error: (jqXHR, textStatus, errorThrown) ->
+        success: (data, textStatus, jqXHR) ->
+
+      false
 
   add_to_collection: ->
     $('#listing-layout').find('a.add').bind 'click', ->

@@ -1,0 +1,42 @@
+#comments
+  #comment_form.container style="display:none;"
+    .cgrid.comment-info
+      h3 Add Comment
+      a.comment-button.button href="#" Cancel
+
+    = form_for Comment.new, url: add_comment_path do |f|
+      strong Description
+      = f.text_area :description, style: "width: 250px;height: 100px"
+      = f.hidden_field :product_id, value: @product.id
+      br
+      br
+      p File
+      = f.file_field :avatar
+      br
+      br
+      .clearboth
+        p Rate
+        .rating
+          - Comment::RATING_ATTRIBUTES.each do |k, v|
+            section
+              label = v[:label]
+              = f.hidden_field k, class: 'score-field'
+              ul.clearboth
+                - 1.upto(5) do |i|
+                  li
+                    a href="#" data-cnt="#{i}"
+      br
+      br
+      = f.submit 'Save'
+
+  #comment_list.container
+    - if @product.comments.length == 0
+      p No comments posted
+    - else
+      .cgrid.comment-info
+        p #{@product.comments.length} Members Have Commented on this Timepiece
+        a.comment-button.button href="#" Add Comment
+      h3 Most helpful Reviews
+      - @product.comments.each do |c|
+        = render '/products/comment_row', {c: c}
+

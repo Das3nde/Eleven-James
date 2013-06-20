@@ -1,0 +1,24 @@
+.review.cgrid
+  .user
+    p.name = c.user.name
+    p Silver Membership
+  .review-body
+    ul
+      - Comment::RATING_ATTRIBUTES.each do |k, v|
+        li.cgrid
+          p.label = v[:label]
+          ul.rating.cgrid
+            - rate_val = c.send(k)
+            - 1.upto(5) do |i|
+              li
+                a href="#" class="#{ i <= rate_val ? 'fill' : ''}"
+
+    - if c.avatar_file_name.present?
+      = image_tag c.avatar.url(:square)
+
+    p.text = c.description
+    p.block #{c.positive_helps.length} of #{c.comment_helps.length} members found this review helpful
+    p You found this review:
+    .button-row.not-centered.cgrid
+      = link_to 'Helpful', '#', class: 'button comment-helpful', 'data-comment-id' => c.id, 'data-flag' => true
+      = link_to 'Not Helpful', '#', class: 'button comment-helpful', 'data-comment-id' => c.id, 'data-flag' => false

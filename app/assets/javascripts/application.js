@@ -17,3 +17,4 @@
 //= require underscore
 //= require jquery.validate
 //= require jcrop
+//= require products

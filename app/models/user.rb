@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_one :billing_address, :as => :addressable
   has_one :shipping_address, :as => :addressable
   has_many :rotations
+  has_many :comments, :dependent => :destroy
 
   def request_vectors
     sql = 'fulfillment_time is null and removal_time is null and user_id = ?'

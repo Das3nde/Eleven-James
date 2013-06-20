@@ -12,4 +12,4 @@ ul.cgrid.compact
             a.button.upgrade href="#" data-product-id="#{product.id}" Upgrade
           - else
             a.button.add href="#" data-product-id="#{product.id}" + Add
-          a.button href="#" Info
+          = link_to 'Info', show_collection_path(product.id), class: 'button'

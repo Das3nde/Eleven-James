@@ -1,0 +1,64 @@
+.header
+  .container
+    h2
+      em the collection
+      small
+        |  /
+      = @product.model
+    .back-link
+      | back to
+      = link_to ' The Collection', '/collection'
+
+.content
+  .container.cgrid.compact
+    .photo-slider
+      ul.bjqs
+        - @product.product_images.each do |p|
+          li
+            .image
+              = image_tag p.url(:medium)
+              a.zoom href="#"
+
+      ol.bjqs-markers.h-centered.real style="left: 0px; "
+        - @product.product_images.each do |p|
+          li.active-marker
+            a href="#"
+              = image_tag p.url(:square)
+
+    .ej-tabs data-active="2"
+      ul
+        li
+          a href="#info" Info
+        li
+          a href="#comments" Member Comments
+      #info
+        .cgrid.compact.info-section
+          .info
+            p.name = @product.brand
+            p.make = @product.model
+            p Movement: Rolex Automatic
+            p Case: #{@product.case_size}mm
+            p Retail: $#{@product.price}
+          .tag.cgrid
+            .circle = @product.tier
+            .circle.double-line.primary
+              | Newly
+              br/
+              | Added
+        p.desc
+          = @product.description
+
+        .cgrid.compact.actions-section
+          .button-row.not-centered.cgrid
+            a.button.add href="#" data-product-id="#{@product.id}" + Add
+            a.button href="#" Buy
+          ul.cgrid.social-media.black-version
+            li.alpha
+              a.facebook href="#facebook"
+            li
+              a.twitter href="#twitter"
+            li
+              a.pinterest href="#pinterest"
+            li.omega
+              a.gplus href="#glpus"
+      = render '/products/comments'

@@ -12,7 +12,7 @@ gem 'aws-sdk'
 gem 'munkres'
 gem 'rmagick', :require => 'RMagick'
 gem "jcrop-rails"
-gem "paperclip", "~> 3.0"
+gem "paperclip", "~> 3.4.2"
 gem "redis"
 gem "simple-navigation", "~> 3.10.0"
 gem "rails-backbone"

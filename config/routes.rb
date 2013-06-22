@@ -70,7 +70,10 @@ Ej::Application.routes.draw do
     match '/auth/sign_out' => 'registrations#destroy_session', :as => :destroy_user_session
   end
 
+  get 'collection/:id' => 'products#show', :as => :show_collection
   get 'collection' => 'home#collection'
+  post 'comment' => 'products#comment', :as => :add_comment
+  post 'comment_helpful' => 'products#comment_helpful'
   post 'filter_collection' => 'home#filter_collection'
   get 'user_queue' => 'home#user_queue'
 end

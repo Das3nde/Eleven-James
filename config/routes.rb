@@ -45,6 +45,8 @@ Ej::Application.routes.draw do
       match "selection/distribute" => "selection#distribute"
       #match "products" => redirect("/admin/products/")
       match 'inventory/remove_record' => 'inventory#remove_record'
+      match 'inventory/add_service/:id' => 'inventory#add_service'
+      match 'inventory/status/:id' => 'inventory#status'
       ['inventory','products'].each do |path|
         controller = ('Admin::'+path.capitalize+'Controller').constantize
         controller.tabs.each do |a, l|
@@ -54,7 +56,8 @@ Ej::Application.routes.draw do
       end
 
       resources :products, :users, :settings, :vendors, :tiers, :courier_transits,
-                :records, :product_images, :events, :inventory, :selection, :storage_records
+                :records, :product_images, :events, :inventory, :selection, :storage_records, :services,
+                :rotations
 
     end
   end

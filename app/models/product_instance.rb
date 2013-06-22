@@ -94,6 +94,7 @@ class ProductInstance < ActiveRecord::Base
     self.services << service
     self.fedex_transits << transit
     self.is_available = false
+    self.status.is_available = false
     self.save
   end
 
@@ -114,5 +115,11 @@ class ProductInstance < ActiveRecord::Base
 
   def self.available()
     ProductInstance.joins(:storage_records).where("storage_records.is_available is null")
+  end
+
+  def remove_future_records()
+    Record.where('start_date is null and product_instance_id = ?',id).each do |r|
+      r.destroy
+    end
   end
 end

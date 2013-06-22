@@ -1,26 +1,13 @@
-# 		console.log(active);
-
-# 		console.log([$this.parents(".ui-dialog").get(0), width]);
-
-# 		console.log([index,$(this).parents(".bjqs-markers").next().find("li").eq(index).find("a")])
-
-# 		console.log($(".shipping-info"));
-
-#         console.log(text_value)
 window.center_button_row = ->
   $(".button-row:not('.not-centered'), .dynamic-centered").each ->
     width = 0
     $("> *", this).each ->
       $this = $(this)
-      # console.log $this.outerWidth(true)
       width += $this.outerWidth(true)
-    # 			console.log($this.outerWidth(true));
-    # console.log width
     $(this).width width
 
 window.onload = ->
   center_button_row()
-# console.log("zsd")
 
 update_select = (sel_instance) ->
   val = $(sel_instance).val()
@@ -46,10 +33,8 @@ $ ->
     page = path_parts.pop()
 
     $.get(action, {}, (html)->
-      refesh_method = refresh_tab_methods[page][action]
       $el = $('.ej-tabs [data-action='+action+']')
-      $el.html(html)
-      refesh_method($el, html)
+      refresh_tab($el, action)
     )
 
   $(".ej-tabs").each ->
@@ -60,33 +45,35 @@ $ ->
       activate: (e, i)->
        $el = $(i.newPanel)
        action = $el.attr('data-action')
-       if($el.attr('id')!= 'add-product')
-         $('#add-product').attr('data-action', 'add_product')
-         $('a[href="#add-product"]').html('Add Model')
-       if(action != undefined)
-         console.log('making a request')
-         $.get(action, {}, (html)->
-           action = action || "all_products"
-           if($.isNumeric(action) || action.substr(5,1) == '-')
-              if(page == 'products')
-                action = 'add_product'
-              else
-               action = 'view_item'
-           console.log('how many times is this called?')
-           console.log(action)
-           refresh_method = refresh_tab_methods[page][action]
-           $el.html(html)
-           $(".select-wrapper select").on "change", ->
-               update_select(this)
+       refresh_tab($el, action)
+    })
 
-           $(".select-wrapper select").each ->
-             update_select(this)
-           if(refresh_method)
-             $el.ready(()->
-               refresh_method($el, html)
-             )
-         )
-      })
+  refresh_tab = ($el, action) ->
+    if($el.attr('id')!= 'add-product')
+      $('#add-product').attr('data-action', 'add_product')
+      $('a[href="#add-product"]').html('Add Model')
+    if(action != undefined)
+      $.get(action, {}, (html)->
+        action = action || "all_products"
+        if($.isNumeric(action) || action.substr(5,1) == '-')
+          if(page == 'products')
+            action = 'add_product'
+          else
+            action = 'view_item'
+        console.log('how many times is this called?')
+        console.log(action)
+        refresh_method = refresh_tab_methods[page][action]
+        $el.html(html)
+        $(".select-wrapper select").on "change", ->
+          update_select(this)
+
+        $(".select-wrapper select").each ->
+          update_select(this)
+        if(refresh_method)
+          $el.ready(()->
+            refresh_method.call(refresh_method, $el, html)
+          )
+      )
 
   $(".ej-modal").each ->
     $this = $(this)
@@ -415,37 +402,76 @@ refresh_tab_methods = {
     inventory: ()->
       $('.ej-table tr').click(()->
         id = this.dataset.id
-        if($('.ui-tabs-anchor').length < 5)
-          console.log('adding')
-          $('.ej-tabs').tabs("add", id, id);
-        else
-          $('.ui-tabs-nav:last-child span').html(id)
-        $('.ui-tabs-panel:last-child').attr('data-action', id)
-        $('.ej-tabs').tabs('select', 4);
+        add_inventory_tab(id)
       )
     view_item : ($el)->
-      console.log($('a.remove-record').html())
+      _this = this
+      $dialog = $('#service_dialog')
+      $panel = $('.ui-tabs-panel:last-child')
+      refresh = -> _this.call(_this, $el);
+
       setTimeout(()-> #this is retarded, but I have no idea why it doesn't work otherwise
+        $status_panel = $('#status_panel')
+        $hover_status = $('#hover_status')
+        $trs = $('#admin-manage-inventory .ej-table tbody tr')
         $el.find('a.remove-record').click(()->
           if(confirm('Are you sure you want to remove this event? Any associated transit records will also be deleted'))
             id = this.dataset.id
             $.post('remove_record', {
                    authenticity_token:AUTH_TOKEN,
                    id: id
-                   }, (res)->
-              _.each(res, (id)->
-                $('#future').find('[data-id='+id+']').remove()
-              )
-            , 'json')
-            return false
+              }, (res)->
+                $panel.html(res)
+                refresh()
+            )
+          return false
         )
-        $el.find('form').change(()->
+        $el.find('form.edit_storage_record').change(()->
           $.post(this.action, $(this).serialize(), ()->
-            console.log('all good')
           )
           return false
         )
-
+        $('label:has(#storage_record_is_available[disabled])').click(->
+          return false
+        )
+        $('#add_service_button').click(->
+          if($dialog.hasClass('ui-dialog'))
+            $dialog.dialog('open')
+          else
+            $('#service_dialog').remove()
+            $dialog = $dialog.dialog()
+            $('#add_service_form').submit(->
+              $.post('add_service/'+$panel[0].dataset.action, $(this).serialize() ,(res) ->
+                $panel.html(res)
+                $dialog.dialog('destroy')
+                $dialog.remove()
+                refresh()
+              )
+              return false
+            )
+        )
+        $trs.hover(->
+          $.get('status/'+this.dataset.id,{}, (res)->
+            $hover_status.html(res)
+          )
+          $hover_status.show()
+          $status_panel.hide()
+        ->
+          $hover_status.hide()
+          $status_panel.show()
+        ).click(->
+          $trs.removeClass('highlight')
+          $(this).addClass('highlight')
+          $status_panel.html($hover_status.html())
+        )
       , 100)
   }
 }
+
+add_inventory_tab = (id)->
+  if($('.ui-tabs-anchor').length < 5)
+    $('.ej-tabs').tabs("add", id, id)
+  else
+    $('.ui-tabs-nav:last-child span').html(id)
+  $('.ui-tabs-panel:last-child').attr('data-action', id)
+  $('.ej-tabs').tabs('select', 4)

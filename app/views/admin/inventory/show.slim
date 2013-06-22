@@ -1,29 +1,40 @@
 .container
   #admin-manage-inventory
-    .content
-      =render('admin/inventory/record_forms/' + @status.class.to_s.underscore)
-    -if !@future.empty?
-      h3 Scheduled
+    .content.left_col
+      #status_panel
+        =render('admin/inventory/record_forms/' + @status.class.to_s.underscore)
+      #hover_status
+    .right_col
+      -if !@future.empty?
+        .content.future
+          h3 Scheduled
+          .table-view
+            table#future.ej-table
+              thead
+                th width='400px' Status
+                th
+              tbody
+                -@future.each do |r|
+                  tr data-id=r.id
+                    td =r.type
+                    -if !r.type.index('Transit')
+                      td
+                        a.remove-record data-id=r.id href="#" X
+      h3 Product History
       .table-view
-        table#future.ej-table
+        table#history.ej-table
           thead
-            th width='400px' Status
-            th
+            th width='200px' Dates
+            th width='210px' Status
           tbody
-            -@future.each do |r|
-              tr data-id=r.id
+            -@history.each do |r|
+              tr{class=(@status.id == r.id ? 'highlight':'') data-id=r.id}
+                td =r.dates
                 td =r.type
-                -if !r.type.index('Transit')
-                  td
-                    a.remove-record data-id=r.id href="#" X
-    h3 Product History
-    .table-view
-      table.ej-table
-        thead
-          th width='400px' Dates
-          th width='400px' Status
-        tbody
-          -@history.each do |r|
-            tr
-              td =r.dates
-              td =r.type
+
+#service_dialog.dialog
+  label Select Vendor
+  =simple_form_for :service, :url => 'add_service', :html => {:id => 'add_service_form'} do |f|
+    =f.collection_select "vendor_id", Vendor.all, :id, :name, :label => "Name"
+    =f.submit
+  div Note: this will remove all scheduled activity for this item.

@@ -1,0 +1,24 @@
+.table-view
+    table.ej-table
+      tr
+        ruby:
+          cols = [
+            {text: "Member Id", classname: "id", width: 135},
+            {text: "Member Name", classname: "model", width: 327},
+            {text: "Membership", classname: "brand", width: 210},
+            {text: "Transit Method", classname: "service", width: 205},
+            {text: "Due Date", classname: "completion", width: 170},
+          ]
+        - cols.each do |i|
+          th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
+            span.cgrid.compact
+              span= i[:text]
+              a.sort class="#{'active' if i[:text] == 'Expected Completion'}" href="#"
+      tbody
+        - @transits.each_with_index do |instance, i|
+          tr class="#{'even' if i%2 == 1}" data-id=instance.id
+            - cols.each do |cell|
+                td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
+                  span= instance.send(cell[:attr])
+                  - if cell.has_key?(:extra)
+                    .extra= raw cell[:extra]

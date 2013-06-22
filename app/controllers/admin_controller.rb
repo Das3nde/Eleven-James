@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   before_filter :authenticate_user!
-  layout 'admin'
   helper_method :tabs
+  before_filter lambda {request.xhr? ? self.class.layout(false) : self.class.layout('admin') }
 
   def tabs
     @tabs

@@ -1,5 +1,5 @@
 =simple_form_for [:admin, @status] do |f|
-  =f.input :is_available
+  =f.input :is_available, :disabled => !@future.empty?
   =f.input :bin_number
 
-button#add_service Service
+button#add_service_button Service

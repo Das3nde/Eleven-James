@@ -1,0 +1,6 @@
+=simple_form_for [:admin, @status] do |f|
+  =f.input :cleaning
+  =f.input :repair_description, :as => :text
+  =f.input :requested_size
+
+button#add_service_button Service

@@ -18,7 +18,7 @@ html
         {title: "Your Selections", slug: "selection", href: '#'},
         {title: "Services & Benefits", slug: "service", href: '#'},
         {title: "News and Events", slug: "news", href: '#'},
-        {title: "Contact Us", slug: "contact", href: '#'}
+        {title: "Contact Us", slug: "contact", href: '#'},
              ]
     - if @wrapper == "splash"
       - @header_partial = "splash_header"
@@ -35,8 +35,11 @@ html
           {title: "Models", slug: "models", href: 'products/'},
           {title: "Inventory", slug: "inventory", href: 'inventory/'},
           {title: "Members", slug: "members", href: '#'},
-          {title: "Events", slug: "events", href: '#',
-           title: "Selection", slug: "selection", href: 'selection/'}
+          {title: "Events", slug: "events", href: '#'},
+           {title: "Selection", slug: "selection", href: 'selection/'},
+           {title: "Access", slug: "access", href: 'admins/'}
+
+
                ]
     div id="#{ @wrapper ? @wrapper : action_name}-page" class="#{@internal_class if @internal_class.present?}"
       #site-header class="#{@header_class if @header_class.present?}"

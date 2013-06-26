@@ -1,5 +1,5 @@
 class Record < ActiveRecord::Base
-  @@record_attrs = [:due_date, :end_date, :start_date, :est_start_date, :est_end_date, :next, :prev]
+  @@record_attrs = [:due_date, :end_date, :start_date, :est_start_date, :est_end_date, :next, :prev, :next_id]
   self.primary_key = :uuid
   attr_accessible *(@@record_attrs)
   attr_accessor :next, :prev, :status
@@ -7,16 +7,30 @@ class Record < ActiveRecord::Base
   before_destroy :remove_status
 
   def remove_status
-    if(product_instance.next_status_id == id)
-      product_instance.next_status = nil
-      product_instance.save
-    end
+    switch_status
+  end
+
+  def switch_status(new_status_class = nil)
+    old_status = self.status.clone
     previous = Record.where('next_id = ?', id).last
-    if(previous)
-      previous.update_attribute('next_id', nil)
-      previous.update_attribute('next_table', nil)
+    new_status = new_status_class && new_status_class.new({}, {:record => self})
+    if(new_status)
+      new_status.id = id
+      self.status = new_status
     end
-    status.class.delete(id)
+    ActiveRecord::Base.transaction do
+      if(previous)
+        previous.update_attribute('next_table', new_status ? new_status.class.to_s.tableize : nil)
+      end
+
+      if(product_instance && product_instance.next_status_id == id)
+        product_instance.next_status = new_status
+        product_instance.save
+
+      end
+      new_status && new_status.save
+      old_status.delete
+    end
   end
 
   def dates
@@ -27,6 +41,11 @@ class Record < ActiveRecord::Base
   def type
     table.classify.constantize.label
   end
+
+  def status_class
+    table.classify.constantize
+  end
+
   def next
     @next ||= next_table.classify.constantize.find(next_id)
   end
@@ -43,6 +62,11 @@ class Record < ActiveRecord::Base
     @prev = status
   end
   def status
-    @status ||= table.classify.constantize.find(id)
+    @status ||= status_class.find(id)
+  end
+  def status=(status)
+    status.id = self.id
+    self.table = status.class.to_s.tableize
+    @status = status
   end
 end

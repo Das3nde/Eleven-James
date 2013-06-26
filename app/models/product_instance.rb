@@ -70,6 +70,7 @@ class ProductInstance < ActiveRecord::Base
     if(status.class != StorageRecord || is_available != true)
       raise 'Rotations cannot be added to product_instances that are unavailable'
     end
+    user.transit_table ||= 'fedex_transits'
     transit_class = user.transit_table.to_class
     rotation = Rotation.new()
     transit = transit_class.new()
@@ -82,6 +83,7 @@ class ProductInstance < ActiveRecord::Base
     self.send(user.transit_table) << transit
     self.is_available = false
     self.save
+
   end
 
   def add_service(vendor, transit = FedexTransit.new())

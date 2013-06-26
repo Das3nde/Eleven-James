@@ -47,6 +47,9 @@ Ej::Application.routes.draw do
       match 'inventory/remove_record' => 'inventory#remove_record'
       match 'inventory/add_service/:id' => 'inventory#add_service'
       match 'inventory/status/:id' => 'inventory#status'
+      match 'inventory/change_transit/:id' => 'inventory#change_transit'
+      match 'admins/add_role' => 'admins#add_role'
+      match 'admins/remove_role' => 'inventory#remove_role'
       ['inventory','products'].each do |path|
         controller = ('Admin::'+path.capitalize+'Controller').constantize
         controller.tabs.each do |a, l|
@@ -57,7 +60,7 @@ Ej::Application.routes.draw do
 
       resources :products, :users, :settings, :vendors, :tiers, :courier_transits,
                 :records, :product_images, :events, :inventory, :selection, :storage_records, :services,
-                :rotations
+                :rotations, :admins
 
     end
   end
@@ -76,4 +79,6 @@ Ej::Application.routes.draw do
   post 'comment_helpful' => 'products#comment_helpful'
   post 'filter_collection' => 'home#filter_collection'
   get 'user_queue' => 'home#user_queue'
+
+  match '*path' => redirect("/users/sign_in")
 end

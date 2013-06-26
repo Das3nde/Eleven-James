@@ -1,6 +1,6 @@
 class Admin::InventoryController < AdminController
   before_filter :append_view_paths
-  @tabs = {:inventory => 'Inventory',
+  @tabs = {:index => 'Inventory',
     :process_transit => 'Arrange Transit',
     :past_due => 'Past Due',
     :purchase_request => 'Purchase Request'
@@ -14,7 +14,12 @@ class Admin::InventoryController < AdminController
 
   def index
     @products = ProductInstance.order('id DESC')
+    if request.xhr?
+      @product_instances = ProductInstance.all
+      render :file => 'admin/inventory/_inventory'
+    end
   end
+
   def show
     @products = ProductInstance.order('id DESC')
     if request.xhr?
@@ -27,10 +32,6 @@ class Admin::InventoryController < AdminController
   end
 
   #tab actions
-  def inventory
-    @product_instances = ProductInstance.all
-    render :file => 'admin/inventory/_inventory'
-  end
   def arrange_transit
     render :nothing => true
   end
@@ -59,6 +60,16 @@ class Admin::InventoryController < AdminController
     @status = Record.find(params[:id]).status
     @future = @status.class == StorageRecord && @status.product_instance.future();
     render :file => 'admin/inventory/record_forms/_'+@status.class.to_s.underscore
+  end
+
+  def change_transit
+    record = Record.find(params[:id])
+
+    new_transit_class = (params[:transit][:transit_type] + 'Transit').constantize
+
+    record.switch_status(new_transit_class)
+    record.save
+    _show(record.product_instance)
   end
 
   private

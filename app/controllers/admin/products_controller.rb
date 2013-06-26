@@ -1,7 +1,7 @@
 class Admin::ProductsController < AdminController
   before_filter :user_preferences
   @tabs = {
-    :products => 'All Products',
+    :index => 'All Products',
     :add_product => 'Add Model',
     :featured => 'Featured',
     :new_arrivals  => 'New Arrivals',
@@ -9,6 +9,10 @@ class Admin::ProductsController < AdminController
   }
   def index
     @product_image = ProductImage.new()
+    @products = Product.order(@order).page(params[:page]).per(@page_size)
+    if request.xhr?
+      render :file => 'admin/products/products'
+    end
   end
   def user_preferences
     key = 'admin::'+ (current_user.id.to_s)

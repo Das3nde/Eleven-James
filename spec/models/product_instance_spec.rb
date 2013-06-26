@@ -44,7 +44,7 @@ describe ProductInstance do
 
       @instance.add_rotation(@user)
 
-      @instance = ProductInstance.find(@instance.id)
+      @instance.reload
 
       @next_status = @instance.next_status;
       @next_status.class.to_s.should eq('FedexTransit')

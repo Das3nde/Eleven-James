@@ -28,14 +28,14 @@ $ ->
     $("ul.ej-queue li:nth-child(2n)").addClass "wrap"
 
   path_parts = document.location.pathname.split('/')
-  if($('.ui-tabs')[0])
-    action = path_parts.pop() || $('.ui-tabs')[0].dataset.action
-    page = path_parts.pop()
-
-    $.get(action, {}, (html)->
-      $el = $('.ej-tabs [data-action='+action+']')
-      refresh_tab($el, action)
-    )
+  console.log(path_parts)
+  action = path_parts.pop() || 'index'
+  page = path_parts.pop()
+  url = if action == 'index' then '' else action
+  $.get( url, {}, (html)->
+    $el = $('.ej-tabs [data-action='+action+']')
+    refresh_tab($el, action)
+  )
 
   $(".ej-tabs").each ->
     active = 0
@@ -53,7 +53,8 @@ $ ->
       $('#add-product').attr('data-action', 'add_product')
       $('a[href="#add-product"]').html('Add Model')
     if(action != undefined)
-      $.get(action, {}, (html)->
+      url = if action == 'index' then '' else action
+      $.get(url, {}, (html)->
         action = action || "all_products"
         if($.isNumeric(action) || action.substr(5,1) == '-')
           if(page == 'products')
@@ -285,7 +286,7 @@ $ ->
 
 refresh_tab_methods = {
   products:{
-    products: () ->
+    index: () ->
       $('.ej-table tbody tr').click(()->
         id = $(this).attr('data-id')
         $('#add-product').attr('data-action', id)
@@ -405,7 +406,7 @@ refresh_tab_methods = {
           responsive: false
   },
   inventory : {
-    inventory: ()->
+    index: ()->
       $('.ej-table tr').click(()->
         id = this.dataset.id
         add_inventory_tab(id)
@@ -469,8 +470,50 @@ refresh_tab_methods = {
           $trs.removeClass('highlight')
           $(this).addClass('highlight')
           $status_panel.html($hover_status.html())
+          refresh_status_forms()
         )
+        refresh_status_forms = ->
+          $('.simple_form.transit').change(->
+            data = $(this).serialize() + '&' + $.param({
+              status_id : $('.right_col tr.highlight').data('id')
+            })
+            console.log(data)
+            $.post(this.action, data, (res)->
+              $el.html(res)
+              refresh()
+            )
+          )
+
+        refresh_status_forms()
       , 100)
+  }
+  admins:{
+    index: ->
+      $('input[type=checkbox]').change(()->
+        _this = this
+        action = if this.checked then 'add' else 'remove'
+        $.post(action+'_role',{
+          authenticity_token:AUTH_TOKEN,
+          id: $(this).parents('tr').data('id'),
+          role: this.name
+        }).fail(->
+          _this.checked = !_this.checked
+          alert('An Unexpected Error Has Occurred')
+        )
+      )
+      $('#new_user').submit(->
+        $.post('', $(this).serialize(), (res)->
+          html = '<tr data-id="'+res.id+'"><td>'+res.name+'</td><td>'+res.email+'</td><td><input name="courier" type="checkbox"></td><td><input name="editor" type="checkbox"></td><td><input name="superadmin" type="checkbox"></td></tr>'
+          $('.ej-table').append(html)
+          $('.error').html()
+        ).fail((res)->
+          errors = JSON.parse(res.responseText).errors
+          _.each(errors, (v,k)->
+            $('.error.'+k).html(v)
+          )
+        )
+        return false
+      )
   }
 }
 

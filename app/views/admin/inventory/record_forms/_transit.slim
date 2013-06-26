@@ -1,0 +1,2 @@
+=simple_form_for :transit, :url => 'change_transit/'+@status.id do |f|
+  =f.input :transit_type, :as => :select, collection: ['Courier', 'Event', 'Fedex'], :selected => @status.class.to_s.underscore.split('_')[0].capitalize

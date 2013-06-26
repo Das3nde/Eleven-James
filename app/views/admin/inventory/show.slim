@@ -15,7 +15,7 @@
                 th
               tbody
                 -@future.each do |r|
-                  tr data-id=r.id
+                  tr{class=(@status.id == r.id ? 'highlight':'') data-id=r.id}
                     td =r.type
                     -if !r.type.index('Transit')
                       td

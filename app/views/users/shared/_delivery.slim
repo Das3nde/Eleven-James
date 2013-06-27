@@ -1,0 +1,7 @@
+#delivery.ui-tabs
+  .container
+    .header
+      h3 Specify Delivery Address
+      a.button.primary href="#" Add new
+    .form#user_addresses
+      = render '/users/shared/addresses', addresses: current_user.shipping_addresses

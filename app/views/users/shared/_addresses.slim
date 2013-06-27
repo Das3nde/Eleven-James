@@ -1,0 +1,14 @@
+ul.cgrid.buttonset
+  - addresses.each_with_index do |address, i|
+    li class="#{"active" if address.selected_shipping}"
+      - checked =  (i==0 ? {checked: 'checked'} : {})
+      input type="radio" id="address#{i}" name="address" data-address-id="#{address.id}" class="default-address" *checked
+      label for="address#{i}" Ship to this address
+      p.address
+        #{address.first_name} #{address.first_name}
+        br
+        #{address.address_line} #{address.apt_unit}
+        br
+        #{address.city}, #{address.state}, #{address.zip}
+        br
+        | Phone: #{address.phone}

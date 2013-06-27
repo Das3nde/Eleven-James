@@ -1,0 +1,22 @@
+#frequency.ui-tabs
+  .container
+    .header
+      h3 Specify Rental Frequency
+      a.button.primary#save_rental_months href="#" Save
+    .hr
+    p.label Please select 6 months of the year you would like to receive your watches.
+    ul.buttonset.cgrid
+      - cnt = 0
+      - ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ].each do |month|
+        - selected = current_user.rental_months.to_s.split(',').include?(month) ? true : false
+        - if selected
+          - cnt = cnt + 1
+        li
+          label for="#{month.downcase}"=month
+          = check_box_tag "months[]", month, selected, class: 'rental-months', id: "#{month.downcase}"
+
+          - if selected
+            p.number
+              - cnt = cnt + 1
+          - else
+            p.number &nbsp;

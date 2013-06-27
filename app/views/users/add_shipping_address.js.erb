@@ -1,0 +1,7 @@
+<%if @sa.errors.keys.length > 0%>
+  alert("<%=@sa.errors.full_messages.join('\n').html_safe%>");
+<%else%>
+
+  window.location.reload();
+<%end%>
+

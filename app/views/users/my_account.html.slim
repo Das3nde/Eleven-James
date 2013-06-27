@@ -1,0 +1,56 @@
+h2 Manage Account
+.ej-tabs
+  .container
+    ul
+      li
+        a href="#account-info" Account Info
+      li
+        a href="#delivery" Delivery
+      li
+        a href="#frequency" Frequency
+      li
+        a href="#referral" Referral
+      li
+        a href="#vault" Vault
+  = render '/users/shared/account_info'
+  = render '/users/shared/delivery'
+  = render '/users/shared/rental_frequency'
+  = render '/users/shared/referrals'
+  = render '/users/shared/vaults'
+
+
+
+#add-address-modal.ej-modal style="display:none" title="Add An Address To Your Account"
+  .form
+    = form_for ShippingAddress.new, url: add_shipping_address_path, remote: true do |f|
+      .row.cgrid.compact
+        label for="shipping-first-name" First Name
+        = f.text_field :first_name
+      .row.cgrid.compact
+        label for="shipping-last-name" Last Name
+        = f.text_field :last_name
+      .row.cgrid.compact
+        label for="shipping-address-line" Address Line
+        = f.text_field :address_line
+      .row.cgrid.compact
+        label for="shipping-apt-unit" Apt / unit
+        = f.text_field :apt_unit
+      .row.cgrid.compact
+        label for="shipping-city" City
+        = f.text_field :city
+      .row.cgrid.compact
+        label for="shipping-state" State
+        = f.select :state, options_for_select(us_states.unshift(['', '']))
+
+      .row.cgrid.compact
+        label for="shipping-zip" Zip
+        = f.text_field :zip
+      .row.cgrid.compact
+        label for="shipping-phone" Phone
+        = f.text_field :phone
+      .button-row.cgrid
+        .button.primary
+          .text Submit
+          input type="submit" value="Submit"
+        .button.button-close
+          .text Cancel

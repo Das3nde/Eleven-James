@@ -208,5 +208,39 @@ collection_list=
     $('#reset_collection').bind 'click', ->
       $('#brand, #tier, #type, #band, #face, #width').val('')
 
+default_shipping =
+  init: ->
+    $('.default-address').bind 'click', ->
+      address_id = $(this).attr('data-address-id')
+
+      $.ajax '/selected_shipping',
+        type: 'POST'
+        data:
+          address_id: address_id
+        error: (jqXHR, textStatus, errorThrown) ->
+        success: (data, textStatus, jqXHR) ->
+
+save_rental_months =
+  init: ->
+    if $('#save_rental_months').length > 0
+      $('#save_rental_months').bind 'click', ->
+        arr = []
+        $(".rental-months").each ->
+          if $(this).attr("checked") == 'checked'
+            arr.push($(this).val())
+
+        if arr.length == 0
+          alert('Select at lease one month')
+        else
+          $.ajax '/rental_months',
+            type: 'POST'
+            data:
+              months: arr.join(',')
+            error: (jqXHR, textStatus, errorThrown) ->
+            success: (data, textStatus, jqXHR) ->
+        false
+
 $ ->
   collection_list.init()
+  default_shipping.init()
+  save_rental_months.init()

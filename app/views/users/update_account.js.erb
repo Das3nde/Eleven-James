@@ -1,0 +1,5 @@
+<%if @status%>
+  alert('Account updated')
+<%else%>
+  alert("<%=@user.errors.full_messages.join('\n')%>")
+<%end%>

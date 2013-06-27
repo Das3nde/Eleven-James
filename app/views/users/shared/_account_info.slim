@@ -1,0 +1,29 @@
+#account-info
+  .container
+    .form.centerme
+      = form_for @user, url: update_account_path, remote: true do |f|
+        h3 Username / Password
+        .row.cgrid.compact
+          label for="username" Username
+          = f.text_field :username
+
+        .row.cgrid.compact
+          label for="username" Name
+          = f.text_field :name
+
+        .row.cgrid.compact
+          label for="email" Email
+          = f.text_field :email
+
+        .row.cgrid.compact
+          label for="userpassword" Password
+          = f.text_field :password
+
+        .row.cgrid.compact
+          label for="userpassword-repeat" Confirm Password
+          = f.text_field :password_confirmation
+
+        .button-row.cgrid
+          .button.primary
+            .text Save
+            input type="submit" value="Save"

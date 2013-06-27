@@ -35,8 +35,8 @@ html
                ]
     div id="#{ @wrapper ? @wrapper : action_name}-page" class="#{@internal_class if @internal_class.present?}"
       #site-header class="#{@header_class if @header_class.present?}"
-        = render "layouts/static/#{@header_partial}"
+        = render "/shared/#{@header_partial}"
       #site-content
         = yield
       #site-footer
-        = render "layouts/static/#{@footer_partial}"
+        = render "/shared/#{@footer_partial}"

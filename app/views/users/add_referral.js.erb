@@ -1,0 +1,6 @@
+<%if @referral.errors.keys.length > 0%>
+  alert("<%=@referral.errors.full_messages.join('\n').html_safe%>");
+<%else%>
+  alert("Referral added");
+  $('#friend_email').val('');
+<%end%>

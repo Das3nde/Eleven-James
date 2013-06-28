@@ -1560,6 +1560,8 @@ body.elevenjames {
     }
     .image {
       position: relative;
+      height:540px;
+      overflow:hidden;
     }
     .zoom {
       position: absolute;
@@ -2204,6 +2206,7 @@ table.ej-table {
   padding:0;
   border-width:0;
   left:50% !important;
+  max-width:100%;
   .ui-dialog-title {
     display:none;
   }

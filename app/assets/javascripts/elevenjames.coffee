@@ -99,9 +99,11 @@ $ ->
         if $(@).attr("id") == "image-zoom-popup"
           $('#image-zoom-popup .image-content').one "load", ->  
             width = $(@).parents(".ui-dialog").width()
-            $(@).parents(".ui-dialog").css {
+            $(@).parents(".ui-dialog").css({
               marginLeft: "-#{width/2}px"
-            }
+            }).find(".image-content").css({
+              width:"100%"
+            })
         
           
   $("body").delegate ".ej-notification .close", "click", ->

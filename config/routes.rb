@@ -83,5 +83,11 @@ Ej::Application.routes.draw do
   post 'filter_collection' => 'home#filter_collection'
   get 'user_queue' => 'home#user_queue'
 
+  get 'my_account' => 'users#my_account', :as => :my_account
+  put 'update_account' => 'users#update_account', :as => :update_account
+  post 'add_referral' => 'users#add_referral', :as => :add_referral
+  post 'add_shipping_address' => 'users#add_shipping_address', :as => :add_shipping_address
+  post 'selected_shipping' => 'users#selected_shipping', :as => :selected_shipping
+  post 'rental_months' => 'users#rental_months', :as => :rental_months
   match '*path' => redirect("/users/sign_in")
 end

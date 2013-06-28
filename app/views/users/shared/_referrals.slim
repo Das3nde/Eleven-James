@@ -1,0 +1,13 @@
+#referral.ui-tabs
+  .container
+    .form.centerme
+      = form_tag(add_referral_path, remote: true)  do |f|
+        h3 Refer your friend
+        .row.cgrid.compact
+          label for="username" Email
+          = text_field_tag :friend_email
+
+        .button-row.cgrid
+          .button.primary
+            .text Save
+            input type="submit" value="Save"

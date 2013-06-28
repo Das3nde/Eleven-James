@@ -21,7 +21,8 @@ class RegistrationsController < Devise::RegistrationsController
     if @resource.errors.keys.length == 0 and @billing_address.errors.keys.length == 0 and @shipping_address.errors.keys.length == 0
       @resource.save
       @resource.create_billing_address(params[:billing_address])
-      @resource.create_shipping_address(params[:shipping_address])
+      @resource.shipping_addresses << ShippingAddress.new(params[:shipping_address])
+      @resource.save
       sign_in @resource
       @status = true
     else

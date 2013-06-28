@@ -1,0 +1,24 @@
+.container
+  h3 Awaiting Pickup
+  table.ej-table
+    thead
+      th Product ID
+    tbody
+      -@awaiting.each do |t|
+        tr{data-id=t.id}
+          td = t.product_instance_id
+          td
+            button.pickup Pick Up
+  -if !@possessed.empty?
+    h3 In Possession
+    table.ej-table
+      thead
+        th Product ID
+      tbody
+        -@possessed.each do |t|
+          tr{data-id=t.id}
+            td =t.product_instance_id
+            td
+              button.mark_delivered Mark Delivered
+              button.cancel_pickup Cancel
+

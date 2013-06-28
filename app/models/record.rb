@@ -35,7 +35,7 @@ class Record < ActiveRecord::Base
 
   def dates
     start = start_date.strftime("%m/%d/%Y")
-    stop = end_date ? end_time.strftime("%m/%d/%Y") : 'current'
+    stop = end_date ? end_date.strftime("%m/%d/%Y") : 'current'
     "#{start} - #{stop}"
   end
   def type
@@ -47,7 +47,7 @@ class Record < ActiveRecord::Base
   end
 
   def next
-    @next ||= next_table.classify.constantize.find(next_id)
+    @next ||= next_table && next_table.classify.constantize.find(next_id)
   end
   def next= (status)
     self.next_table = status && status.class.to_s.tableize

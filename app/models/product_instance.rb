@@ -82,8 +82,10 @@ class ProductInstance < ActiveRecord::Base
     self.rotations << rotation
     self.send(user.transit_table) << transit
     self.is_available = false
-    self.save
-
+    ActiveRecord::Base.transaction do
+      self.save
+      status.save
+    end
   end
 
   def add_service(vendor, transit = FedexTransit.new())
@@ -97,22 +99,44 @@ class ProductInstance < ActiveRecord::Base
     self.fedex_transits << transit
     self.is_available = false
     self.status.is_available = false
-    self.save
+    ActiveRecord::Base.transaction do
+      self.save
+      status.save
+    end
   end
 
 
   def advance_record(date = Time.now)
-    current_record = status()
-    next_record = current_record.next_record()
-    current.end_date = date;
-    next_record.start_date = date
-    self.status = next_record;
+
+    advancing_record = next_status
+    current_record = status
+    current_record.end_date = date;
+    advancing_record.start_date = date
+
+    self.status = advancing_record;
+    self.next_status = advancing_record.next()
+
 
     ActiveRecord::Base.transaction do
-      next_record.save()
+      advancing_record.save()
       current_record.save()
       self.save()
     end
+  end
+
+  def retreat_record
+    current_record = status
+    last_record = status.prev
+    current_record.start_date = nil
+    last_record.end_date = nil
+    self.status = last_record
+    self.next_status = current_record
+    ActiveRecord::Base.transaction do
+      last_record.save()
+      current_record.save()
+      self.save()
+    end
+
   end
 
   def self.available()

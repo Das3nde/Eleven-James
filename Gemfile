@@ -7,6 +7,7 @@ group :assets do
 end
 
 #gem 'fedex', :path => '~/dev/fedex'
+gem 'roo'
 gem 'money'
 gem 'aws-sdk'
 gem 'munkres'

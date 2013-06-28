@@ -1,12 +1,10 @@
 class Admin::InventoryController < AdminController
   before_filter :append_view_paths
-  @tabs = {:index => 'Inventory',
-    :process_transit => 'Arrange Transit',
-    :past_due => 'Past Due',
-    :purchase_request => 'Purchase Request'
-    }
 
-
+  @@tabs = {:index => 'Inventory',
+           :past_due => 'Past Due',
+           :purchase_request => 'Purchase Request'
+  }
   def append_view_paths
     append_view_path 'app/views/admin/inventory/record_forms'
 
@@ -48,6 +46,9 @@ class Admin::InventoryController < AdminController
     record.destroy()
     _show(record.product_instance)
   end
+  def process_transit
+    @transits = ProductInstance.where("next_status_table ~ 'transits'")
+  end
 
   def add_service
     @product_instance = ProductInstance.find(params[:id])
@@ -73,11 +74,19 @@ class Admin::InventoryController < AdminController
   end
 
   private
-  def _show(product_instance = nil)
-    @product_instance = product_instance || ProductInstance.find(params[:id])
-    @history = @product_instance.history()
-    @future = @product_instance.future()
-    @status = params[:status_id] ? Record.find(params[:status_id]).status : @product_instance.status
-    render :file => 'admin/inventory/show'
-  end
+    def _show(product_instance = nil)
+      @product_instance = product_instance || ProductInstance.find(params[:id])
+      @history = @product_instance.history()
+      @future = @product_instance.future()
+      @status = params[:status_id] ? Record.find(params[:status_id]).status : @product_instance.status
+      @couriers = User.with_role :courier
+
+      render :file => 'admin/inventory/show'
+    end
+    def set_tabs
+      @tabs = {:index => 'Inventory',
+               :past_due => 'Past Due',
+               :purchase_request => 'Purchase Request'
+      }
+    end
 end

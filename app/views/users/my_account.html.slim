@@ -20,7 +20,7 @@ h2 Manage Account
 
 
 
-#add-address-modal.ej-modal style="display:none" title="Add An Address To Your Account"
+#add-address-modal.ej-modal style="display:none" title="Add An Address To Your Account" data-open="false"
   .form
     = form_for ShippingAddress.new, url: add_shipping_address_path, remote: true do |f|
       .row.cgrid.compact

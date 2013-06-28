@@ -53,7 +53,7 @@ Ej::Application.routes.draw do
       match 'shipping/pickup' => 'shipping#pickup'
       match 'shipping/cancel_pickup' => 'shipping#cancel_pickup'
       match 'shipping/mark_delivered' => 'shipping#mark_delivered'
-      ['inventory','products', 'shipping'].each do |path|
+      ['inventory','products', 'shipping', 'selection'].each do |path|
         controller = ('Admin::'+path.capitalize+'Controller').constantize
         controller.tabs.each do |a, l|
           action = a.to_s

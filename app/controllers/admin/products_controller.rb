@@ -1,6 +1,12 @@
 class Admin::ProductsController < AdminController
   before_filter :user_preferences
-
+  @@tabs = {
+      :index => 'All Products',
+      :add_product => 'Add Model',
+      :featured => 'Featured',
+      :new_arrivals  => 'New Arrivals',
+      :popular => 'Popular'
+  }
   def index
     @product_image = ProductImage.new()
     @products = Product.order('id ASC')

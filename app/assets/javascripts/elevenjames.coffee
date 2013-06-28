@@ -61,13 +61,13 @@ $ ->
           else
             action = 'view_item'
         refresh_method = refresh_tab_methods[page][action]
-        $el.html(html)
+        (refresh_method && refresh_method.norefresh) || $el.html(html)
         $(".select-wrapper select").on "change", ->
           update_select(this)
 
         $(".select-wrapper select").each ->
           update_select(this)
-        if(refresh_method)
+        if(refresh_method && !refresh_method.norefresh)
           $el.ready(()->
             refresh_method.call(refresh_method, $el, html)
           )
@@ -199,84 +199,8 @@ $ ->
   $(".shipping-billing-same input").on "change", ->
     $(".shipping-info").toggleClass "disable"
 
-  $(".select-wrapper select").on "change", ->
-    update_select this
-
-  $(".select-wrapper select").each ->
-    update_select this
-
-  $(".custom-select-wrapper").each ->
-    $this = $(@)
-    $ul = $("<ul />")
-    $this.find("select option").each ->
-      value = $(@).attr("value")
-      text = $(@).text()
-      text = value if $.trim(text) == ""
-      $li = $("<li data-value='" + value + "'>" + text + "</li>")
-      $ul.append($li)
-    $this.find(".options").append($ul)
-
-  $(".custom-select-wrapper").click ->
-    $(@).find(".options").toggle()
 
 
-  $( ".connected-sortable" ).sortable({
-    connectWith: ".connected-sortable"
-    update: (ev,ui)->
-      $item = ui.item
-      if($(this).hasClass('user-selection'))
-        $item.addClass('locked')
-        if($(this).find('li').length > 1)
-          $old_item = $(this).find('li').eq(1)
-          $old_item.removeClass('locked')
-          $('#selection_products').append($old_item)
-
-      else
-        $item.removeClass('locked')
-      check_paired()
-  }).disableSelection()
-  locked_pairs = ()->
-    arr = _.map($('.locked'),(
-      (item)->
-          [item.dataset.id, $(item).parents('ul')[0].dataset.id] ))
-    arr || []
-
-  $('#selection_form').submit(()->
-    data =  $(this).serialize() + '&' + $.param({
-      locked_pairs : locked_pairs(),
-    })
-    $.post('get_pairs', data, (result)->
-      _.each(result, (pair)->
-        product_id = pair[0]
-        user_id = pair[1]
-        $('#user-'+user_id).append($('#product-'+product_id))
-      )
-      check_paired()
-
-    , 'json')
-    return false
-  )
-
-  check_paired = ()->
-    action = if ($('.user-selection li').length != 0) then 'show' else 'hide'
-    $('#distribute_button')[action]()
-    action = if ($('.user-selection li').length == $('.user-selection').length) then 'hide' else 'show'
-    $('#run_selection')[action]()
-
-  $('#distribute_button').click(()->
-    pairs = _.map($('.user-selection li'), (item)->
-      [item.dataset.id,item.parentNode.dataset.id]
-    )
-    if confirm('Are you sure you want to distribute these '+ pairs.length + ' items?')
-      params = {
-        pairs:pairs,
-        authenticity_token: $('input[name=authenticity_token]').val()
-      }
-      $.post('distribute', params, ()->
-        $('.user-slot:has(li)').remove()
-      ,'json')
-    return false
-  )
 
 
 refresh_tab_methods = {
@@ -527,6 +451,87 @@ refresh_tab_methods = {
           $el.html(res)
           refresh()
         )
+      )
+  }
+  selection:{
+    index: ->
+      this.norefresh = true
+      $(".select-wrapper select").on "change", ->
+        update_select this
+
+      $(".select-wrapper select").each ->
+        update_select this
+
+      $(".custom-select-wrapper").each ->
+        $this = $(@)
+        $ul = $("<ul />")
+        $this.find("select option").each ->
+          value = $(@).attr("value")
+          text = $(@).text()
+          text = value if $.trim(text) == ""
+          $li = $("<li data-value='" + value + "'>" + text + "</li>")
+          $ul.append($li)
+        $this.find(".options").append($ul)
+
+      $(".custom-select-wrapper").click ->
+        $(@).find(".options").toggle()
+
+
+      $( ".connected-sortable" ).sortable({
+        connectWith: ".connected-sortable"
+        update: (ev,ui)->
+          $item = ui.item
+          if($(this).hasClass('user-selection'))
+            $item.addClass('locked')
+            if($(this).find('li').length > 1)
+              $old_item = $(this).find('li').eq(1)
+              $old_item.removeClass('locked')
+              $('#selection_products').append($old_item)
+
+          else
+            $item.removeClass('locked')
+          check_paired()
+        }).disableSelection()
+      locked_pairs = ()->
+        arr = _.map($('.locked'),(
+          (item)->
+            [item.dataset.id, $(item).parents('ul')[0].dataset.id] ))
+        arr || []
+
+      $('#selection_form').submit(()->
+        data =  $(this).serialize() + '&' + $.param({
+                                                    locked_pairs : locked_pairs(),
+                                                    })
+        $.post('get_pairs', data, (result)->
+          _.each(result, (pair)->
+            product_id = pair[0]
+            user_id = pair[1]
+            $('#user-'+user_id).append($('#product-'+product_id))
+          )
+          check_paired()
+
+        , 'json')
+        return false
+      )
+      check_paired = ()->
+        action = if ($('.user-selection li').length != 0) then 'show' else 'hide'
+        $('#distribute_button')[action]()
+        action = if ($('.user-selection li').length == $('.user-selection').length) then 'hide' else 'show'
+        $('#run_selection')[action]()
+
+      $('#distribute_button').click(()->
+        pairs = _.map($('.user-selection li'), (item)->
+          [item.dataset.id,item.parentNode.dataset.id]
+        )
+        if confirm('Are you sure you want to distribute these '+ pairs.length + ' items?')
+          params = {
+          pairs:pairs,
+          authenticity_token: $('input[name=authenticity_token]').val()
+          }
+          $.post('distribute', params, ()->
+            $('.user-slot:has(li)').remove()
+          ,'json')
+        return false
       )
   }
 }

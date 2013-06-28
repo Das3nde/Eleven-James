@@ -64,7 +64,7 @@ class Product < ActiveRecord::Base
     ['Gold', 'Silver', 'Steel']
   end
 
-  def image
-    product_images.first.url('thumb')
+  def image(style= 'thumb')
+    product_images.first.url(style)
   end
 end

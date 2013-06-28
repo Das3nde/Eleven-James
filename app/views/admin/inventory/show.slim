@@ -1,36 +1,39 @@
 .container
   #admin-manage-inventory
     .content.left_col
+      #product_info
+        img src=@product_instance.image('square')
+        p
+          span.left Model
+          span.right =@product_instance.model
+
       #status_panel
         =render('admin/inventory/record_forms/' + @status.class.to_s.underscore)
-      #hover_status
     .right_col
       -if !@future.empty?
         .content.future
           h3 Scheduled
-          .table-view
-            table#future.ej-table
-              thead
-                th width='400px' Status
-                th
-              tbody
-                -@future.each do |r|
-                  tr{class=(@status.id == r.id ? 'highlight':'') data-id=r.id}
-                    td =r.type
-                    -if !r.type.index('Transit')
-                      td
-                        a.remove-record data-id=r.id href="#" X
+          table#future.ej-table
+            thead
+              th width='400px' Status
+              th
+            tbody
+              -@future.each do |r|
+                tr{class=(@status.id == r.id ? 'highlight':'') data-id=r.id}
+                  td =r.type
+                  -if !r.type.index('Transit')
+                    td
+                      a.remove-record data-id=r.id href="#" X
       h3 Product History
-      .table-view
-        table#history.ej-table
-          thead
-            th width='200px' Dates
-            th width='210px' Status
-          tbody
-            -@history.each do |r|
-              tr{class=(@status.id == r.id ? 'highlight':'') data-id=r.id}
-                td =r.dates
-                td =r.type
+      table#history.ej-table
+        thead
+          th width='200px' Dates
+          th width='210px' Status
+        tbody
+          -@history.each do |r|
+            tr{class=(@status.id == r.id ? 'highlight':'') data-id=r.id}
+              td =r.dates
+              td =r.type
 
 #service_dialog.dialog
   label Select Vendor

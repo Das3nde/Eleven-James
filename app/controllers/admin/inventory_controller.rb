@@ -11,9 +11,9 @@ class Admin::InventoryController < AdminController
   end
 
   def index
-    @products = ProductInstance.order('id DESC')
+    @products = ProductInstance.order('cast(id as unsigned) asc')
     if request.xhr?
-      @product_instances = ProductInstance.all
+      @product_instances = ProductInstance.order('id asc')
       render :file => 'admin/inventory/_inventory'
     end
   end

@@ -21,15 +21,14 @@
       }
     }
   }
-
+  h3 {
+    color:$orange;
+    text-align:left;
+    font-size:27px;
+    text-transform:uppercase;
+    line-height:60px;
+  }
   #admin-manage-models {
-    h3 {
-      color:$orange;
-      text-align:left;
-      font-size:27px;
-      text-transform:uppercase;
-      line-height:60px;
-    }
     #add-product {
       .left_col {
         width:890px;
@@ -532,9 +531,6 @@
   .left_col{
     float:left;
   }
-  #hover_status{
-    display:none;
-  }
 
   #service_repair_description{
     height: 150px;
@@ -587,7 +583,7 @@
       color:#a3a197;
     }
   }
-  #inventory.ui-tabs {
+  #admin-manage-inventory {
     .action-bar {
       border-top:1px solid $bdcolor;
       border-bottom:1px solid $bdcolor;
@@ -623,7 +619,20 @@
       float:right;;
       width:183px;
     }
+
   }
+  #product_info, #status_panel{
+    float:left;
+    width: 300px;
+    span.right{
+      float:right;
+      margin-right:100px
+    }
+    span.left{
+      float:left
+    }
+  }
+
   .watch-record {
     margin-top:50px;
     border-top-width:0;
@@ -782,6 +791,13 @@
   }
 }
 
+#selection_history{
+  li{
+    float:left;
+    margin:10px
+  }
+}
+
 .table-view{
   height: 500px;
   overflow: auto;
@@ -863,6 +879,22 @@
     }
   }
 
+}
+
+#selection_form {
+
+  input{
+    width: 40px;
+    float:right;
+    clear:right
+  }
+  button{
+    clear:both;
+    float:right
+  }
+  label{
+
+  }
 }
 
 .dialog{

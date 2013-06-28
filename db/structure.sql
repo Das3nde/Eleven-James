@@ -46,7 +46,8 @@ CREATE TABLE addresses (
     addressable_id integer,
     addressable_type character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    selected_shipping boolean DEFAULT false
 );
 
 
@@ -100,6 +101,80 @@ CREATE SEQUENCE admins_id_seq
 --
 
 ALTER SEQUENCE admins_id_seq OWNED BY admins.id;
+
+
+--
+-- Name: comment_helps; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE comment_helps (
+    id integer NOT NULL,
+    comment_id integer,
+    user_id integer,
+    helpful boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: comment_helps_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE comment_helps_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: comment_helps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE comment_helps_id_seq OWNED BY comment_helps.id;
+
+
+--
+-- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE comments (
+    id integer NOT NULL,
+    product_id integer,
+    user_id integer,
+    description text,
+    avatar_file_name character varying(255),
+    avatar_content_type character varying(255),
+    avatar_file_size integer,
+    avatar_updated_at timestamp without time zone,
+    fit_score integer DEFAULT 0,
+    excitement_score integer DEFAULT 0,
+    accuracy_score integer DEFAULT 0,
+    wear_again_score integer DEFAULT 0,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
@@ -331,7 +406,7 @@ CREATE TABLE products (
     material character varying(255),
     style character varying(255),
     color character varying(255),
-    case_size character varying(255),
+    case_size integer,
     msrp integer,
     vendor_id integer,
     description text,
@@ -383,6 +458,38 @@ CREATE TABLE records (
     next_id character varying(255),
     next_table character varying(255)
 );
+
+
+--
+-- Name: referrals; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE referrals (
+    id integer NOT NULL,
+    user_id integer,
+    email character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: referrals_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE referrals_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: referrals_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE referrals_id_seq OWNED BY referrals.id;
 
 
 --
@@ -438,6 +545,38 @@ CREATE TABLE rotations (
 CREATE TABLE schema_migrations (
     version character varying(255) NOT NULL
 );
+
+
+--
+-- Name: selections; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE selections (
+    id integer NOT NULL,
+    pairings text,
+    date timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: selections_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE selections_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: selections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE selections_id_seq OWNED BY selections.id;
 
 
 --
@@ -521,7 +660,9 @@ CREATE TABLE users (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     name character varying(255),
-    transit_table character varying(255)
+    transit_table character varying(255),
+    username character varying(255),
+    rental_months character varying(255)
 );
 
 
@@ -631,6 +772,20 @@ ALTER TABLE ONLY admins ALTER COLUMN id SET DEFAULT nextval('admins_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY comment_helps ALTER COLUMN id SET DEFAULT nextval('comment_helps_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY customers ALTER COLUMN id SET DEFAULT nextval('customers_id_seq'::regclass);
 
 
@@ -666,7 +821,21 @@ ALTER TABLE ONLY products ALTER COLUMN id SET DEFAULT nextval('products_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY referrals ALTER COLUMN id SET DEFAULT nextval('referrals_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY selections ALTER COLUMN id SET DEFAULT nextval('selections_id_seq'::regclass);
 
 
 --
@@ -704,6 +873,22 @@ ALTER TABLE ONLY addresses
 
 ALTER TABLE ONLY admins
     ADD CONSTRAINT admins_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comment_helps_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comment_helps
+    ADD CONSTRAINT comment_helps_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
 
 
 --
@@ -787,6 +972,14 @@ ALTER TABLE ONLY records
 
 
 --
+-- Name: referrals_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY referrals
+    ADD CONSTRAINT referrals_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -800,6 +993,14 @@ ALTER TABLE ONLY roles
 
 ALTER TABLE ONLY rotations
     ADD CONSTRAINT rotations_pkey PRIMARY KEY (uuid);
+
+
+--
+-- Name: selections_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY selections
+    ADD CONSTRAINT selections_pkey PRIMARY KEY (id);
 
 
 --
@@ -1107,3 +1308,19 @@ INSERT INTO schema_migrations (version) VALUES ('20130606051439');
 INSERT INTO schema_migrations (version) VALUES ('20130607164306');
 
 INSERT INTO schema_migrations (version) VALUES ('20130613174634');
+
+INSERT INTO schema_migrations (version) VALUES ('20130613175859');
+
+INSERT INTO schema_migrations (version) VALUES ('20130619175903');
+
+INSERT INTO schema_migrations (version) VALUES ('20130620093126');
+
+INSERT INTO schema_migrations (version) VALUES ('20130627104513');
+
+INSERT INTO schema_migrations (version) VALUES ('20130627135825');
+
+INSERT INTO schema_migrations (version) VALUES ('20130627152319');
+
+INSERT INTO schema_migrations (version) VALUES ('20130627154001');
+
+INSERT INTO schema_migrations (version) VALUES ('20130628104352');

@@ -2,6 +2,11 @@
   .container
     .header
       h3 Specify Delivery Address
-      a.button.primary href="#" Add new
+      a#add-new-delivery-address.button.primary href="#" Add new
     .form#user_addresses
       = render '/users/shared/addresses', addresses: current_user.shipping_addresses
+
+
+coffee:
+  $("#add-new-delivery-address").click ->
+    $("#add-address-modal").dialog "open"

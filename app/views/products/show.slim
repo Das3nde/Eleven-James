@@ -62,3 +62,12 @@
             li.omega
               a.gplus href="#glpus"
       = render '/products/comments'
+#image-zoom-popup.ej-modal data-width="auto" data-class="image-zoom-popup" data-open="false"
+  img alt="" src="/assets/temp/F1.jpg" class="image-content"
+
+coffee:
+  $("body.elevenjames #detail-page .zoom").click ->
+    image_path = $(@).prev().attr("src").replace("medium", "original")
+    $("#image-zoom-popup").find(".image-content").attr("src", image_path)
+    $("#image-zoom-popup").dialog "open"
+    console.log(image_path)

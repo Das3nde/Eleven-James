@@ -9,6 +9,9 @@ describe ProductInstance do
         :id  => "00016-1",
     #:product_id => 16
     )
+    @user = FactoryGirl.create(:user)
+    @user.transit_table = 'courier_transits'
+    @user.save
   end
   describe "#add_storage_record" do
     it "a storage record is added" do
@@ -29,12 +32,6 @@ describe ProductInstance do
     end
   end
   describe "#add_rotation" do
-    before :all do
-      @user = FactoryGirl.create(:user)
-
-      @user.transit_table = 'fedex_transits'
-      @user.save
-    end
     it "doesn't add records to product_instances that aren't available" do
       expect { @instance.add_rotation(@user) }.to raise_error
     end
@@ -47,7 +44,7 @@ describe ProductInstance do
       @instance.reload
 
       @next_status = @instance.next_status;
-      @next_status.class.to_s.should eq('FedexTransit')
+      @next_status.class.to_s.should eq('CourierTransit')
       @next_status.id.should eq(@instance.status.next.id)
 
       @next_status.next.class.to_s.should eq('Rotation')
@@ -71,4 +68,38 @@ describe ProductInstance do
       @next_status.next.class.to_s.should eq('Service')
     end
   end
+
+  describe 'record movement' do
+    before :all do
+      @now = Time.now
+      @instance.is_available = true
+      @instance.save
+      @instance.add_rotation(@user)
+      @advancing_status = @instance.next_status
+      @instance.advance_record(@now)
+
+    end
+    describe "#advance_record" do
+
+
+      it "sets the next record as the current status" do
+        #puts @advancing_instance.status.inspect
+        #puts @advancing_status.inspect
+        @instance.status.should eq(@advancing_status)
+        @instance.next_status.should eq(@advancing_status.next)
+      end
+    end
+
+    describe '#retreat_record' do
+      before :all do
+        @retreating_record = @instance.status
+        @instance.retreat_record()
+      end
+      it "sets the previous record as the current status" do
+        @instance.status.should eq(@retreating_record.prev)
+        @instance.next_status.should eq(@retreating_record)
+      end
+    end
+  end
+
 end

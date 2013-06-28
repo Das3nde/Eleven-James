@@ -49,8 +49,11 @@ Ej::Application.routes.draw do
       match 'inventory/status/:id' => 'inventory#status'
       match 'inventory/change_transit/:id' => 'inventory#change_transit'
       match 'admins/add_role' => 'admins#add_role'
-      match 'admins/remove_role' => 'inventory#remove_role'
-      ['inventory','products'].each do |path|
+      match 'admins/remove_role' => 'admins#remove_role'
+      match 'shipping/pickup' => 'shipping#pickup'
+      match 'shipping/cancel_pickup' => 'shipping#cancel_pickup'
+      match 'shipping/mark_delivered' => 'shipping#mark_delivered'
+      ['inventory','products', 'shipping'].each do |path|
         controller = ('Admin::'+path.capitalize+'Controller').constantize
         controller.tabs.each do |a, l|
           action = a.to_s
@@ -60,7 +63,7 @@ Ej::Application.routes.draw do
 
       resources :products, :users, :settings, :vendors, :tiers, :courier_transits,
                 :records, :product_images, :events, :inventory, :selection, :storage_records, :services,
-                :rotations, :admins
+                :rotations, :admins, :shipping
 
     end
   end

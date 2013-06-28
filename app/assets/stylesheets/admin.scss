@@ -782,6 +782,15 @@
   }
 }
 
+.table-view{
+  height: 500px;
+  overflow: auto;
+}
+
+#distribute_button{
+  display:none;
+}
+
 .add-photo-modal {
   padding:0;
   .image-container {

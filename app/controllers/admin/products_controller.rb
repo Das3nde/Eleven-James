@@ -1,15 +1,9 @@
 class Admin::ProductsController < AdminController
   before_filter :user_preferences
-  @tabs = {
-    :index => 'All Products',
-    :add_product => 'Add Model',
-    :featured => 'Featured',
-    :new_arrivals  => 'New Arrivals',
-    :popular => 'Popular'
-  }
+
   def index
     @product_image = ProductImage.new()
-    @products = Product.order(@order).page(params[:page]).per(@page_size)
+    @products = Product.order('id ASC')
     if request.xhr?
       render :file => 'admin/products/products'
     end
@@ -34,7 +28,6 @@ class Admin::ProductsController < AdminController
 
   def products
     @products = Product.order(@order).page(params[:page]).per(@page_size)
-    render :layout => false
   end
 
   def featured
@@ -83,5 +76,16 @@ class Admin::ProductsController < AdminController
     @product_image = ProductImage.new()
     render :layout => false, :file => "admin/products/_add_model"
   end
+
+  private
+    def set_tabs
+      @tabs = {
+          :index => 'All Products',
+          :add_product => 'Add Model',
+          :featured => 'Featured',
+          :new_arrivals  => 'New Arrivals',
+          :popular => 'Popular'
+      }
+    end
 end
 

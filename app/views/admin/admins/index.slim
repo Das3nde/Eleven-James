@@ -1,27 +1,28 @@
 ruby:
   @roles = ['courier', 'editor', 'superadmin']
 
-=simple_form_for [:admin, User.new], :url => '' do |u|
-  =u.input :name
-  .ej-notification.error.name
-  =u.input :email
-  .ej-notification.error.email
-  =u.submit
-.content
-  table.ej-table
-    thead
-      th Name
-      th Email
-      -@roles.each do |r|
-        th =r.capitalize
-    tbody
-      -@admins.each do |u|
-        tr data-id=u.id
-          td =u.name
-          td =u.email
-          -@roles.each do |r|
-            td
-              input type='checkbox' name=r checked=(u.has_role? r)
+.container
+  =simple_form_for [:admin, User.new], :url => '' do |u|
+    =u.input :name
+    .ej-notification.error.name
+    =u.input :email
+    .ej-notification.error.email
+    =u.submit
+  .content
+    table.ej-table
+      thead
+        th Name
+        th Email
+        -@roles.each do |r|
+          th =r.capitalize
+      tbody
+        -@admins.each do |u|
+          tr data-id=u.id
+            td =u.name
+            td =u.email
+            -@roles.each do |r|
+              td
+                input type='checkbox' name=r checked=(u.has_role? r)
 
 
 

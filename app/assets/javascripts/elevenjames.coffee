@@ -28,7 +28,6 @@ $ ->
     $("ul.ej-queue li:nth-child(2n)").addClass "wrap"
 
   path_parts = document.location.pathname.split('/')
-  console.log(path_parts)
   action = path_parts.pop() || 'index'
   page = path_parts.pop()
   url = if action == 'index' then '' else action
@@ -43,9 +42,9 @@ $ ->
     $(this).tabs({
       active: active,
       activate: (e, i)->
-       $el = $(i.newPanel)
-       action = $el.attr('data-action')
-       refresh_tab($el, action)
+        $el = $(i.newPanel)
+        action = $el.attr('data-action')
+        refresh_tab($el, action)
     })
 
   refresh_tab = ($el, action) ->
@@ -61,8 +60,6 @@ $ ->
             action = 'add_product'
           else
             action = 'view_item'
-        console.log('how many times is this called?')
-        console.log(action)
         refresh_method = refresh_tab_methods[page][action]
         $el.html(html)
         $(".select-wrapper select").on "change", ->
@@ -245,7 +242,6 @@ $ ->
     arr || []
 
   $('#selection_form').submit(()->
-    console.log(locked_pairs())
     data =  $(this).serialize() + '&' + $.param({
       locked_pairs : locked_pairs(),
     })
@@ -253,7 +249,6 @@ $ ->
       _.each(result, (pair)->
         product_id = pair[0]
         user_id = pair[1]
-        console.log($('#user-'+user_id))
         $('#user-'+user_id).append($('#product-'+product_id))
       )
       check_paired()
@@ -331,8 +326,7 @@ refresh_tab_methods = {
       $('.button.save').click(()->
         $product_form = $('.simple_form.edit_product')
         $.post($product_form.attr('action'), $product_form.serialize(), (result)->
-          console.log("ooo")
-
+          console.log
         , 'json')
         return false
       )
@@ -415,7 +409,7 @@ refresh_tab_methods = {
       _this = this
       $dialog = $('#service_dialog')
       $panel = $('.ui-tabs-panel:last-child')
-      refresh = -> _this.call(_this, $el);
+      refresh = -> _this.call(_this, $el)
 
       setTimeout(()-> #this is retarded, but I have no idea why it doesn't work otherwise
         $status_panel = $('#status_panel')
@@ -477,15 +471,19 @@ refresh_tab_methods = {
             data = $(this).serialize() + '&' + $.param({
               status_id : $('.right_col tr.highlight').data('id')
             })
-            console.log(data)
             $.post(this.action, data, (res)->
               $el.html(res)
               refresh()
             )
           )
+          $('.transit_form').change(->
+            $.post(this.action, $(this).serialize()).fail(->
+              alert('an unexpected error has ocurred')
+            )
+          )
 
         refresh_status_forms()
-      , 100)
+      , 30)
   }
   admins:{
     index: ->
@@ -494,7 +492,7 @@ refresh_tab_methods = {
         action = if this.checked then 'add' else 'remove'
         $.post(action+'_role',{
           authenticity_token:AUTH_TOKEN,
-          id: $(this).parents('tr').data('id'),
+          id: get_row_id(this),
           role: this.name
         }).fail(->
           _this.checked = !_this.checked
@@ -514,13 +512,33 @@ refresh_tab_methods = {
         )
         return false
       )
+  },
+  shipping:{
+    my_pickups: ($el) ->
+      _this = this
+      refresh = -> _this.call(_this, $el)
+      $('.pickup, .cancel_pickup, .mark_delivered').click(->
+        data = {
+          id:get_row_id(this),
+          authenticity_token:AUTH_TOKEN
+        }
+        action = $(this).attr('class')
+        $.post(action, data, (res)->
+          $el.html(res)
+          refresh()
+        )
+      )
   }
 }
 
+get_row_id = ($el)->
+  $($el).parents('tr').data('id')
+
 add_inventory_tab = (id)->
-  if($('.ui-tabs-anchor').length < 5)
+  console.log('is this called more than once?')
+  if($('.ui-tabs-anchor').length < 4)
     $('.ej-tabs').tabs("add", id, id)
   else
     $('.ui-tabs-nav:last-child span').html(id)
   $('.ui-tabs-panel:last-child').attr('data-action', id)
-  $('.ej-tabs').tabs('select', 4)
+  $('.ej-tabs').tabs('select', 3)

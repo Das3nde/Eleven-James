@@ -1,12 +1,3 @@
--tabs = Admin::ProductsController.tabs
 #admin-manage-models
   h2 Manage Models
-  .ej-tabs data-active="0"
-    .container
-      ul
-        -tabs.each do |key, label|
-          li
-            a{href=('#'+key.to_s.gsub('_','-'))} =label
-    -tabs.each do |key, label|
-      .ui-tabs{id=(key.to_s.gsub('_','-')) data-action=(key) data-refresh=(key)}
-
+  =show_tabs()

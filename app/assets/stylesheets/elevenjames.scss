@@ -2275,3 +2275,24 @@ table.ej-table {
     display:inline-block;
   }
 }
+
+#signin-modal {
+  .form {
+    width:446px;
+    margin:0 auto;
+    .row  {
+      label {
+        width:150px;
+      }
+      input[type=text], input[type=password] {
+        width:250px;
+      }
+    }
+    .button {
+      padding:0 30px;
+    }
+    .button-row {
+      padding:30px 0 20px;
+    }
+  }
+}

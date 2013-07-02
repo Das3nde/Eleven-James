@@ -2268,3 +2268,10 @@ table.ej-table {
 #comment_list .no-comments {
   float:left;
 }
+
+#site-nav.css-center {
+  text-align:center;
+  > ul {
+    display:inline-block;
+  }
+}

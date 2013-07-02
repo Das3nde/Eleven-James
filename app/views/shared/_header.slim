@@ -3,8 +3,8 @@
     img alt="James Eleven logo" src="/assets/logo-mini.png"
   p.sub
       == t("tagline").html_safe
-  #site-nav
-    ul.cgrid.dynamic-centered
+  #site-nav.css-center
+    ul.cgrid
       li class="home"
         a href="#"
       - @menu.each do |item|

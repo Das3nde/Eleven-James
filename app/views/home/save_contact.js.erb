@@ -1,0 +1,6 @@
+<%if @status%>
+  alert('Thank you for contacting us. We will reply to you shortly.');
+  $('#contact_name, #contact_email, #contact_subject, #contact_message').val('')
+<%else%>
+  alert("<%=@contact.errors.full_messages.join('\n').html_safe%>");
+<%end%>

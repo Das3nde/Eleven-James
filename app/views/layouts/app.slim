@@ -5,17 +5,17 @@ html
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  body.elevenjames
+  body.elevenjames.user-end
     - @header_partial = "mini_header"
     - @footer_partial = "footer"
     - @internal_class = "internal-page"
     ruby:
      @menu = [
-        {title: "The Collection", slug: "collection"},
-        {title: "Your Selections", slug: "selection"},
-        {title: "Services & Benefits", slug: "service"},
-        {title: "News and Events", slug: "news"},
-        {title: "Contact Us", slug: "contact"}
+        {title: "The Collection", slug: "collection", href: '/collection'},
+        {title: "Your Selections", slug: "selection", href: '#'},
+        {title: "Services & Benefits", slug: "service", href: service_benefits_path},
+        {title: "News and Events", slug: "news", href: '#'},
+        {title: "Contact Us", slug: "contact", href: contact_path}
              ]
     - if @wrapper == "splash"
       - @header_partial = "splash_header"

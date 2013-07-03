@@ -48,30 +48,31 @@ $ ->
     })
 
   refresh_tab = ($el, action) ->
-    if($el.attr('id')!= 'add-product')
-      $('#add-product').attr('data-action', 'add_product')
-      $('a[href="#add-product"]').html('Add Model')
-    if(action != undefined)
-      url = if action == 'index' then '' else action
-      $.get(url, {}, (html)->
-        action = action || "all_products"
-        if($.isNumeric(action) || action.substr(5,1) == '-')
-          if(page == 'products')
-            action = 'add_product'
-          else
-            action = 'view_item'
-        refresh_method = refresh_tab_methods[page][action]
-        (refresh_method && refresh_method.norefresh) || $el.html(html)
-        $(".select-wrapper select").on "change", ->
-          update_select(this)
+    if $('.user-end').length == 0
+      if($el.attr('id')!= 'add-product')
+        $('#add-product').attr('data-action', 'add_product')
+        $('a[href="#add-product"]').html('Add Model')
+      if(action != undefined)
+        url = if action == 'index' then '' else action
+        $.get(url, {}, (html)->
+          action = action || "all_products"
+          if($.isNumeric(action) || action.substr(5,1) == '-')
+            if(page == 'products')
+              action = 'add_product'
+            else
+              action = 'view_item'
+          refresh_method = refresh_tab_methods[page][action]
+          (refresh_method && refresh_method.norefresh) || $el.html(html)
+          $(".select-wrapper select").on "change", ->
+            update_select(this)
 
-        $(".select-wrapper select").each ->
-          update_select(this)
-        if(refresh_method && !refresh_method.norefresh)
-          $el.ready(()->
-            refresh_method.call(refresh_method, $el, html)
-          )
-      )
+          $(".select-wrapper select").each ->
+            update_select(this)
+          if(refresh_method && !refresh_method.norefresh)
+            $el.ready(()->
+              refresh_method.call(refresh_method, $el, html)
+            )
+        )
 
   $(".ej-modal").each ->
     $this = $(this)
@@ -94,15 +95,15 @@ $ ->
         $this.parents(".ui-dialog").addClass($this.data("class")).css "top", "60px"
         center_button_row()
         if $(@).attr("id") == "image-zoom-popup"
-          $('#image-zoom-popup .image-content').one "load", ->  
+          $('#image-zoom-popup .image-content').one "load", ->
             width = $(@).parents(".ui-dialog").width()
             $(@).parents(".ui-dialog").css({
               marginLeft: "-#{width/2}px"
             }).find(".image-content").css({
               width:"100%"
             })
-        
-          
+
+
   $("body").delegate ".ej-notification .close", "click", ->
     $(this).parents(".ej-notification").fadeOut 700, ->
       $(this).remove()

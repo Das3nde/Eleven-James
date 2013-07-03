@@ -1,0 +1,56 @@
+h2 Contact us
+.content
+  .container
+    h3 Hello there, how can we be of service?
+    .cgrid.compact
+      .email
+        .header
+          h4 Email us
+        .form
+          = form_for Contact.new, url: save_contact_path, remote: true do |f|
+            .row.cgrid.compact
+              label for="name" Your name
+              = f.text_field :name
+            .row.cgrid.compact
+              label for="email" Your email
+              = f.text_field :email
+            .row.cgrid.compact
+              label for="subject" Subject
+              = f.text_field :subject
+            .row.cgrid.compact.textarea-row
+              label for="message" Message
+              = f.text_area :message, cols: 30, rows: 10
+
+            .button-row.cgrid
+
+              = f.submit 'Send', class: 'btn-style', style: 'margin-left: 40px'
+
+      /! End email
+      .call
+        .header
+          h4 Call us
+        .body
+          p
+            | If you require immediate assistance,
+            | please don’t hesitate to call us at:
+          br/
+          p.number (917) 555-1212
+      /! End email
+      .follow
+        .header
+          h4 Follow us
+        .body
+          p
+            | Keep a keen eye on our social space for
+            | special offers and exciting news:
+          br/
+          .dynamic-centered.social-media.black-version.cgrid
+            ul.cgrid
+              li.alpha
+                a.facebook href="#facebook"
+              li
+                a.twitter href="#twitter"
+              li
+                a.pinterest href="#pinterest"
+              li.omega
+                a.instagram href="#instagram"

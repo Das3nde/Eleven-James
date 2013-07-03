@@ -394,19 +394,25 @@ body.elevenjames {
 
         float: none;
       }
-      a.account {
+      .right-nav {
         position: absolute;
         top: 0;
         right: 0;
-        color: #FFF;
-        font-size: 12px;
-        font-family: akkurat;
+        a {
+          color: #FFF;
+          font-size: 12px;
+          font-family: akkurat;
+          line-height: 50px;
+          text-decoration: none;
+          text-transform: uppercase;
+        }
+      }
+      a.account {
         padding-right: 60px;
-        line-height: 50px;
-        text-decoration: none;
-        text-transform: uppercase;
+        margin-right:20px;
         background: url(account-gear-icon-white.png) 100% 0 no-repeat;
       }
+      
       .social-media {
         position: absolute;
         left: 0;

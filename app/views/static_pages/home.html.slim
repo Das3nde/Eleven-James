@@ -80,7 +80,7 @@
         p April 2013
         a.button href="#" Read
         
-#signin-modal.ej-modal title="Welcome Please Signin Into Your Account" data-width="538"
+#signin-modal.ej-modal title="Welcome Please Signin Into Your Account" data-width="538" data-open="false"
   .form
     .row.cgrid.compact
       label Username
@@ -91,4 +91,8 @@
     .button-row.cgrid
       a.button.primary href="#" Login
       a.button href="#" I forgot my password
-      
+
+
+coffee:
+  $("a.account").click ->
+    $("#signin-modal").dialog "open"

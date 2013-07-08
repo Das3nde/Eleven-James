@@ -57,6 +57,17 @@ body.elevenjames {
     }
   }
 
+  .btn-style
+  {
+    background-color: #333333;
+    border: medium none;
+    color: #FFFFFF;
+    font-family: 'dinnC';
+    font-size: 25px;
+    padding: 5px 10px;
+    width: auto !important;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     text-align: center;
     font-family: dinnLC;
@@ -383,19 +394,25 @@ body.elevenjames {
 
         float: none;
       }
-      a.account {
+      .right-nav {
         position: absolute;
         top: 0;
         right: 0;
-        color: #FFF;
-        font-size: 12px;
-        font-family: akkurat;
+        a {
+          color: #FFF;
+          font-size: 12px;
+          font-family: akkurat;
+          line-height: 50px;
+          text-decoration: none;
+          text-transform: uppercase;
+        }
+      }
+      a.account {
         padding-right: 60px;
-        line-height: 50px;
-        text-decoration: none;
-        text-transform: uppercase;
+        margin-right:20px;
         background: url(account-gear-icon-white.png) 100% 0 no-repeat;
       }
+      
       .social-media {
         position: absolute;
         left: 0;
@@ -2267,4 +2284,32 @@ table.ej-table {
 
 #comment_list .no-comments {
   float:left;
+}
+
+#site-nav.css-center {
+  text-align:center;
+  > ul {
+    display:inline-block;
+  }
+}
+
+#signin-modal {
+  .form {
+    width:446px;
+    margin:0 auto;
+    .row  {
+      label {
+        width:150px;
+      }
+      input[type=text], input[type=password] {
+        width:250px;
+      }
+    }
+    .button {
+      padding:0 30px;
+    }
+    .button-row {
+      padding:30px 0 20px;
+    }
+  }
 }

@@ -2,7 +2,8 @@ ul.cgrid.compact
   - products.each do |product|
     li
       - img_src = (product.product_images.first.url(:public) rescue '/assets/temp/D1.jpg')
-      img alt="" src="#{img_src}"
+      = link_to image_tag(img_src), show_collection_path(product.id)
+
       .info
         p.name style="height:20px;" = product.brand
         .make

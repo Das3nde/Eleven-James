@@ -33,30 +33,32 @@ $ ->
   url = if action == 'index' then '' else action
 
   refresh_tab = ($el, action) ->
-    if($el.attr('id')!= 'add-product')
-      $('#add-product').attr('data-action', 'add_product')
-      $('a[href="#add-product"]').html('Add Model')
-    if(action != undefined)
-      url = if action == 'index' then '' else action
-      $.get(url, {}, (html)->
-        action = action || "all_products"
-        if($.isNumeric(action) || action.substr(5,1) == '-')
-          if(page == 'products')
-            action = 'add_product'
-          else
-            action = 'view_item'
-        refresh_method = refresh_methods[page][action]
-        $el.html(html)
-        $(".select-wrapper select").on "change", ->
-          update_select(this)
+    if $('.user-end').length == 0
+      if($el.attr('id')!= 'add-product')
+        $('#add-product').attr('data-action', 'add_product')
+        $('a[href="#add-product"]').html('Add Model')
+      if(action != undefined)
+        url = if action == 'index' then '' else action
+        $.get(url, {}, (html)->
+          action = action || "all_products"
+          if($.isNumeric(action) || action.substr(5,1) == '-')
+            if(page == 'products')
+              action = 'add_product'
+            else
+              action = 'view_item'
+          refresh_method = refresh_methods[page][action]
+          $el.html(html)
+          $(".select-wrapper select").on "change", ->
+            update_select(this)
 
-        $(".select-wrapper select").each ->
-          update_select(this)
-        $el.ready(()->
-          if(refresh_method)
-            refresh_method.call(refresh_method, $el, html)
+          $(".select-wrapper select").each ->
+            update_select(this)
+          $el.ready(()->
+            if(refresh_method)
+              refresh_method.call(refresh_method, $el, html)
+          )
         )
-      )
+
 
   $(".ej-tabs").each ->
     active = 0

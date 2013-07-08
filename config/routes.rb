@@ -7,7 +7,7 @@ Ej::Application.routes.draw do
 
   get "static_pages/concierge"
 
-  get "static_pages/contact_us"
+  #get "static_pages/contact_us"
 
   get "static_pages/detail"
 
@@ -83,6 +83,10 @@ Ej::Application.routes.draw do
   post 'filter_collection' => 'home#filter_collection'
   get 'user_queue' => 'home#user_queue'
 
+  get '/service_benefits' => 'home#service_benefits', :as => :service_benefits
+
+  get '/contact' => 'home#contact', :as => :contact
+  post '/save_contact' => 'home#save_contact', :as => :save_contact
   get 'my_account' => 'users#my_account', :as => :my_account
   put 'update_account' => 'users#update_account', :as => :update_account
   post 'add_referral' => 'users#add_referral', :as => :add_referral

@@ -1997,3 +1997,11 @@ ul.ej-queue li.unknown {
 #concierge-page .request-button {
 	width:250px;
 }
+
+#site-nav.css-center {
+  text-align:center;
+  
+}
+#site-nav.css-center > ul {
+  display:inline-block;
+}

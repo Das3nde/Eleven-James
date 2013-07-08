@@ -30,11 +30,26 @@ class HomeController < ApplicationController
     @requested_products = ProductRequest.where("fulfillment_time IS NULL AND user_id = ?", current_user.id)
   end
 
+  def contact
+    @wrapper = "contact"
+  end
+
+  def save_contact
+    @contact = Contact.new(params[:contact])
+    @status = @contact.save
+    render layout: false
+  end
+
+  def service_benefits
+    @wrapper = "concierge"
+  end
+
   private
 
   def determine_layout
     case action_name
-    when 'collection', 'user_queue'
+    when 'collection', 'user_queue', 'contact', 'service_benefits'
+      #raise "sdf"
       'app'
     else
       'application'

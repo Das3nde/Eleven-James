@@ -12,5 +12,6 @@
           = link_to item[:title], "#"
   - if current_user
     = link_to 'Logout', '/auth/sign_out'
+    = link_to 'Account', my_account_path
   - else
     a.account href="#" Account

@@ -2294,10 +2294,13 @@ table.ej-table {
   float:left;
 }
 
-#site-nav.css-center {
+body.elevenjames .css-center {
   text-align:center;
-  > ul {
+  > ul, > .button {
     display:inline-block;
+  }
+  .button {
+    margin:0 5px;
   }
 }
 
@@ -2309,7 +2312,7 @@ table.ej-table {
       label {
         width:150px;
       }
-      input[type=text], input[type=password] {
+      input[type=text], input[type=password], input[type=email] {
         width:250px;
       }
     }

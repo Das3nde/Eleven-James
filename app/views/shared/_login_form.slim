@@ -7,7 +7,9 @@
       .row.cgrid.compact
         label Password
         = f.password_field :password, placeholder: 'Password'
-      .button-row.cgrid
-        = submit_tag 'Login', class: 'button primary'
+      .button-row.not-centered.css-center
+        .button.primary
+          .text Login
+          = submit_tag 'Login'
         a.button href="/users/password/new" I forgot my password
 

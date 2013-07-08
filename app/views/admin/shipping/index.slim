@@ -1,4 +1,8 @@
 .container
-  #shipping
-    h2 =@foo
-    =show_tabs()
+  script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBujfiI1Wd7IkPbYqExnAgcDWuJqVfJUaQ&sensor=false"
+  #shipping{style="height:600px"}
+    h2 Shipping
+    .container
+      .container style="float:left;width:650px;height:700px"
+        =show_tabs()
+      #pickup_map

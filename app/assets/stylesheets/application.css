@@ -25,4 +25,5 @@
  *= require admin_pages
  *= require static_pages
  *= require jcrop
+ *= require chosen
  */

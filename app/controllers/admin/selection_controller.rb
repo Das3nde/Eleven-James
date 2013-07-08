@@ -10,6 +10,10 @@ class Admin::SelectionController < AdminController
     @users = User.all()
     @products = ProductInstance.where('is_available is true')
     if request.xhr?
+      s = Chronic.parse('2 weeks from now')
+      @start_date = Time.new(s.year, s.month) + 2.days
+      t = Chronic.parse('11 weeks from now',:now => @rotation_start)
+      @end_date = Time.new(t.year, t.month) - 2.days
       render :file => 'admin/selection/selection'
     end
   end
@@ -32,7 +36,8 @@ class Admin::SelectionController < AdminController
     pairs.each do |k, arr|
       product = ProductInstance.find(arr[0])
       user = User.find(arr[1])
-      product.add_rotation(user)
+
+      product.add_rotation(user, Chronic.parse(params[:start_date]),Chronic.parse(params[:end_date]))
     end
     Selection.create({
                       pairings: pairs.to_json,
@@ -43,7 +48,7 @@ class Admin::SelectionController < AdminController
 
   def history
     @history = []
-    Selection.all.each do |s|
+    Selection.order('date DESC').each do |s|
       pairs = ActiveSupport::JSON.decode(s.pairings).values
       @history << {pairs: pairs.map{|p| [ProductInstance.find(p[0]),User.find(p[1])]}, date: s.date}
     end

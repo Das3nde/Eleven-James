@@ -73,6 +73,8 @@ class Admin::InventoryController < AdminController
     _show(record.product_instance)
   end
 
+
+
   private
     def _show(product_instance = nil)
       @product_instance = product_instance || ProductInstance.find(params[:id])

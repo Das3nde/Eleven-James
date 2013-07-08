@@ -17,45 +17,26 @@ ruby:
                   = f.input_field :model
                 .row.cgrid.compact
                   label Brand
-                  .select-wrapper.brand.field
-                    .value
-                    .arrow.red
-                    =f.input_field :brand, collection: @brands, as: :select
+                  =f.input_field :brand, collection: @brands, as: :select
                 .row.cgrid.compact
                   label Style
-                  .select-wrapper.style.field
-                    .value
-                    .arrow.red
-                    =f.input_field :style, collection: @styles, as: :select
+                  =f.input_field :style, collection: @styles, as: :select
                 .row.cgrid.compact
                   label Case Size (MM)
                   = f.input_field :case_size
                 .row.cgrid.compact
                   label Face
-                  .select-wrapper.face.field
-                    .value
-                    .arrow.red
-                    =f.input_field :face, collection: @faces, as: :select
+                  =f.input_field :face, collection: @faces, as: :select
               .right.omega
                 .row.cgrid.compact
                   label Tier
-                  .select-wrapper.tier.field
-                    .value
-                    .arrow.red
-                    =f.input_field :tier, collection: @tiers, as: :select
+                  =f.input_field :tier, collection: @tiers, as: :select
                 .row.cgrid.compact
                   label Material
-                  .select-wrapper.material.field
-                    .value
-                    .arrow.red
-                    =f.input_field :material, collection: @materials, as: :select
+                  =f.input_field :material, collection: @materials, as: :select
                 .row.cgrid.compact
                   label Vendor
-                  / .custom-select-wrapper.select-wrapper.vendor.field
-                  .select-wrapper.vendor.field
-                    .value
-                    .arrow.red
-                    = f.collection_select "vendor_id", Vendor.all, :id, :name, :label => "Name"
+                  = f.collection_select "vendor_id", Vendor.all, :id, :name, :label => "Name"
                     / .options
                 .row.cgrid.compact
                   label MSRP

@@ -66,14 +66,14 @@ class ProductInstance < ActiveRecord::Base
     label.index('Transit') ? label + ' to ' + next_status_table.classify : label
   end
 
-  def add_rotation(user)
+  def add_rotation(user, start_date = null, end_date = null)
     if(status.class != StorageRecord || is_available != true)
       raise 'Rotations cannot be added to product_instances that are unavailable'
     end
     user.transit_table ||= 'fedex_transits'
     transit_class = user.transit_table.to_class
-    rotation = Rotation.new()
-    transit = transit_class.new()
+    rotation = Rotation.new({:est_start_date => start_date, :est_end_date => end_date, :due_date => end_date})
+    transit = transit_class.new({:est_end_date => start_date, :due_date => start_date})
     transit.next = rotation
 
     self.next_status = transit

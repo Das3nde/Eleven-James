@@ -31,21 +31,6 @@ $ ->
   action = path_parts.pop() || 'index'
   page = path_parts.pop()
   url = if action == 'index' then '' else action
-  $.get( url, {}, (html)->
-    $el = $('.ej-tabs [data-action='+action+']')
-    refresh_tab($el, action)
-  )
-
-  $(".ej-tabs").each ->
-    active = 0
-    active = $(this).data("active")  if $(this).data("active") isnt 'undefined'
-    $(this).tabs({
-      active: active,
-      activate: (e, i)->
-        $el = $(i.newPanel)
-        action = $el.attr('data-action')
-        refresh_tab($el, action)
-    })
 
   refresh_tab = ($el, action) ->
     if $('.user-end').length == 0
@@ -61,18 +46,42 @@ $ ->
               action = 'add_product'
             else
               action = 'view_item'
-          refresh_method = refresh_tab_methods[page][action]
-          (refresh_method && refresh_method.norefresh) || $el.html(html)
+          refresh_method = refresh_methods[page][action]
+          $el.html(html)
           $(".select-wrapper select").on "change", ->
             update_select(this)
 
           $(".select-wrapper select").each ->
             update_select(this)
-          if(refresh_method && !refresh_method.norefresh)
-            $el.ready(()->
+          $el.ready(()->
+            if(refresh_method)
               refresh_method.call(refresh_method, $el, html)
-            )
+          )
         )
+
+
+  $(".ej-tabs").each ->
+    active = 0
+    active = $(this).data("active")  if $(this).data("active") isnt 'undefined'
+    $(this).tabs({
+      active: active,
+      activate: (e, i)->
+        $el = $(i.newPanel)
+        action = $el.attr('data-action')
+        refresh_tab($el, action)
+
+    })
+
+  if(refresh_methods[page].onload)
+    refresh_methods[page].onload(action)
+
+  $.get( url, {}, (html)->
+    $el = $('.ej-tabs [data-action='+action+']')
+    console.log(refresh_methods[page])
+    refresh_tab($el, action)
+  )
+
+
 
   $(".ej-modal").each ->
     $this = $(this)
@@ -206,7 +215,7 @@ $ ->
 
 
 
-refresh_tab_methods = {
+refresh_methods = {
   products:{
     index: () ->
       $('.ej-table tbody tr').click(()->
@@ -327,6 +336,9 @@ refresh_tab_methods = {
           responsive: false
   },
   inventory : {
+    onload: (action) ->
+      if(action)
+        add_inventory_tab(action)
     index: ()->
       $('.ej-table tr').click(()->
         id = this.dataset.id
@@ -441,6 +453,13 @@ refresh_tab_methods = {
       )
   },
   shipping:{
+    onload: ()->
+      mapOptions = {
+      center: new google.maps.LatLng(-34.397, 150.644),
+      zoom: 8,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+      map = new google.maps.Map($("#pickup_map")[0],mapOptions);
     my_pickups: ($el) ->
       _this = this
       refresh = -> _this.call(_this, $el)
@@ -455,6 +474,8 @@ refresh_tab_methods = {
           refresh()
         )
       )
+
+
   }
   selection:{
     index: ->
@@ -528,14 +549,17 @@ refresh_tab_methods = {
         )
         if confirm('Are you sure you want to distribute these '+ pairs.length + ' items?')
           params = {
-          pairs:pairs,
-          authenticity_token: $('input[name=authenticity_token]').val()
+            pairs:pairs
+            authenticity_token: $('input[name=authenticity_token]').val()
+            start_date: $('#start_date').val()
+            end_date: $('#end_date').val()
           }
           $.post('distribute', params, ()->
             $('.user-slot:has(li)').remove()
           ,'json')
         return false
       )
+      $('#start_date,#end_date').datepicker()
   }
 }
 
@@ -543,9 +567,8 @@ get_row_id = ($el)->
   $($el).parents('tr').data('id')
 
 add_inventory_tab = (id)->
-  console.log('is this called more than once?')
   if($('.ui-tabs-anchor').length < 4)
-    $('.ej-tabs').tabs("add", id, id)
+    $('.ej-tabs').tabs("add", '#'+id, id)
   else
     $('.ui-tabs-nav:last-child span').html(id)
   $('.ui-tabs-panel:last-child').attr('data-action', id)

@@ -26,6 +26,10 @@ class Record < ActiveRecord::Base
       if(product_instance && product_instance.next_status_id == id)
         product_instance.next_status = new_status
         product_instance.save
+      end
+      if(product_instance && product_instance.status_id == id)
+        product_instance.status = new_status
+        product_instance.save
 
       end
       new_status && new_status.save
@@ -34,10 +38,16 @@ class Record < ActiveRecord::Base
   end
 
   def dates
-    start = start_date.strftime("%m/%d/%Y")
-    stop = end_date ? end_date.strftime("%m/%d/%Y") : 'current'
+    start = start_date.strftime("%m/%d")
+    stop = end_date ? end_date.strftime("%m/%d") : 'current'
     "#{start} - #{stop}"
   end
+  def est_dates
+    start = est_start_date ? est_start_date.strftime("%m/%d") : '<span class="blank-date">?</span>'
+    stop = est_end_date ? est_end_date.strftime("%m/%d") : '<span class="blank-date">?</span>'
+    "#{start} - #{stop}"
+  end
+
   def type
     table.classify.constantize.label
   end

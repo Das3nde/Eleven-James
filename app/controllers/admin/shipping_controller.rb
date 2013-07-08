@@ -1,27 +1,32 @@
 class Admin::ShippingController < AdminController
   @@tabs = {
-      index: 'Pickup From 11James',
-      from_member: 'Pickup From Member',
-      my_pickups: 'My Pickups'
+      index: 'From 11James',
+      from_member: 'From Member',
+      my_pickups: 'My Pickups',
   }
 
   def index
-    @foo = 'bar'
     if request.xhr?
-      render :file => 'admin/products/products'
+      render :file => 'admin/shipping/from_11james'
     end
   end
 
   def my_pickups
     transits = CourierTransit.where('courier_id = ?',current_user.id)
     @possessed = []
-    @awaiting = []
+    @awaiting_rotation = []
     transits.each do |t|
-      if t.product_instance.status_id == t.id
+
+      pi = t.product_instance
+      if pi.status_id == t.id
         @possessed << t
       end
-      if t.product_instance.next_status_id == t.id
-        @awaiting << t
+      if pi.next_status_id == t.id
+        if(pi.next_status_table)
+          @awaiting_rotation << t
+        else
+          @awaiting_storage << t
+        end
       end
     end
     render('admin/shipping/my_pickups')
@@ -57,6 +62,11 @@ class Admin::ShippingController < AdminController
 
   private
     def set_tabs
+      @@tabs = {
+          index: 'From 11James',
+          from_member: 'From Member',
+          my_pickups: 'My Pickups',
+      }
       @tabs = @@tabs.reject{|tab| tab==:my_pickups and !current_user.has_role 'Courier'}
     end
 

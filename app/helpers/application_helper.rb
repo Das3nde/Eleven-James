@@ -19,7 +19,7 @@ module ApplicationHelper
   def main_menu_array
     [
       {title: "The Collection", slug: "collection", href: '/collection'},
-      {title: "Your Selections", slug: "selection", href: '#'},
+      {title: "Your Selections", slug: "selection", href: '/user_queue'},
       {title: "Services & Benefits", slug: "service", href: service_benefits_path},
       {title: "News and Events", slug: "news", href: '#'},
       {title: "Contact Us", slug: "contact", href: contact_path}

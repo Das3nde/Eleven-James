@@ -12,8 +12,7 @@
           = link_to item[:title], item[:href]
   .right-nav.cgrid
     - if current_user
-
       = link_to 'Account', my_account_path, class: "account"
       = link_to 'Logout', '/auth/sign_out', class: "logout"
     - else
-      a.account.login href="#" Account
+      a.account.login href="#" Login

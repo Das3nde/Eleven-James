@@ -11,6 +11,6 @@
         li class="#{determine_active_menu(item[:slug].downcase)}"
           = link_to item[:title], "#"
   - if current_user
-    a href="/auth/sign_out" Logout
+    = link_to 'Logout', '/auth/sign_out'
   - else
-    a.account href="#" Accounts
+    a.account href="#" Account

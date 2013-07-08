@@ -72,7 +72,7 @@ $ ->
 
     })
 
-  if(refresh_methods[page].onload)
+  if(refresh_methods[page] != undefined && refresh_methods[page].onload)
     refresh_methods[page].onload(action)
 
   $.get( url, {}, (html)->

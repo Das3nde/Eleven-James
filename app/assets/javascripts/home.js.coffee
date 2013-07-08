@@ -242,7 +242,7 @@ save_rental_months =
 
 login =
   init: ->
-    $("a.account").click ->
+    $("a.account.login").click ->
       $("#signin-modal").dialog "open"
 
     this.catch_response()

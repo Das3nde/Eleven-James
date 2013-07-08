@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:sign_in]
   layout :determine_layout
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'

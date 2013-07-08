@@ -240,7 +240,22 @@ save_rental_months =
             success: (data, textStatus, jqXHR) ->
         false
 
+login =
+  init: ->
+    $("a.account").click ->
+      $("#signin-modal").dialog "open"
+
+    this.catch_response()
+
+  catch_response: ->
+    $('#new_user').on 'ajax:success', (event, data, status, xhr) ->
+      if data.success == false
+        alert(data.errors.join('\n'))
+      else
+        window.location.reload()
+
 $ ->
   collection_list.init()
   default_shipping.init()
   save_rental_months.init()
+  login.init()

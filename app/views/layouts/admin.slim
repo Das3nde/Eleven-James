@@ -9,17 +9,9 @@ html
 
   body.elevenjames
     - @is_admin = controller.class.to_s.split("::").first=="Admin"
-    - @header_partial = "mini_header"
-    - @footer_partial = "footer"
-    - @internal_class = "internal-page"
+    - @header_partial, @footer_partial, @internal_class, @body_class = page_settings
     ruby:
-     @menu = [ 
-        {title: "The Collection", slug: "collection", href: '#'},
-        {title: "Your Selections", slug: "selection", href: '#'},
-        {title: "Services & Benefits", slug: "service", href: '#'},
-        {title: "News and Events", slug: "news", href: '#'},
-        {title: "Contact Us", slug: "contact", href: '#'},
-             ]
+     @menu = main_menu_array
     - if @wrapper == "splash"
       - @header_partial = "splash_header"
       - @footer_partial = "splash_footer"
@@ -31,7 +23,7 @@ html
     - elsif  @is_admin
       - @footer_partial = "admin/footer"
       ruby:
-       @menu = [ 
+       @menu = [
           {title: "Models", slug: "models", href: 'products/'},
           {title: "Inventory", slug: "inventory", href: 'inventory/'},
           {title: "Members", slug: "members", href: '#'},

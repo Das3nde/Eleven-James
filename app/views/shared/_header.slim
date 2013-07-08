@@ -10,4 +10,7 @@
       - @menu.each do |item|
         li class="#{determine_active_menu(item[:slug].downcase)}"
           = link_to item[:title], "#"
-  a.account href="#" Account
+  - if current_user
+    a href="/auth/sign_out" Logout
+  - else
+    a.account href="#" Accounts

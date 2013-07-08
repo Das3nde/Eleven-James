@@ -9,7 +9,10 @@ class HomeController < ApplicationController
   def collection
     @wrapper = "listing"
     @products = Product.where("quantity > ?", 0)
-    @requested_product_ids = ProductRequest.where("user_id = ?", current_user.id).collect(&:product_id)
+    if current_user
+      @requested_product_ids = ProductRequest.where("user_id = ?", current_user.id).collect(&:product_id)
+    end
+    @requested_product_ids ||= []
   end
 
   def filter_collection
@@ -44,13 +47,18 @@ class HomeController < ApplicationController
     @wrapper = "concierge"
   end
 
+  def home_index
+    @wrapper = "home"
+  end
+
   private
 
   def determine_layout
     case action_name
     when 'collection', 'user_queue', 'contact', 'service_benefits'
-      #raise "sdf"
       'app'
+    when 'home_index'
+      'home'
     else
       'application'
     end

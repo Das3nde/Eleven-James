@@ -1,5 +1,5 @@
 class Admin::ProductsController < AdminController
-  before_filter :user_preferences
+  #before_filter :user_preferences
   @@tabs = {
       :index => 'All Products',
       :add_product => 'Add Model',
@@ -44,7 +44,8 @@ class Admin::ProductsController < AdminController
     render :nothing => true
   end
   def popular
-    render :nothing => true
+    prq = ProductRequest.count(:all, :group => 'product_id')
+    render :json => {:ok => prq.to_a}
   end
   def edit
     @product = Product.find(params[:id])

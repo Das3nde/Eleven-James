@@ -6,4 +6,11 @@ class Rotation < ActiveRecord::Base
   def self.label
     'Rotation'
   end
+
+  def self.due_date(start = Time.now)
+    time = Chronic.parse('11 weeks from now')
+    y = time.year
+    m = time.month
+
+  end
 end

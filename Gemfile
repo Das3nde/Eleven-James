@@ -17,7 +17,6 @@ gem "paperclip", "~> 3.4.2"
 gem "redis"
 gem "simple-navigation", "~> 3.10.0"
 gem "rails-backbone"
-gem "chosen-rails"
 gem "underscore-rails"
 gem 'jquery-rails'
 gem 'pg'

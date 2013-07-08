@@ -9,17 +9,19 @@
 
       #status_panel
         =render('admin/inventory/record_forms/' + @status.class.to_s.underscore)
+      #hover_status
     .right_col
       -if !@future.empty?
         .content.future
           h3 Scheduled
           table#future.ej-table
             thead
-              th width='400px' Status
-              th
+              th width='200px' Dates
+              th width='210px' Status
             tbody
               -@future.each do |r|
                 tr{class=(@status.id == r.id ? 'highlight':'') data-id=r.id}
+                  td =r.est_dates.html_safe
                   td =r.type
                   -if !r.type.index('Transit')
                     td
@@ -32,7 +34,7 @@
         tbody
           -@history.each do |r|
             tr{class=(@status.id == r.id ? 'highlight':'') data-id=r.id}
-              td =r.dates
+              td =r.dates.html_safe
               td =r.type
 
 #service_dialog.dialog

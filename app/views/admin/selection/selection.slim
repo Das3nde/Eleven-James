@@ -1,7 +1,15 @@
-.container
-  div style='width:200px;display:inline-block;top:0;vertical-align:text-top'
-    h2 Weights
-    form#selection_form
+form#selection_form
+  .container style="min-height:0px"
+    div style="clear:both;width:100%"
+          label Rotation Starting On
+          input#start_date type="text" value=@start_date.strftime('%m/%d/%Y')
+          label Ending On
+          input#end_date type="text" value=@end_date.strftime('%m/%d/%Y')
+  .container
+    div style='width:240px;display:inline-block;top:0;vertical-align:text-top'
+
+
+      h2 Weights
       div
         label Face Color
         input value=1.0
@@ -14,22 +22,22 @@
       button#run_selection Assign
       input type='hidden' value=form_authenticity_token name='authenticity_token'
 
-    button#distribute_button Distribute
-  div style='width:400px;display:inline-block;height:700px;top:0;vertical-align:text-top'
-    h2 Users
-    div style='overflow:auto;height:700px'
-      -@users.each do |u|
-        -if u.needs_rotation()
-          .user-slot
-            p =u.name
-            ul.connected-sortable.user-selection style='height:125px' id=('user-'+u.id.to_s) data-id=u.id
-  div style='width:400px;display:inline-block;vertical-align:text-top'
-    h2 Products
-    div style='overflow:auto;height:700px'
-      ul#selection_products.connected-sortable
-        -@products.each do |p|
-          li data-id=p.id id=('product-'+p.id)
-            .lock Locked
-            div{style='clear:both;height:125px'}
-              img{src=p.image style='float:left'}
-              p =p.model
+      button#distribute_button Done
+    div style='width:400px;display:inline-block;height:700px;top:0;vertical-align:text-top'
+      h2 Users
+      div style='overflow:auto;height:700px'
+        -@users.each do |u|
+          -if u.needs_rotation()
+            .user-slot
+              p =u.name
+              ul.connected-sortable.user-selection style='height:125px' id=('user-'+u.id.to_s) data-id=u.id
+    div style='width:400px;display:inline-block;vertical-align:text-top'
+      h2 Products
+      div style='overflow:auto;height:700px'
+        ul#selection_products.connected-sortable
+          -@products.each do |p|
+            li data-id=p.id id=('product-'+p.id)
+              .lock Locked
+              div{style='clear:both;height:125px'}
+                img{src=p.image style='float:left'}
+                p =p.model

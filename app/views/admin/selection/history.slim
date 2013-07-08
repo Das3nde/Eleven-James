@@ -1,13 +1,13 @@
 #selection_history.container.table_view style="height:500px"
-
   -@history.each do |h|
     div style='clear:both'
       h3 =h[:date]
       ul
         -h[:pairs].each do |p|
           li data-id="00009-1" id="product-00009-1"
-            div style="clear:both;height:145px"
-              p =p[1].name
-              img src=p[0].image
-              p =p[0].id
+            a href=('/admin/inventory/'+p[0].id)
+              div style="clear:both;height:145px"
+                p =p[1].name
+                img src=p[0].image
+                p =p[0].id
         /-h.pairs.each do |p|

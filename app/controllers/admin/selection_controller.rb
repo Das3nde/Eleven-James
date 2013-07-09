@@ -10,9 +10,9 @@ class Admin::SelectionController < AdminController
     @users = User.all()
     @products = ProductInstance.where('is_available is true')
     if request.xhr?
-      s = Chronic.parse('2 weeks from now')
+      s = Chronic.parse('3 weeks 5 days from now')
       @start_date = Time.new(s.year, s.month) + 2.days
-      t = Chronic.parse('11 weeks from now',:now => @rotation_start)
+      t = Chronic.parse('11 weeks from now',:now => s)
       @end_date = Time.new(t.year, t.month) - 2.days
       render :file => 'admin/selection/selection'
     end

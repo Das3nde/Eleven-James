@@ -2,13 +2,13 @@ class Product < ActiveRecord::Base
   @@fields = {
       model: {},
       collection: {as: 'select', selection_coords: true},
-      brand: {as: 'select'},
-      case_diameter: {},
-      face_color: {as:'select', input_html:{multiple:true} },
-      case_material: {as:'select', input_html:{multiple:true} },
-      band_color: {as: 'select'},
-      band_material: {as: 'select'},
-      band_name: {as: 'select'},
+      brand: {as: 'select', algorithm:true},
+      case_diameter: {algorithm:true},
+      face_color: {as:'select', input_html:{multiple:true}, algorithm:true },
+      case_material: {as:'select', input_html:{multiple:true}, algorithm:true },
+      band_color: {as: 'select', algorithm:true},
+      band_material: {as: 'select', algorithm:true},
+      band_name: {as: 'select', algorithm:true},
       reference: {},
       family: {},
       cost: {as: 'currency'},
@@ -31,7 +31,7 @@ class Product < ActiveRecord::Base
       description: {as: 'text'},
 
   }
-
+  before_save :convert_fields
   belongs_to :vendor
   has_many :product_images, :dependent => :destroy
   has_many :product_instances, :dependent => :destroy
@@ -40,6 +40,19 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_instances
 
   attr_accessible *@@fields.keys
+
+  def convert_fields
+    Product.fields.each do |attr,meta|
+      val = self[attr]
+      if(attr.to_s.index('is_')==0 && val.is_a?(String))
+        self[attr] = val.downcase == 'true' ? true : false;
+      elsif(meta[:as] == 'dateselect' && val.is_a?(String))
+        self[attr] = Chronic.parse(val)
+      elsif(meta[:as] == 'currency' && val.is_a?(String))
+        self[attr] = Money.parse(val).to_f
+      end
+    end
+  end
 
   def self.fields
     @@fields
@@ -59,25 +72,30 @@ class Product < ActiveRecord::Base
     instance
   end
 
+  def self.algorithm_fields
+    Product.fields.reject{|k,v| !v[:algorithm]}.keys
+  end
+
   def to_vector
+    #need to implement support for fields with multiple values in them,
     vector = {}
-    ['brand', 'color', 'material', 'model', 'style', 'face'].each do |attr|
-      val = self.send(attr)
-      if(val && !val.empty?)
-        vector[attr+'-'+val.to_s] = 1;
+    Product.algorithm_fields.each do |attr|
+      val = self[attr]
+      if(val && !val.to_s.empty?)
+        vector[attr.to_s+'-'+val.to_s] = 1;
       end
     end
-    vector['case_size'] = relative_case_size()
+    vector['case_diameter'] = relative_case_diameter()
     return vector
   end
 
-  def relative_case_size
-    @@max_case_size ||= Product.maximum('case_size').to_i;
-    @@min_case_size ||= Product.minimum('case_size').to_i;
-    if @@max_case_size === @@min_case_size
+  def relative_case_diameter
+    @@max_case_diameter ||= Product.maximum('case_diameter').to_i;
+    @@min_case_diameter ||= Product.minimum('case_diameter').to_i;
+    if @@max_case_diameter === @@min_case_diameter
       return 1
     end
-    (case_size.to_i - @@min_case_size * 1.0) / (@@max_case_size - @@min_case_size)
+    (case_diameter.to_i - @@min_case_diameter * 1.0) / (@@max_case_diameter - @@min_case_diameter)
   end
 
   def self.get_options field
@@ -113,7 +131,7 @@ class Product < ActiveRecord::Base
   end
 
   def image(style= 'thumb')
-    product_images.first.url(style)
+    product_images.first && product_images.first.url(style)
   end
 
   def to_display

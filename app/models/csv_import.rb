@@ -2,31 +2,24 @@
 module CsvImport
   require 'csv'
   def self.import_csv(path)
-    header_map =  {
-        'Family'=> 'model',
-        'Brand' =>'brand',
-        'Band Material' =>'material',
-        'Bucketed Classification' => 'style',
-        'Face Color' => 'color',
-        'Case Diameter' =>'case_size',
-        'Face Color' => 'face',
-        'Collection'=>'tier'
-    }
     file = File.open(path).read
     spreadsheet = CSV.parse(file)
     header = spreadsheet[0]
-    puts header
     (2..(spreadsheet.count-1)).each do |i|
       attrs = {}
       image = nil
       spreadsheet[i].each_with_index do |cell, j|
-        attr = header_map[header[j]]
-        if(attr)
+        attr = header[j].underscore.gsub(' ','_')
+        meta = Product.fields[attr.to_sym]
+        if(meta)
           attrs[attr] = cell
         end
         if header[j] == 'Image' && cell
-          puts 'sdzsd'
-          image = File.new('/tmp/'+cell, "r")
+          p = path.split('/')
+          p.pop()
+          dir = p.join('/')+'/'
+          puts dir+cell
+          image = File.new(dir+cell, "r")
         end
       end
       if(image)
@@ -34,9 +27,11 @@ module CsvImport
         product_image = ProductImage.new(:image => image)
         product.product_images << product_image
         product.save
+        product.add_inventory
         product_image.save
       end
 
     end
+    REDIS.flushall
   end
 end

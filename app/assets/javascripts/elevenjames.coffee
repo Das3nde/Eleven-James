@@ -368,7 +368,7 @@ refresh_methods = {
   },
   inventory : {
     onload: (action) ->
-      if(action)
+      if(action && action.indexOf('-')!=-1)
         add_inventory_tab(action)
     index: ()->
       $('.ej-table tr').click(()->

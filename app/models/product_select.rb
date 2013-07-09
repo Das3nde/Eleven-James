@@ -22,7 +22,7 @@ class ProductSelect
       product = product.to_vector()
       matrix[i] = []
       requests.each_with_index{ |request ,j|
-        matrix[i][j] = distance(product, request, j)
+        matrix[i][j] = product && request ? distance(product, request, j) : 0
       }
     }
 

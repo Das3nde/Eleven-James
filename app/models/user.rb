@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
     ProductRequest.where(sql, id).to_a.map{|req|
       reqs << req.product.to_vector()
     }
-    return reqs
+    return reqs.empty? ?  nil : reqs
   end
 
   def needs_rotation

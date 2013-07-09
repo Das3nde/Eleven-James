@@ -10,15 +10,12 @@ form#selection_form
 
 
       h2 Weights
-      div
-        label Face Color
-        input value=1.0
-      div
-        label Case
-        input value=1.0
-      div
-        label Material
-        input value=1.0
+      /These don't do anything yet
+      -Product.algorithm_fields.each do |f|
+        div
+          label =f.to_s.titleize
+          input value=1.0
+
       button#run_selection Assign
       input type='hidden' value=form_authenticity_token name='authenticity_token'
 

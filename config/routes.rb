@@ -76,8 +76,10 @@ Ej::Application.routes.draw do
   root :to => "users#index"
   devise_for :users, :controllers => {:registrations => "registrations"} do
     match '/auth/sign_out' => 'registrations#destroy_session', :as => :destroy_user_session
+    post '/users/sign_in' => 'sessions#create'
   end
 
+  get '/home' => 'home#home_index', :as => :home
   get 'collection/:id' => 'products#show', :as => :show_collection
   get 'collection' => 'home#collection'
   post 'comment' => 'products#comment', :as => :add_comment

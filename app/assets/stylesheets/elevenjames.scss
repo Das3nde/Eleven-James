@@ -234,7 +234,7 @@ body.elevenjames {
         margin-top:17px;
 
         li {
-          margin: 0 15px;
+          margin: 0 13px;
         }
         a {
           color: #FFF;
@@ -264,9 +264,17 @@ body.elevenjames {
             background-image: url(home-icon-active.png);
           }
         }
+        .logout {
+          float:right;
+          a {
+            text-transform: uppercase;
+            color: #ff4002;
+            font-size: 13px;
+          }
+        }
         .account {
           padding-right: 50px;
-          padding-left: 40px;
+          padding-left: 30px;
           background: url(account-gear-icon.png) 100% 2px no-repeat;
           margin-right:0;
           float:right;
@@ -2290,10 +2298,13 @@ table.ej-table {
   float:left;
 }
 
-#site-nav.css-center {
+body.elevenjames .css-center {
   text-align:center;
-  > ul {
+  > ul, > .button {
     display:inline-block;
+  }
+  .button {
+    margin:0 5px;
   }
 }
 
@@ -2305,7 +2316,7 @@ table.ej-table {
       label {
         width:150px;
       }
-      input[type=text], input[type=password] {
+      input[type=text], input[type=password], input[type=email] {
         width:250px;
       }
     }

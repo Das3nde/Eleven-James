@@ -16,6 +16,7 @@
 //= require jquery.validate
 //= require jcrop
 //= require products
+//= require home
 //= require select-parser
 //= require abstract-chosen
 //= require chosen.jquery

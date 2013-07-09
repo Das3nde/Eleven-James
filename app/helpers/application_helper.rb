@@ -12,7 +12,19 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def page_settings
+    ["mini_header", "footer", "internal-page", ""]
+  end
 
+  def main_menu_array
+    [
+      {title: "The Collection", slug: "collection", href: '/collection'},
+      {title: "Your Selections", slug: "selection", href: '/user_queue'},
+      {title: "Services & Benefits", slug: "service", href: service_benefits_path},
+      {title: "News and Events", slug: "news", href: '#'},
+      {title: "Contact Us", slug: "contact", href: contact_path}
+    ]
+  end
 
   def determine_active_menu(context)
     case context
@@ -88,6 +100,18 @@ module ApplicationHelper
         ['Wisconsin', 'WI'],
         ['Wyoming', 'WY']
       ]
+  end
+
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
   end
 
 end

@@ -6,17 +6,9 @@ html
     = javascript_include_tag "application"
     = csrf_meta_tags
   body.elevenjames.user-end
-    - @header_partial = "mini_header"
-    - @footer_partial = "footer"
-    - @internal_class = "internal-page"
+    - @header_partial, @footer_partial, @internal_class, @body_class = page_settings
     ruby:
-     @menu = [
-        {title: "The Collection", slug: "collection", href: '/collection'},
-        {title: "Your Selections", slug: "selection", href: '#'},
-        {title: "Services & Benefits", slug: "service", href: service_benefits_path},
-        {title: "News and Events", slug: "news", href: '#'},
-        {title: "Contact Us", slug: "contact", href: contact_path}
-             ]
+     @menu = main_menu_array
     - if @wrapper == "splash"
       - @header_partial = "splash_header"
       - @footer_partial = "splash_footer"
@@ -40,3 +32,5 @@ html
         = yield
       #site-footer
         = render "/shared/#{@footer_partial}"
+
+= render '/shared/login_form'

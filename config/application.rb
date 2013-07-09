@@ -14,11 +14,11 @@ module Ej
 
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
-      
+
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
-      
-      
+
+
       g.view_specs false
       g.helper_specs false
     end
@@ -82,5 +82,6 @@ module Ej
 
     config.active_record.schema_format = :sql
 
+    config.action_mailer.default_url_options = { :host => 'elevenjames.com' }
   end
 end

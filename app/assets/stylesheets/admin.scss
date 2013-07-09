@@ -46,6 +46,9 @@ body.elevenjames{
             float:right;
             margin-left:0;
           }
+          .form{
+            width: 950px;
+          }
         }
         .right_col {
           width:180px;
@@ -54,21 +57,34 @@ body.elevenjames{
             width:110px;
           }
         }
+
         .section {
+          left_col alpha{
+            width: 950px;
+          }
+
           margin-top:35px;
-          &.description {
+          .row.control-group.product_description {
+            clear:both;
+            display:block;
+            width: 900px;
             .row, .field {
               height:auto;
             }
-            .field {
-              width:700px;
-            }
-            textarea.text {
+            textarea {
               line-height:24px;
               margin:5px 0;
-              width:700px;
+              width:900px;
               height:200px
             }
+          }
+          .row.control-group{
+            min-height: 44px;
+            height: inherit;
+            float:left;
+            clear:none;
+            width: 450px;
+            border-bottom: none;
           }
         }
         .button_panel {

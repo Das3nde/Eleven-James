@@ -41,6 +41,8 @@ Ej::Application.routes.draw do
       match "products/:product_id/upload_image" => "products#upload_image"
       match "products/add_vendor" => "products#add_vendor"
       match "products/:id/add_inventory" => "products#add_inventory"
+      match "products/add_option" => "products#add_option"
+      match 'products/reorder_images' => 'products#reorder_images'
       match "selection/get_pairs" => "selection#get_pairs"
       match "selection/distribute" => "selection#distribute"
       #match "products" => redirect("/admin/products/")

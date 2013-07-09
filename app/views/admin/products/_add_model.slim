@@ -1,64 +1,21 @@
-ruby:
-  @brands = Product.brand_list
-  @styles = Product.style_list
-  @tiers = Product.tier_list
-  @faces = Product.faces_list
-  @materials = Product.materials_list
-
 .container.cgrid
-  = simple_form_for [:admin, @product] do |f|
+  = simple_form_for [:admin, @product] do |form|
         .left_col.alpha
           .section
             h3 Product Specifications
             .cgrid.form
-              .left.alpha
-                .row.cgrid.compact
-                  label Model
-                  = f.input_field :model
-                .row.cgrid.compact
-                  label Brand
-                  =f.input_field :brand, collection: @brands, as: :select
-                .row.cgrid.compact
-                  label Style
-                  =f.input_field :style, collection: @styles, as: :select
-                .row.cgrid.compact
-                  label Case Size (MM)
-                  = f.input_field :case_size
-                .row.cgrid.compact
-                  label Face
-                  =f.input_field :face, collection: @faces, as: :select
-              .right.omega
-                .row.cgrid.compact
-                  label Tier
-                  =f.input_field :tier, collection: @tiers, as: :select
-                .row.cgrid.compact
-                  label Material
-                  =f.input_field :material, collection: @materials, as: :select
-                .row.cgrid.compact
-                  label Vendor
-                  = f.collection_select "vendor_id", Vendor.all, :id, :name, :label => "Name"
-                    / .options
-                .row.cgrid.compact
-                  label MSRP
-                  = f.input_field :msrp
-                .row.cgrid.compact
-                  label Purchase Price
-                  =f.input_field :price
-            .section.description
-              h3 Product Description
-              .form
-                .row.cgrid.compact
-                  label Description
-                  =f.input_field :description, :as => :text
+              -Product.fields.each do |field, options|
+                -options[:wrapper_html] = {class: 'row cgrid compact' }
+                -if options[:as] == 'select'
+                  -options[:collection] = Product.get_options(field)
+                =form.input field, options
             .section
               h3 Product Photos
               .content.photo-list
                 ul.cgrid.compact#photos
                   li.add-photo
                     label for="product_image_image" Add Photo
-
-
-                  - @product.product_images.each do |image|
+                  - @product.product_images.order('rank ASC').each do |image|
                     li{data-id=(image.id)}
                       img{src=(image.url('square'))}
                       .edit-bar
@@ -69,25 +26,8 @@ ruby:
             .section.cgrid
               .form.button_panel.cgrid
                 .buttonset.cgrid.alpha
-                  .checkbox.featured
-                    label for="is_featured" Featured
-                    = f.input_field :is_featured
-                  .checkbox
-                    label for="is_new" New Arrival
-                    = f.input_field :is_new
-                .row.cgrid.compact.omega
-                  label Status
-                  .select-wrapper.status.field
-                    .value
-                    .arrow.red
-                    select#status
-                      option value="0" Draft
-                      option value="1" Saved
               .button-row.not-centered.cgrid
-                /a.preview.button.alpha href="#" Preview
                 a.save.btn.button.primary.omega href="#" Save
-
-
         .right_col.omega
           .section
             .header.cgrid

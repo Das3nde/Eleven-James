@@ -32,6 +32,11 @@ class Admin::ProductsController < AdminController
     @page_size = @admin_prefs['page_size'].to_i || 10;
   end
 
+  def add_option
+    Product.add_option(params[:field], params[:option])
+    render :nothing => true
+  end
+
   def products
     @products = Product.order(@order).page(params[:page]).per(@page_size)
   end
@@ -55,14 +60,20 @@ class Admin::ProductsController < AdminController
     render "admin/products/create_edit"
   end
   def add_product
-    @product = Product.where('model = ?', 'Untitled Model').last || Product.create({:model => 'Untitled Model', :quantity => 0})
+    @product = Product.where('model = ?', 'Untitled Model').last || Product.create({:model => 'Untitled Model'})
     @product.product_instances
+    @product.to_display()
     @product_image = ProductImage.new()
     render :layout => false, :file => "admin/products/_add_model"
   end
   def update
     product = Product.find(params[:id])
-    if product.update_attributes params[:product]
+    attrs = params[:product]
+    attrs.each do |k,v|
+      v = v.kind_of?(Array) && v.shift ? v.join(',') : v    #for some reason chosen makes the first element of the array an empty string, hence the shift
+      attrs[k] = k.to_s.include?('_date') ? Chronic.parse(v) : v
+    end
+    if product.update_attributes(attrs)
       render :json => {:ok => true}
     else
       render :json => {:ok => false}
@@ -81,7 +92,16 @@ class Admin::ProductsController < AdminController
     @product = Product.find(params[:id])
     @product_instances = ProductInstance.where('id ~ ?','^'+ sprintf('%05d',@product.id))
     @product_image = ProductImage.new()
+    @product.to_display()
     render :layout => false, :file => "admin/products/_add_model"
+  end
+  def reorder_images
+    a = []
+    params[:order].each_with_index do |id, i|
+      ProductImage.find(id).update_attribute(:rank, i)
+      a << ProductImage.find(id)
+    end
+    render json: a
   end
 
   private

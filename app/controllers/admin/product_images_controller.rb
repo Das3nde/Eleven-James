@@ -3,7 +3,9 @@ class Admin::ProductImagesController < ApplicationController
   include Magick
 
   def create
-    img = ProductImage.create( params[:product_image] )
+    attrs = params[:product_image]
+    attrs[:rank] = ProductImage.where('product_id = 1').size
+    img = ProductImage.create( attrs )
     if(img.valid?)
       render :json => {:thumb_src => img.image.url('square'), :id => img.id}
     else

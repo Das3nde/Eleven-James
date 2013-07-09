@@ -40,5 +40,5 @@ Ej::Application.configure do
 
   Paperclip.options[:command_path] = "/tmp"
 
-  ENV["REDISTOGO_URL"] = 'redis://redistogo:e281dcb1f412eddff96fa11e88c62e5a@barreleye.redistogo.com:10608/'
+  ENV["REDISTOGO_URL"] = 'redis://localhost:6379/'
 end

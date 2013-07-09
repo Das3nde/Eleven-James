@@ -225,6 +225,28 @@ refresh_methods = {
         $('.ej-tabs').tabs('select', 1);
       )
     add_product : ()->
+
+      $('.control-group.select select').each(()->
+        field = this.name.match(RegExp('[^[\\]]+(?=])'))[0]
+        $(this).chosen({
+          create_option: (opt)->
+            chosen = this
+            $.post('add_option', {option: opt, field:field, authenticity_token:AUTH_TOKEN}, (data) ->
+              chosen.append_option({
+                value: opt,
+                text: opt
+              })
+            )
+        })
+      )
+      $('.dateselect input').datepicker()
+      check_borrowed = ()->
+        if($('#product_is_borrowed')[0].checked)
+          $('.product_return_date').show()
+        else
+          $('.product_return_date').hide()
+      $('#product_is_borrowed').change(check_borrowed)
+      check_borrowed()
       handle_vendor_form = ()->
         $('.vendor-dialog').dialog()
         $('.simple_form.vendor').validate({
@@ -318,7 +340,16 @@ refresh_methods = {
         return false
       )
 
+
+      $('#photos').sortable({
+        update: ->
+          a = _.map($(this).find('li[class!=add-photo]'),(v) -> return v.dataset.id)
+          $.post('reorder_images', {authenticity_token:AUTH_TOKEN, order:a})
+      })
+
     featured: () ->
+
+
       $(".bjqs-wrap").each ->
         width = $(@).data("width")
         height = $(@).data("height")

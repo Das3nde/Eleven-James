@@ -178,6 +178,40 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
+-- Name: contacts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE contacts (
+    id integer NOT NULL,
+    name character varying(255),
+    email character varying(255),
+    subject character varying(255),
+    message text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: contacts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE contacts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: contacts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE contacts_id_seq OWNED BY contacts.id;
+
+
+--
 -- Name: courier_transits; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -314,7 +348,8 @@ CREATE TABLE product_images (
     image_file_name character varying(255),
     image_content_type character varying(255),
     image_file_size integer,
-    image_updated_at timestamp without time zone
+    image_updated_at timestamp without time zone,
+    rank integer
 );
 
 
@@ -402,22 +437,35 @@ ALTER SEQUENCE product_requests_id_seq OWNED BY product_requests.id;
 CREATE TABLE products (
     id integer NOT NULL,
     model character varying(255),
-    brand character varying(255),
-    material character varying(255),
-    style character varying(255),
-    color character varying(255),
-    case_size integer,
-    msrp integer,
-    vendor_id integer,
-    description text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
     quantity integer,
-    is_featured boolean,
-    is_new boolean,
-    price integer,
-    face character varying(255),
-    tier character varying(255)
+    collection character varying(255),
+    brand character varying(255),
+    case_diameter integer,
+    face_color character varying(255),
+    case_material character varying(255),
+    band_color character varying(255),
+    band_material character varying(255),
+    band_name character varying(255),
+    reference character varying(255),
+    family character varying(255),
+    description text,
+    cost integer,
+    retail_price integer,
+    dial_style character varying(255),
+    hand_color character varying(255),
+    clasp_type character varying(255),
+    is_used boolean,
+    movement character varying(255),
+    power_reserve character varying(255),
+    bezel_type character varying(255),
+    purchase_date date,
+    vendor_id character varying(255),
+    bucketed_classification character varying(255),
+    water_resistance integer,
+    is_borrowed boolean,
+    return_date date,
+    is_new_arrival boolean,
+    is_featured boolean
 );
 
 
@@ -642,6 +690,18 @@ ALTER SEQUENCE tiers_id_seq OWNED BY tiers.id;
 
 
 --
+-- Name: unarranged_transits; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE unarranged_transits (
+    uuid character varying(255) NOT NULL,
+    product_instance_id character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -786,6 +846,13 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY contacts ALTER COLUMN id SET DEFAULT nextval('contacts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY customers ALTER COLUMN id SET DEFAULT nextval('customers_id_seq'::regclass);
 
 
@@ -889,6 +956,14 @@ ALTER TABLE ONLY comment_helps
 
 ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: contacts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY contacts
+    ADD CONSTRAINT contacts_pkey PRIMARY KEY (id);
 
 
 --
@@ -1028,6 +1103,14 @@ ALTER TABLE ONLY tiers
 
 
 --
+-- Name: unarranged_transits_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY unarranged_transits
+    ADD CONSTRAINT unarranged_transits_pkey PRIMARY KEY (uuid);
+
+
+--
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1125,13 +1208,6 @@ CREATE INDEX index_product_requests_on_product_instance_id ON product_requests U
 --
 
 CREATE INDEX index_product_requests_on_user_id ON product_requests USING btree (user_id);
-
-
---
--- Name: index_products_on_vendor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_products_on_vendor_id ON products USING btree (vendor_id);
 
 
 --
@@ -1324,3 +1400,15 @@ INSERT INTO schema_migrations (version) VALUES ('20130627152319');
 INSERT INTO schema_migrations (version) VALUES ('20130627154001');
 
 INSERT INTO schema_migrations (version) VALUES ('20130628104352');
+
+INSERT INTO schema_migrations (version) VALUES ('20130703143906');
+
+INSERT INTO schema_migrations (version) VALUES ('20130708144854');
+
+INSERT INTO schema_migrations (version) VALUES ('20130708191737');
+
+INSERT INTO schema_migrations (version) VALUES ('20130709000105');
+
+INSERT INTO schema_migrations (version) VALUES ('20130709001653');
+
+INSERT INTO schema_migrations (version) VALUES ('20130709061015');

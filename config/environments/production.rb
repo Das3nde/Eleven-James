@@ -73,4 +73,6 @@ Ej::Application.configure do
           :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
       }
   }
+
+  ENV["REDISTOGO_URL"] = 'redis://redistogo:e281dcb1f412eddff96fa11e88c62e5a@barreleye.redistogo.com:10608/'
 end

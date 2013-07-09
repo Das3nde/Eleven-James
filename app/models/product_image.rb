@@ -2,7 +2,7 @@ class ProductImage < ActiveRecord::Base
   belongs_to :product
 
   # attr_accessible :title, :body
-  attr_accessible :image, :product_id
+  attr_accessible :image, :product_id, :rank
 
   # This method associates the attribute ":avatar" with a file attachment
   has_attached_file :image, :styles => {

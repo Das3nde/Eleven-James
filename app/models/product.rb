@@ -1,4 +1,37 @@
 class Product < ActiveRecord::Base
+  @@fields = {
+      model: {},
+      collection: {as: 'select', selection_coords: true},
+      brand: {as: 'select'},
+      case_diameter: {},
+      face_color: {as:'select', input_html:{multiple:true} },
+      case_material: {as:'select', input_html:{multiple:true} },
+      band_color: {as: 'select'},
+      band_material: {as: 'select'},
+      band_name: {as: 'select'},
+      reference: {},
+      family: {},
+      cost: {as: 'currency'},
+      retail_price: {as: 'currency'},
+      dial_style: {as: 'select', input_html:{multiple:true}},
+      hand_color: {as: 'select', input_html:{multiple:true}},
+      clasp_type: {as: 'select'},
+      movement: {as: 'select'},
+      power_reserve: {},
+      bezel_type: {as: 'select'},
+      purchase_date: {as:'dateselect'},
+      vendor_id: {as: 'collection_select'},
+      bucketed_classification: {as: 'select', input_html:{multiple:true}},
+      water_resistance: {},
+      is_used:  {},
+      is_new_arrival: {},
+      is_featured: {},
+      is_borrowed: {},
+      return_date: {as:'dateselect'},
+      description: {as: 'text'},
+
+  }
+
   belongs_to :vendor
   has_many :product_images, :dependent => :destroy
   has_many :product_instances, :dependent => :destroy
@@ -6,7 +39,11 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_images, :reject_if => lambda { |t| t['product_images'].nil? }
   accepts_nested_attributes_for :product_instances
 
-  attr_accessible :brand, :case_size, :color, :description, :material, :model, :msrp, :price, :is_featured, :is_new, :style, :vendor_id,:face, :tier, :quantity
+  attr_accessible *@@fields.keys
+
+  def self.fields
+    @@fields
+  end
 
   def add_inventory
     product_id = sprintf '%05d', id
@@ -43,28 +80,45 @@ class Product < ActiveRecord::Base
     (case_size.to_i - @@min_case_size * 1.0) / (@@max_case_size - @@min_case_size)
   end
 
-
-  def self.brand_list
-    ['Cartier', 'Rolex', 'Omega', 'Breitling']
+  def self.get_options field
+    key = 'admin::product::options::'+ field.to_s
+    stored = REDIS.get(key)
+    if stored
+      return JSON.parse(stored)
+    else
+      options = Product.select(field).group(field).map{ |p|
+        self.multi_to_array(field, p)
+      }.flatten.uniq
+      options = options[0] == nil && options.size == 1 ? [] : options
+      REDIS.set(key, options.to_json)
+      return options
+    end
   end
 
-  def self.style_list
-    ['Sport', 'Luxury']
+  def self.multi_to_array field, hash
+    v = hash[field]
+    field = field.to_sym
+    (v.is_a?(String) && v.include?(',') && Product.fields[field] &&
+        Product.fields[field.to_sym][:input_html] && Product.fields[field][:input_html][:multiple]) ?
+        v.split(',') : v
   end
 
-  def self.tier_list
-    ['Artisan', 'tier 2', 'tier 3']
-  end
-
-  def self.faces_list
-    ['Red', 'Blue', 'Purple', 'Black']
-  end
-
-  def self.materials_list
-    ['Gold', 'Silver', 'Steel']
+  def self.add_option field, option
+    options = self.get_options(field)
+    if(options.include?(option))
+      return false
+    end
+    options << option
+    REDIS.set('admin::product::options::'+ field.to_s, options.to_json)
   end
 
   def image(style= 'thumb')
     product_images.first.url(style)
+  end
+
+  def to_display
+    self.attributes.keys.each do |k|
+      self[k] = Product.multi_to_array(k, self)
+    end
   end
 end

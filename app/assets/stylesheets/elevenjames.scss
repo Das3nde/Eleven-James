@@ -746,6 +746,7 @@ body.elevenjames {
     border-left-width: 0;
     border-right-width: 0;
     margin-top: -1px;
+    clear:both;
     label {
       text-transform: uppercase;
       font-family: dinnLC;
@@ -758,7 +759,7 @@ body.elevenjames {
     &.textarea-row {
       height: auto;
     }
-    input, textarea, .field {
+    input:not([type=checkbox]), textarea, .field {
       border-width: 0px;
       box-shadow: none;
       background-color: #eeeeeb;
@@ -769,6 +770,9 @@ body.elevenjames {
       color: #363636;
       font-size: 16px;
       float: right;
+    }
+    input.currency {
+      width : 200px;
     }
     input, .field {
       height: 40px;

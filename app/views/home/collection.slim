@@ -6,19 +6,19 @@ h2 Timepieces
       .select-wrapper.brand.field
         .value
         .arrow.red
-        = select_tag 'brand', options_for_select(Product.brand_list.unshift(['Brand', '']))
+        = select_tag 'brand', options_for_select(Product.get_options('brand').unshift(['Brand', '']))
 
       label for="tier" Tier
       .select-wrapper.tier.field
         .value
         .arrow.red
-        = select_tag 'tier', options_for_select(Product.tier_list.unshift(['Tier', '']))
+        = select_tag 'tier', options_for_select(Product.get_options('collection').unshift(['Tier', '']))
 
       label for="type" Type
       .select-wrapper.type.field
         .value
         .arrow.red
-        = select_tag 'type', options_for_select(Product.style_list.unshift(['Any', '']))
+        = select_tag 'type', options_for_select(Product.get_options('dial_style').unshift(['Any', '']))
 
       label for="band" band
       .select-wrapper.band.field
@@ -33,7 +33,7 @@ h2 Timepieces
       .select-wrapper.face.field
         .value
         .arrow.red
-        = select_tag 'face', options_for_select(Product.faces_list.unshift(['Any', '']))
+        = select_tag 'face', options_for_select(Product.get_options('face_color').unshift(['Any', '']))
       label for="width" Width
       .select-wrapper.width.field
         .value

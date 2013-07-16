@@ -29,6 +29,10 @@ class HomeController < ApplicationController
   end
 
   def user_queue
+    if not current_user
+      redirect_to :controller => :home, :action => :collection
+      return false
+    end
     @wrapper = "queue"
     @requested_products = ProductRequest.where("fulfillment_time IS NULL AND user_id = ?", current_user.id)
   end

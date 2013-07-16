@@ -47,7 +47,7 @@ h2
             .info
               p.name = pr.product.brand
               p.make = pr.product.model
-              p Case Diameter: #{pr.product.case_size}
+              p Case Diameter: #{pr.product.case_size rescue 'N/A'}
 
             .close data-request-id="#{pr.id}"
 

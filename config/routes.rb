@@ -1,6 +1,7 @@
 Ej::Application.routes.draw do
   # root to: "static_pages#splash"
 
+  
   get "static_pages/splash"
 
   get "static_pages/account"
@@ -32,6 +33,7 @@ Ej::Application.routes.draw do
   get "admin_pages/inventory_past_due"
   get "admin_pages/inventory_purchase_request"
   get "admin_pages/inventory_watch_record"
+  get "admin_pages/members"
 
 
   resources :fedex_transits

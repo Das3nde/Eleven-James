@@ -324,7 +324,7 @@ body.elevenjames{
           padding-right:30px;
           padding-left:10px;
           select{
-            opacity:1
+/*            opacity:1*/
           }
           .value {
             line-height:27px;
@@ -550,7 +550,7 @@ body.elevenjames{
   }
 
   #admin-manage-inventory {
-    height: 700px;
+    
     .search-header {
       margin-top:0;
     }
@@ -593,6 +593,144 @@ body.elevenjames{
       width:150px;
     }
   }
+  
+  @mixin action-bar {
+    .action-bar {
+      border-top:1px solid $bdcolor;
+      border-bottom:1px solid $bdcolor;
+      line-height:40px;
+      .button.primary {
+        float:right;
+      }
+      label {
+        width:105px;
+        padding:0 20px;
+      }
+      .value {
+        width:415px;
+        font-family:akkurat;
+        padding:0 10px;
+      }
+      .product-id {
+        width:110px;
+        font-family:akkuratB;
+        color:$orange;
+        font-size:13px;
+        padding:0 10px;
+      }
+      .button {
+        @include border_radius(0);
+        margin-left:-6px;
+      }
+    }
+  }
+  #manage-members {
+    .ui-tabs-panel > .container {
+      padding-top:50px;
+    }
+    #members.ui-tabs {
+      @include action-bar;
+      
+      .action-bar {
+        .credit-approval-field  {
+          width:170px;
+        }
+        .current-membership-status-field  {
+          width:250px;
+          background-color:transparent;
+        }
+        label {
+          width:auto;;
+        }
+      }
+    }
+    .left-column.alpha {
+      width:890px;
+    }
+    .right-column.omega {
+      float:right;
+      width:184px;
+      background-color:#eeeeeb;
+      border-top:1px solid #c5c5c3;
+      border-bottom:1px solid #c5c5c3;
+      .content {
+        padding:10px 15px 0;
+        label, .value {
+          font-size:13px;
+          display:block;
+          line-height:17px;
+        }
+        .value {
+          padding-bottom:10px;
+        }
+      }
+    }
+    .section {
+      margin-top:15px;
+      border-bottom:1px solid #c8c8c6;
+      h3 {
+        font-size:27px;
+        line-height:48px;
+        border-bottom:1px solid #c8c8c6;
+      }
+    }
+    .rotation-section {
+      .info {
+        width:800px;
+        float:right;
+        margin:10px 0;
+      }
+      label {
+        line-height:20px;
+        width:150px;
+      }
+      .field {
+        font-size:13px;
+        line-height:20px;
+        width:200px;
+      }
+      img {
+        width:83px;
+        height:83px;
+      }
+      
+    }
+    .table-layout {
+      margin-top:30px;
+      .cgrid.header a {
+        text-decoration:none;
+        font-size:15px;
+        font-family:akkuratB;
+        margin:0 15px;
+        line-height:40px;
+        &.active {
+          color:#ff4002;
+        }
+        &:hover {
+          text-decoration:underline;
+        }
+      }
+    }
+    .member-info.section {
+      
+      .alpha {
+        width:50%;
+      }
+      .content {
+        padding:10px 5px;
+      }
+      label {
+        width:150px;
+        line-height:18px;
+      }
+      .field {
+        font-size:13px;
+        line-height:18px;
+        font-family:akkuratB;
+      }
+    }
+  }
+  
   #admin-manage-inventory {
     .extra {
       padding:0 10px 10px;
@@ -623,35 +761,8 @@ body.elevenjames{
         color:#a3a197;
       }
     }
-    #admin-manage-inventory {
-      .action-bar {
-        border-top:1px solid $bdcolor;
-        border-bottom:1px solid $bdcolor;
-        line-height:40px;
-        .button.primary {
-          float:right;
-        }
-        label {
-          width:105px;
-          padding:0 20px;
-        }
-        .value {
-          width:415px;
-          font-family:akkurat;
-          padding:0 10px;
-        }
-        .product-id {
-          width:110px;
-          font-family:akkuratB;
-          color:$orange;
-          font-size:13px;
-          padding:0 10px;
-        }
-        .button {
-          @include border_radius(0);
-          margin-left:-6px;
-        }
-      }
+    .ej-tabs {
+      @include action-bar;
       .detail-info {
         width:892px;
       }
@@ -839,7 +950,6 @@ body.elevenjames{
   }
 
   .table-view{
-    height: 500px;
     overflow: auto;
   }
 

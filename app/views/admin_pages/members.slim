@@ -1,0 +1,214 @@
+#manage-members
+  h2.black-grey
+    em Manage Members
+    small 
+      |  / 
+    | Harlon Stanton
+
+  .ej-tabs
+    .container
+      ul
+        li
+          a href="#members" Members
+        li
+          a href="#generate-invite" Generate Invite
+        li
+          a href="#prospects" Prospects
+        
+
+    #members.ui-tabs
+      .container
+        .cgrid.compact
+          .alpha.left-column
+            .action-bar.cgrid.compact.form
+              .product-id #####-034
+              img class="seperator" src="/assets/seperator-pointed.png"
+              label Credit Approval
+              .field.select-wrapper.credit-approval-field
+                .value
+                .arrow.red
+                select
+                  option value="Ap" Aproved
+                  option value="Ap2" Aproved 2
+              label Current Membership Status
+              .field.select-wrapper.current-membership-status-field
+                .value
+                .arrow
+                select
+                  option value="Active" Active
+                  option value="Inactive" Inactive
+            .member-info.section
+              h3 Member info
+              .content
+                .cgrid
+                  .alpha
+                    .row.cgrid
+                      label Work Address
+                      .field
+                        | 860 East 74th Street
+                        br
+                        | New York, NY 10010
+                    .row.cgrid
+                      label Home Address
+                      .field
+                        | 860 East 74th Street
+                        br
+                        | New York, NY 10010
+                    .row.cgrid
+                      label Alternate Address
+                      .field
+                        | 860 East 74th Street
+                        br
+                        | New York, NY 10010
+                  .omega
+                    .row.cgrid
+                      label Wrist Size
+                      .field X"
+                    .row.cgrid
+                      label Email
+                      .field Harlon.Stanton@domain.com
+                    .row.cgrid
+                      label Phone Home
+                      .field 212.555.1234
+                    .row.cgrid
+                      label Phone Mobile
+                      .field 212.555.1234
+                    .row.cgrid
+                      label Phone Office
+                      .field 212.555.1234
+            .section.rotation-section
+              h3 Current Rotation
+              .content.cgrid.compact
+                img src="/assets/admin/watch01.jpg"
+                .info.cgrid
+                  .row.cgrid
+                    label Product ID
+                    .field ######-034
+                  .row.cgrid
+                    label Due date
+                    .field 3/25/13
+                  .row.cgrid
+                    label Brand
+                    .field Rolex
+                  .row.cgrid
+                    label Return Transit
+                    .field Event Drop Off
+                  .row.cgrid
+                    label Model
+                    .field Calatrava
+            .section.rotation-section
+              h3 Upcoming Rotation
+              .content.cgrid.compact
+                img src="/assets/admin/watch02.jpg"
+                .info.cgrid
+                  .row.cgrid
+                    label Product ID
+                    .field ######-034
+                  .row.cgrid
+                    label Due date
+                    .field 3/25/13
+                  .row.cgrid
+                    label Brand
+                    .field Rolex
+                  .row.cgrid
+                    label Return Transit
+                    .field Event Drop Off
+                  .row.cgrid
+                    label Model
+                    .field Calatrava
+            .table-layout
+              .cgrid.header
+                = link_to "Queue", "#", class: "active"
+                = link_to "Rotation History", "#"
+                = link_to "Suggested Watches", "#"
+              .page-controls.cgrid
+                .alpha
+                  .select-wrapper
+                    .value
+                    .arrow.red
+                    select
+                      option value="5" 5
+                      option value="10" 10
+                      option value="15" 15
+                      option value="20" 20
+                  .label items per page
+                .omega
+                  .label page
+                  input.ej-text-field type="text" value="1"
+                  .label of 5
+                  span.arrow
+                    a.prev href="#" <
+                    a.next.active href="#" >
+              .table-view
+                table.ej-table
+                  tr
+                    ruby:
+                      cols = [
+                        {text: "Order", classname: "order", width: 105},
+                        {text: "Model", classname: "model", width: 225},
+                        {text: "Brand", classname: "brand", width: 400},
+                        {text: "Availability", classname: "availability", width: 160}
+                      ]
+                    - cols.each do |i|
+                      th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
+                        span.cgrid.compact
+                          span= i[:text]
+                          a.sort class="#{'active' if i[:text] == 'Expected Completion'}" href="#"
+                  tbody
+                    - 5.times do |i|
+                      tr class="#{'even' if i%2 == 1}"
+                        ruby:
+                          cols = [
+                            {text: "3/23/13", classname: "order", width: 105},
+                            {text: "Chronomat", classname: "model", width: 225},
+                            {text: "Breiting", classname: "brand", width: 400},
+                            {text: "Available", classname: "availability", width: 150}
+                          ]
+                        - cols.each do |cell|
+                            td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
+                              span= raw cell[:text]
+                              - if cell.has_key?(:extra)
+                                .extra= raw cell[:extra]
+              .page-controls.cgrid
+                .alpha
+                  .select-wrapper
+                    .value
+                    .arrow.red
+                    select
+                      option value="5" 5
+                      option value="10" 10
+                      option value="15" 15
+                      option value="20" 20
+                  .label items per page
+                .omega
+                  .label page
+                  input.ej-text-field type="text" value="1"
+                  .label of 5
+                  span.arrow
+                    a.prev href="#" <
+                    a.next.active href="#" >
+          .omega.right-column
+            .content
+              label Membership Plan
+              .value Platinum
+              label Plan Duration
+              .value 6 Months
+              label Selected Months
+              .value
+                | January
+                br
+                | February
+                br
+                | March
+                br
+                | April
+              label Plan Started
+              .value 1/1/13
+              label Next payment due
+              .value 6/01/13
+              label Watches in queue
+              .value 15
+    #generate-invite.ui-tabs
+      .container
+    #prospects.ui-tabs
+      .container

@@ -71,10 +71,16 @@ body.elevenjames {
   h1, h2, h3, h4, h5, h6 {
     text-align: center;
     font-family: dinnLC;
+    em {
+      color: #ff4002;
+    }
   }
-
-  h1 em, h2 em, h3 em, h4 em, h5 em, h6 em {
-    color: #ff4002;
+  
+  h2.black-grey {
+    color:#a3a197;
+    em {
+      color:#363636;
+    }
   }
 
   h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {

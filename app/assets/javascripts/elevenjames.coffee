@@ -46,7 +46,7 @@ $ ->
               action = 'add_product'
             else
               action = 'view_item'
-          refresh_method = refresh_methods[page][action]
+          refresh_method = refresh_methods[page][action] if refresh_methods[page] != undefined
           $el.html(html)
           $(".select-wrapper select").on "change", ->
             update_select(this)
@@ -55,7 +55,7 @@ $ ->
             update_select(this)
           $el.ready(()->
             if(refresh_method)
-              refresh_method.call(refresh_method, $el, html)
+              refresh_method.call(refresh_method, $el, html) if refresh_methods[page] != undefined
           )
         )
 

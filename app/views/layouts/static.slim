@@ -17,7 +17,7 @@ html
     - @header_class = "main-layout"
   - elsif controller_name == "admin_pages" or @wrapper == "admin"
     - @footer_partial = "admin/footer"
-    -@body_class = "admin-wrapper"
+    - @body_class = "admin-wrapper"
     ruby:
      @menu = [
         {title: "Models", slug: "model"},
@@ -25,8 +25,8 @@ html
         {title: "Members", slug: "members"},
         {title: "Events", slug: "events"}
              ]
-  body.elevenjames class="#{@body_class}"
-    div id="#{ @wrapper ? @wrapper : action_name}-page" class="#{@internal_class if @internal_class.present?}"
+  body.elevenjames
+    div id="#{ @wrapper ? @wrapper : action_name}-page" class="#{@internal_class if @internal_class.present?} #{@body_class}"
       #site-header class="#{@header_class if @header_class.present?}"
         = render "layouts/static/#{@header_partial}"
       #site-content

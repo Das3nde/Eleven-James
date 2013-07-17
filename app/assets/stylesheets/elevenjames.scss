@@ -2247,6 +2247,9 @@ table.ej-table {
     }
     &.red {
       color:$orange;
+      .extra {
+        color:#333;
+      }
     }
     &.arrow {
       img {
@@ -2257,6 +2260,12 @@ table.ej-table {
     }
     .extra {
       display:none;
+      padding:0  10px 5px;
+      line-height:20px;
+      
+      .label {
+        line-height:20px;
+      }
     }
   }
   .highlight {

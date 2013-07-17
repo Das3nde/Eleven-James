@@ -34,6 +34,7 @@ Ej::Application.routes.draw do
   get "admin_pages/inventory_purchase_request"
   get "admin_pages/inventory_watch_record"
   get "admin_pages/members"
+  get "admin_pages/member_individual"
 
 
   resources :fedex_transits

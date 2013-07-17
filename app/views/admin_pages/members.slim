@@ -5,7 +5,7 @@
       |  / 
     | Harlon Stanton
 
-  .ej-tabs data-active="2"
+  .ej-tabs
     .container
       ul
         li
@@ -18,243 +18,128 @@
 
     #members.ui-tabs
       .container
-        .cgrid.compact
-          .alpha.left-column
-            .action-bar.cgrid.compact.form
-              .product-id #####-034
-              img class="seperator" src="/assets/seperator-pointed.png"
-              .action-bar-dropdown-area.cgrid.compact
-                label Credit Approval
-                .field.select-wrapper.credit-approval-field
-                  .value
-                  .arrow.red
-                  select
-                    option value="Ap" Aproved
-                    option value="Ap2" Aproved 2
-                label Current Membership Status
-                .field Active
+        .search-header
+          .cgrid.compact
+            form
+              .token-input-wrap.filter.cgrid
+                label.alpha Filter
+                ul.token-input-list.omega
+                  - ["iwc", "Cartier", "Burberry", "Jeager"].each do |i|
+                    li.token-input-token
+                      p= i
+                      .token-input-delete-token x
+                  li.token-input-token
+                    input type="text"
                 .arrow
-                .action-bar-dropdown
-                  .table-view
-                    table.ej-table
-                      tr
-                        th style="width:166px"
-                          span.cgrid.compact
-                            span Month
-                            
-                        th style="width:166px"
-                          span.cgrid.compact
-                            span Payment Due
-                            
-                        th style="width:130px"
-                          span.cgrid.compact
-                            span Amount
-                            
-                        th style="width:205px"
-                          span.cgrid.compact
-                            span Payment Received
-                            
-                        th style="width:86px"
-                          span.cgrid.compact
-                            span Paid
-                      - 3.times do |i|
-                        tr class="#{'even' if i%2 == 1}"
-                          td style="width:166px"
-                            span Jan 2013
-                          td style="width:166px"
-                            span 1/1/13
-                          td style="width:130px"
-                            span $925.00
-                          td style="width:205px"
-                            span 1/1/13
-                          td style="width:86px"
-                            span.buttonset
-                              label for="paid1"
-                              input#paid1 type="checkbox"
-                      - 2.times do |i|
-                        tr class="#{'even' if i%2 == 1}"
-                          td style="width:166px"
-                            span.disable Jan 2013
-                          td style="width:166px"
-                            span.disable 1/1/13
-                          td style="width:130px"
-                            span.disable $925.00
-                          td style="width:205px"
-                          td style="width:86px"
-                    .button-row.not-centered.css-center
-                      a.primary.button href="#" Update
-                      a.button href="#" Cancel
-            .member-info.section
-              h3 Member info
-              .content
-                .cgrid
-                  .alpha
-                    .row.cgrid
-                      label Work Address
-                      .field
-                        | 860 East 74th Street
-                        br
-                        | New York, NY 10010
-                    .row.cgrid
-                      label Home Address
-                      .field
-                        | 860 East 74th Street
-                        br
-                        | New York, NY 10010
-                    .row.cgrid
-                      label Alternate Address
-                      .field
-                        | 860 East 74th Street
-                        br
-                        | New York, NY 10010
-                  .omega
-                    .row.cgrid
-                      label Wrist Size
-                      .field X"
-                    .row.cgrid
-                      label Email
-                      .field Harlon.Stanton@domain.com
-                    .row.cgrid
-                      label Phone Home
-                      .field 212.555.1234
-                    .row.cgrid
-                      label Phone Mobile
-                      .field 212.555.1234
-                    .row.cgrid
-                      label Phone Office
-                      .field 212.555.1234
-            .section.rotation-section
-              h3 Current Rotation
-              .content.cgrid.compact
-                img src="/assets/admin/watch01.jpg"
-                .info.cgrid
-                  .row.cgrid
-                    label Product ID
-                    .field ######-034
-                  .row.cgrid
-                    label Due date
-                    .field 3/25/13
-                  .row.cgrid
-                    label Brand
-                    .field Rolex
-                  .row.cgrid
-                    label Return Transit
-                    .field Event Drop Off
-                  .row.cgrid
-                    label Model
-                    .field Calatrava
-            .section.rotation-section
-              h3 Upcoming Rotation
-              .content.cgrid.compact
-                img src="/assets/admin/watch02.jpg"
-                .info.cgrid
-                  .row.cgrid
-                    label Product ID
-                    .field ######-034
-                  .row.cgrid
-                    label Due date
-                    .field 3/25/13
-                  .row.cgrid
-                    label Brand
-                    .field Rolex
-                  .row.cgrid
-                    label Return Transit
-                    .field Event Drop Off
-                  .row.cgrid
-                    label Model
-                    .field Calatrava
-            .table-layout
-              .cgrid.header
-                = link_to "Queue", "#", class: "active"
-                = link_to "Rotation History", "#"
-                = link_to "Suggested Watches", "#"
-              .page-controls.cgrid
-                .alpha
-                  .select-wrapper
-                    .value
-                    .arrow.red
-                    select
-                      option value="5" 5
-                      option value="10" 10
-                      option value="15" 15
-                      option value="20" 20
-                  .label items per page
-                .omega
-                  .label page
-                  input.ej-text-field type="text" value="1"
-                  .label of 5
-                  span.arrow
-                    a.prev href="#" <
-                    a.next.active href="#" >
-              .table-view
-                table.ej-table
-                  tr
-                    ruby:
-                      cols = [
-                        {text: "Order", classname: "order", width: 105},
-                        {text: "Model", classname: "model", width: 225},
-                        {text: "Brand", classname: "brand", width: 400},
-                        {text: "Availability", classname: "availability", width: 160}
-                      ]
-                    - cols.each do |i|
-                      th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
-                        span.cgrid.compact
-                          span= i[:text]
-                          a.sort class="#{'active' if i[:text] == 'Expected Completion'}" href="#"
-                  tbody
-                    - 5.times do |i|
-                      tr class="#{'even' if i%2 == 1}"
-                        ruby:
-                          cols = [
-                            {text: "3/23/13", classname: "order", width: 105},
-                            {text: "Chronomat", classname: "model", width: 225},
-                            {text: "Breiting", classname: "brand", width: 400},
-                            {text: "Available", classname: "availability", width: 150}
-                          ]
-                        - cols.each do |cell|
-                            td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
-                              span= raw cell[:text]
-                              - if cell.has_key?(:extra)
-                                .extra= raw cell[:extra]
-              .page-controls.cgrid
-                .alpha
-                  .select-wrapper
-                    .value
-                    .arrow.red
-                    select
-                      option value="5" 5
-                      option value="10" 10
-                      option value="15" 15
-                      option value="20" 20
-                  .label items per page
-                .omega
-                  .label page
-                  input.ej-text-field type="text" value="1"
-                  .label of 5
-                  span.arrow
-                    a.prev href="#" <
-                    a.next.active href="#" >
-          .omega.right-column
-            .content
-              label Membership Plan
-              .value Platinum
-              label Plan Duration
-              .value 6 Months
-              label Selected Months
+                .dropdown
+                  .cgrid.select_row
+                    .brands_select_field.multiple_select_field
+                      select.custom_select_wrapper multiple="multiple" data-width="114" data-class="brands" data-prompt="Brand"
+                        - @brands.each_with_index do |b,i|
+                          option value="#{i}" #{b}
+                    .status_select_field.multiple_select_field
+                      select.custom_select_wrapper multiple="multiple" data-width="114" data-class="tier" data-prompt="Status"
+                        - @status.each_with_index do |b,i|
+                          option value="#{i}" #{b}
+                  .button-row.cgrid.not-centered(style="width: 196px")
+                    a.button.primary href="#" Filter
+                    a.button href="#" Reset All
+            img.seperator src="/assets/seperator-pointed.png"  
+            form
+              .token-input-wrap.search
+                label Search
+                ul.token-input-list
+                  - ["Search Term A", "Search Term B"].each do |i|
+                    li.token-input-token
+                      p= i
+                      .token-input-delete-token x
+                  li.token-input-token
+                    input type="text"
+                .arrow
+                .dropdown
+                  .form
+                    .row.cgrid.compact.search_for
+                      label Search for
+                      input type="text"
+                    .buttonset.search-within-results
+                      label for="search_within_results" Search within results
+                      input id="search_within_results" type="checkbox"
+                    .button-row
+                      a.button.primary Search
+                        
+            img src="/assets/seperator-pointed.png"
+            .count
+              p 5 items
+            img.seperator src="/assets/seperator-pointed.png"  
+            a.button.export.primary href="#" Export
+        .page-controls.cgrid
+          .alpha
+            .select-wrapper
               .value
-                | January
-                br
-                | February
-                br
-                | March
-                br
-                | April
-              label Plan Started
-              .value 1/1/13
-              label Next payment due
-              .value 6/01/13
-              label Watches in queue
-              .value 15
+              .arrow.red
+              select
+                - 3.times do |i|
+                  option value="#{(i+1)*10}" #{(i+1)*10}
+            .label items per page
+          .omega
+            .label page
+            input.ej-text-field type="text" value="1"
+            .label of 5
+            span.arrow
+              a.prev href="#" <
+              a.next.active href="#" >
+        .table-view
+          table.ej-table
+            tr
+              ruby:
+                cols = [
+                  {text: "Member Id", classname: "id", width: 123},
+                  {text: "Full name", classname: "name", width: 225},
+                  {text: "Membership", classname: "membership", width: 210},
+                  {text: "Queue Count", classname: "queue", width: 205},
+                  {text: "Rotation Status", classname: "rotation-status", width: 170},
+                  {text: "Membership Status", classname: "membership-status", width: 170},
+                  {text: "", classname: "noarrow", width: 40}
+                ]
+              - cols.each do |i|
+                th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
+                  span.cgrid.compact
+                    span= i[:text]
+                    a.sort class="#{'active' if i[:text] == 'Full name'}" href="#"
+            tbody
+              - 10.times do |i|
+                tr class="#{'even' if i%2 == 1}"
+                  ruby:
+                    cols = [
+                      {text: "######", classname: "id", width: 123},
+                      {text: "Vince Chase", classname: "name", width: 225, extra: "<div class='label'>Product ID<br/>Brand<br/>Model</div>"},
+                      {text: "Platinum", classname: "membership", width: 210, extra: "######-035<br/>Rolex<br/>Sea-Dweller Deepsea"},
+                      {text: "6", classname: "queue", width: 205},
+                      {text: "Transit to member", classname: "rotation-status", width: 170, extra: "<div class='label'>Transit Method<br/>Tracking Number<br/>Delivery Date</div>"},
+                      {text: "Active", classname: "membership-status red", width: 170, extra: "Fedex<br/>013466277388<br/>3/3/13"},
+                      {text: "<img src='/assets/select-arrow-red.png' class='down'/><img src='/assets/select-arrow-up.png' class='up'/>", classname: "arrow", width: 40}
+                    ]
+                  - cols.each do |cell|
+                      td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
+                        span= raw cell[:text]
+                        - if cell.has_key?(:extra)
+                          .extra= raw cell[:extra]
+        .page-controls.cgrid
+          .alpha
+            .select-wrapper
+              .value
+              .arrow.red
+              select
+                - 3.times do |i|
+                  option value="#{(i+1)*10}" #{(i+1)*10}
+            .label items per page
+          .omega
+            .label page
+            input.ej-text-field type="text" value="1"
+            .label of 5
+            span.arrow
+              a.prev href="#" <
+              a.next.active href="#" >
     #generate-invite.ui-tabs
       .container
         .cgrid

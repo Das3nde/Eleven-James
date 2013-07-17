@@ -21,6 +21,11 @@ window.prepare_multiselect = ->
       $(@).next().css('width', width+'px')
 $ ->
   
+  $("#manage-members #generate-invite.ui-tabs .right-column.omega .results").tinyscrollbar()
+  
+  $("body.elevenjames #manage-members #members.ui-tabs .action-bar .action-bar-dropdown-area > .arrow").on "click", ->
+    $(@).next().toggle()
+  
   $(".admin-wrapper .export.button").click ->
     $("#export-inventory-modal").dialog "open"
 

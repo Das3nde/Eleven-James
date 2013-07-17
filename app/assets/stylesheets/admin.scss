@@ -630,10 +630,54 @@ body.elevenjames{
     .ui-tabs-panel > .container {
       padding-top:50px;
     }
+    .search-header {
+      margin-top:0;
+    }
     #members.ui-tabs {
       @include action-bar;
       
       .action-bar {
+        
+        
+        .action-bar-dropdown-area {
+          position:relative;
+          width:753px;
+          > .arrow {
+            width:12px;
+            height:8px;
+            background:url(select-arrow.png) 0 0 no-repeat;
+            position:absolute;
+            top:16px;
+            right:10px;
+            cursor:pointer;
+          }
+        }
+        .action-bar-dropdown {
+          position:absolute;
+          display:none;
+          top:40px;
+          left:-6px;
+          width:758px;
+          background-color:#f6f6f4;
+          border:1px solid #c5c5c3;
+          border-top-width:0;
+          border-right-width:0;
+          .table-view {
+            padding:16px 24px;
+          }
+          span.disable {
+            color:#c5c5c5;
+          }
+          .button-row {
+            padding:20px 0;
+            .button {
+              float:none;
+              margin:0 5px;
+              @include border_radius(3px);
+              padding:0 20px;
+            }
+          }
+        }
         .credit-approval-field  {
           width:170px;
         }
@@ -648,6 +692,94 @@ body.elevenjames{
     }
     .left-column.alpha {
       width:890px;
+    }
+    #generate-invite.ui-tabs {
+      .left-column.alpha {
+        width:745px;
+        margin:0;
+        label  {
+          width:85px;
+        }
+        .field {
+          width:624px;
+          input, textarea {
+            width:610px;
+          }
+          textarea {
+            line-height:20px;
+            height:200px;
+          }
+        }
+        .button-row {
+          padding:5px 0;
+          border-bottom:1px solid #c5c5c3;
+        }
+      }
+      .right-column.omega {
+        width:339px;
+        margin:0;
+        margin-top:-1px;
+        background-color:#f6f6f4;
+        
+        h3 {
+          line-height:41px;
+          padding:0;
+          text-align:center;
+        }
+        .row.cgrid {
+          label {
+            width:auto;
+            padding-right:20px;
+          }
+          .field  {
+            width:255px;
+            padding:0;
+            background-color:transparent;
+            input {
+              width:240px;
+              background-color:transparent;
+            }
+          }
+        }
+        .results  {
+          height:253px;
+          overflow:auto;
+          &.tiny-scrollbar {
+            position:relative;
+            width:100%;
+            margin:0;
+            .viewport {
+              width:100%;
+              height:253px;
+            }
+            .overview {
+              width:100%;
+            }
+            .scrollbar {
+              position:absolute;
+              right:0;
+              z-index:1;
+            }
+            .thumb {
+              background-color:#3e3d39;
+            }
+            .track {
+              background-color:transparent;
+            }
+          }
+          
+          .row {
+            font-size:13px;
+            font-family:akkuratB;
+            padding:0 25px;
+            height:40px;
+            line-height:40px;
+            &.even {
+              background-color:#f2f2f2;
+            }
+          }
+        }
+      }
     }
     .right-column.omega {
       float:right;
@@ -1050,4 +1182,21 @@ body.elevenjames{
   .dialog{
     display:none
   }
+}
+
+.tiny-scrollbar { width: 520px; clear: both; margin: 20px 0 10px; }
+.tiny-scrollbar .viewport { width: 500px; height: 200px; overflow: hidden; position: relative; }
+.tiny-scrollbar .overview { list-style: none; position: absolute; left: 0; top: 0; }
+.tiny-scrollbar .thumb .end,
+.tiny-scrollbar .thumb { background-color: #003D5D; }
+.tiny-scrollbar .scrollbar { position: relative; float: right; width: 15px; }
+.tiny-scrollbar .track { background-color: #D8EEFD; height: 100%; width:13px; position: relative; padding: 0 1px; }
+.tiny-scrollbar .thumb { height: 20px; width: 13px; cursor: pointer; overflow: hidden; position: absolute; top: 0; }
+.tiny-scrollbar .thumb .end { overflow: hidden; height: 5px; width: 13px; }
+.tiny-scrollbar .disable{ display: none; }
+.noSelect { user-select: none; -o-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; }
+
+
+body.browser-firefox #manage-members #generate-invite.ui-tabs .right-column.omega .results.tiny-scrollbar .viewport, body.browser-firefox #manage-members #generate-invite.ui-tabs .right-column.omega .results.tiny-scrollbar {
+  height:255px;
 }

@@ -1192,3 +1192,8 @@ body.elevenjames{
 .tiny-scrollbar .thumb .end { overflow: hidden; height: 5px; width: 13px; }
 .tiny-scrollbar .disable{ display: none; }
 .noSelect { user-select: none; -o-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; }
+
+
+body.browser-firefox #manage-members #generate-invite.ui-tabs .right-column.omega .results.tiny-scrollbar .viewport, body.browser-firefox #manage-members #generate-invite.ui-tabs .right-column.omega .results.tiny-scrollbar {
+  height:255px;
+}

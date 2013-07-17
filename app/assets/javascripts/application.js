@@ -1,6 +1,7 @@
 /*leave the following line empty */
 
 //= require jquery
+//= require browser-detect
 //= require jquery-ui
 //= require jquery_ujs
 //= require jquery.multiselect

@@ -770,7 +770,7 @@ body.elevenjames {
       color: #363636;
       font-size: 17px;
     }
-    &.textarea-row {
+    &.textarea-row, &.textarea-row .field {
       height: auto;
     }
     input:not([type=checkbox]), textarea, .field {

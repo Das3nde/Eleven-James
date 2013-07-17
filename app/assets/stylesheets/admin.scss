@@ -630,6 +630,9 @@ body.elevenjames{
     .ui-tabs-panel > .container {
       padding-top:50px;
     }
+    #prospects.ui-tabs.ui-tabs-panel > .container {
+      padding-top:0;
+    }
     #members.ui-tabs {
       @include action-bar;
       

@@ -5,7 +5,7 @@
       |  / 
     | Harlon Stanton
 
-  .ej-tabs data-active="1"
+  .ej-tabs data-active="2"
     .container
       ul
         li
@@ -326,3 +326,119 @@
 
     #prospects.ui-tabs
       .container
+        .search-header
+          .cgrid.compact
+            form
+              .token-input-wrap.filter.cgrid
+                label.alpha Filter
+                ul.token-input-list.omega
+                  - ["iwc", "Cartier", "Burberry", "Jeager"].each do |i|
+                    li.token-input-token
+                      p= i
+                      .token-input-delete-token x
+                  li.token-input-token
+                    input type="text"
+                .arrow
+                .dropdown
+                  .cgrid.select_row
+                    .brands_select_field.multiple_select_field
+                      select.custom_select_wrapper multiple="multiple" data-width="114" data-class="brands" data-prompt="Brand"
+                        - @brands.each_with_index do |b,i|
+                          option value="#{i}" #{b}
+                    .tier_select_field.multiple_select_field
+                      select.custom_select_wrapper multiple="multiple" data-width="114" data-class="tier" data-prompt="Tier"
+                        - @tiers.each_with_index do |b,i|
+                          option value="#{i}" #{b}
+                    .diameter_select_field.multiple_select_field
+                      select.custom_select_wrapper multiple="multiple" data-width="145" data-class="diameter" data-prompt="Case Diameter"
+                        - @diameter.each_with_index do |b,i|
+                          option value="#{i}" #{b}
+                  .button-row.cgrid.not-centered(style="width: 196px")
+                    a.button.primary href="#" Filter
+                    a.button href="#" Reset All
+            img.seperator src="/assets/seperator-pointed.png"  
+            form
+              .token-input-wrap.search
+                label Search
+                ul.token-input-list
+                  - ["Search Term A", "Search Term B"].each do |i|
+                    li.token-input-token
+                      p= i
+                      .token-input-delete-token x
+                  li.token-input-token
+                    input type="text"
+                .arrow
+                .dropdown
+                  .form
+                    .row.cgrid.compact.search_for
+                      label Search for
+                      input type="text"
+                    .buttonset.search-within-results
+                      label for="search_within_results" Search within results
+                      input id="search_within_results" type="checkbox"
+                    .button-row
+                      a.button.primary Search
+                        
+            img src="/assets/seperator-pointed.png"
+            .count
+              p 5 items
+            img.seperator src="/assets/seperator-pointed.png"  
+            a.button.export.primary href="#" Export
+        .page-controls.cgrid
+          .alpha
+            .select-wrapper
+              .value
+              .arrow.red
+              select
+                - 3.times do |i|
+                  option value="#{(i+1)*10}" #{(i+1)*10}
+            .label items per page
+          .omega
+            .label page
+            input.ej-text-field type="text" value="1"
+            .label of 5
+            span.arrow
+              a.prev href="#" <
+              a.next.active href="#" >
+        .table-view
+          table.ej-table
+            tr
+              ruby:
+                cols = [
+                  {text: "Full Name", classname: "name", width: 258},
+                  {text: "Email Address", classname: "email", width: 303},
+                  {text: "Referred By", classname: "referred", width: 520}
+                ]
+              - cols.each do |i|
+                th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
+                  span.cgrid.compact
+                    span= i[:text]
+                    a.sort class="#{'active' if i[:text] == 'Full Name'}" href="#"
+            tbody
+              - 10.times do |i|
+                tr class="#{'even' if i%2 == 1}"
+                  ruby:
+                    cols = [
+                      {text: "Vince Chase", classname: "name", width: 258},
+                      {text: "vchase@domain.com", classname: "email", width: 303},
+                      {text: "Sam Kleen", classname: "referred", width: 520}
+                    ]
+                  - cols.each do |cell|
+                      td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
+                        span= cell[:text]
+        .page-controls.cgrid
+          .alpha
+            .select-wrapper
+              .value
+              .arrow.red
+              select
+                - 3.times do |i|
+                  option value="#{(i+1)*10}" #{(i+1)*10}
+            .label items per page
+          .omega
+            .label page
+            input.ej-text-field type="text" value="1"
+            .label of 5
+            span.arrow
+              a.prev href="#" <
+              a.next.active href="#" >

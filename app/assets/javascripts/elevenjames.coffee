@@ -32,6 +32,9 @@ $ ->
   page = path_parts.pop()
   url = if action == 'index' then '' else action
 
+  $(".select-wrapper select").on "change", ->
+    update_select(this)
+  
   refresh_tab = ($el, action) ->
     if $('.user-end').length == 0
       if($el.attr('id')!= 'add-product')

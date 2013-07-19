@@ -1,7 +1,7 @@
 h2 Member Signup
 .form
   .container
-    = form_for resource, url: user_registration_path, remote: true do |f|
+    = form_for resource, url: user_registration_path, remote: true, html: {id: 'user_signup'} do |f|
       ul
         = render '/devise/registrations/steps/user_info', f: f
         = render '/devise/registrations/steps/duration'

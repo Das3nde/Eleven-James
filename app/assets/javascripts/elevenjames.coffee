@@ -34,7 +34,7 @@ $ ->
 
   $(".select-wrapper select").on "change", ->
     update_select(this)
-  
+
   refresh_tab = ($el, action) ->
     if $('.user-end').length == 0
       if($el.attr('id')!= 'add-product')
@@ -200,6 +200,9 @@ $ ->
     $this.find("label").click ->
       $this.find(">div").removeClass "selected"
       $(this).parent().addClass "selected"
+
+      $("#signup-page .dual-radio").find('input').attr('checked', false)
+      $(this).parent('.selected').find('input').attr('checked', true)
 
 
   $("#signup-page .step2").buttonset create: ->

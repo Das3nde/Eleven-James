@@ -75,4 +75,10 @@ Ej::Application.configure do
   }
 
   ENV["REDISTOGO_URL"] = 'redis://redistogo:e281dcb1f412eddff96fa11e88c62e5a@barreleye.redistogo.com:10608/'
+
 end
+
+ActiveMerchant::Billing::Base.mode = ENV['PAYPAL_MODE'].to_sym
+PAYPAL_API_LOGIN = ENV['PAYPAL_LOGIN']
+PAYPAL_API_PASSWORD = ENV['PAYPAL_PASSWORD']
+PAYPAL_API_SIGNATURE = ENV['PAYPAL_SIGNATURE']

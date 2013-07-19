@@ -112,7 +112,18 @@ li.section.step4
           label for="card-num"
             | Card #
             sup *
-          input#card-num name="" type="text"
+
+          = text_field_tag :cc_num
+        .row.cgrid.compact
+          label for="card-type"
+            | Card Type
+            sup *
+          .field.cgrid.compact.card-expiry
+            .select-wrapper.card-expiry-month
+              .value
+              .arrow
+              = select_tag "cc_type", options_for_select([['Visa', 'visa'], ['Mastercard', 'mastercard'], ['Amex', 'amex'], ['Discover', 'discover']])
+
         .row.cgrid.compact
           label for="card-expiry-month"
             | Expiration
@@ -121,35 +132,30 @@ li.section.step4
             .select-wrapper.card-expiry-month
               .value 1
               .arrow
-              select id="" name="card-expiry-month"
-                option value="1" 1
-                option value="2" 2
-                option value="3" 3
+              = select_tag "cc_expiry_month", options_for_select((1..12).to_a)
+
             .select-wrapper
               .value 2013
               .arrow
-              select id="" name="card-expiry-year"
-                option value="2013" 2013
-                option value="2014" 2014
-                option value="2015" 2015
+              = select_tag "cc_expiry_year", options_for_select((2013..2020).to_a)
+
         .row.cgrid.compact.card-ccv
           label for="card-ccv-1"
             | CCV
             sup *
           .field.cgrid.compact
             input#card-ccv-1.card-ccv-1 name="" type="text"
-            .sep
-            input#card-ccv-2.card-ccv-2 name="" type="text"
+
         .row.cgrid.compact.card-ssn
           label for="card-ssn"
             | Social Security #
             sup *
           .field.compact.cgrid
-            input#card-ssn-1.card-ssn-1 name="" type="text"
+            = text_field_tag 'ssn-1', '', class: 'card-ssn-1'
             .sep
-            input#card-ssn-2.card-ssn-2 name="" type="text"
+            = text_field_tag 'ssn-2', '', class: 'card-ssn-2'
             .sep
-            input#card-ssn-3.card-ssn-3 name="" type="text"
+            = text_field_tag 'ssn-3', '', class: 'card-ssn-3'
         .checkbox-row.shipping-billing-same
           input#shipping-billing-same name="shipping-billing-same" type="checkbox"
           label.small-checkbox for="shipping-billing-same" my shipping and billing information are the same

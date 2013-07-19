@@ -16,4 +16,15 @@ Preferences:
 
 ________________________
 
+Environment Variables
+
+Paypal
+***********
+ENV['PAYPAL_MODE']  #values :test or :production
+ENV['PAYPAL_LOGIN']
+ENV['PAYPAL_PASSWORD']
+ENV['PAYPAL_SIGNATURE']
+
+________________________
+
 License

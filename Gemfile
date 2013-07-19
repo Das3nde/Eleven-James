@@ -45,3 +45,4 @@ gem 'slim-rails', "~> 1.1.0"
 gem 'chronic'
 gem 'jquery-validation-rails'
 gem 'thin', "~> 1.5.1"
+gem 'activemerchant'

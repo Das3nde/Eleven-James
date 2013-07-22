@@ -4,6 +4,10 @@ $('.signup-error').remove();
   window.location.href = '/collection';
 <%else%>
   <%@errors.each do |k,v|%>
-  $("#<%=k%>").siblings('label').append("<span class='signup-error'><%=v%></span>")
+    <%if k == 'payment_errors'%>
+      $("#<%=k%>").append("<span class='signup-error'><%=v%></span>")
+    <%else%>
+      $("#<%=k%>").siblings('label').append("<span class='signup-error'><%=v%></span>")
+    <%end%>
   <%end%>
 <%end%>

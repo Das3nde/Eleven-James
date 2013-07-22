@@ -4,7 +4,10 @@ class Payment < ActiveRecord::Base
   validates :amount, presence: true
   validates :purpose, presence: true
 
-  serialize :paypal_response_dump, :ipn_response_dump
+  attr_accessible :user_id, :amount, :purpose
+
+  serialize :paypal_response_dump
+  serialize :ipn_response_dump
 
 
   def self.authorization(amount, cc_details, request_ip, f_name, l_name)
@@ -44,15 +47,17 @@ class Payment < ActiveRecord::Base
                 purpose: 'signup'
               })
 
-
+    #raise response.params['transaction_id']
     if response.success?
       obj.status = 'success'
+      obj.txn_id = response.params['transaction_id']
     else
       obj.status = 'failed'
     end
+    obj.paypal_response_dump = response
+    obj.save
+    obj.status
   end
-
-  private
 
   def self.paypal_gateway
     ActiveMerchant::Billing::PaypalGateway.new(

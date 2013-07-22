@@ -32,11 +32,18 @@ class UsersController < ApplicationController
   end
 
   def request_product
-    pr = ProductRequest.new
-    pr.user_id = current_user.id
-    pr.product_id = Product.find(params[:product_id]).id
-    pr.save
-    render json: { status: 'success' }
+    if current_user.approved
+      pr = ProductRequest.new
+      pr.user_id = current_user.id
+      pr.product_id = Product.find(params[:product_id]).id
+      pr.save
+      status = 'success'
+      message = ''
+    else
+      status = 'failed'
+      message = 'You can add to queue once your account is approved'
+    end
+    render json: { status: status, message: message }
   end
 
   def delete_request

@@ -107,6 +107,7 @@ li.section.step4
     /! End shipping info
     .card-info
       h5 Visa, Mastercard, Amex or Discover
+      #payment_errors
       .form
         .row.cgrid.compact
           label for="card-num"
@@ -144,7 +145,7 @@ li.section.step4
             | CCV
             sup *
           .field.cgrid.compact
-            input#card-ccv-1.card-ccv-1 name="" type="text"
+            = text_field_tag :cvv, '', class: 'card-ccv-1'
 
         .row.cgrid.compact.card-ssn
           label for="card-ssn"

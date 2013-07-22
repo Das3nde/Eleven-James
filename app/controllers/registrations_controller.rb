@@ -11,33 +11,35 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     build_resource
     @resource = resource
-    @resource.payment_mode = params[:user].delete(:payment_mode)
     @resource.attributes = params[:user]
 
     @resource.valid?
     @billing_address = BillingAddress.new(params[:billing_address])
     @shipping_address = ShippingAddress.new(params[:shipping_address])
-    @billing_address.valid?
-    @shipping_address.valid?
+    #@billing_address.valid?
+    #@shipping_address.valid?
 
-    amount = @resource.payment_amount
+    first_name = @resource.name
+    last_name = @resource.username
+    amount = @resource.signup_amount
     request_ip = request.remote_ip
-    cc_details = {  cc_type: params[:cc_num],
+    cc_details = {  cc_num: params[:cc_num],
                     cc_type: params[:cc_type],
                     cvv: params[:cvv],
                     expiry_month: params[:cc_expiry_month],
                     expiry_year: params[:cc_expiry_year]
                   }
 
-    authorization_token, payment_errors = Payment.authorization(amount, cc_details, request_ip, @resource.first_name, @resource.last_name)
+    authorization_token, payment_errors = Payment.authorization(amount, cc_details, request_ip, first_name, last_name)
 
     @errors = {}
     if @resource.errors.keys.length == 0 and @billing_address.errors.keys.length == 0 and @shipping_address.errors.keys.length == 0 and payment_errors.length == 0
       @resource.paypal_authorization_token = authorization_token
       @resource.save
-      @resource.create_billing_address(params[:billing_address])
-      @resource.shipping_addresses << ShippingAddress.new(params[:shipping_address])
+      #@resource.create_billing_address(params[:billing_address])
+      #@resource.shipping_addresses << ShippingAddress.new(params[:shipping_address])
       @resource.save
+      @resource.initialize_recurring_payment(cc_details, request_ip, first_name, last_name)
       sign_in @resource
       @status = true
     else

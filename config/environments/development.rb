@@ -41,9 +41,13 @@ Ej::Application.configure do
   Paperclip.options[:command_path] = "/tmp"
 
   ENV["REDISTOGO_URL"] = 'redis://localhost:6379/'
+
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    PAYPAL_API_LOGIN = 'biz_api1.hfc.com'
+    PAYPAL_API_PASSWORD = '1373805400'
+    PAYPAL_API_SIGNATURE = 'A.PXmlUekXT4ZbKRKrrE3K9v7dTiAUiTAEpAMPDNQaq5BfPbVNA7Imjc'
+  end
+
 end
 
-ActiveMerchant::Billing::Base.mode = :test
-PAYPAL_API_LOGIN = 'biz_api1.hfc.com'
-PAYPAL_API_PASSWORD = '1373805400'
-PAYPAL_API_SIGNATURE = 'A.PXmlUekXT4ZbKRKrrE3K9v7dTiAUiTAEpAMPDNQaq5BfPbVNA7Imjc'

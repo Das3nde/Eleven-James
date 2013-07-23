@@ -253,9 +253,17 @@ login =
         alert(data.errors.join('\n'))
       else
         window.location.reload()
+signup =
+  init: ->
+    $('#user_signup').on 'ajax:before', (event, data, status, xhr) ->
+      $('#join_button').hide()
+
+    $('#user_signup').on 'ajax:success', (event, data, status, xhr) ->
+      $('#join_button').show()
 
 $ ->
   collection_list.init()
   default_shipping.init()
   save_rental_months.init()
   login.init()
+  signup.init()

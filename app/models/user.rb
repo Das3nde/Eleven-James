@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :shipping_addresses, :as => :addressable
   has_many :rotations
   has_many :comments, :dependent => :destroy
+  has_many :product_requests, :dependent => :destroy
 
   def request_vectors
     sql = 'fulfillment_time is null and removal_time is null and user_id = ?'
@@ -52,6 +53,7 @@ class User < ActiveRecord::Base
     status = Payment.signup_payment(self.id, self.signup_amount, self.paypal_authorization_token)
     if status == 'success'
       self.approved = true
+      #TODO: approval date
       self.save
 
       #activate recurring as it is suspended while signing up
@@ -59,6 +61,16 @@ class User < ActiveRecord::Base
         gateway = Payment.paypal_gateway
         gateway.reactivate_recurring(self.paypal_profile_id)
       end
+    end
+  end
+
+  def unapprove
+    self.approved = false
+    #TODO: unapproval date
+    self.save
+    if not self.paypal_profile_id.blank?
+      gateway = Payment.paypal_gateway
+      gateway.suspend_recurring(self.paypal_profile_id)
     end
   end
 

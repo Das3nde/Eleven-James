@@ -22,4 +22,5 @@
 //= require abstract-chosen
 //= require chosen.jquery
 //= require jquery.tiny.scrollbar
+//= require admin/members
 

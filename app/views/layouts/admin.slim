@@ -4,6 +4,7 @@ html
     title ElevenJames
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
+    = csrf_meta_tags
     javascript:
       var AUTH_TOKEN ='#{form_authenticity_token}'
 
@@ -26,7 +27,7 @@ html
        @menu = [
           {title: "Models", slug: "models", href: 'products/'},
           {title: "Inventory", slug: "inventory", href: 'inventory/'},
-          {title: "Members", slug: "members", href: '#'},
+          {title: "Members", slug: "members", href: 'members'},
           {title: "Events", slug: "events", href: '#'},
            {title: "Selection", slug: "selection", href: 'selection/'},
            {title: "Access", slug: "access", href: 'admins/',},

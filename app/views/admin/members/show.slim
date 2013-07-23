@@ -1,19 +1,12 @@
-#manage-members
+#manage-members.no-refresh-tab
   h2.black-grey
     em Manage Members
     small
       |  /
-    | Harlon Stanton
+    | #{@user.name}
 
-  .ej-tabs data-active="2"
-    .container
-      ul
-        li
-          a href="#members" Members
-        li
-          a href="#generate-invite" Generate Invite
-        li
-          a href="#prospects" Prospects
+  .ej-tabs data-active="0"
+    = render 'tabs'
 
 
     #members.ui-tabs
@@ -27,10 +20,9 @@
                 label Credit Approval
                 .field.select-wrapper.credit-approval-field
                   .value
+                    = @user.approved == true ? 'Approved' : 'Unapproved'
                   .arrow.red
-                  select
-                    option value="Ap" Aproved
-                    option value="Ap2" Aproved 2
+                  = select_tag 'approve_user', options_for_select([['Aproved', 'approve'], ['Unapproved', 'unapprove']], selected: @user.approved == true ? 'approve' : 'unapprove'), 'data-user-id' => @user.id
                 label Current Membership Status
                 .field Active
                 .arrow

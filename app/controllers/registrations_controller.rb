@@ -16,8 +16,8 @@ class RegistrationsController < Devise::RegistrationsController
     @resource.valid?
     @billing_address = BillingAddress.new(params[:billing_address])
     @shipping_address = ShippingAddress.new(params[:shipping_address])
-    #@billing_address.valid?
-    #@shipping_address.valid?
+    @billing_address.valid?
+    @shipping_address.valid?
 
     first_name = @resource.name
     last_name = @resource.username
@@ -36,8 +36,8 @@ class RegistrationsController < Devise::RegistrationsController
     if @resource.errors.keys.length == 0 and @billing_address.errors.keys.length == 0 and @shipping_address.errors.keys.length == 0 and payment_errors.length == 0
       @resource.paypal_authorization_token = authorization_token
       @resource.save
-      #@resource.create_billing_address(params[:billing_address])
-      #@resource.shipping_addresses << ShippingAddress.new(params[:shipping_address])
+      @resource.create_billing_address(params[:billing_address])
+      @resource.shipping_addresses << ShippingAddress.new(params[:shipping_address])
       @resource.save
       @resource.initialize_recurring_payment(cc_details, request_ip, first_name, last_name)
       sign_in @resource

@@ -1,5 +1,6 @@
 class Admin::ProductsController < AdminController
   #before_filter :user_preferences
+
   @@tabs = {
       :index => 'All Products',
       :add_product => 'Add Model',

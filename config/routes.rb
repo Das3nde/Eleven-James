@@ -1,7 +1,7 @@
 Ej::Application.routes.draw do
   # root to: "static_pages#splash"
 
-  
+
   get "static_pages/splash"
 
   get "static_pages/account"
@@ -36,7 +36,7 @@ Ej::Application.routes.draw do
   get "admin_pages/members"
   get "admin_pages/member_individual"
 
-
+  post '/admin/members/approval'
   resources :fedex_transits
   authenticated :user do
     root :to => redirect("/admin/products/")
@@ -68,7 +68,7 @@ Ej::Application.routes.draw do
 
       resources :products, :users, :settings, :vendors, :tiers, :courier_transits,
                 :records, :product_images, :events, :inventory, :selection, :storage_records, :services,
-                :rotations, :admins, :shipping
+                :rotations, :admins, :shipping, :members
 
     end
   end

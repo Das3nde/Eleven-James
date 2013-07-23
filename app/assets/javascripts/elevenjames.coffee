@@ -78,11 +78,12 @@ $ ->
   if(refresh_methods[page] != undefined && refresh_methods[page].onload)
     refresh_methods[page].onload(action)
 
-  $.get( url, {}, (html)->
-    $el = $('.ej-tabs [data-action='+action+']')
-    console.log(refresh_methods[page])
-    refresh_tab($el, action)
-  )
+  if $('.no-refresh-tab').length == 0
+    $.get( url, {}, (html)->
+      $el = $('.ej-tabs [data-action='+action+']')
+      console.log(refresh_methods[page])
+      refresh_tab($el, action)
+    )
 
 
 

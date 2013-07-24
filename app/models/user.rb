@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :product_requests, :dependent => :destroy
 
+  SUBSCRIPTION_MONTHLY_CHARGE = 925
+  SUBSCRIPTION_YEARLY_CHARGE = 1000
+
   def request_vectors
     sql = 'fulfillment_time is null and removal_time is null and user_id = ?'
     reqs = []
@@ -40,9 +43,9 @@ class User < ActiveRecord::Base
     case self.payment_mode
     when 'monthly'
       #first payment is for 3 months then recurring is for 1 month
-      3 * ENV['MONTHLY_CHARGE'].to_i
+      3 * SUBSCRIPTION_MONTHLY_CHARGE.to_i
     when 'yearly'
-      ENV['YEARLY_CHARGE'].to_i
+      SUBSCRIPTION_YEARLY_CHARGE.to_i
     else
       0
     end
@@ -94,12 +97,12 @@ class User < ActiveRecord::Base
     when 'monthly'
       period = 'Month'
       frequency = 1
-      amount = ENV['MONTHLY_CHARGE'].to_i
+      amount = SUBSCRIPTION_MONTHLY_CHARGE.to_i
 
     when 'yearly'
       period = 'Year'
       frequency = 1
-      amount = ENV['YEARLY_CHARGE'].to_i
+      amount = SUBSCRIPTION_YEARLY_CHARGE.to_i
     end
 
     [period, frequency, amount]

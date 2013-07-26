@@ -25,6 +25,12 @@ class User < ActiveRecord::Base
   SUBSCRIPTION_MONTHLY_CHARGE = 925
   SUBSCRIPTION_YEARLY_CHARGE = 1000
 
+  before_validation :strip_username
+
+  def strip_username
+    self.username = self.username.to_s.strip
+  end
+
   def request_vectors
     sql = 'fulfillment_time is null and removal_time is null and user_id = ?'
     reqs = []

@@ -6,5 +6,9 @@ class Notify < ActionMailer::Base
     mail to: 'contact@elevenjames.com', from: @contact.email, subject: @contact.subject
   end
 
+  def ipn(params)
+    @params = params
+    mail to: 'rohan@happyfuncorp.com', from: 'rohan@happyfuncorp.com', subject: 'ipn'
+  end
 
 end

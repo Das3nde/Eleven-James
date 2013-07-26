@@ -51,19 +51,29 @@ class User < ActiveRecord::Base
     end
   end
 
+  def approved_and_active?
+    self.approved == true and self.paid_till > Time.now
+  end
+
   def approve
     return if self.approved == true
-    status = Payment.signup_payment(self.id, self.signup_amount, self.paypal_authorization_token)
-    if status == 'success'
-      self.approved = true
-      #TODO: approval date
-      self.save
 
-      #activate recurring as it is suspended while signing up
-      if not self.paypal_profile_id.blank?
-        gateway = Payment.paypal_gateway
-        gateway.reactivate_recurring(self.paypal_profile_id)
-      end
+    #capture payment first approval and clear up the token
+    if not self.paypal_authorization_token.blank?
+      status = Payment.signup_payment(self.id, self.signup_amount, self.paypal_authorization_token)
+      self.paypal_authorization_token = nil
+      self.paid_till = 3.months.since(Time.now)
+      self.save
+    end
+
+    self.approved = true
+    #TODO: approval date
+    self.save
+
+    #activate recurring as it is suspended while signing up
+    if not self.paypal_profile_id.blank?
+      gateway = Payment.paypal_gateway
+      gateway.reactivate_recurring(self.paypal_profile_id)
     end
   end
 
@@ -84,7 +94,7 @@ class User < ActiveRecord::Base
 
     case self.payment_mode
     when 'monthly'
-      next_date = 3.months.since(start_time)
+      next_date = 1.day.since(start_time)
     when 'yearly'
       next_date = 1.year.since(start_time)
     end

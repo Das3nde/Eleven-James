@@ -62,7 +62,13 @@ class User < ActiveRecord::Base
     if not self.paypal_authorization_token.blank?
       status = Payment.signup_payment(self.id, self.signup_amount, self.paypal_authorization_token)
       self.paypal_authorization_token = nil
-      self.paid_till = 3.months.since(Time.now)
+      case self.payment_mode
+      when 'monthly'
+        self.paid_till = 3.months.since(Time.now)
+      when 'yearly'
+        self.paid_till = 1.year.since(Time.now)
+      end
+
       self.save
     end
 
@@ -88,7 +94,7 @@ class User < ActiveRecord::Base
   end
 
   def next_recurring_date
-    payment = Payment.where("user_id = ? AND status = 'success'", self.id).order("created_at DESC").first
+    payment = Payment.where("user_id = ? AND status IN ?", self.id, ['pending', 'success']).order("created_at DESC").first
 
     start_time = payment.blank? ? Time.now : payment.created_at
 

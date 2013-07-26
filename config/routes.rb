@@ -36,6 +36,7 @@ Ej::Application.routes.draw do
   get "admin_pages/members"
   get "admin_pages/member_individual"
 
+  match '/ipn' => 'ipn#index'
   post '/admin/members/approval'
   resources :fedex_transits
   authenticated :user do

@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
   end
 
   def next_recurring_date
-    payment = Payment.where("user_id = ? AND status IN ?", self.id, ['pending', 'success']).order("created_at DESC").first
+    payment = Payment.where("user_id = ? AND status IN (?)", self.id, ['pending', 'success']).order("created_at DESC").first
 
     start_time = payment.blank? ? Time.now : payment.created_at
 

@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
 
     case self.payment_mode
     when 'monthly'
-      next_date = 1.day.since(start_time)
+      next_date = 3.months.since(start_time)
     when 'yearly'
       next_date = 1.year.since(start_time)
     end

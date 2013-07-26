@@ -49,7 +49,7 @@ class Payment < ActiveRecord::Base
 
     #raise response.params['transaction_id']
     if response.success?
-      obj.status = 'pending'
+      obj.status = 'success'
       obj.txn_id = response.params['transaction_id']
     else
       obj.status = 'failed'

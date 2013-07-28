@@ -68,14 +68,8 @@ class User < ActiveRecord::Base
     if not self.paypal_authorization_token.blank?
       status = Payment.signup_payment(self.id, self.signup_amount, self.paypal_authorization_token)
       self.paypal_authorization_token = nil
-      case self.payment_mode
-      when 'monthly'
-        self.paid_till = 3.months.since(Time.now)
-      when 'yearly'
-        self.paid_till = 1.year.since(Time.now)
-      end
-
       self.save
+      self.extend_activation
     end
 
     self.approved = true
@@ -86,6 +80,17 @@ class User < ActiveRecord::Base
     if not self.paypal_profile_id.blank?
       gateway = Payment.paypal_gateway
       gateway.reactivate_recurring(self.paypal_profile_id)
+    end
+  end
+
+  def extend_activation
+    activation_till = self.paid_till
+    activation_till ||= Time.now
+    case self.payment_mode
+    when 'monthly'
+      self.paid_till = 3.months.since(activation_till)
+    when 'yearly'
+      self.paid_till = 1.year.since(activation_till)
     end
   end
 

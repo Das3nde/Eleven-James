@@ -5,13 +5,32 @@ class Admin::MembersController < ApplicationController
   def index
     @brands = Product.get_options('brand')
     @tiers= Product.get_options('collection')
-
     @diameter = Product.get_options('dial_style')
     @status = []
 
     params[:page] ||= 1
-    params[:per_page] ||= 10
-    @users = User.page(params[:page]).per(params[:per_page])
+    params[:per_page] ||= 2
+    @sort_column = params[:order]
+    @sort_order = params[:order_by]
+    @sort_column ||= 'name'
+    @sort_order ||= 'DESC'
+    @users = User.page(params[:page]).per(params[:per_page]).order("#{@sort_column} #{@sort_order}")
+  end
+
+  def page_members
+    @brands = Product.get_options('brand')
+    @tiers= Product.get_options('collection')
+    @diameter = Product.get_options('dial_style')
+    @status = []
+
+    params[:page] ||= 1
+    params[:per_page] ||= 2
+    @sort_column = params[:order]
+    @sort_order = params[:order_by]
+    @sort_column ||= 'name'
+    @sort_order ||= 'DESC'
+    @users = User.page(params[:page]).per(params[:per_page]).order("#{@sort_column} #{@sort_order}")
+    render layout: false
   end
 
   def show

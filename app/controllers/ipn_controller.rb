@@ -22,8 +22,8 @@ class IpnController < ApplicationController
       if payment.blank?
         payment = Payment.new({user_id: user.id, purpose: 'recurring'})
         payment.amount = params['amount']
-        payment.ipn_status = params["payment_status"]
-        payment.status = params["payment_status"] == 'Completed' ? 'success' : 'failed'
+        payment.ipn_status = params['payment_status']
+        payment.status = params['payment_status'] == 'Completed' ? 'success' : 'failed'
         payment.txn_id = params['txn_id']
         payment.ipn_response_dump = params
         payment.save

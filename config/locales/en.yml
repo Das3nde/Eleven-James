@@ -9,3 +9,10 @@ en:
     instagram: "http://instagram.com/elevenjames"
     pinterest: "http://pinterest.com/elevenjames/"
     twitter: "https://twitter.com/elevenjames/"
+  views:
+    pagination:
+      first: ""
+      last: ""
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: ""

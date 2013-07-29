@@ -1,0 +1,126 @@
+#members.ui-tabs
+  .container
+    .search-header
+      .cgrid.compact
+        form
+          .token-input-wrap.filter.cgrid
+            label.alpha Filter
+            ul.token-input-list.omega
+              - ["iwc", "Cartier", "Burberry", "Jeager"].each do |i|
+                li.token-input-token
+                  p= i
+                  .token-input-delete-token x
+              li.token-input-token
+                input type="text"
+            .arrow
+            .dropdown
+              .cgrid.select_row
+                .brands_select_field.multiple_select_field
+                  select.custom_select_wrapper multiple="multiple" data-width="114" data-class="brands" data-prompt="Brand"
+                    - @brands.each_with_index do |b,i|
+                      option value="#{i}" #{b}
+                .status_select_field.multiple_select_field
+                  select.custom_select_wrapper multiple="multiple" data-width="114" data-class="tier" data-prompt="Status"
+                    - @status.each_with_index do |b,i|
+                      option value="#{i}" #{b}
+              .button-row.cgrid.not-centered(style="width: 196px")
+                a.button.primary href="#" Filter
+                a.button href="#" Reset All
+        img.seperator src="/assets/seperator-pointed.png"
+        form
+          .token-input-wrap.search
+            label Search
+            ul.token-input-list
+              - ["Search Term A", "Search Term B"].each do |i|
+                li.token-input-token
+                  p= i
+                  .token-input-delete-token x
+              li.token-input-token
+                input type="text"
+            .arrow
+            .dropdown
+              .form
+                .row.cgrid.compact.search_for
+                  label Search for
+                  input type="text"
+                .buttonset.search-within-results
+                  label for="search_within_results" Search within results
+                  input id="search_within_results" type="checkbox"
+                .button-row
+                  a.button.primary Search
+
+        img src="/assets/seperator-pointed.png"
+        .count
+          p 5 items
+        img.seperator src="/assets/seperator-pointed.png"
+        a.button.export.primary href="#" Export
+    .page-controls.cgrid
+      .alpha
+        .select-wrapper
+          .value
+          .arrow.red
+          select
+            - 3.times do |i|
+              option value="#{(i+1)*10}" #{(i+1)*10}
+        .label items per page
+      .omega
+        = paginate users, :window => 2
+
+    .table-view
+      table.ej-table
+        tr
+          ruby:
+            cols = [
+              {text: "Member Id", classname: "id", width: 123},
+              {text: "Full name", classname: "name", width: 225},
+              {text: "Membership", classname: "membership", width: 210},
+              {text: "Queue Count", classname: "queue", width: 205},
+              {text: "Rotation Status", classname: "rotation-status", width: 170},
+              {text: "Membership Status", classname: "membership-status", width: 170},
+              {text: "", classname: "noarrow", width: 40}
+            ]
+          - cols.each do |i|
+            th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
+              span.cgrid.compact
+                span= i[:text]
+                a.sort class="#{'active' if i[:text] == 'Full name'}" href="#"
+        tbody
+          - users.each_with_index do |u, i|
+            tr class="#{'even' if i%2 == 1}"
+              ruby:
+                cols = [
+                  {text: "#{u.id}", classname: "id", width: 123},
+                  {text: "#{u.name}", classname: "name", width: 225, extra: "<div class='label'>Product ID<br/>Brand<br/>Model</div>", type: 'user_name'},
+                  {text: "Platinum", classname: "membership", width: 210, extra: "######-035<br/>Rolex<br/>Sea-Dweller Deepsea"},
+                  {text: u.product_requests.length, classname: "queue", width: 205},
+                  {text: "Transit to member", classname: "rotation-status", width: 170, extra: "<div class='label'>Transit Method<br/>Tracking Number<br/>Delivery Date</div>"},
+                  {text: "Active", classname: "membership-status red", width: 170, extra: "Fedex<br/>013466277388<br/>3/3/13"},
+                  {text: "<img src='/assets/select-arrow-red.png' class='down'/><img src='/assets/select-arrow-up.png' class='up'/>", classname: "arrow", width: 40}
+                ]
+
+
+
+              - cols.each do |cell|
+                - if cell[:type] == 'user_name'
+                  td class="name" style="width:225px;"
+                    = link_to u.name, "/admin/members/#{u.id}"
+                    - if cell.has_key?(:extra)
+                      .extra= raw cell[:extra]
+                - else
+                  td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
+                    span= raw cell[:text]
+                    - if cell.has_key?(:extra)
+                      .extra= raw cell[:extra]
+
+    .page-controls.cgrid
+      .alpha
+        .select-wrapper
+          .value
+          .arrow.red
+          select
+            - 3.times do |i|
+              option value="#{(i+1)*10}" #{(i+1)*10}
+        .label items per page
+      .omega
+        = paginate users, :params => {:controller => "admin/members", :action => "page_members",
+        :sort_column => @sort_column, :sort_order => @sort_order}, :remote => true, :window => 2

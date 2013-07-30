@@ -55,14 +55,6 @@
         img.seperator src="/assets/seperator-pointed.png"
         a.button.export.primary href="#" Export
     .page-controls.cgrid
-      .alpha
-        .select-wrapper
-          .value
-          .arrow.red
-          select
-            - 3.times do |i|
-              option value="#{(i+1)*10}" #{(i+1)*10}
-        .label items per page
       .omega
         = paginate users, :window => 2
 
@@ -121,14 +113,6 @@
                       .extra= raw cell[:extra]
 
     .page-controls.cgrid
-      .alpha
-        .select-wrapper
-          .value
-          .arrow.red
-          select
-            - 3.times do |i|
-              option value="#{(i+1)*10}" #{(i+1)*10}
-        .label items per page
       .omega
         = paginate users, :params => {:controller => "admin/members", :action => "page_members",
         :sort_column => @sort_column, :sort_order => @sort_order}, :remote => true, :window => 2

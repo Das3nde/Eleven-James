@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   has_many :product_requests, :dependent => :destroy
 
   SUBSCRIPTION_MONTHLY_CHARGE = 925
-  SUBSCRIPTION_YEARLY_CHARGE = 1000
+  SUBSCRIPTION_YEARLY_CHARGE = 10000
 
   before_validation :strip_username
 
@@ -43,6 +43,26 @@ class User < ActiveRecord::Base
   def needs_rotation
     rotations = Rotation.where('user_id = ?', id)
     rotations.last == nil || Rotation.last.start_date != nil
+  end
+
+  def current_product_instance
+    rotation = self.rotations.order('created_at DESC').first
+    return nil if rotation.blank?
+    rotation.product_instance
+  end
+
+  def is_active?
+    return false if self.paid_till.blank?
+    self.paid_till > Time.now
+  end
+
+  def membership_type
+    case self.payment_mode
+    when 'monthly'
+      'Gold'
+    when 'yearly'
+      'Platinum'
+    end
   end
 
   def signup_amount

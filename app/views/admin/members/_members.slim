@@ -71,30 +71,38 @@
         tr
           ruby:
             cols = [
-              {text: "Member Id", classname: "id", width: 123},
-              {text: "Full name", classname: "name", width: 225},
-              {text: "Membership", classname: "membership", width: 210},
-              {text: "Queue Count", classname: "queue", width: 205},
-              {text: "Rotation Status", classname: "rotation-status", width: 170},
-              {text: "Membership Status", classname: "membership-status", width: 170},
+              {text: "Member Id", classname: "id", width: 123, sort_col: 'id'},
+              {text: "Full name", classname: "name", width: 225, sort_col: 'name'},
+              {text: "Membership", classname: "membership", width: 210, sort_col: 'payment_mode'},
+              {text: "Queue Count", classname: "queue", width: 205, sort_col: 'queue_count'},
+              {text: "Rotation Status", classname: "rotation-status", width: 170, sort_col: 'name'},
+              {text: "Membership Status", classname: "membership-status", width: 170, sort_col: 'paid_till'},
               {text: "", classname: "noarrow", width: 40}
             ]
           - cols.each do |i|
             th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
               span.cgrid.compact
                 span= i[:text]
-                a.sort class="#{'active' if i[:text] == 'Full name'}" href="#"
+                - order = @sort_order == 'ASC' ? 'DESC' : 'ASC'
+                - sort_link = "/admin/page_members?sort_column=#{i[:sort_col]}&sort_order=#{order}"
+                = link_to '', sort_link, class: "sort #{@sort_column == i[:sort_col] ? 'active' : ''}", remote: true
+
         tbody
           - users.each_with_index do |u, i|
             tr class="#{'even' if i%2 == 1}"
               ruby:
+                instance = u.current_product_instance
+                model_details = ""
+                if not instance.blank?
+                  model_details = "#{instance.id}<br/>#{instance.brand}<br/>#{instance.model}"
+                end
                 cols = [
-                  {text: "#{u.id}", classname: "id", width: 123},
-                  {text: "#{u.name}", classname: "name", width: 225, extra: "<div class='label'>Product ID<br/>Brand<br/>Model</div>", type: 'user_name'},
-                  {text: "Platinum", classname: "membership", width: 210, extra: "######-035<br/>Rolex<br/>Sea-Dweller Deepsea"},
+                  {text: u.id, classname: "id", width: 123},
+                  {text: u.name, classname: "name", width: 225, extra: "<div class='label'>Product ID<br/>Brand<br/>Model</div>", type: 'user_name'},
+                  {text: u.membership_type, classname: "membership", width: 210, extra: model_details},
                   {text: u.product_requests.length, classname: "queue", width: 205},
                   {text: "Transit to member", classname: "rotation-status", width: 170, extra: "<div class='label'>Transit Method<br/>Tracking Number<br/>Delivery Date</div>"},
-                  {text: "Active", classname: "membership-status red", width: 170, extra: "Fedex<br/>013466277388<br/>3/3/13"},
+                  {text: "#{u.is_active? ? 'Active' : 'Inactive'}", classname: "membership-status red", width: 170, extra: "-<br/>-<br/>-"},
                   {text: "<img src='/assets/select-arrow-red.png' class='down'/><img src='/assets/select-arrow-up.png' class='up'/>", classname: "arrow", width: 40}
                 ]
 

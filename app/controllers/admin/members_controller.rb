@@ -3,33 +3,13 @@ class Admin::MembersController < ApplicationController
   #TODO: admin authorization and to be done across all admin controllers
 
   def index
-    @brands = Product.get_options('brand')
-    @tiers= Product.get_options('collection')
-    @diameter = Product.get_options('dial_style')
-    @status = []
-
-    params[:page] ||= 1
-    params[:per_page] ||= 2
-    @sort_column = params[:order]
-    @sort_order = params[:order_by]
-    @sort_column ||= 'name'
-    @sort_order ||= 'DESC'
-    @users = User.page(params[:page]).per(params[:per_page]).order("#{@sort_column} #{@sort_order}")
+    set_watch_metrics()
+    paginate_user()
   end
 
   def page_members
-    @brands = Product.get_options('brand')
-    @tiers= Product.get_options('collection')
-    @diameter = Product.get_options('dial_style')
-    @status = []
-
-    params[:page] ||= 1
-    params[:per_page] ||= 2
-    @sort_column = params[:order]
-    @sort_order = params[:order_by]
-    @sort_column ||= 'name'
-    @sort_order ||= 'DESC'
-    @users = User.page(params[:page]).per(params[:per_page]).order("#{@sort_column} #{@sort_order}")
+    set_watch_metrics()
+    paginate_user()
     render layout: false
   end
 
@@ -53,6 +33,26 @@ class Admin::MembersController < ApplicationController
     end
 
     render json: { status: 'success'}
+  end
+
+  private
+
+  def paginate_user
+    params[:page] ||= 1
+    params[:per_page] ||= 10
+    @sort_column = params[:sort_column]
+    @sort_order = params[:sort_order]
+    @sort_column ||= 'name'
+    @sort_order ||= 'DESC'
+
+    @users = User.select("count(*) as queue_count, users.id, users.name, users.payment_mode, users.paid_till").joins("left join product_requests on users.id = product_requests.user_id").page(params[:page]).per(params[:per_page]).order("#{@sort_column} #{@sort_order}").group("users.id, users.name, users.payment_mode, users.paid_till")
+  end
+
+  def set_watch_metrics
+    @brands = Product.get_options('brand')
+    @tiers= Product.get_options('collection')
+    @diameter = Product.get_options('dial_style')
+    @status = []
   end
 
 end

@@ -20,28 +20,28 @@ window.prepare_multiselect = ->
     unless width == null
       $(@).next().css('width', width+'px')
 $ ->
-  
+
   $("#manage-members #generate-invite.ui-tabs .right-column.omega .results").tinyscrollbar()
-  
+
   $("body.elevenjames #manage-members #members.ui-tabs .action-bar .action-bar-dropdown-area > .arrow").on "click", ->
     $(@).next().toggle()
-  
+
   $(".admin-wrapper .export.button").click ->
     $("#export-inventory-modal").dialog "open"
 
   $(".admin-wrapper .add_a_record.button").click ->
     $("#add-record-modal").dialog "open"
-  
-  $("table.ej-table td.arrow img").click ->
-      $(@).parents("tr").toggleClass("highlight");
 
-  
+  $("table.ej-table td.arrow img").live 'click', ->
+    $(@).parents("tr").toggleClass("highlight");
+
+
   prepare_multiselect()
-  
+
   $(".token-input-wrap .arrow").click ->
     $(@).parents('.token-input-wrap').find(".dropdown").slideToggle()
-      
-    
+
+
 $ ->
   $("#site-footer .admin-footer .sitemap li").hover(
     ->
@@ -52,14 +52,14 @@ $ ->
       data_menu = $this.find("a").data "menu"
       $("#site-footer .admin-footer .submenu##{data_menu}").show()
     ->
-      window.timer_ref = setTimeout( 
+      window.timer_ref = setTimeout(
         ->
           $("#site-footer .admin-footer .submenu").hide();
           $("#site-footer .admin-footer .sitemap li").removeClass("hover")
         , 100
       )
   )
-  
+
   $("#site-footer .admin-footer .submenu").hover(
     ->
       clearTimeout window.timer_ref

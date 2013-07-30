@@ -104,14 +104,24 @@ class User < ActiveRecord::Base
   end
 
   def extend_activation
+    self.paid_till = self.next_activation_date
+    self.save
+  end
+
+  def next_activation_date
     activation_till = self.paid_till
     activation_till ||= Time.now
     case self.payment_mode
     when 'monthly'
-      self.paid_till = 3.months.since(activation_till)
+      3.months.since(activation_till)
     when 'yearly'
-      self.paid_till = 1.year.since(activation_till)
+      1.year.since(activation_till)
     end
+  end
+
+  def next_activation_amount
+    period, frequency, amount = self.recurring_metrics
+    amount
   end
 
   def unapprove
@@ -122,6 +132,14 @@ class User < ActiveRecord::Base
       gateway = Payment.paypal_gateway
       gateway.suspend_recurring(self.paypal_profile_id)
     end
+  end
+
+  def latest_successful_payment
+    Payment.where("user_id = ? AND status = 'success'", self.id).order("created_at DESC").first
+  end
+
+  def successful_payments
+    Payment.where("user_id = ? AND status = 'success'", self.id).order("created_at ASC")
   end
 
   def next_recurring_date

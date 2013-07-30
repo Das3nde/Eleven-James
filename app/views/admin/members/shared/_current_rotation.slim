@@ -1,0 +1,24 @@
+.section.rotation-section
+  h3 Current Rotation
+  ruby:
+    instance = @user.current_product_instance
+
+  - if not instance.blank?
+    .content.cgrid.compact
+      img src="#{instance.product.product_images.first.url(:public)}"
+      .info.cgrid
+        .row.cgrid
+          label Product ID
+          .field #{instance.id}
+        .row.cgrid
+          label Due date
+          .field -
+        .row.cgrid
+          label Brand
+          .field #{instance.product.brand}
+        .row.cgrid
+          label Return Transit
+          .field Event Drop Off
+        .row.cgrid
+          label Model
+          .field #{instance.product.model}

@@ -1,0 +1,44 @@
+.table-view
+  table.ej-table
+    tr
+      th style="width:166px"
+        span.cgrid.compact
+          span Month
+
+      th style="width:166px"
+        span.cgrid.compact
+          span Payment Due
+
+      th style="width:130px"
+        span.cgrid.compact
+          span Amount
+
+      th style="width:205px"
+        span.cgrid.compact
+          span Payment Received
+
+      th style="width:86px"
+        span.cgrid.compact
+          span Paid
+    - @user.successful_payments.each_with_index do |payment, i|
+      tr class="#{'even' if i%2 == 1}"
+        td style="width:166px"
+          span #{payment.created_at.strftime('%b %Y')}
+        td style="width:166px"
+          span #{payment.created_at.strftime('%m/%d/%Y')}
+        td style="width:130px"
+          span $#{payment.amount}
+        td style="width:205px"
+          span #{payment.created_at.strftime('%m/%d/%Y')}
+        td style="width:86px"
+          span Yes
+
+    tr
+      td style="width:166px"
+        span.disable #{@user.next_activation_date.strftime('%b %Y') rescue ''}
+      td style="width:166px"
+        span.disable #{@user.next_activation_date.strftime('%m/%d/%Y') rescue ''}
+      td style="width:130px"
+        span.disable $#{@user.next_activation_amount}
+      td style="width:205px"
+      td style="width:86px"

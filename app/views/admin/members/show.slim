@@ -14,7 +14,7 @@
         .cgrid.compact
           .alpha.left-column
             .action-bar.cgrid.compact.form
-              .product-id #####-034
+              .product-id #####-#{@user.id}
               img class="seperator" src="/assets/seperator-pointed.png"
               .action-bar-dropdown-area.cgrid.compact
                 label Credit Approval
@@ -24,137 +24,43 @@
                   .arrow.red
                   = select_tag 'approve_user', options_for_select([['Aproved', 'approve'], ['Unapproved', 'unapprove']], selected: @user.approved == true ? 'approve' : 'unapprove'), 'data-user-id' => @user.id
                 label Current Membership Status
-                .field Active
+                .field #{@user.is_active? ? 'Active' : 'Inactive'}
                 .arrow
                 .action-bar-dropdown
-                  .table-view
-                    table.ej-table
-                      tr
-                        th style="width:166px"
-                          span.cgrid.compact
-                            span Month
+                  = render '/admin/members/shared/payment_history'
 
-                        th style="width:166px"
-                          span.cgrid.compact
-                            span Payment Due
-
-                        th style="width:130px"
-                          span.cgrid.compact
-                            span Amount
-
-                        th style="width:205px"
-                          span.cgrid.compact
-                            span Payment Received
-
-                        th style="width:86px"
-                          span.cgrid.compact
-                            span Paid
-                      - 3.times do |i|
-                        tr class="#{'even' if i%2 == 1}"
-                          td style="width:166px"
-                            span Jan 2013
-                          td style="width:166px"
-                            span 1/1/13
-                          td style="width:130px"
-                            span $925.00
-                          td style="width:205px"
-                            span 1/1/13
-                          td style="width:86px"
-                            span.buttonset
-                              label for="paid1"
-                              input#paid1 type="checkbox"
-                      - 2.times do |i|
-                        tr class="#{'even' if i%2 == 1}"
-                          td style="width:166px"
-                            span.disable Jan 2013
-                          td style="width:166px"
-                            span.disable 1/1/13
-                          td style="width:130px"
-                            span.disable $925.00
-                          td style="width:205px"
-                          td style="width:86px"
-                    .button-row.not-centered.css-center
-                      a.primary.button href="#" Update
-                      a.button href="#" Cancel
             .member-info.section
               h3 Member info
               .content
                 .cgrid
                   .alpha
-                    .row.cgrid
-                      label Work Address
-                      .field
-                        | 860 East 74th Street
-                        br
-                        | New York, NY 10010
-                    .row.cgrid
-                      label Home Address
-                      .field
-                        | 860 East 74th Street
-                        br
-                        | New York, NY 10010
-                    .row.cgrid
-                      label Alternate Address
-                      .field
-                        | 860 East 74th Street
-                        br
-                        | New York, NY 10010
+                    - @user.shipping_addresses.each do |address|
+                      .row.cgrid
+                        label Shipping Address
+                        .field
+                          #{address.address_line} #{address.apt_unit}
+                          #{address.city} , #{address.state} #{address.zip}
+
                   .omega
                     .row.cgrid
                       label Wrist Size
                       .field X"
                     .row.cgrid
                       label Email
-                      .field Harlon.Stanton@domain.com
+                      .field #{@user.email}
                     .row.cgrid
                       label Phone Home
-                      .field 212.555.1234
+                      .field
                     .row.cgrid
                       label Phone Mobile
-                      .field 212.555.1234
+                      .field
                     .row.cgrid
                       label Phone Office
-                      .field 212.555.1234
-            .section.rotation-section
-              h3 Current Rotation
-              .content.cgrid.compact
-                img src="/assets/admin/watch01.jpg"
-                .info.cgrid
-                  .row.cgrid
-                    label Product ID
-                    .field ######-034
-                  .row.cgrid
-                    label Due date
-                    .field 3/25/13
-                  .row.cgrid
-                    label Brand
-                    .field Rolex
-                  .row.cgrid
-                    label Return Transit
-                    .field Event Drop Off
-                  .row.cgrid
-                    label Model
-                    .field Calatrava
-            .section.rotation-section
-              h3 Upcoming Rotation
-              .content.cgrid.compact
-                img src="/assets/admin/watch02.jpg"
-                .info.cgrid
-                  .row.cgrid
-                    label Product ID
-                    .field ######-034
-                  .row.cgrid
-                    label Due date
-                    .field 3/25/13
-                  .row.cgrid
-                    label Brand
-                    .field Rolex
-                  .row.cgrid
-                    label Return Transit
-                    .field Event Drop Off
-                  .row.cgrid
-                    label Model
-                    .field Calatrava
+                      .field
+
+            = render '/admin/members/shared/current_rotation'
+
+
             .table-layout
               .cgrid.header
                 = link_to "Queue", "#", class: "active"
@@ -229,9 +135,9 @@
           .omega.right-column
             .content
               label Membership Plan
-              .value Platinum
+              .value #{@user.membership_type}
               label Plan Duration
-              .value 6 Months
+              .value 1 Year
               label Selected Months
               .value
                 | January
@@ -242,195 +148,15 @@
                 br
                 | April
               label Plan Started
-              .value 1/1/13
+              .value #{@user.latest_successful_payment.created_at.strftime('%m/%d/%Y') rescue ''}
               label Next payment due
-              .value 6/01/13
+              .value #{@user.next_activation_date.strftime('%m/%d/%Y') rescue ''}
               label Watches in queue
-              .value 15
-    #generate-invite.ui-tabs
-      .container
-        .cgrid
-          .left-column.alpha.form
-            .row.cgrid.compact
-              label Name
-              .field
-                input type="text" value="Dr. Watch"
-            .row.cgrid.compact
-              label Email
-              .field
-                input type="email" value="watch@domain.com"
-            .row.cgrid.compact.textarea-row
-              label Message
-              .field
-                textarea Un le je, et saucelet au donrai por fait et honiz de. Veuil mener quant vert qui garnier chapelet cuillir vie. Garnier de endeter mai qui seignor moi et mauvais covient, soit a li endeter. Mener deduire l'autr'ier la chief tient puis aimme les, et par quel ne prester je, et fait ai selon qu'il met bel, et cler pas au.
-            .button-row.css-center.not-centered
-              .button.primary
-                .text Send
-                input type="submit" value="send"
-          .right-column.omega.form
-            h3 Search prospects
-            .row.cgrid.compact
-              label Search
-              .field
-                input type="text" placeholder="Enter Name"
-            .results.tiny-scrollbar
-              .scrollbar
-                .track
-                  .thumb
-                    .end
-              .viewport
-                .overview
-                  .row Vince Chase
-                  .row.even Blythe Dabney
-                  .row Herbert Smith
-                  .row.even Tyler Fredericks
-                  .row Jeff Garrett
-                  .row.even Blythe Dabney
-                  .row Herbert Smith
-                  .row.even Tyler Fredericks
-                  .row Jeff Garrett
-                  .row Vince Chase
-                  .row.even Blythe Dabney
-                  .row Herbert Smith
-                  .row.even Tyler Fredericks
-                  .row Jeff Garrett
-                  .row.even Blythe Dabney
-                  .row Herbert Smith
-                  .row.even Tyler Fredericks
-                  .row Jeff Garrett
-                  .row.even Blythe Dabney
-                  .row Herbert Smith
-                  .row.even Tyler Fredericks
-                  .row Jeff Garrett
-                  .row.even Blythe Dabney
-                  .row Herbert Smith
-                  .row.even Tyler Fredericks
-                  .row Jeff Garrett
-                  .row Vince Chase
-                  .row.even Blythe Dabney
-                  .row Herbert Smith
-                  .row.even Tyler Fredericks
-                  .row Jeff Garrett
-                  .row.even Blythe Dabney
-                  .row Herbert Smith
-                  .row.even Tyler Fredericks
-                  .row Jeff Garrett
+              .value #{@user.product_requests.length}
 
-    #prospects.ui-tabs
-      .container
-        .search-header
-          .cgrid.compact
-            form
-              .token-input-wrap.filter.cgrid
-                label.alpha Filter
-                ul.token-input-list.omega
-                  - ["iwc", "Cartier", "Burberry", "Jeager"].each do |i|
-                    li.token-input-token
-                      p= i
-                      .token-input-delete-token x
-                  li.token-input-token
-                    input type="text"
-                .arrow
-                .dropdown
-                  .cgrid.select_row
-                    .brands_select_field.multiple_select_field
-                      select.custom_select_wrapper multiple="multiple" data-width="114" data-class="brands" data-prompt="Brand"
-                        - @brands.each_with_index do |b,i|
-                          option value="#{i}" #{b}
-                    .tier_select_field.multiple_select_field
-                      select.custom_select_wrapper multiple="multiple" data-width="114" data-class="tier" data-prompt="Tier"
-                        - @tiers.each_with_index do |b,i|
-                          option value="#{i}" #{b}
-                    .diameter_select_field.multiple_select_field
-                      select.custom_select_wrapper multiple="multiple" data-width="145" data-class="diameter" data-prompt="Case Diameter"
-                        - @diameter.each_with_index do |b,i|
-                          option value="#{i}" #{b}
-                  .button-row.cgrid.not-centered(style="width: 196px")
-                    a.button.primary href="#" Filter
-                    a.button href="#" Reset All
-            img.seperator src="/assets/seperator-pointed.png"
-            form
-              .token-input-wrap.search
-                label Search
-                ul.token-input-list
-                  - ["Search Term A", "Search Term B"].each do |i|
-                    li.token-input-token
-                      p= i
-                      .token-input-delete-token x
-                  li.token-input-token
-                    input type="text"
-                .arrow
-                .dropdown
-                  .form
-                    .row.cgrid.compact.search_for
-                      label Search for
-                      input type="text"
-                    .buttonset.search-within-results
-                      label for="search_within_results" Search within results
-                      input id="search_within_results" type="checkbox"
-                    .button-row
-                      a.button.primary Search
+    #invite_section
+      = render 'generate_invite'
 
-            img src="/assets/seperator-pointed.png"
-            .count
-              p 5 items
-            img.seperator src="/assets/seperator-pointed.png"
-            a.button.export.primary href="#" Export
-        .page-controls.cgrid
-          .alpha
-            .select-wrapper
-              .value
-              .arrow.red
-              select
-                - 3.times do |i|
-                  option value="#{(i+1)*10}" #{(i+1)*10}
-            .label items per page
-          .omega
-            .label page
-            input.ej-text-field type="text" value="1"
-            .label of 5
-            span.arrow
-              a.prev href="#" <
-              a.next.active href="#" >
-        .table-view
-          table.ej-table
-            tr
-              ruby:
-                cols = [
-                  {text: "Full Name", classname: "name", width: 258},
-                  {text: "Email Address", classname: "email", width: 303},
-                  {text: "Referred By", classname: "referred", width: 520}
-                ]
-              - cols.each do |i|
-                th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
-                  span.cgrid.compact
-                    span= i[:text]
-                    a.sort class="#{'active' if i[:text] == 'Full Name'}" href="#"
-            tbody
-              - 10.times do |i|
-                tr class="#{'even' if i%2 == 1}"
-                  ruby:
-                    cols = [
-                      {text: "Vince Chase", classname: "name", width: 258},
-                      {text: "vchase@domain.com", classname: "email", width: 303},
-                      {text: "Sam Kleen", classname: "referred", width: 520}
-                    ]
-                  - cols.each do |cell|
-                      td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
-                        span= cell[:text]
-        .page-controls.cgrid
-          .alpha
-            .select-wrapper
-              .value
-              .arrow.red
-              select
-                - 3.times do |i|
-                  option value="#{(i+1)*10}" #{(i+1)*10}
-            .label items per page
-          .omega
-            .label page
-            input.ej-text-field type="text" value="1"
-            .label of 5
-            span.arrow
-              a.prev href="#" <
-              a.next.active href="#" >
+    #prospect_section
+      = render 'prospects'
+

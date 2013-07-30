@@ -1,8 +1,8 @@
 .table-layout#que_history
   .cgrid.header
-    = link_to "Queue", "#", class: "active", 'data-type' => 'que'
-    = link_to "Rotation History", "#", 'data-type' => 'rotation'
-    = link_to "Suggested Watches", "#", 'data-type' => 'suggestion'
+    = link_to "Queue", "#", class: "active", 'data-type' => 'que', 'data-userid' => @user.id
+    = link_to "Rotation History", "#", 'data-type' => 'rotation', 'data-userid' => @user.id
+    = link_to "Suggested Watches", "#", 'data-type' => 'suggestion', 'data-userid' => @user.id
 
   .table-view#que_list
 

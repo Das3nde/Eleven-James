@@ -26,22 +26,28 @@ que_history =
     $( "#que_history > .header > a").bind 'click', ->
       $(this).siblings().removeClass('active')
       $(this).addClass('active')
+      user_id = $(this).attr('data-userid')
       switch $(this).attr('data-type')
         when 'que'
-          self.que_list()
+          self.que_list(user_id)
         when 'rotation'
-          self.rotation_list()
+          self.rotation_list(user_id)
         when 'suggestion'
           $('#que_list').html("To be implemented")
       false
 
-  que_list: ->
+  que_list: (user_id) ->
     $.ajax '/admin/page_member_que',
       type: 'GET'
+      data:
+        user_id: user_id
       success: (data, textStatus, jqXHR) ->
-  rotation_list: ->
+
+  rotation_list: (user_id) ->
     $.ajax '/admin/page_member_rotation_history',
       type: 'GET'
+      data:
+        user_id: user_id
       success: (data, textStatus, jqXHR) ->
 
 $ ->

@@ -70,13 +70,9 @@
               .value 1 Year
               label Selected Months
               .value
-                | January
-                br
-                | February
-                br
-                | March
-                br
-                | April
+                - @user.rental_months.to_s.split(',').each do |month|
+                  = month
+                  br
               label Plan Started
               .value #{@user.latest_successful_payment.created_at.strftime('%m/%d/%Y') rescue ''}
               label Next payment due

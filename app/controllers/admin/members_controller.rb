@@ -35,6 +35,23 @@ class Admin::MembersController < ApplicationController
     render json: { status: 'success'}
   end
 
+  def page_member_que
+    @sort_column = params[:sort_column]
+    @sort_order = params[:sort_order]
+    @sort_column ||= 'model'
+    @sort_order ||= 'DESC'
+
+    @products = Product.select("products.brand, products.model, products.quantity, product_requests.created_at").joins("join product_requests on products.id = product_requests.product_id").where("product_requests.user_id = ?", current_user.id).order("#{@sort_column} #{@sort_order}")
+
+    render layout: false
+  end
+
+  def page_member_rotation_history
+    rotations = current_user.rotations
+    @products = Product.select("products.brand, products.model, products.quantity, rotations.created_at").joins("join product_instances on products.id = product_instances.product_id join rotations on product_instances.id = rotations.product_instance_id").where("rotations.user_id = ?", current_user.id)
+    render layout: false
+  end
+
   private
 
   def paginate_user

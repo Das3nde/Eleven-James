@@ -17,6 +17,33 @@ approve_user =
           success: (data, textStatus, jqXHR) ->
             alert('Done!')
 
+que_history =
+  init: ->
+    this.tab_event()
+    $( "#que_history > .header > a:first").trigger('click')
+  tab_event: ->
+    self = @
+    $( "#que_history > .header > a").bind 'click', ->
+      $(this).siblings().removeClass('active')
+      $(this).addClass('active')
+      switch $(this).attr('data-type')
+        when 'que'
+          self.que_list()
+        when 'rotation'
+          self.rotation_list()
+        when 'suggestion'
+          $('#que_list').html("To be implemented")
+      false
+
+  que_list: ->
+    $.ajax '/admin/page_member_que',
+      type: 'GET'
+      success: (data, textStatus, jqXHR) ->
+  rotation_list: ->
+    $.ajax '/admin/page_member_rotation_history',
+      type: 'GET'
+      success: (data, textStatus, jqXHR) ->
+
 $ ->
-  console.log('sd')
   approve_user.init()
+  que_history.init()

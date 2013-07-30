@@ -1,0 +1,34 @@
+table.ej-table
+  tr
+    ruby:
+      cols = [
+        {text: "Order", classname: "order", width: 105, sort_col: 'created_at'},
+        {text: "Model", classname: "model", width: 225, sort_col: 'model'},
+        {text: "Brand", classname: "brand", width: 400, sort_col: 'brand'},
+        {text: "Availability", classname: "availability", width: 160, sort_col: 'quantity'}
+      ]
+    - cols.each do |i|
+      th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
+        span.cgrid.compact
+          span= i[:text]
+          - order = @sort_order == 'ASC' ? 'DESC' : 'ASC'
+          - if tab == 'queue_history'
+            - sort_link = "/admin/page_member_que?sort_column=#{i[:sort_col]}&sort_order=#{order}"
+          - elsif tab == 'rotation_history'
+            - sort_link = "/admin/page_member_rotation_history?sort_column=#{i[:sort_col]}&sort_order=#{order}"
+
+          = link_to '', sort_link, class: "sort #{@sort_column == i[:sort_col] ? 'active' : ''}", remote: true
+
+  tbody
+    - products.each_with_index do |product, i|
+      tr class="#{'even' if i%2 == 1}"
+        ruby:
+          cols = [
+            {text: "3/23/13", classname: "order", width: 105},
+            {text: product.model, classname: "model", width: 225},
+            {text: product.brand, classname: "brand", width: 400},
+            {text: (product.quantity > 0 ? 'Available' : 'Unavailable'), classname: "availability", width: 150}
+          ]
+        - cols.each do |cell|
+            td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
+              span= raw cell[:text]

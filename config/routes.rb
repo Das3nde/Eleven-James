@@ -44,6 +44,8 @@ Ej::Application.routes.draw do
     namespace :admin do
       match 'products/add_product' => 'products#add_product'
       match 'page_members' => 'members#page_members'
+      match 'page_member_que' => 'members#page_member_que'
+      match 'page_member_rotation_history' => 'members#page_member_rotation_history'
       match "products/:product_id/upload_image" => "products#upload_image"
       match "products/add_vendor" => "products#add_vendor"
       match "products/:id/add_inventory" => "products#add_inventory"

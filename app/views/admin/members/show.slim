@@ -60,78 +60,8 @@
 
             = render '/admin/members/shared/current_rotation'
 
+            = render '/admin/members/shared/queue_history'
 
-            .table-layout
-              .cgrid.header
-                = link_to "Queue", "#", class: "active"
-                = link_to "Rotation History", "#"
-                = link_to "Suggested Watches", "#"
-              .page-controls.cgrid
-                .alpha
-                  .select-wrapper
-                    .value
-                    .arrow.red
-                    select
-                      option value="5" 5
-                      option value="10" 10
-                      option value="15" 15
-                      option value="20" 20
-                  .label items per page
-                .omega
-                  .label page
-                  input.ej-text-field type="text" value="1"
-                  .label of 5
-                  span.arrow
-                    a.prev href="#" <
-                    a.next.active href="#" >
-              .table-view
-                table.ej-table
-                  tr
-                    ruby:
-                      cols = [
-                        {text: "Order", classname: "order", width: 105},
-                        {text: "Model", classname: "model", width: 225},
-                        {text: "Brand", classname: "brand", width: 400},
-                        {text: "Availability", classname: "availability", width: 160}
-                      ]
-                    - cols.each do |i|
-                      th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
-                        span.cgrid.compact
-                          span= i[:text]
-                          a.sort class="#{'active' if i[:text] == 'Expected Completion'}" href="#"
-                  tbody
-                    - 5.times do |i|
-                      tr class="#{'even' if i%2 == 1}"
-                        ruby:
-                          cols = [
-                            {text: "3/23/13", classname: "order", width: 105},
-                            {text: "Chronomat", classname: "model", width: 225},
-                            {text: "Breiting", classname: "brand", width: 400},
-                            {text: "Available", classname: "availability", width: 150}
-                          ]
-                        - cols.each do |cell|
-                            td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
-                              span= raw cell[:text]
-                              - if cell.has_key?(:extra)
-                                .extra= raw cell[:extra]
-              .page-controls.cgrid
-                .alpha
-                  .select-wrapper
-                    .value
-                    .arrow.red
-                    select
-                      option value="5" 5
-                      option value="10" 10
-                      option value="15" 15
-                      option value="20" 20
-                  .label items per page
-                .omega
-                  .label page
-                  input.ej-text-field type="text" value="1"
-                  .label of 5
-                  span.arrow
-                    a.prev href="#" <
-                    a.next.active href="#" >
           .omega.right-column
             .content
               label Membership Plan

@@ -1,1 +1,1 @@
-$('#que_list').html("<%= escape_javascript render :partial => '/admin/members/shared/queue_list', locals: {products: @products, tab: 'queue_history'} %>");
+$('#que_list').html("<%= escape_javascript render :partial => '/admin/members/shared/queue_list', locals: {products: @products, tab: 'queue_history', user: @user} %>");

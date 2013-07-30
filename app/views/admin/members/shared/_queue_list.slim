@@ -13,9 +13,9 @@ table.ej-table
           span= i[:text]
           - order = @sort_order == 'ASC' ? 'DESC' : 'ASC'
           - if tab == 'queue_history'
-            - sort_link = "/admin/page_member_que?sort_column=#{i[:sort_col]}&sort_order=#{order}"
+            - sort_link = "/admin/page_member_que?sort_column=#{i[:sort_col]}&sort_order=#{order}&user_id=#{user.id}"
           - elsif tab == 'rotation_history'
-            - sort_link = "/admin/page_member_rotation_history?sort_column=#{i[:sort_col]}&sort_order=#{order}"
+            - sort_link = "/admin/page_member_rotation_history?sort_column=#{i[:sort_col]}&sort_order=#{order}&user_id=#{user.id}"
 
           = link_to '', sort_link, class: "sort #{@sort_column == i[:sort_col] ? 'active' : ''}", remote: true
 

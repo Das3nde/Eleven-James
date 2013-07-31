@@ -1,0 +1,8 @@
+<%if @status == true%>
+$('#invite_name').val('');
+$('#invite_email').val('');
+$('#invite_message').val('');
+alert('Invitation Sent');
+<%else%>
+alert("Please enter all fields to send invitation.")
+<%end%>

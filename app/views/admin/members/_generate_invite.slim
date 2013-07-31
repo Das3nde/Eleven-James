@@ -1,68 +1,38 @@
-#generate-invite.ui-tabs
-  .container
-    .cgrid
-      .left-column.alpha.form
-        .row.cgrid.compact
-          label Name
-          .field
-            input type="text" value="Dr. Watch"
-        .row.cgrid.compact
-          label Email
-          .field
-            input type="email" value="watch@domain.com"
-        .row.cgrid.compact.textarea-row
-          label Message
-          .field
-            textarea Un le je, et saucelet au donrai por fait et honiz de. Veuil mener quant vert qui garnier chapelet cuillir vie. Garnier de endeter mai qui seignor moi et mauvais covient, soit a li endeter. Mener deduire l'autr'ier la chief tient puis aimme les, et par quel ne prester je, et fait ai selon qu'il met bel, et cler pas au.
-        .button-row.css-center.not-centered
-          .button.primary
-            .text Send
-            input type="submit" value="send"
-      .right-column.omega.form
-        h3 Search prospects
-        .row.cgrid.compact
-          label Search
-          .field
-            input type="text" placeholder="Enter Name"
-        .results.tiny-scrollbar
-          .scrollbar
-            .track
-              .thumb
-                .end
-          .viewport
-            .overview
-              .row Vince Chase
-              .row.even Blythe Dabney
-              .row Herbert Smith
-              .row.even Tyler Fredericks
-              .row Jeff Garrett
-              .row.even Blythe Dabney
-              .row Herbert Smith
-              .row.even Tyler Fredericks
-              .row Jeff Garrett
-              .row Vince Chase
-              .row.even Blythe Dabney
-              .row Herbert Smith
-              .row.even Tyler Fredericks
-              .row Jeff Garrett
-              .row.even Blythe Dabney
-              .row Herbert Smith
-              .row.even Tyler Fredericks
-              .row Jeff Garrett
-              .row.even Blythe Dabney
-              .row Herbert Smith
-              .row.even Tyler Fredericks
-              .row Jeff Garrett
-              .row.even Blythe Dabney
-              .row Herbert Smith
-              .row.even Tyler Fredericks
-              .row Jeff Garrett
-              .row Vince Chase
-              .row.even Blythe Dabney
-              .row Herbert Smith
-              .row.even Tyler Fredericks
-              .row Jeff Garrett
-              .row.even Blythe Dabney
-              .row Herbert Smith
-              .row.even Tyler Fredericks
-              .row Jeff Garrett
+= form_tag admin_prospect_invitation_path, remote: true do |f|
+  #generate-invite.ui-tabs
+
+    .container
+      .cgrid
+        .left-column.alpha.form
+
+          .row.cgrid.compact
+            label Name
+            .field
+              = text_field_tag :invite_name
+
+          .row.cgrid.compact
+            label Email
+            .field
+              = text_field_tag :invite_email
+          .row.cgrid.compact.textarea-row
+            label Message
+            .field
+              = text_area_tag :invite_message
+          .button-row.css-center.not-centered
+            .button.primary
+              .text Send
+              input type="submit" value="send"
+        .right-column.omega.form
+          h3 Search prospects
+          .row.cgrid.compact
+            label Search
+            .field
+              input type="text" placeholder="Enter Name" id="search_prospect"
+          .results.tiny-scrollbar
+            .scrollbar
+              .track
+                .thumb
+                  .end
+            .viewport
+              .overview#prospect_search_list
+

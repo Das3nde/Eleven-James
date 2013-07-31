@@ -57,8 +57,30 @@ prospects =
         type: 'GET'
         success: (data, textStatus, jqXHR) ->
 
+generate_invite =
+  init: ->
+    this.search()
+    this.click_event()
+
+  click_event: ->
+    $('#prospect_search_list').on "click", "div > a", ->
+      $('#invite_name').val($(this).attr('data-name'))
+      $('#invite_email').val($(this).attr('data-email'))
+      false
+
+  search: ->
+    if $('#invite_section').length > 0
+      $('#search_prospect').on 'keyup', ->
+        val = $(this).val()
+        $.ajax '/admin/search_prospect',
+          type: 'POST'
+          data:
+            term: val
+          success: (data, textStatus, jqXHR) ->
+
 
 $ ->
   approve_user.init()
   que_history.init()
   prospects.init()
+  generate_invite.init()

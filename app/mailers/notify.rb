@@ -11,4 +11,9 @@ class Notify < ActionMailer::Base
     mail to: 'rohan@happyfuncorp.com', from: 'rohan@happyfuncorp.com', subject: 'ipn'
   end
 
+  def invitation(name, email, message)
+    @name = name
+    @message = message
+    mail to: email, from: 'contact@elevenjames.com', subject: 'ElevenJames Invitation'
+  end
 end

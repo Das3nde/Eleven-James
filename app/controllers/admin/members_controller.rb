@@ -71,6 +71,20 @@ class Admin::MembersController < ApplicationController
     render layout: false
   end
 
+  def search_prospect
+    @prospects = Referral.where("lower(name) like ?", "%#{params[:term].downcase.strip}%")
+    render layout: false
+  end
+
+  def prospect_invitation
+    @status = false
+    if !params[:invite_name].blank? and !params[:invite_email].blank? and !params[:invite_message].blank?
+      Notify.invitation(params[:invite_name], params[:invite_email], params[:invite_message]).deliver
+      @status = true
+    end
+    render layout: false
+  end
+
   private
 
   def paginate_user

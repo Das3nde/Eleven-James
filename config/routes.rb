@@ -43,6 +43,8 @@ Ej::Application.routes.draw do
     root :to => redirect("/admin/products/")
     namespace :admin do
       match 'products/add_product' => 'products#add_product'
+      match 'search_prospect' => 'members#search_prospect'
+      match 'prospect_invitation' => 'members#prospect_invitation', :as => :prospect_invitation
       match 'prospects' => 'members#prospects'
       match 'page_members' => 'members#page_members'
       match 'page_member_que' => 'members#page_member_que'

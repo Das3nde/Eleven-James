@@ -1,0 +1,4 @@
+$('#prospect_search_list').html('');
+<%@prospects.each do |p|%>
+  $('#prospect_search_list').append("<div class='row'><a href='#' data-name='<%=p.name%>' data-email='<%=p.email%>'><%=p.name%></a></div>");
+<%end%>

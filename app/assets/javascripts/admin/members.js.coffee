@@ -50,6 +50,15 @@ que_history =
         user_id: user_id
       success: (data, textStatus, jqXHR) ->
 
+prospects =
+  init: ->
+    if $('#prospect_section').length > 0
+      $.ajax '/admin/prospects',
+        type: 'GET'
+        success: (data, textStatus, jqXHR) ->
+
+
 $ ->
   approve_user.init()
   que_history.init()
+  prospects.init()

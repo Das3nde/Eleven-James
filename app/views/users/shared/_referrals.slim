@@ -3,6 +3,11 @@
     .form.centerme
       = form_tag(add_referral_path, remote: true)  do |f|
         h3 Refer your friend
+
+        .row.cgrid.compact
+          label for="username" Name
+          = text_field_tag :friend_name
+
         .row.cgrid.compact
           label for="username" Email
           = text_field_tag :friend_email

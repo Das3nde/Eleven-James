@@ -59,60 +59,43 @@
         img.seperator src="/assets/seperator-pointed.png"
         a.button.export.primary href="#" Export
     .page-controls.cgrid
-      .alpha
-        .select-wrapper
-          .value
-          .arrow.red
-          select
-            - 3.times do |i|
-              option value="#{(i+1)*10}" #{(i+1)*10}
-        .label items per page
+
       .omega
-        .label page
-        input.ej-text-field type="text" value="1"
-        .label of 5
-        span.arrow
-          a.prev href="#" <
-          a.next.active href="#" >
+        = paginate prospects, :params => {:controller => "admin/members", :action => "prospects",
+        :sort_column => @sort_column, :sort_order => @sort_order}, :remote => true, :window => 2
+
     .table-view
       table.ej-table
         tr
           ruby:
             cols = [
-              {text: "Full Name", classname: "name", width: 258},
-              {text: "Email Address", classname: "email", width: 303},
-              {text: "Referred By", classname: "referred", width: 520}
+              {text: "Full Name", classname: "name", width: 258, sort_col: 'name'},
+              {text: "Email Address", classname: "email", width: 303, sort_col: 'email'},
+              {text: "Referred By", classname: "referred", width: 520, sort_col: 'user_fullname'}
             ]
           - cols.each do |i|
             th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
               span.cgrid.compact
                 span= i[:text]
-                a.sort class="#{'active' if i[:text] == 'Full Name'}" href="#"
+                - order = @sort_order == 'ASC' ? 'DESC' : 'ASC'
+                - sort_link = "/admin/prospects?sort_column=#{i[:sort_col]}&sort_order=#{order}"
+                = link_to '', sort_link, class: "sort #{@sort_column == i[:sort_col] ? 'active' : ''}", remote: true
+
         tbody
-          - 10.times do |i|
+          - @prospects.each_with_index do |prospect, i|
             tr class="#{'even' if i%2 == 1}"
               ruby:
                 cols = [
-                  {text: "Vince Chase", classname: "name", width: 258},
-                  {text: "vchase@domain.com", classname: "email", width: 303},
-                  {text: "Sam Kleen", classname: "referred", width: 520}
+                  {text: prospect.name, classname: "name", width: 258},
+                  {text: prospect.email, classname: "email", width: 303},
+                  {text: prospect.user_fullname, classname: "referred", width: 520}
                 ]
               - cols.each do |cell|
                   td class="#{cell[:classname]}" style="width:#{cell[:width]}px;"
                     span= cell[:text]
     .page-controls.cgrid
-      .alpha
-        .select-wrapper
-          .value
-          .arrow.red
-          select
-            - 3.times do |i|
-              option value="#{(i+1)*10}" #{(i+1)*10}
-        .label items per page
+
       .omega
-        .label page
-        input.ej-text-field type="text" value="1"
-        .label of 5
-        span.arrow
-          a.prev href="#" <
-          a.next.active href="#" >
+        = paginate prospects, :params => {:controller => "admin/members", :action => "prospects",
+        :sort_column => @sort_column, :sort_order => @sort_order}, :remote => true, :window => 2
+

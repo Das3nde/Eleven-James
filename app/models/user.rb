@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_many :rotations
   has_many :comments, :dependent => :destroy
   has_many :product_requests, :dependent => :destroy
+  has_many :referrals, :dependent => :destroy
 
   SUBSCRIPTION_MONTHLY_CHARGE = 925
   SUBSCRIPTION_YEARLY_CHARGE = 10000

@@ -72,7 +72,7 @@ class UsersController < ApplicationController
   end
 
   def add_referral
-    @referral = Referral.new(user_id: current_user.id, email: params[:friend_email])
+    @referral = Referral.new(user_id: current_user.id, name: params[:friend_name], email: params[:friend_email])
     @referral.save
   end
 

@@ -58,6 +58,19 @@ class Admin::MembersController < ApplicationController
     render layout: false
   end
 
+  def prospects
+    set_watch_metrics()
+    params[:page] ||= 1
+    params[:per_page] ||= 10
+    @sort_column = params[:sort_column]
+    @sort_order = params[:sort_order]
+    @sort_column ||= 'name'
+    @sort_order ||= 'DESC'
+
+    @prospects = Referral.select("referrals.name, referrals.email, users.name as user_fullname").joins("join users on referrals.user_id = users.id").order("#{@sort_column} #{@sort_order}").page(params[:page]).per(params[:per_page])
+    render layout: false
+  end
+
   private
 
   def paginate_user

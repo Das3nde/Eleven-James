@@ -2,5 +2,5 @@
   alert("<%=@referral.errors.full_messages.join('\n').html_safe%>");
 <%else%>
   alert("Referral added");
-  $('#friend_email').val('');
+  $('#friend_email, #friend_name').val('');
 <%end%>

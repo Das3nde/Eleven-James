@@ -1,4 +1,7 @@
 class Admin::EventsController < AdminController
+
+  #authentication before filter is in admin controller
+
   def index
     @events = Event.all()
   end

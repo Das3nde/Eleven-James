@@ -1,4 +1,7 @@
 class Admin::InventoryController < AdminController
+
+  #authentication before filter is in admin controller
+
   before_filter :append_view_paths
 
   @@tabs = {:index => 'Inventory',

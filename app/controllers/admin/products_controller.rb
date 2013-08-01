@@ -1,5 +1,6 @@
 class Admin::ProductsController < AdminController
   #before_filter :user_preferences
+  #authentication before filter is in admin controller
 
   @@tabs = {
       :index => 'All Products',

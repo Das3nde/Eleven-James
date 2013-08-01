@@ -1,0 +1,19 @@
+table
+  = form_tag admin_signin_path do |f|
+    tr
+      td style="width:100px"
+        | Admin
+      td
+        = text_field_tag :admin_email
+
+    tr
+      td style="width:100px"
+        | Password
+      td
+        = password_field_tag :admin_password
+
+    tr
+      td style="width:100px"
+
+      td
+        = submit_tag "Login"

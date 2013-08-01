@@ -5,6 +5,24 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
+  def set_super_admin_session(super_admin)
+    session[:super_admin_id] = super_admin.id
+  end
+
+  def current_super_admin
+    return nil unless session[:super_admin_id]
+    @current_super_admin ||= User.find(session[:super_admin_id])
+  end
+
+  helper_method :current_super_admin
+
+  def super_admin_required
+    if not current_super_admin
+      redirect_to '/admin/login', notice: 'Login to access'
+      return false
+    end
+  end
+
   def us_states
     [
         ['Alabama', 'AL'],

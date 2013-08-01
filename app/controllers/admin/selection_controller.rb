@@ -1,5 +1,7 @@
 class Admin::SelectionController < AdminController
   require 'json'
+  #authentication before filter is in admin controller
+
   @@tabs = {
     index: 'Select',
     history: 'Past Selections',

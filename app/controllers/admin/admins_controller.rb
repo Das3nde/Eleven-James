@@ -1,4 +1,7 @@
 class Admin::AdminsController < AdminController
+
+  #authentication before filter is in admin controller
+
   def index
     @admins = User.with_role :admin
 

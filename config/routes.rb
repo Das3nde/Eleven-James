@@ -39,52 +39,53 @@ Ej::Application.routes.draw do
   match '/ipn' => 'ipn#index'
   post '/admin/members/approval'
   resources :fedex_transits
-  authenticated :user do
-    root :to => redirect("/admin/products/")
-    namespace :admin do
-      match 'products/add_product' => 'products#add_product'
-      match 'search_prospect' => 'members#search_prospect'
-      match 'prospect_invitation' => 'members#prospect_invitation', :as => :prospect_invitation
-      match 'prospects' => 'members#prospects'
-      match 'page_members' => 'members#page_members'
-      match 'page_member_que' => 'members#page_member_que'
-      match 'page_member_rotation_history' => 'members#page_member_rotation_history'
-      match "products/:product_id/upload_image" => "products#upload_image"
-      match "products/add_vendor" => "products#add_vendor"
-      match "products/:id/add_inventory" => "products#add_inventory"
-      match "products/add_option" => "products#add_option"
-      match 'products/reorder_images' => 'products#reorder_images'
-      match "selection/get_pairs" => "selection#get_pairs"
-      match "selection/distribute" => "selection#distribute"
-      #match "products" => redirect("/admin/products/")
-      match 'inventory/remove_record' => 'inventory#remove_record'
-      match 'inventory/add_service/:id' => 'inventory#add_service'
-      match 'inventory/status/:id' => 'inventory#status'
-      match 'inventory/change_transit/:id' => 'inventory#change_transit'
-      match 'admins/add_role' => 'admins#add_role'
-      match 'admins/remove_role' => 'admins#remove_role'
-      match 'shipping/pickup' => 'shipping#pickup'
-      match 'shipping/cancel_pickup' => 'shipping#cancel_pickup'
-      match 'shipping/mark_delivered' => 'shipping#mark_delivered'
-      ['inventory','products', 'shipping', 'selection'].each do |path|
-        controller = ('Admin::'+path.capitalize+'Controller').constantize
-        controller.tabs.each do |a, l|
-          action = a.to_s
-          match path+'/'+action => path+"#"+action
-        end
+
+  namespace :admin do
+    post 'signin' => 'login#signin'
+    match 'login' => 'login#index'
+    match 'products/add_product' => 'products#add_product'
+    match 'search_prospect' => 'members#search_prospect'
+    match 'prospect_invitation' => 'members#prospect_invitation', :as => :prospect_invitation
+    match 'prospects' => 'members#prospects'
+    match 'page_members' => 'members#page_members'
+    match 'page_member_que' => 'members#page_member_que'
+    match 'page_member_rotation_history' => 'members#page_member_rotation_history'
+    match "products/:product_id/upload_image" => "products#upload_image"
+    match "products/add_vendor" => "products#add_vendor"
+    match "products/:id/add_inventory" => "products#add_inventory"
+    match "products/add_option" => "products#add_option"
+    match 'products/reorder_images' => 'products#reorder_images'
+    match "selection/get_pairs" => "selection#get_pairs"
+    match "selection/distribute" => "selection#distribute"
+    #match "products" => redirect("/admin/products/")
+    match 'inventory/remove_record' => 'inventory#remove_record'
+    match 'inventory/add_service/:id' => 'inventory#add_service'
+    match 'inventory/status/:id' => 'inventory#status'
+    match 'inventory/change_transit/:id' => 'inventory#change_transit'
+    match 'admins/add_role' => 'admins#add_role'
+    match 'admins/remove_role' => 'admins#remove_role'
+    match 'shipping/pickup' => 'shipping#pickup'
+    match 'shipping/cancel_pickup' => 'shipping#cancel_pickup'
+    match 'shipping/mark_delivered' => 'shipping#mark_delivered'
+    ['inventory','products', 'shipping', 'selection'].each do |path|
+      controller = ('Admin::'+path.capitalize+'Controller').constantize
+      controller.tabs.each do |a, l|
+        action = a.to_s
+        match path+'/'+action => path+"#"+action
       end
-
-      resources :products, :users, :settings, :vendors, :tiers, :courier_transits,
-                :records, :product_images, :events, :inventory, :selection, :storage_records, :services,
-                :rotations, :admins, :shipping, :members
-
     end
+
+    resources :products, :users, :settings, :vendors, :tiers, :courier_transits,
+              :records, :product_images, :events, :inventory, :selection, :storage_records, :services,
+              :rotations, :admins, :shipping, :members
+
   end
+
 
   match "/request_product" => 'users#request_product'
   delete "/delete_request" => 'users#delete_request'
   match "/fedex-email-notifications" => 'fedex_transits#update'
-  root :to => "users#index"
+  root :to => "home#collection"
   devise_for :users, :controllers => {:registrations => "registrations"} do
     match '/auth/sign_out' => 'registrations#destroy_session', :as => :destroy_user_session
     post '/users/sign_in' => 'sessions#create'

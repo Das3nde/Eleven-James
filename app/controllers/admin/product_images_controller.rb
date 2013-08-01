@@ -2,6 +2,8 @@ class Admin::ProductImagesController < ApplicationController
 
   include Magick
 
+  before_filter :super_admin_required
+
   def create
     attrs = params[:product_image]
     attrs[:rank] = ProductImage.where('product_id = 1').size

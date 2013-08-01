@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
-  before_filter :authenticate_user!
+
+  before_filter :super_admin_required
+
   helper_method :show_tabs
 
   cattr_accessor :tabs

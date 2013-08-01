@@ -1,4 +1,6 @@
 class Admin::StorageRecordsController < AdminController
+  #authentication before filter is in admin controller
+
   def update
     @record = StorageRecord.find(params[:id])
     @record.update_attributes(params[:storage_record])

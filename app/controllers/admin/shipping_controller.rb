@@ -5,6 +5,8 @@ class Admin::ShippingController < AdminController
       my_pickups: 'My Pickups',
   }
 
+  #authentication before filter is in admin controller
+
   def index
     if request.xhr?
       render :file => 'admin/shipping/from_11james'

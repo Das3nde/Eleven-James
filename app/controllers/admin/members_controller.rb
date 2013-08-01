@@ -1,7 +1,8 @@
 require 'mandrill'
 class Admin::MembersController < ApplicationController
   layout 'admin'
-  #TODO: admin authorization and to be done across all admin controllers
+
+  before_filter :super_admin_required
 
   def index
     set_watch_metrics()

@@ -47,6 +47,7 @@ Ej::Application.configure do
     PAYPAL_API_LOGIN = 'biz_api1.hfc.com'
     PAYPAL_API_PASSWORD = '1373805400'
     PAYPAL_API_SIGNATURE = 'A.PXmlUekXT4ZbKRKrrE3K9v7dTiAUiTAEpAMPDNQaq5BfPbVNA7Imjc'
+    MANDRILL_API_KEY = '88b22b85-9a14-4910-93d4-7accffef7c2d'
   end
 
 end

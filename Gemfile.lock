@@ -95,6 +95,7 @@ GEM
       mail (~> 2.2)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    excon (0.16.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.2.0)
@@ -143,6 +144,9 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mandrill-api (1.0.38)
+      excon (~> 0.16.0)
+      json (~> 1.7.7)
     mime-types (1.23)
     money (5.1.1)
       i18n (~> 0.6.0)
@@ -291,6 +295,7 @@ DEPENDENCIES
   jquery-rails
   jquery-validation-rails
   kaminari
+  mandrill-api
   money
   munkres
   paperclip (~> 3.4.2)

@@ -16,7 +16,7 @@ Preferences:
 
 ________________________
 
-Environment Variables
+Environment Variables to setup on server
 
 Paypal
 ***********
@@ -24,6 +24,10 @@ ENV['PAYPAL_MODE']  #values :test or :production
 ENV['PAYPAL_LOGIN']
 ENV['PAYPAL_PASSWORD']
 ENV['PAYPAL_SIGNATURE']
+
+Mandrill
+***********
+ENV['MANDRILL_KEY']
 
 ________________________
 

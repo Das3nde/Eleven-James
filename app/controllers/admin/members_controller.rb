@@ -1,3 +1,4 @@
+require 'mandrill'
 class Admin::MembersController < ApplicationController
   layout 'admin'
   #TODO: admin authorization and to be done across all admin controllers
@@ -79,7 +80,24 @@ class Admin::MembersController < ApplicationController
   def prospect_invitation
     @status = false
     if !params[:invite_name].blank? and !params[:invite_email].blank? and !params[:invite_message].blank?
-      Notify.invitation(params[:invite_name], params[:invite_email], params[:invite_message]).deliver
+      #Notify.invitation(params[:invite_name], params[:invite_email], params[:invite_message]).deliver
+
+      m = Mandrill::API.new(MANDRILL_API_KEY)
+      message = {
+       :subject=> "ElevenJames Invitation",
+       :from_name=> "ElevenJames",
+       :text=> params[:invite_message],
+       :to=>[
+         {
+           :email=> params[:invite_email],
+           :name=> params[:invite_name]
+         }
+       ],
+       :html=>"<div>Hi #{params[:invite_name]},</div><br/>#{params[:invite_message].gsub("\n", "<br/>")}<br/><br/>Thanks<br/>ElevenJames",
+       :from_email=>"contact@elevenjames.com"
+      }
+      sending = m.messages.send message
+
       @status = true
     end
     render layout: false

@@ -111,7 +111,7 @@ $ ->
           $('#image-zoom-popup .image-content').one "load", ->
             width = $(@).parents(".ui-dialog").width()
             $(@).parents(".ui-dialog").css({
-              marginLeft: "-#{width/2}px"
+              marginLeft: "-#{width / 2}px"
             }).find(".image-content").css({
               width:"100%"
             })
@@ -309,7 +309,7 @@ refresh_methods = {
         val = this.value
         ext = val.substring(val.lastIndexOf('.') + 1);
         if($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']) == -1)
-          consle.log($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']))
+          console.log($.inArray(ext, ['png', 'jpg', 'jpeg', 'gif']))
           alert('Must be a valid image format')
           this.value = null
         else

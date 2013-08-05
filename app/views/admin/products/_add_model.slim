@@ -9,6 +9,15 @@
                 -if options[:as] == 'select'
                   -options[:collection] = Product.get_options(field)
                 =form.input field, options
+
+
+            .section
+              h3 Featured Photo
+              .content.featured-photo
+                = image_tag((@product.featured_image.url(:banner) rescue '/assets/temp/no_image.jpg'), size: "100x100")
+                = link_to 'Change', '#', id: 'add_featured_photo'
+
+
             .section
               h3 Product Photos
               .content.photo-list
@@ -49,3 +58,11 @@ div.vendor-dialog style="display:none"
                       = f.input :product_id, :as => :hidden, :input_html => { :value => @product.id }
 
 iframe{id="upload_iframe" src="/admin/product_images" width="200" height="200" style="position:absolute;top:-500px"}
+
+= form_tag '/admin/add_featured_photo', id: 'featured_photo_form', :target => 'featured_iframe', multipart: true do |f|
+  div style="height:0px;width:0px;overflow:hidden;"
+    = file_field_tag :featured_image
+  = hidden_field_tag :hidden_product_id, @product.id
+
+iframe{name="featured_iframe" width="200" height="200" style="position:absolute;top:-500px"}
+

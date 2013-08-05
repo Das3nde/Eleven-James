@@ -1,61 +1,19 @@
 #homepage-slider
   ul.slider.bjqs
-    li
-      .cgrid
-        img alt="" src="/assets/slides/1.jpg"
-        .info
-          .decorated-block
-            p.label New Addition
-            p.name
-              | Patek
-              br
-                | Philippe
-            p.highlight Aquanaut
-          .button-row.cgrid
-            a.button.primary href="#" + Add
-            a.button href="#" Info
-    li
-      .cgrid
-        img alt="" src="/assets/slides/2.jpg"
-        .info
-          .decorated-block
-            p.label New Addition
-            p.name
-              | Patek
-              br
-                | Philippe
-            p.highlight Aquanaut
-          .button-row.cgrid
-            a.button.primary href="#" + Add
-            a.button href="#" Info
-    li
-      .cgrid
-        img alt="" src="/assets/slides/3.jpg"
-        .info
-          .decorated-block
-            p.label New Addition
-            p.name
-              | Patek
-              br
-                | Philippe
-            p.highlight Aquanaut
-          .button-row.cgrid
-            a.button.primary href="#" + Add
-            a.button href="#" Info
-    li
-      .cgrid
-        img alt="" src="/assets/slides/4.jpg"
-        .info
-          .decorated-block
-            p.label New Addition
-            p.name
-              | Patek
-              br
-                | Philippe
-            p.highlight Aquanaut
-          .button-row.cgrid
-            a.button.primary href="#" + Add
-            a.button href="#" Info
+    - Product.where("is_featured = ?", true).each do |p|
+      li
+        .cgrid
+          = image_tag p.featured_image.url(:banner)
+          .info
+            .decorated-block
+              p.label New Addition
+              p.name #{p.model}
+
+              p.highlight #{p.brand}
+            .button-row.cgrid
+              a.button.primary.add href="#" data-product-id="#{p.id}" + Add
+              = link_to 'Info', show_collection_path(p.id), class: 'button'
+
 .more-links
   ul.cgrid.compact.container
     li.new

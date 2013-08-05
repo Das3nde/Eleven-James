@@ -41,6 +41,8 @@ class Product < ActiveRecord::Base
 
   attr_accessible *@@fields.keys
 
+  has_attached_file :featured_image, :styles => { :banner => '750x530#' }
+
   def convert_fields
     Product.fields.each do |attr,meta|
       val = self[attr]

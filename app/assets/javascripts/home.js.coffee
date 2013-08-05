@@ -156,38 +156,45 @@ collection_list=
     if $('#info').length > 0
       this.show_page_add_to_collection()
 
+    this.home_page_add_to_collection()
     if $('#listing-layout').length > 0
       this.add_to_collection()
       this.filter_collection()
       this.reset_collection()
 
-  show_page_add_to_collection: ->
-    $('#info').find('a.add').bind 'click', ->
-      $(this).html('Upgrade')
+  home_page_add_to_collection: ->
+    self = @
+    $('#homepage-slider').find('.add').bind 'click', ->
       product_id = $(this).attr('data-product-id')
-      $.ajax '/request_product',
-        type: 'POST'
-        dataType: 'json'
-        data:
-          product_id: product_id
-        error: (jqXHR, textStatus, errorThrown) ->
-        success: (data, textStatus, jqXHR) ->
+      self.request_product_server(product_id, $(this))
+      false
 
+  show_page_add_to_collection: ->
+    self = @
+    $('#info').find('a.add').bind 'click', ->
+      #$(this).html('Upgrade')
+      product_id = $(this).attr('data-product-id')
+      self.request_product_server(product_id, $(this))
       false
 
   add_to_collection: ->
+    self = @
     $('#listing-layout').find('a.add').bind 'click', ->
-      $(this).removeClass('add').addClass('upgrade').html('Upgrade')
+      #$(this).removeClass('add').addClass('upgrade').html('Upgrade')
       product_id = $(this).attr('data-product-id')
-      $.ajax '/request_product',
-        type: 'POST'
-        dataType: 'json'
-        data:
-          product_id: product_id
-        error: (jqXHR, textStatus, errorThrown) ->
-        success: (data, textStatus, jqXHR) ->
-
+      self.request_product_server(product_id, $(this))
       false
+
+  request_product_server: (product_id, ele) ->
+    $.ajax '/request_product',
+      type: 'POST'
+      dataType: 'json'
+      data:
+        product_id: product_id
+      error: (jqXHR, textStatus, errorThrown) ->
+        alert('Please Login')
+      success: (data, textStatus, jqXHR) ->
+        $(ele).html('In Queue')
 
   filter_collection: ->
     $('#brand, #tier, #type, #band, #face, #width').bind 'change', ->
@@ -261,9 +268,29 @@ signup =
     $('#user_signup').on 'ajax:success', (event, data, status, xhr) ->
       $('#join_button').show()
 
+window.featured_photo =
+  init: ->
+    this.click_event()
+    this.change_event()
+
+  click_event: ->
+    $("#admin-manage-models").on "click", "#add_featured_photo", (event) ->
+      $('#featured_image').trigger('click')
+      false
+
+  change_event: ->
+    $("#admin-manage-models").on "change", "#featured_image", (event) ->
+      console.log("7878787")
+      $('#featured_photo_form').submit()
+
+  change_pic: (url) ->
+    console.log 'change pic'
+    $('.featured-photo > img').attr('src', url)
+
 $ ->
   collection_list.init()
   default_shipping.init()
   save_rental_months.init()
   login.init()
   signup.init()
+  featured_photo.init()

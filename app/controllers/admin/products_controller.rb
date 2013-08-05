@@ -106,6 +106,13 @@ class Admin::ProductsController < AdminController
     render json: a
   end
 
+  def add_featured_photo
+    @product = Product.find(params[:hidden_product_id])
+    @product.featured_image = params[:featured_image]
+    @product.save
+    render :layout => false
+  end
+
   private
     def set_tabs
       @tabs = {

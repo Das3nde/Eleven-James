@@ -41,6 +41,7 @@ Ej::Application.routes.draw do
   resources :fedex_transits
 
   namespace :admin do
+    post 'add_featured_photo' => 'products#add_featured_photo'
     post 'signin' => 'login#signin'
     match 'login' => 'login#index'
     match 'products/add_product' => 'products#add_product'
@@ -85,7 +86,7 @@ Ej::Application.routes.draw do
   match "/request_product" => 'users#request_product'
   delete "/delete_request" => 'users#delete_request'
   match "/fedex-email-notifications" => 'fedex_transits#update'
-  root :to => "home#collection"
+  root :to => "home#home_index"
   devise_for :users, :controllers => {:registrations => "registrations"} do
     match '/auth/sign_out' => 'registrations#destroy_session', :as => :destroy_user_session
     post '/users/sign_in' => 'sessions#create'

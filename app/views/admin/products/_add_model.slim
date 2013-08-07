@@ -12,10 +12,10 @@
 
 
             .section
-              h3 Featured Photo
-              .content.featured-photo
-                = image_tag((@product.featured_image.url(:banner) rescue '/assets/temp/no_image.jpg'), size: "100x100")
-                = link_to 'Change', '#', id: 'add_featured_photo'
+              h3 Banner Photo
+              .content.banner-photo
+                = image_tag((@product.banner_image.url(:banner) rescue '/assets/temp/no_image.jpg'), size: "100x100")
+                = link_to 'Change', '#', id: 'add_banner_photo'
 
 
             .section
@@ -59,10 +59,10 @@ div.vendor-dialog style="display:none"
 
 iframe{id="upload_iframe" src="/admin/product_images" width="200" height="200" style="position:absolute;top:-500px"}
 
-= form_tag '/admin/add_featured_photo', id: 'featured_photo_form', :target => 'featured_iframe', multipart: true do |f|
+= form_tag '/admin/add_banner_photo', id: 'banner_photo_form', :target => 'banner_iframe', multipart: true do |f|
   div style="height:0px;width:0px;overflow:hidden;"
-    = file_field_tag :featured_image
+    = file_field_tag :banner_image
   = hidden_field_tag :hidden_product_id, @product.id
 
-iframe{name="featured_iframe" width="200" height="200" style="position:absolute;top:-500px"}
+iframe{name="banner_iframe" width="200" height="200" style="position:absolute;top:-500px"}
 

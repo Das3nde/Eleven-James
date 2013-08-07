@@ -268,24 +268,22 @@ signup =
     $('#user_signup').on 'ajax:success', (event, data, status, xhr) ->
       $('#join_button').show()
 
-window.featured_photo =
+window.banner_photo =
   init: ->
     this.click_event()
     this.change_event()
 
   click_event: ->
-    $("#admin-manage-models").on "click", "#add_featured_photo", (event) ->
-      $('#featured_image').trigger('click')
+    $("#admin-manage-models").on "click", "#add_banner_photo", (event) ->
+      $('#banner_image').trigger('click')
       false
 
   change_event: ->
-    $("#admin-manage-models").on "change", "#featured_image", (event) ->
-      console.log("7878787")
-      $('#featured_photo_form').submit()
+    $("#admin-manage-models").on "change", "#banner_image", (event) ->
+      $('#banner_photo_form').submit()
 
   change_pic: (url) ->
-    console.log 'change pic'
-    $('.featured-photo > img').attr('src', url)
+    $('.banner-photo > img').attr('src', url)
 
 $ ->
   collection_list.init()
@@ -293,4 +291,4 @@ $ ->
   save_rental_months.init()
   login.init()
   signup.init()
-  featured_photo.init()
+  banner_photo.init()

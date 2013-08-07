@@ -41,7 +41,7 @@ Ej::Application.routes.draw do
   resources :fedex_transits
 
   namespace :admin do
-    post 'add_featured_photo' => 'products#add_featured_photo'
+    post 'add_banner_photo' => 'products#add_banner_photo'
     post 'signin' => 'login#signin'
     match 'login' => 'login#index'
     match 'products/add_product' => 'products#add_product'

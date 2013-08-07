@@ -3,7 +3,7 @@
     - Product.where("is_featured = ?", true).each do |p|
       li
         .cgrid
-          = image_tag p.featured_image.url(:banner)
+          = image_tag p.banner_image.url(:banner)
           .info
             .decorated-block
               p.label New Addition

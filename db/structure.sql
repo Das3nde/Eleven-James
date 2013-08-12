@@ -337,6 +337,80 @@ CREATE TABLE fedex_transits (
 
 
 --
+-- Name: news; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE news (
+    id integer NOT NULL,
+    title character varying(255),
+    description text,
+    date date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: news_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE news_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: news_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE news_id_seq OWNED BY news.id;
+
+
+--
+-- Name: payments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE payments (
+    id integer NOT NULL,
+    user_id integer,
+    amount numeric,
+    purpose character varying(255),
+    status character varying(255),
+    cc_last_four character varying(255),
+    txn_id character varying(255),
+    custom_message text,
+    paypal_response_dump text,
+    ipn_status character varying(255),
+    ipn_custom_message text,
+    ipn_response_dump text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE payments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE payments_id_seq OWNED BY payments.id;
+
+
+--
 -- Name: product_images; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -465,7 +539,14 @@ CREATE TABLE products (
     is_borrowed boolean,
     return_date date,
     is_new_arrival boolean,
-    is_featured boolean
+    is_featured boolean,
+    banner_image_file_name character varying(255),
+    banner_image_content_type character varying(255),
+    banner_image_file_size integer,
+    banner_image_updated_at timestamp without time zone,
+    banner_display boolean DEFAULT false,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -517,7 +598,8 @@ CREATE TABLE referrals (
     user_id integer,
     email character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    name character varying(255)
 );
 
 
@@ -658,6 +740,38 @@ CREATE TABLE storage_records (
 
 
 --
+-- Name: super_admins; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE super_admins (
+    id integer NOT NULL,
+    email character varying(255),
+    password_hash character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: super_admins_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE super_admins_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: super_admins_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE super_admins_id_seq OWNED BY super_admins.id;
+
+
+--
 -- Name: tiers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -722,7 +836,12 @@ CREATE TABLE users (
     name character varying(255),
     transit_table character varying(255),
     username character varying(255),
-    rental_months character varying(255)
+    rental_months character varying(255),
+    paypal_authorization_token character varying(255),
+    approved boolean DEFAULT false,
+    paypal_profile_id character varying(255),
+    payment_mode character varying(255),
+    paid_till timestamp without time zone
 );
 
 
@@ -867,6 +986,20 @@ ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY news ALTER COLUMN id SET DEFAULT nextval('news_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY payments ALTER COLUMN id SET DEFAULT nextval('payments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY product_images ALTER COLUMN id SET DEFAULT nextval('product_images_id_seq'::regclass);
 
 
@@ -903,6 +1036,13 @@ ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regcl
 --
 
 ALTER TABLE ONLY selections ALTER COLUMN id SET DEFAULT nextval('selections_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY super_admins ALTER COLUMN id SET DEFAULT nextval('super_admins_id_seq'::regclass);
 
 
 --
@@ -1007,6 +1147,22 @@ ALTER TABLE ONLY fedex_transits
 
 
 --
+-- Name: news_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY news
+    ADD CONSTRAINT news_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY payments
+    ADD CONSTRAINT payments_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: product_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1092,6 +1248,14 @@ ALTER TABLE ONLY services
 
 ALTER TABLE ONLY storage_records
     ADD CONSTRAINT storage_records_pkey PRIMARY KEY (uuid);
+
+
+--
+-- Name: super_admins_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY super_admins
+    ADD CONSTRAINT super_admins_pkey PRIMARY KEY (id);
 
 
 --
@@ -1367,8 +1531,6 @@ INSERT INTO schema_migrations (version) VALUES ('20130530101001');
 
 INSERT INTO schema_migrations (version) VALUES ('20130530181344');
 
-INSERT INTO schema_migrations (version) VALUES ('20130530192745');
-
 INSERT INTO schema_migrations (version) VALUES ('20130602065013');
 
 INSERT INTO schema_migrations (version) VALUES ('20130603200704');
@@ -1408,3 +1570,21 @@ INSERT INTO schema_migrations (version) VALUES ('20130709000105');
 INSERT INTO schema_migrations (version) VALUES ('20130709001653');
 
 INSERT INTO schema_migrations (version) VALUES ('20130709061015');
+
+INSERT INTO schema_migrations (version) VALUES ('20130718174103');
+
+INSERT INTO schema_migrations (version) VALUES ('20130718183917');
+
+INSERT INTO schema_migrations (version) VALUES ('20130726091847');
+
+INSERT INTO schema_migrations (version) VALUES ('20130730174936');
+
+INSERT INTO schema_migrations (version) VALUES ('20130801165705');
+
+INSERT INTO schema_migrations (version) VALUES ('20130805140335');
+
+INSERT INTO schema_migrations (version) VALUES ('20130807150041');
+
+INSERT INTO schema_migrations (version) VALUES ('20130807152953');
+
+INSERT INTO schema_migrations (version) VALUES ('20130812094801');

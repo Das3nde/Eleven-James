@@ -25,7 +25,7 @@ html
         {title: "Members", slug: "members"},
         {title: "Events", slug: "events"}
              ]
-  body.elevenjames
+  body.elevenjames(id="#{@body_id unless @body_id.blank?}")
     div id="#{ @wrapper ? @wrapper : action_name}-page" class="#{@internal_class if @internal_class.present?} #{@body_class}"
       #site-header class="#{@header_class if @header_class.present?}"
         = render "layouts/static/#{@header_partial}"

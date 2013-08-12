@@ -1,11 +1,13 @@
 class EventsController < ApplicationController
 
-  layout 'app'
+  layout 'static'
 
   def index
+    @wrapper = "splash"
   end
 
   def show
+    @wrapper = "splash"
   end
 
 end

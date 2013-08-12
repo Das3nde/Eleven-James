@@ -55,6 +55,7 @@ class HomeController < ApplicationController
     @wrapper = "home"
     @new_collection = Product.newest_in_collection
     @upcoming_event = Event.recently_upcoming
+    @latest_news = News.latest_news
   end
 
   private

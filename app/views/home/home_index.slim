@@ -35,10 +35,11 @@
           p #{@upcoming_event.subhead}, #{@upcoming_event.date.strftime('%A %B %d, %Y')}
           a.button href="#" + Add
 
-    li.news
-      h4.decorated-block In the news
-      img alt="" src="/assets/temp/A3.jpg"
-      .info
-        p 11 James Featured In GQ,
-        p April 2013
-        a.button href="#" Read
+    - if not @latest_news.blank?
+      li.news
+        h4.decorated-block In the news
+        = image_tag(@latest_news.image.url(:public), size: "359x293")
+        .info
+          p #{@latest_news.title}
+          p #{@upcoming_event.date.strftime('%B, %Y')}
+          = link_to 'Read', news_path(@latest_news), class: 'button'

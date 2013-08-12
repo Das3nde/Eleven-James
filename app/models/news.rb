@@ -11,5 +11,8 @@ class News < ActiveRecord::Base
       :public => '359x293#'
   }
 
+  def self.latest_news
+    where("date > ?", Time.now).order("date ASC").first
+  end
 
 end

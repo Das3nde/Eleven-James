@@ -40,6 +40,7 @@ Ej::Application.routes.draw do
   post '/admin/members/approval'
   resources :fedex_transits
   resources :events
+  resources :news
 
   namespace :admin do
     post 'add_banner_photo' => 'products#add_banner_photo'

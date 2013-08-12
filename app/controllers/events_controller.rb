@@ -1,13 +1,16 @@
 class EventsController < ApplicationController
 
-  layout 'static'
+  layout 'app'
 
   def index
-    @wrapper = "splash"
+    @wrapper = "marketing"
+    @events = Event.order("date DESC")
+    @upcoming_events = Event.where("date > ?", Time.now).order("date DESC")
   end
 
   def show
-    @wrapper = "splash"
+    @wrapper = "marketing"
+    @event = Event.find(params[:id])
   end
 
 end

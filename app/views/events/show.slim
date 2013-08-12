@@ -5,10 +5,10 @@
   .cgrid.compact
     .left-column.events
       .event
-        .date June 17, 2013
-        .title The History of James Bond and Rolex
+        .date #{@event.date.strftime('%B %d, %Y')}
+        .title #{@event.title}
         .desc
-          p We’re thrilled to have the one and only Sean Connery coming to speak to us about his life wearing the best watches in the world. Fresh off his Vegas party tour, Sean shares some of his favorite tips for tan lines, beard grooming, and watch selections. This one will be a full house so RSVP if you know you’ll be going to be sure you have a seat.
-          = image_tag "temp/blog-image.jpg"
-          p Mener deduire l'autr'ier la chief tient puis aimme les, et par quel ne prestereuil mener quant vert qui garnier chapelet cuillir vie. Garnier de endeter mai qui seignor moi et mauvais covient, soit a li endeter. Mener deduire l'autr'ier la chief tient puis aimme les, et par quel ne prester je, et fait ai selon qu'il met bel, et cler pas au.  
+          p #{@event.subhead}
+          = image_tag(@event.image.url(:public), size: "359x293")
+          p #{@event.description}
         a.button.primary href="#" RSVP to this event

@@ -1,17 +1,26 @@
-= simple_form_for [:admin, @event] do |f|
-  =f.input :title
-  =f.input :subhead
-  =f.input :description
-  =f.input :venue
-  =f.input :address1
-  =f.input :address2
-  =f.input :city
-  =f.input :state, :as => :select, :collection => us_states
-  =f.input :zip
-  =f.input :date
-  =f.input :start_time
-  =f.input :end_time
-  =f.file_field :image
-  =f.input :pickup
-  =f.input :drop_off
-  =f.button :submit
+.container
+  %h2
+    = @event.new_record? ? "Add Event" : "Edit Event"
+
+  = simple_form_for [:admin, @event] do |f|
+    =f.input :title
+    =f.input :subhead
+    =f.input :description
+    =f.input :venue
+    =f.input :address1
+    =f.input :address2
+    =f.input :city
+    =f.input :state, :as => :select, :collection => us_states
+    =f.input :zip
+    =f.input :date
+    =f.input :start_time
+    =f.input :end_time
+
+    %br
+    =f.file_field :image
+    - if not @event.image_file_name.blank?
+      = image_tag @event.image.url(:thumb)
+
+    =f.input :pickup
+    =f.input :drop_off
+    =f.button :submit

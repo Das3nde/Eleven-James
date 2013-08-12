@@ -27,8 +27,9 @@ class Product < ActiveRecord::Base
       is_new_arrival: {},
       is_featured: {},
       is_borrowed: {},
+      banner_display: {},
       return_date: {as:'dateselect'},
-      description: {as: 'text'},
+      description: {as: 'text'}
 
   }
   before_save :convert_fields
@@ -141,4 +142,21 @@ class Product < ActiveRecord::Base
       self[k] = Product.multi_to_array(k, self)
     end
   end
+
+  def self.show_as_banner
+    where("banner_display = ?", true)
+  end
+
+  def self.newest_in_collection
+    where("quantity > 0").order("created_at DESC").first
+  end
+
+  def default_image(type= :square)
+    if product_images.length > 0
+      product_images.first.url(type)
+    else
+      "/assets/temp/no_image.jpg"
+    end
+  end
+
 end

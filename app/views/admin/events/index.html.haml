@@ -1,6 +1,29 @@
-= link_to 'New', new_admin_event_path
+.container
+  %h2
+    Events
 
-%ul
--@events.each do |event|
-  %li
-    =link_to event.title, edit_admin_event_path(event.id)
+  = link_to 'Add New Event', new_admin_event_path
+
+  .content.photo-list
+    .table-view
+      %table.ej-table{cellpadding: "5px"}
+        %tr
+          %td{style: "width: 200px;"}
+            Title
+          %td{style: "width: 200px;"}
+            Date
+          %td{style: "width: 400px;"}
+            Address
+        -@events.each do |event|
+          %tr
+            %td
+              = link_to event.title, edit_admin_event_path(event.id)
+            %td
+              = event.date
+            %td
+              - address = [event.address1, event.address2, event.city, event.state]
+              -  address.reject! { |c| c.empty? }
+              = address.join(", ")
+
+
+

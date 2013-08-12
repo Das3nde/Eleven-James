@@ -8,7 +8,7 @@ class ProductImage < ActiveRecord::Base
   has_attached_file :image, :styles => {
       :thumb => '100x100#',
       :square => '200x200#',
-      :public => '359x293',
+      :public => '359x293#',
       :medium => '600x600>'
   }
 

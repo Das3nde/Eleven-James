@@ -1,6 +1,6 @@
 #homepage-slider
   ul.slider.bjqs
-    - Product.where("is_featured = ?", true).each do |p|
+    - Product.show_as_banner.each do |p|
       li
         .cgrid
           = image_tag p.banner_image.url(:banner)
@@ -18,18 +18,22 @@
   ul.cgrid.compact.container
     li.new
       h4.decorated-block New to the collection
-      img alt="" src="/assets/temp/A1.jpg"
+      = image_tag(@new_collection.default_image(:public), size: "360x293")
       .info
-        p.name Rolex
-        p Daytona Stainless
+        p.name #{@new_collection.brand}
+        p #{@new_collection.model}
         a.button href="#" + Add
-    li.upcoming
-      h4.decorated-block Upcoming Event
-      img alt="" src="/assets/temp/A2.jpg"
-      .info
-        p Meet Mike Tyson
-        p Atlantic City, Friday March 22, 2013
-        a.button href="#" + Add
+
+    - if not @upcoming_event.blank?
+      li.upcoming
+        h4.decorated-block Upcoming Event
+        = image_tag(@upcoming_event.image.url(:public), size: "359x293")
+
+        .info
+          p #{@upcoming_event.title}
+          p #{@upcoming_event.subhead}, #{@upcoming_event.date.strftime('%A %B %d, %Y')}
+          a.button href="#" + Add
+
     li.news
       h4.decorated-block In the news
       img alt="" src="/assets/temp/A3.jpg"

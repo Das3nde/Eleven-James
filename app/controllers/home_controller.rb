@@ -53,6 +53,8 @@ class HomeController < ApplicationController
 
   def home_index
     @wrapper = "home"
+    @new_collection = Product.newest_in_collection
+    @upcoming_event = Event.recently_upcoming
   end
 
   private

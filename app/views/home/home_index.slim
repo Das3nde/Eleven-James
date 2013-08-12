@@ -16,13 +16,14 @@
 
 .more-links
   ul.cgrid.compact.container
-    li.new
-      h4.decorated-block New to the collection
-      = image_tag(@new_collection.default_image(:public), size: "360x293")
-      .info
-        p.name #{@new_collection.brand}
-        p #{@new_collection.model}
-        a.button href="#" + Add
+    - if not @new_collection.blank?
+      li.new
+        h4.decorated-block New to the collection
+        = image_tag(@new_collection.default_image(:public), size: "360x293")
+        .info
+          p.name #{@new_collection.brand}
+          p #{@new_collection.model}
+          a.button href="#" + Add
 
     - if not @upcoming_event.blank?
       li.upcoming

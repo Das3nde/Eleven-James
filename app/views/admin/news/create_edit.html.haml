@@ -1,0 +1,20 @@
+.container
+  %h2
+    = @news.new_record? ? "Add News" : "Edit News"
+
+  = simple_form_for [:admin, @news] do |f|
+    =f.input :title
+
+    =f.input :description
+
+    =f.input :date
+
+
+    %br
+    =f.file_field :image
+    - if not @news.image_file_name.blank?
+      = image_tag @news.image.url(:thumb)
+
+    %br
+    %br
+    =f.button :submit

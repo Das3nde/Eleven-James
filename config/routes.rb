@@ -79,7 +79,7 @@ Ej::Application.routes.draw do
 
     resources :products, :users, :settings, :vendors, :tiers, :courier_transits,
               :records, :product_images, :events, :inventory, :selection, :storage_records, :services,
-              :rotations, :admins, :shipping, :members
+              :rotations, :admins, :shipping, :members, :news
 
   end
 

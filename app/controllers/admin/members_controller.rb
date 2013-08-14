@@ -81,9 +81,19 @@ class Admin::MembersController < ApplicationController
   def prospect_invitation
     @status = false
     if !params[:invite_name].blank? and !params[:invite_email].blank? and !params[:invite_message].blank?
-      #Notify.invitation(params[:invite_name], params[:invite_email], params[:invite_message]).deliver
 
       m = Mandrill::API.new(MANDRILL_API_KEY)
+
+      template_content = [
+                            {
+                              name: 'username',
+                              content: params[:invite_name]
+                            },
+                            {
+                              name: 'invitationmessage',
+                              content:  params[:invite_message].gsub("\n", "<br/>")
+                            }
+                        ]
       message = {
        :subject=> "ElevenJames Invitation",
        :from_name=> "ElevenJames",
@@ -94,10 +104,9 @@ class Admin::MembersController < ApplicationController
            :name=> params[:invite_name]
          }
        ],
-       :html=>"<div>Hi #{params[:invite_name]},</div><br/>#{params[:invite_message].gsub("\n", "<br/>")}<br/><br/>Thanks<br/>ElevenJames",
        :from_email=>"contact@elevenjames.com"
       }
-      sending = m.messages.send message
+      sending = m.messages.send_template('prospect-invitation', template_content,  message)
 
       @status = true
     end

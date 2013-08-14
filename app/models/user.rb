@@ -1,3 +1,4 @@
+require 'mandrill'
 class User < ActiveRecord::Base
   rolify :role_cname => 'Customer'
   rolify :role_cname => 'Admin'
@@ -27,6 +28,8 @@ class User < ActiveRecord::Base
   SUBSCRIPTION_YEARLY_CHARGE = 10000
 
   before_validation :strip_username
+
+  after_create :approval_pending_notification
 
   def strip_username
     self.username = self.username.to_s.strip
@@ -85,12 +88,14 @@ class User < ActiveRecord::Base
   def approve
     return if self.approved == true
 
-    #capture payment first approval and clear up the token
+    #capture payment on first approval and clear up the token
+    #if paypal_authorization_token is present means first time approval
     if not self.paypal_authorization_token.blank?
       status = Payment.signup_payment(self.id, self.signup_amount, self.paypal_authorization_token)
       self.paypal_authorization_token = nil
       self.save
       self.extend_activation
+      self.send_approved_notification
     end
 
     self.approved = true
@@ -206,6 +211,55 @@ class User < ActiveRecord::Base
       gateway.suspend_recurring(profile_id)
     end
 
+  end
+
+
+  def approval_pending_notification
+    m = Mandrill::API.new(MANDRILL_API_KEY)
+
+    template_content = [
+                          {
+                            name: 'username',
+                            content: self.name
+                          }
+                      ]
+    message = {
+     :subject=> "ElevenJames Approval Pending",
+     :from_name=> "ElevenJames",
+     :text=> "You successfully created an account with ElevenJames. Your account will be verified soon by our administrator after which you will have complete access of ElevenJames application.",
+     :to=>[
+       {
+         :email=> self.email,
+         :name=> self.name
+       }
+     ],
+     :from_email=>"contact@elevenjames.com"
+    }
+    sending = m.messages.send_template('signup-approval', template_content,  message)
+  end
+
+  def send_approved_notification
+    m = Mandrill::API.new(MANDRILL_API_KEY)
+
+    template_content = [
+                          {
+                            name: 'username',
+                            content: self.name
+                          }
+                      ]
+    message = {
+     :subject=> "ElevenJames Account Approved",
+     :from_name=> "ElevenJames",
+     :text=> "Your account is successfully approved by ElevenJames.",
+     :to=>[
+       {
+         :email=> self.email,
+         :name=> self.name
+       }
+     ],
+     :from_email=>"contact@elevenjames.com"
+    }
+    sending = m.messages.send_template('account-approved', template_content,  message)
   end
 
 end

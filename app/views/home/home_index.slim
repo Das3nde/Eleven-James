@@ -41,5 +41,5 @@
         = image_tag(@latest_news.image.url(:public), size: "359x293")
         .info
           p #{@latest_news.title}
-          p #{@upcoming_event.date.strftime('%B, %Y')}
+          p #{@latest_news.date.strftime('%B, %Y')}
           = link_to 'Read', news_path(@latest_news), class: 'button'

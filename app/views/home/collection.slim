@@ -1,50 +1,93 @@
-h2 Timepieces
-.filters.form
-  .container
-    .cgrid.compact.row
-      label for="brand" Brand
-      .select-wrapper.brand.field
-        .value
-        .arrow.red
-        = select_tag 'brand', options_for_select(Product.get_options('brand').unshift(['Brand', '']))
-
-      label for="tier" Tier
-      .select-wrapper.tier.field
-        .value
-        .arrow.red
-        = select_tag 'tier', options_for_select(Product.get_options('collection').unshift(['Tier', '']))
-
-      label for="type" Type
-      .select-wrapper.type.field
-        .value
-        .arrow.red
-        = select_tag 'type', options_for_select(Product.get_options('dial_style').unshift(['Any', '']))
-
-      label for="band" band
-      .select-wrapper.band.field
-        .value
-        .arrow.red
-        select#band name=""
-          option value="0"  Band
-          option value="1"  Band 1
-          option value="2"  Band 2
-          option value="3"  Band 3
-      label for="face" Face
-      .select-wrapper.face.field
-        .value
-        .arrow.red
-        = select_tag 'face', options_for_select(Product.get_options('face_color').unshift(['Any', '']))
-      label for="width" Width
-      .select-wrapper.width.field
-        .value
-        .arrow.red
-        select#width name=""
-          option value="0" Width
-          option value="1" Width 1
-          option value="2" Width 2
-          option value="3" Width 3
-      a.action href="#" id="reset_collection" Reset All
-#listing-layout
-  .listing
-    .container
-      = render '/home/collection_list', products: @products, requested_product_ids: @requested_product_ids
+#collection-page-wrap.content
+  h2 Timepieces
+  .cgrid.compact
+    .left-column
+      =link_to "Reset All", "#", class: "reset-link"
+      .collapsible-panels
+        ul.filters
+          - %w(Brand Tier).each do |criteria|
+            li.filter
+                .header.open= criteria
+                .content.checkbox-row style="display:block"
+                  - 10.times do |i|
+                    input type="checkbox" name="#{criteria.parameterize}#{i}" id="#{criteria.parameterize}#{i}"
+                    label.small-checkbox for="#{criteria.parameterize}#{i}" #{criteria} #{i}
+          - %w(Family SKU Reference Band).each do |criteria|
+            li.filter
+                .header= criteria
+                .content.checkbox-row style="display:none"
+                  - 10.times do |i|
+                    input type="checkbox" name="#{criteria.parameterize}#{i}" id="#{criteria.parameterize}#{i}"
+                    label.small-checkbox for="#{criteria.parameterize}#{i}" #{criteria} #{i}
+    .right-column
+      ul.watches.cgrid.compact
+        - 3.times do |i|
+          li.watch
+            .thumb= image_tag "temp/collection-watch-thumb.png"
+            .info
+              p.brand Brietling
+              p.title Chronomat B01
+              .tier1
+          li.watch
+            .thumb= image_tag "temp/collection-watch-thumb.png"
+            .info
+              p.brand Brietling
+              p.title Chronomat B01
+              .tier2
+          li.watch
+            .thumb= image_tag "temp/collection-watch-thumb.png"
+            .info
+              p.brand Brietling
+              p.title Chronomat B01
+              .tier3
+            
+            
+/ .filters.form
+/   .container
+/     .cgrid.compact.row
+/       label for="brand" Brand
+/       .select-wrapper.brand.field
+/         .value
+/         .arrow.red
+/         = select_tag 'brand', options_for_select(Product.get_options('brand').unshift(['Brand', '']))
+/ 
+/       label for="tier" Tier
+/       .select-wrapper.tier.field
+/         .value
+/         .arrow.red
+/         = select_tag 'tier', options_for_select(Product.get_options('collection').unshift(['Tier', '']))
+/ 
+/       label for="type" Type
+/       .select-wrapper.type.field
+/         .value
+/         .arrow.red
+/         = select_tag 'type', options_for_select(Product.get_options('dial_style').unshift(['Any', '']))
+/ 
+/       label for="band" band
+/       .select-wrapper.band.field
+/         .value
+/         .arrow.red
+/         select#band name=""
+/           option value="0"  Band
+/           option value="1"  Band 1
+/           option value="2"  Band 2
+/           option value="3"  Band 3
+/       label for="face" Face
+/       .select-wrapper.face.field
+/         .value
+/         .arrow.red
+/         = select_tag 'face', options_for_select(Product.get_options('face_color').unshift(['Any', '']))
+/       label for="width" Width
+/       .select-wrapper.width.field
+/         .value
+/         .arrow.red
+/         select#width name=""
+/           option value="0" Width
+/           option value="1" Width 1
+/           option value="2" Width 2
+/           option value="3" Width 3
+/       a.action href="#" id="reset_collection" Reset All
+/ #listing-layout
+/   .listing
+/     .container
+/       = render '/home/collection_list', products: @products, requested_product_ids: @requested_product_ids

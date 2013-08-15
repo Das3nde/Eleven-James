@@ -2466,3 +2466,113 @@ body.elevenjames .css-center {
     }
   }
 }
+
+#collection-page-wrap.content {
+  h2 {
+    padding:0;
+  }
+  .left-column {
+    width:242px;
+    border-width:0;
+  }
+  .right-column {
+    width:825px;
+    float:right;
+    margin-top:40px;
+  }
+  .reset-link {
+    color:#ff4002;
+    font-family:Arial;
+    font-size:15px;
+    line-height:40px;
+    height:40px;
+    text-align:right;
+    padding-right:10px;
+    display:block;
+    text-decoration:none;
+  }
+  > .cgrid {
+    border-top-width:0;
+  }
+  .left-column .filters {
+    background-color:#f6f6f4;
+    border-bottom:1px solid #c5c5c3;
+    .header {
+      height:45px;
+      line-height:48px;
+      background:#FFF url(collapsible-panel-arrows.png) 93% -81px no-repeat;
+      font-family:dinnC;
+      cursor:pointer;
+      font-size:20px;
+      text-transform:uppercase;
+      padding-left:15px;
+      color:#555;
+      border:1px solid #c5c5c3;
+      border-left-width:0;
+      border-bottom-width:0;
+    }
+    .content {
+      border-bottom-width:0;
+      border-left:1px solid #c5c5c3;
+      border-top:1px solid #c5c5c3;
+      padding:13px;
+      padding-bottom:0;
+    }
+    .header.open {
+      background-position:93% 19px;
+    }
+    .small-checkbox.ui-button {
+      display:block;
+      padding-bottom:13px;
+      padding-left:36px;
+      .ui-button-text {
+        line-height:28px;
+        font-family:Arial;
+        font-size:16px;
+      }
+    }
+  }
+  .right-column {
+    li.watch {
+      margin-left:15px;
+      margin-bottom:15px;
+    }
+    .thumb {
+      width:260px;
+      height:215px;
+      img {
+        max-width: 260px;
+        max-height:215px;
+      }
+    }
+    .info {
+      background-color:#2c2b28;
+      padding:26px 20px;
+      position:relative;
+      .tier1, .tier2, .tier3 {
+        position:absolute;
+        background:url(tier-badges.png) 0 0 no-repeat;
+        width:76px;
+        height:76px;
+        top:-8px;
+        right:-7px;
+      }
+      .tier3{
+        background-position:0 -333px;
+      }
+      .tier2{
+        background-position:0 -668px;
+      }
+      p {
+        font-family:akkurat;
+        font-size:16px;
+        line-height:24px;
+        color:#FFF;
+        text-align:center;
+      }
+      p.brand {
+        text-transform:uppercase;
+      }
+    }
+  }
+}

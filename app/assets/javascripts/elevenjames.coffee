@@ -213,10 +213,17 @@ $ ->
       $(this).parent().addClass "selected"
 
 
-  $("#signup-page .checkbox-row input").button()
+  $("#signup-page .checkbox-row input, #collection-page-wrap .checkbox-row input").button()
   $(".shipping-billing-same input").prop "checked", false
   $(".shipping-billing-same input").on "change", ->
     $(".shipping-info").toggleClass "disable"
+    
+  $("#collection-page-wrap.content .left-column .filters .header").on "click", ->
+    $(@).toggleClass("open").next().slideToggle()
+    
+  $("#collection-page-wrap.content .reset-link").on "click", ->
+    $("#collection-page-wrap.content .left-column .filters input[type=checkbox]").prop( "checked", false ).button( "refresh" )
+    # $("#collection-page-wrap.content .left-column .filters .small-checkbox")
 
 
 

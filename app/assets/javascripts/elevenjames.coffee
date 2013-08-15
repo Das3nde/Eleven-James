@@ -223,6 +223,7 @@ $ ->
     
   $("#collection-page-wrap.content .reset-link").on "click", ->
     $("#collection-page-wrap.content .left-column .filters input[type=checkbox]").prop( "checked", false ).button( "refresh" )
+    false
     # $("#collection-page-wrap.content .left-column .filters .small-checkbox")
 
 

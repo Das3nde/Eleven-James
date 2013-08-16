@@ -5,43 +5,33 @@
       =link_to "Reset All", "#", class: "reset-link"
       .collapsible-panels
         ul.filters
-          - %w(Brand Tier).each do |criteria|
-            li.filter
-                .header.open= criteria
-                .content.checkbox-row style="display:block"
-                  - 10.times do |i|
-                    input type="checkbox" name="#{criteria.parameterize}#{i}" id="#{criteria.parameterize}#{i}"
-                    label.small-checkbox for="#{criteria.parameterize}#{i}" #{criteria} #{i}
+
+          li.filter
+            .header.open Brand
+            .content.checkbox-row style="display:block"
+              - Product.get_options('brand').each_with_index do |brand, i|
+                input type="checkbox" name="#{brand}" id="#{brand}#{i}"
+                label.small-checkbox for="#{brand}#{i}" #{brand}
+
+          li.filter
+            .header.open Tier
+            .content.checkbox-row style="display:block"
+              - Product.get_options('collection').each_with_index do |tier, i|
+                input type="checkbox" name="#{tier}" id="#{tier}#{i}"
+                label.small-checkbox for="#{tier}#{i}" #{tier}
+
           - %w(Family SKU Reference Band).each do |criteria|
             li.filter
                 .header= criteria
                 .content.checkbox-row style="display:none"
-                  - 10.times do |i|
+                  - 2.times do |i|
                     input type="checkbox" name="#{criteria.parameterize}#{i}" id="#{criteria.parameterize}#{i}"
                     label.small-checkbox for="#{criteria.parameterize}#{i}" #{criteria} #{i}
-    .right-column
-      ul.watches.cgrid.compact
-        - 3.times do |i|
-          li.watch
-            .thumb= image_tag "temp/collection-watch-thumb.png"
-            .info
-              p.brand Brietling
-              p.title Chronomat B01
-              .tier1
-          li.watch
-            .thumb= image_tag "temp/collection-watch-thumb.png"
-            .info
-              p.brand Brietling
-              p.title Chronomat B01
-              .tier2
-          li.watch
-            .thumb= image_tag "temp/collection-watch-thumb.png"
-            .info
-              p.brand Brietling
-              p.title Chronomat B01
-              .tier3
-            
-            
+    .right-column#listing-layout
+      = render '/home/collection_list', products: @products, requested_product_ids: @requested_product_ids
+
+
+
 / .filters.form
 /   .container
 /     .cgrid.compact.row
@@ -50,19 +40,19 @@
 /         .value
 /         .arrow.red
 /         = select_tag 'brand', options_for_select(Product.get_options('brand').unshift(['Brand', '']))
-/ 
+/
 /       label for="tier" Tier
 /       .select-wrapper.tier.field
 /         .value
 /         .arrow.red
 /         = select_tag 'tier', options_for_select(Product.get_options('collection').unshift(['Tier', '']))
-/ 
+/
 /       label for="type" Type
 /       .select-wrapper.type.field
 /         .value
 /         .arrow.red
 /         = select_tag 'type', options_for_select(Product.get_options('dial_style').unshift(['Any', '']))
-/ 
+/
 /       label for="band" band
 /       .select-wrapper.band.field
 /         .value

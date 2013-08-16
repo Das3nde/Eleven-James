@@ -2540,9 +2540,33 @@ body.elevenjames .css-center {
     .thumb {
       width:260px;
       height:215px;
+      text-align:center;
+      background-color: #fff;
+      position: relative;
       img {
         max-width: 260px;
         max-height:215px;
+      }
+      .links
+      {
+        top: 50px;
+        left: 0px;
+        position: absolute;
+        width: 100%;
+        display:none;
+        a
+        {
+          margin:5px auto;
+          width: 30%;
+          background-color: #000 !important;
+        }
+      }
+      &:hover
+      {
+        .links
+        {
+          display: block;
+        }
       }
     }
     .info {

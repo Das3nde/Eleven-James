@@ -1,16 +1,37 @@
-ul.cgrid.compact
+ul.watches.cgrid.compact
   - products.each do |product|
-    li
-      - img_src = (product.product_images.first.url(:public) rescue '/assets/temp/D1.jpg')
-      = link_to image_tag(img_src), show_collection_path(product.id)
-
-      .info
-        p.name style="height:20px;" = product.brand
-        .make
-          = product.model
-        .button-row.not-centered.css-center
+    - img_src = (product.product_images.first.url(:public) rescue '/assets/temp/D1.jpg')
+    li.watch
+      .thumb
+        = link_to image_tag(img_src), show_collection_path(product.id)
+        .links
           - if requested_product_ids.include?(product.id)
-            a.button.upgrade href="#" data-product-id="#{product.id}" Upgrade
+            a.button.inque href="#" In Queue
           - else
             a.button.add href="#" data-product-id="#{product.id}" + Add
+
           = link_to 'Info', show_collection_path(product.id), class: 'button'
+
+      .info
+        p.brand=product.brand
+        p.title= product.model
+        //.tier1
+
+
+
+//ul.cgrid.compact
+//  - products.each do |product|
+//    li
+//      - img_src = (product.product_images.first.url(:public) rescue '/assets/temp/D1.jpg')
+//      = link_to image_tag(img_src), show_collection_path(product.id)
+
+//      .info
+//        p.name style="height:20px;" = product.brand
+//        .make
+//          = product.model
+//        .button-row.not-centered.css-center
+//          - if requested_product_ids.include?(product.id)
+//            a.button.upgrade href="#" data-product-id="#{product.id}" Upgrade
+//          - else
+//            a.button.add href="#" data-product-id="#{product.id}" + Add
+//          = link_to 'Info', show_collection_path(product.id), class: 'button'

@@ -14,6 +14,8 @@
             Date
           %td{style: "width: 400px;"}
             Address
+          %td{style: "width: 400px;"}
+
         -@events.each do |event|
           %tr
             %td
@@ -24,6 +26,8 @@
               - address = [event.address1, event.address2, event.city, event.state]
               -  address.reject! { |c| c.empty? }
               = address.join(", ")
+            %td
+              = link_to 'delete', admin_event_path(event), :method => :delete, confirm: 'Are you sure you want to delete?'
 
 
 

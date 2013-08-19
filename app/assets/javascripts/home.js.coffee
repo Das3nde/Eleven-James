@@ -285,6 +285,24 @@ window.banner_photo =
   change_pic: (url) ->
     $('.banner-photo > img').attr('src', url)
 
+@filter_collection =
+  init: ->
+    self = @
+    if $('#listing-layout').length > 0
+      $('.filters').find('input').on 'click', ->
+        self.filter()
+
+  filter: ->
+    arr = []
+    $('.filters').find('input:checked').each ->
+      arr.push(".#{$(this).val()}")
+
+    $('#listing-layout > ul > li').hide()
+    $('#listing-layout > ul').children(arr.join(', ')).show()
+
+  show_all: ->
+    $('#listing-layout > ul > li').show()
+
 $ ->
   collection_list.init()
   default_shipping.init()
@@ -292,3 +310,4 @@ $ ->
   login.init()
   signup.init()
   banner_photo.init()
+  filter_collection.init()

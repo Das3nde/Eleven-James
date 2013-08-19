@@ -1,7 +1,7 @@
 ul.watches.cgrid.compact
   - products.each do |product|
     - img_src = (product.product_images.first.url(:public) rescue '/assets/temp/D1.jpg')
-    li.watch
+    li.watch class="brand-#{sanitize_filter_class(product.brand)} tier-#{sanitize_filter_class(product.collection)}"
       .thumb
         = link_to image_tag(img_src), show_collection_path(product.id)
         .links

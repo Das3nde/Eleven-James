@@ -217,12 +217,13 @@ $ ->
   $(".shipping-billing-same input").prop "checked", false
   $(".shipping-billing-same input").on "change", ->
     $(".shipping-info").toggleClass "disable"
-    
+
   $("#collection-page-wrap.content .left-column .filters .header").on "click", ->
     $(@).toggleClass("open").next().slideToggle()
-    
+
   $("#collection-page-wrap.content .reset-link").on "click", ->
     $("#collection-page-wrap.content .left-column .filters input[type=checkbox]").prop( "checked", false ).button( "refresh" )
+    filter_collection.show_all()
     false
     # $("#collection-page-wrap.content .left-column .filters .small-checkbox")
 

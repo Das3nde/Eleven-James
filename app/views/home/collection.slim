@@ -10,14 +10,14 @@
             .header.open Brand
             .content.checkbox-row style="display:block"
               - Product.get_options('brand').each_with_index do |brand, i|
-                input type="checkbox" name="#{brand}" id="#{brand}#{i}"
+                input type="checkbox" name="#{brand}" id="#{brand}#{i}" value="brand-#{sanitize_filter_class(brand)}"
                 label.small-checkbox for="#{brand}#{i}" #{brand}
 
           li.filter
             .header.open Tier
             .content.checkbox-row style="display:block"
               - Product.get_options('collection').each_with_index do |tier, i|
-                input type="checkbox" name="#{tier}" id="#{tier}#{i}"
+                input type="checkbox" name="#{tier}" id="#{tier}#{i}" value="tier-#{sanitize_filter_class(tier)}"
                 label.small-checkbox for="#{tier}#{i}" #{tier}
 
           - %w(Family SKU Reference Band).each do |criteria|

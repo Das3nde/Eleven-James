@@ -5,7 +5,7 @@
   .cgrid.compact
     .left-column.events
       h3 Upcoming Events
-      - @events.each do |event|
+      - @upcoming_events .each do |event|
         .event
           .date #{event.date.strftime('%B %d, %Y')}
           .title #{event.title}

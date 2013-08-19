@@ -47,3 +47,4 @@ gem 'jquery-validation-rails'
 gem 'thin', "~> 1.5.1"
 gem 'activemerchant'
 gem 'mandrill-api'
+gem 'tinymce-rails', "~> 3.5.8.1"

@@ -10,4 +10,5 @@
         .desc
 
           = image_tag(@news.image.url(:public), size: "359x293")
-          p #{@news.description}
+          p
+            = raw @news.description

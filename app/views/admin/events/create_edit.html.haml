@@ -1,3 +1,4 @@
+= tinymce_assets
 .container
   %h2
     = @event.new_record? ? "Add Event" : "Edit Event"
@@ -5,7 +6,7 @@
   = simple_form_for [:admin, @event] do |f|
     =f.input :title
     =f.input :subhead
-    =f.input :description
+    =f.input :description,as: 'text',  :input_html => { class: 'tinymce', :cols => 5, :rows => 20 }
     =f.input :venue
     =f.input :address1
     =f.input :address2
@@ -24,3 +25,4 @@
     =f.input :pickup
     =f.input :drop_off
     =f.button :submit
+

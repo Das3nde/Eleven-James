@@ -1,3 +1,4 @@
+= tinymce_assets
 .container
   %h2
     = @news.new_record? ? "Add News" : "Edit News"
@@ -5,7 +6,7 @@
   = simple_form_for [:admin, @news] do |f|
     =f.input :title
 
-    =f.input :description
+    =f.input :description,as: 'text',  :input_html => { class: 'tinymce', :cols => 5, :rows => 20 }
 
     =f.input :date
 

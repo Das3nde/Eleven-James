@@ -10,5 +10,7 @@
         .desc
           p #{@event.subhead}
           = image_tag(@event.image.url(:public), size: "359x293")
-          p #{@event.description}
+          p
+            = raw @event.description
+
         a.button.primary href="#" RSVP to this event

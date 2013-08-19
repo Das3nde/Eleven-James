@@ -23,4 +23,5 @@
 //= require chosen.jquery
 //= require jquery.tiny.scrollbar
 //= require admin/members
+//= require tinymce-jquery
 

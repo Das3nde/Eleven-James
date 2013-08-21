@@ -36,7 +36,7 @@
             tr{class=(@status.id == r.id ? 'highlight':'') data-id=r.id}
               td =r.dates.html_safe
               td =r.type
-
+    div style="clear:both"
 #service_dialog.dialog
   label Select Vendor
   =simple_form_for :service, :url => 'add_service', :html => {:id => 'add_service_form'} do |f|

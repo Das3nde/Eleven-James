@@ -42,7 +42,6 @@ $ ->
     $(@).parents('.token-input-wrap').find(".dropdown").slideToggle()
 
 apply_tiny_mce = ->
-  console.log "SDf"
   tinyMCE.init
     mode: "specific_textareas"
     editor_selector: "tinymce"

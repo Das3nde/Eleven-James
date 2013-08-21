@@ -2,4 +2,4 @@
 
 =simple_form_for [:admin, @status], :html => {:class => 'transit_form'} do |f|
   label for='courier_id' Courier
-  = f.collection_select "courier_id", User.with_role(:courier), :id, :name, :label => "Courier", :include_blank => true
+  = f.collection_select "courier_id", SuperAdmin.all, :id, :name, :label => "Courier", :include_blank => true

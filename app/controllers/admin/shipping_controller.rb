@@ -14,7 +14,7 @@ class Admin::ShippingController < AdminController
   end
 
   def my_pickups
-    transits = CourierTransit.where('courier_id = ?',current_user.id)
+    transits = CourierTransit.where('courier_id = ?',current_super_admin.id)
     @possessed = []
     @awaiting_rotation = []
     transits.each do |t|
@@ -69,12 +69,14 @@ class Admin::ShippingController < AdminController
           from_member: 'From Member',
           my_pickups: 'My Pickups',
       }
-      @tabs = @@tabs.reject{|tab| tab==:my_pickups and !current_user.has_role 'Courier'}
+      # role have no significance at this point
+      #@tabs = @@tabs.reject{|tab| tab==:my_pickups and !current_user.has_role 'Courier'}
+      @tabs = @@tabs
     end
 
     def get_courier_instance transit
       product_instance = transit.product_instance
-      if transit.courier_id != current_user.id
+      if transit.courier_id != current_super_admin.id
         raise ForbiddenError.new('Unauthorized')
       end
       return product_instance

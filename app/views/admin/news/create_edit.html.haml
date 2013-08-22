@@ -8,6 +8,8 @@
 
     =f.input :description,as: 'text',  :input_html => { class: 'tinymce', :cols => 5, :rows => 20 }
 
+    =f.input :status, :as => :select, :collection => ['draft', 'publish']
+
     =f.input :date
 
 

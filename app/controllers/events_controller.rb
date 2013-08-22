@@ -4,8 +4,8 @@ class EventsController < ApplicationController
 
   def index
     @wrapper = "marketing"
-    @events = Event.order("date DESC")
-    @upcoming_events = Event.where("date > ?", Time.now).order("date DESC")
+    @events = Event.published.order("date DESC")
+    @upcoming_events = Event.published.where("date > ?", Time.now).order("date DESC")
   end
 
   def show

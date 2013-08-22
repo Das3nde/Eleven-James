@@ -1,6 +1,6 @@
 class News < ActiveRecord::Base
 
-  attr_accessible :title, :date, :description,  :image
+  attr_accessible :title, :date, :description,  :image, :status
 
 
   validates :title, presence: true
@@ -10,6 +10,8 @@ class News < ActiveRecord::Base
       :square => '200x200#',
       :public => '359x293#'
   }
+
+  scope :published, where(:status => 'publish')
 
   def self.latest_news
     where("date > ?", Time.now).order("date ASC").first

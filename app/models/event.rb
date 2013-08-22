@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   attr_accessible :address1, :address2, :city, :description, :drop_off, :pickup, :state, :subhead, :title, :venue, :zip,
-                  :date, :start_time, :end_time, :image
+                  :date, :start_time, :end_time, :image, :status, :rsvp
 
 
   validates :title, presence: true
@@ -10,6 +10,8 @@ class Event < ActiveRecord::Base
       :square => '200x200#',
       :public => '359x293#'
   }
+
+  scope :published, where(:status => 'publish')
 
   def self.recently_upcoming
     where("date > ?", Time.now).order("date ASC").first

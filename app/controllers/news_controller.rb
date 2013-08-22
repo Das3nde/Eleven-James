@@ -4,8 +4,8 @@ class NewsController < ApplicationController
 
   def index
     @wrapper = "marketing"
-    @news = News.order("date DESC")
-    @latest_news = News.order("date DESC").limit(2)
+    @news = News.published.order("date DESC")
+    @latest_news = News.published.order("date DESC").limit(2)
   end
 
   def show

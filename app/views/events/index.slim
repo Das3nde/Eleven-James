@@ -8,18 +8,24 @@
       - @upcoming_events .each do |event|
         .event
           .date #{event.date.strftime('%B %d, %Y')}
-          .title #{event.title}
+          .title
+            = link_to event.title, event_path(event)
+
           .desc
             p #{event.subhead}
             = image_tag(event.image.url(:public), size: "359x293")
             .default-style
               = raw event.description
 
-          a.button.primary href="#" RSVP to this event
+          - if not event.rsvp.blank?
+            = link_to 'RSVP to this event', event.rsvp, class: 'button primary'
+
     .right-column.jump-to-event
       h3 Jump to an event listing
       - @events.each do |event|
         .event
           .date #{event.date.strftime('%B %d, %Y')}
-          .title #{event.title}
-          = link_to 'RSVP', event_path(event), class: 'button primary'
+          .title
+            = link_to event.title, event_path(event)
+          - if not event.rsvp.blank?
+            = link_to 'RSVP', event.rsvp, class: 'button primary'

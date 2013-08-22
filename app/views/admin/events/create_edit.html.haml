@@ -7,6 +7,8 @@
     =f.input :title
     =f.input :subhead
     =f.input :description,as: 'text',  :input_html => { class: 'tinymce', :cols => 5, :rows => 20 }
+    =f.input :rsvp
+    =f.input :status, :as => :select, :collection => ['draft', 'publish']
     =f.input :venue
     =f.input :address1
     =f.input :address2

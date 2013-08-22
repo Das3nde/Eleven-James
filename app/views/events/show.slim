@@ -13,4 +13,5 @@
           .default-style
             = raw @event.description
 
-        a.button.primary href="#" RSVP to this event
+        - if @event.rsvp
+          = link_to 'RSVP to this event', @event.rsvp, class: 'button primary'

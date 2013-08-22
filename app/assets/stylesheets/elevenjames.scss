@@ -2420,6 +2420,7 @@ body.elevenjames .css-center {
         p, img {
           margin-bottom:30px;
         }
+        @include default-style();
       }
     }
   }

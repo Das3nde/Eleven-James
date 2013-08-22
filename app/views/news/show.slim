@@ -8,7 +8,6 @@
         .date #{@news.date.strftime('%B %d, %Y')}
         .title #{@news.title}
         .desc
-
           = image_tag(@news.image.url(:public), size: "359x293")
-          p
+          .default-style
             = raw @news.description

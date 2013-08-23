@@ -262,11 +262,18 @@ login =
         window.location.reload()
 signup =
   init: ->
+    this.submit_events()
+    this.amount_to_charge()
+
+  amount_to_charge: ->
+    $('#months-1, #months-2').on 'change', ->
+      $('#signup_amount').html($(this).attr('data-amount-label'))
+      $('#signup_charge_statement').html("#{$(this).attr('data-amount-period')} charges beginning today")
+
+  submit_events: ->
     $('#user_signup').on 'ajax:before', (event, data, status, xhr) ->
       $('#join_button').hide()
-
-    $('#user_signup').on 'ajax:success', (event, data, status, xhr) ->
-      $('#join_button').show()
+      $('#signup_loader').show()
 
 window.banner_photo =
   init: ->

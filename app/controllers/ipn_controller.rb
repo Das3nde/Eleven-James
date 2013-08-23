@@ -9,7 +9,7 @@ class IpnController < ApplicationController
 
     when 'web_accept'
       if params["payment_status"] == 'Completed'
-        user = User.where("username = ? ", params["last_name"]).first
+        user = User.where("signup_email = ? ", params["payer_email"]).first
         payment = Payment.where("user_id = ? and purpose = 'signup'", user.id).first
         payment.ipn_status = params["payment_status"]
         payment.ipn_response_dump = params
@@ -17,7 +17,7 @@ class IpnController < ApplicationController
       end
 
     when 'recurring_payment'
-      user = User.where("username = ? ", params["last_name"]).first
+      user = User.where("signup_email = ? ", params["payer_email"]).first
       payment = Payment.where("txn_id = ? and purpose = 'recurring'", params['txn_id']).first
       if payment.blank?
         payment = Payment.new({user_id: user.id, purpose: 'recurring'})

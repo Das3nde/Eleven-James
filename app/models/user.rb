@@ -28,8 +28,12 @@ class User < ActiveRecord::Base
   SUBSCRIPTION_YEARLY_CHARGE = 10000
 
   before_validation :strip_username
-
+  before_create :set_signup_email
   after_create :approval_pending_notification
+
+  def set_signup_email
+    self.signup_email = self.email
+  end
 
   def strip_username
     self.username = self.username.to_s.strip
@@ -91,7 +95,7 @@ class User < ActiveRecord::Base
     #capture payment on first approval and clear up the token
     #if paypal_authorization_token is present means first time approval
     if not self.paypal_authorization_token.blank?
-      status = Payment.signup_payment(self.id, self.signup_amount, self.paypal_authorization_token)
+      status = Payment.signup_payment(self.id, self.signup_email, self.signup_amount, self.paypal_authorization_token)
       self.paypal_authorization_token = nil
       self.save
       self.extend_activation

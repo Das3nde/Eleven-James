@@ -3,6 +3,8 @@ $('.signup-error').remove();
 <%if @status%>
   window.location.href = '/collection';
 <%else%>
+  $('#join_button').show()
+  $('#signup_loader').hide()
   <%@errors.each do |k,v|%>
     <%if k == 'payment_errors'%>
       $("#<%=k%>").append("<span class='signup-error'><%=v%></span>")

@@ -5,13 +5,13 @@ li.section.step3
       h3 Choose your billing cycle...
   .cgrid.dual-radio.compact style="width:990px"
     .month12
-      = f.radio_button :payment_mode,'yearly', {id: 'months-1'}
+      = f.radio_button :payment_mode,'yearly', {id: 'months-1', 'data-amount-label' => "$#{number_with_delimiter(User::SUBSCRIPTION_YEARLY_CHARGE.to_i)}", 'data-amount-period' => 'YEARLY'}
 
       label for="months-1" 1 Annual Charge of  $#{number_with_delimiter(User::SUBSCRIPTION_YEARLY_CHARGE.to_i)}
       p.desc
         | This option gives you a savings of $1000 per year.
     .month6
-      = f.radio_button :payment_mode,'monthly', {id: 'months-2'}
+      = f.radio_button :payment_mode,'monthly', {id: 'months-2', 'data-amount-label' => "$#{User::SUBSCRIPTION_MONTHLY_CHARGE}", 'data-amount-period' => 'MONTHLY'}
       label for="months-2" Monthly Charges of $#{User::SUBSCRIPTION_MONTHLY_CHARGE}
       p.desc
         | If you elect to pay monthly, you will pay three months of membership upfront, and then you will be charged monthly thereafter on the first of every month.

@@ -195,8 +195,7 @@ $ ->
       $this.find("li").removeClass("active")
       $(this).addClass("active")
 
-
-  $("#signup-page .dual-radio").buttonset create: ->
+  $("#signup-page .step1 .dual-radio").buttonset create: ->
     $this = $(this)
     $this.find("label").click ->
       $this.find(">div").removeClass "selected"
@@ -206,16 +205,30 @@ $ ->
       $(this).parent('.selected').find('input').attr('checked', true)
 
 
+  $("#signup-page .step3 .dual-radio").buttonset create: ->
+    $this = $(this)
+    $this.find("label").click ->
+      $this.find(">div").removeClass "selected"
+      $(this).parent().addClass "selected"
+
+      $("#signup-page .dual-radio").find('input').attr('checked', false).change()
+      $(this).parent('.selected').find('input').attr('checked', true).change()
+
+  ###
   $("#signup-page .step2").buttonset create: ->
     $this = $(this)
     $this.find("label").click ->
       $this.find(".title").removeClass "selected"
       $(this).parent().addClass "selected"
-
+  ###
 
   $("#signup-page .checkbox-row input, #collection-page-wrap .checkbox-row input").button()
   $(".shipping-billing-same input").prop "checked", false
   $(".shipping-billing-same input").on "change", ->
+    if $("#shipping-billing-same").attr('checked') == 'checked'
+      $(".shipping-info input").val('')
+
+
     $(".shipping-info").toggleClass "disable"
 
   $("#collection-page-wrap.content .left-column .filters .header").on "click", ->

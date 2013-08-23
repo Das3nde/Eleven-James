@@ -105,6 +105,13 @@ li.section.step4
               sup *
             = sa.text_field :phone
     /! End shipping info
+    div style="clear:both"
+
+    .checkbox-row.shipping-billing-same
+      input#shipping-billing-same name="shipping-billing-same" type="checkbox"
+      label.small-checkbox for="shipping-billing-same" my shipping and billing information are the same
+
+    div style="clear:both"
     .card-info
       h5 Visa, Mastercard, Amex or Discover
       #payment_errors
@@ -122,8 +129,9 @@ li.section.step4
           .field.cgrid.compact.card-expiry
             .select-wrapper.card-expiry-month
               .value
+                | Visa
               .arrow
-              = select_tag "cc_type", options_for_select([['Visa', 'visa'], ['Mastercard', 'mastercard'], ['Amex', 'amex'], ['Discover', 'discover']])
+              = select_tag "cc_type", options_for_select([['Visa', 'visa'], ['Mastercard', 'mastercard'], ['Amex', 'amex'], ['Discover', 'discover']], 'visa')
 
         .row.cgrid.compact
           label for="card-expiry-month"
@@ -157,18 +165,21 @@ li.section.step4
             = text_field_tag 'ssn-2', '', class: 'card-ssn-2'
             .sep
             = text_field_tag 'ssn-3', '', class: 'card-ssn-3'
-        .checkbox-row.shipping-billing-same
-          input#shipping-billing-same name="shipping-billing-same" type="checkbox"
-          label.small-checkbox for="shipping-billing-same" my shipping and billing information are the same
+
     .final
       h5  
       .summary.cgrid.compact
-        .label monthly charges beginning today
-        .value $925.00
+        .label#signup_charge_statement
+
+        .value#signup_amount
+
       .checkbox-row.cgrid.compact
         input#send-promotional-email name="" type="checkbox"
         label.small-checkbox for="send-promotional-email"  send me promotional email &amp; news
+        = image_tag 'ajax-loader.gif', style:"margin: 15px 0px 0px 10px; display:none", id: "signup_loader"
         .button.submit#join_button
           .text Join
           input type="submit" value="Join"
+
+
 /! End step4 content

@@ -10,7 +10,7 @@ class Payment < ActiveRecord::Base
   serialize :ipn_response_dump
 
 
-  def self.authorization(amount, cc_details, request_ip, f_name, l_name)
+  def self.authorization(amount, cc_details, request_ip, f_name, l_name, email)
     gateway = self.paypal_gateway
 
     credit_card = ActiveMerchant::Billing::CreditCard.new(
@@ -26,7 +26,7 @@ class Payment < ActiveRecord::Base
     errors = []
     token = ''
     if credit_card.valid?
-      response = gateway.authorize(amount * 100, credit_card, :ip => request_ip)
+      response = gateway.authorize(amount * 100, credit_card, :ip => request_ip, email: email)
       if response.success?
         token =  response.authorization
       else
@@ -38,9 +38,9 @@ class Payment < ActiveRecord::Base
     return token, errors
   end
 
-  def self.signup_payment(user_id, amount, authorization_token)
+  def self.signup_payment(user_id, user_email ,amount, authorization_token)
     gateway = self.paypal_gateway
-    response = gateway.capture(amount * 100, authorization_token)
+    response = gateway.capture(amount * 100, authorization_token, {email: user_email})
     obj = new({
                 user_id: user_id,
                 amount: amount,
@@ -48,6 +48,9 @@ class Payment < ActiveRecord::Base
               })
 
     #raise response.params['transaction_id']
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    puts response.params.inspect
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     if response.success?
       obj.status = 'success'
       obj.txn_id = response.params['transaction_id']

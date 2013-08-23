@@ -32,6 +32,9 @@ class User < ActiveRecord::Base
   after_create :approval_pending_notification
 
   def set_signup_email
+    #signup_email is for checking paypal ipn requests
+    #to be set only while signing up and never to be changed later
+    #email can be changed from my account but signup_email can not be
     self.signup_email = self.email
   end
 

@@ -123,7 +123,7 @@ class Admin::MembersController < ApplicationController
     @sort_column ||= 'name'
     @sort_order ||= 'DESC'
 
-    @users = User.select("count(*) as queue_count, users.id, users.name, users.payment_mode, users.paid_till").joins("left join product_requests on users.id = product_requests.user_id").page(params[:page]).per(params[:per_page]).order("#{@sort_column} #{@sort_order}").group("users.id, users.name, users.payment_mode, users.paid_till")
+    @users = User.page(params[:page]).per(params[:per_page]).order("#{@sort_column} #{@sort_order}")
   end
 
   def set_watch_metrics

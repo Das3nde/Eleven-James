@@ -56,7 +56,9 @@
         a.button.export.primary href="#" Export
     .page-controls.cgrid
       .omega
-        = paginate users, :window => 2
+        = paginate users, :params => {:controller => "admin/members", :action => "page_members",
+        :sort_column => @sort_column, :sort_order => @sort_order}, :remote => true, :window => 2
+
 
     .table-view
       table.ej-table
@@ -75,9 +77,10 @@
             th class="#{i[:classname]}"  style="width:#{i[:width]}px;"
               span.cgrid.compact
                 span= i[:text]
-                - order = @sort_order == 'ASC' ? 'DESC' : 'ASC'
-                - sort_link = "/admin/page_members?sort_column=#{i[:sort_col]}&sort_order=#{order}"
-                = link_to '', sort_link, class: "sort #{@sort_column == i[:sort_col] ? 'active' : ''}", remote: true
+                - if i[:sort_col] != 'queue_count'
+                  - order = @sort_order == 'ASC' ? 'DESC' : 'ASC'
+                  - sort_link = "/admin/page_members?sort_column=#{i[:sort_col]}&sort_order=#{order}"
+                  = link_to '', sort_link, class: "sort #{@sort_column == i[:sort_col] ? 'active' : ''}", remote: true
 
         tbody
           - users.each_with_index do |u, i|
